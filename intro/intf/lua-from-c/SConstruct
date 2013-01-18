@@ -1,0 +1,6 @@
+env = Environment(CCFLAGS='-g', LIBPATH=['/usr/local/lib'])
+targets = {"test" : "test.c"}
+common_sources = []
+CommonObjects = env.Object(common_sources)
+for target, file in targets.iteritems():
+    env.Program(target = target, source = [file, CommonObjects], LIBS = ['pthread', 'rt', 'lua', 'm', 'dl'])

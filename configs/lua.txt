@@ -1,0 +1,6 @@
+Looking for Lua... lua found in $PATH: /usr/local/bin
+Checking Lua includes... lua.h found in /usr/local/include/lua.h
+
+Installation prefix: /usr/local
+LuaRocks configuration directory: /usr/local/etc/luarocks
+Using Lua from: /usr/local
