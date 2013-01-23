@@ -4,12 +4,13 @@ local json = require 'cjson'
 ngx.header.content_type = 'application/json; charset=utf-8';
 
 local mongol = require "resty.mongol"
-local conn = mongol:new()
 
-conn:set_timeout(1000)
+local conn = mongol:new()
+conn:set_timeout(10000) 
 
 ok, err = conn:connect("127.0.0.1", 27017)
 if ok then
+    -- conn:set_timeout(10000)
     local db = conn:new_db_handle("stock")
     local col = db:get_col("symbols")
     local r = col:find_one({S="UOLL4"})
