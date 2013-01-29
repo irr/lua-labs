@@ -15,7 +15,8 @@ make install
 apt-get install libreadline-dev libpcre3-dev libssl-dev libdrizzle-dev
 tar xfva ngx_openresty-1.2.4.14.tar.gz
 cd ngx_openresty-1.2.4.14
-./configure --prefix=/data/Lua/openresty --with-luajit --with-http_drizzle_module --with-libdrizzle=/usrmake -j4 
+./configure --prefix=/data/Lua/openresty --with-luajit --with-http_drizzle_module --with-libdrizzle=/usr
+make -j4 
 make install
 ```
 
