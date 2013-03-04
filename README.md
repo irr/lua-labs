@@ -7,7 +7,7 @@ lua-labs
 yum install readline-devel pcre-devel openssl-devel libdrizzle-devel
 tar xfva ngx_openresty-1.2.4.14.tar.gz
 cd ngx_openresty-1.2.4.14
-./configure --prefix=/data/Lua/openresty --with-luajit --with-http_drizzle_module
+./configure --prefix=/data/Lua/openresty --with-luajit --with-http_drizzle_module --with-http_stub_status_module
 make install
 ```
 
@@ -15,7 +15,7 @@ make install
 apt-get install libreadline-dev libpcre3-dev libssl-dev libdrizzle-dev
 tar xfva ngx_openresty-1.2.4.14.tar.gz
 cd ngx_openresty-1.2.4.14
-./configure --prefix=/data/Lua/openresty --with-luajit --with-http_drizzle_module --with-libdrizzle=/usr
+./configure --prefix=/data/Lua/openresty --with-luajit --with-http_drizzle_module --with-libdrizzle=/usr --with-http_stub_status_module
 make -j4 
 make install
 ```
