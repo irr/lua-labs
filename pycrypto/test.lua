@@ -1,3 +1,5 @@
+-- https://github.com/irr/lua-pycrypto-aes
+
 package.path = package.path .. ';/home/irocha/gitf/lua-pycrypto-aes/?.lua'
 package.cpath = package.cpath .. ';/home/irocha/gitf/lua-pycrypto-aes/?.so'
 
