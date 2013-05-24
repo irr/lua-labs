@@ -66,4 +66,4 @@ print("crypt="..c)
 
 local s = decrypt(key, iv, c)
 
-print(#s.."=["..trim(s).."]")
+print("plain=["..trim(s).."]")
