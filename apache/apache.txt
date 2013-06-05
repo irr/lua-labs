@@ -1,20 +1,21 @@
-svn checkout http://svn.apache.org/repos/asf/httpd/httpd/trunk httpd-trunk
-
 apr:
-tar xfva packages/apr-1.4.6.tar.bz2
+tar xfva /opt/packages/apr-1.4.6.tar.bz2
 cd apr-1.4.6
-./configure --prefix=/data/Apache/apache --enable-threads
+./configure --prefix=/opt/httpd --enable-threads
 
 apr-util:
-tar xfva packages/apr-util-1.5.1.tar.bz2
-cd apr-util-1.5.1
-./configure --prefix=/data/Apache/apache --with-apr=/data/Apache/apache/bin/apr-1-config
+tar xfva /opt/packages/apr-util-1.5.2.tar.bz2
+cd apr-util-1.5.2
+./configure --prefix=/opt/httpd --with-apr=/opt/httpd/bin/apr-1-config
 
 httpd:
-svn checkout http://svn.apache.org/repos/asf/httpd/httpd/trunk httpd-trunk
-cd httpd-trunk
-./buildconf --with-apr=/data/Apache/apr-1.4.6 --with-apr-util=/data/Apache/apr-util-1.5.1
+tar xfva /opt/packages/httpd-2.4.4.tar.bz2
+cd httpd-2.4.4
+./buildconf --with-apr=/opt/apache/apr-1.4.6 --with-apr-util=/opt/apache/apr-util-1.5.2
 
-./configure --prefix=/data/Apache/apache --enable-lua --enable-file-cache --enable-cache --enable-cache-disk --enable-so --enable-ratelimit --enable-request --enable-deflate --enable-http --enable-expires --enable-remoteip --enable-proxy --enable-proxy-connect --enable-proxy-http --enable-proxy-balancer --enable-proxy-express --enable-session --enable-session-cookie --enable-ssl --enable-lbmethod-byrequests --enable-lbmethod-bytraffic --enable-lbmethod-bybusyness --enable-lbmethod-heartbeat --enable-heartbeat --enable-heartmonitor --enable-mpms-shared=event --enable-watchdog --with-apr=/data/Apache/apache/bin/apr-1-config --with-apr-util=/data/Apache/apache/bin/apu-1-config
+./configure --prefix=/opt/httpd/apache --enable-lua --enable-file-cache --enable-cache --enable-cache-disk --enable-so --enable-ratelimit --enable-request --enable-deflate --enable-http --enable-expires --enable-remoteip --enable-proxy --enable-proxy-connect --enable-proxy-http --enable-proxy-balancer --enable-proxy-express --enable-session --enable-session-cookie --enable-ssl --enable-lbmethod-byrequests --enable-lbmethod-bytraffic --enable-lbmethod-bybusyness --enable-lbmethod-heartbeat --enable-heartbeat --enable-heartmonitor --enable-mpms-shared=event --enable-watchdog --with-apr=/opt/httpd/bin/apr-1-config --with-apr-util=/opt/httpd/bin/apu-1-config
 
-LUA_LIBS="-L/data/Lua/LuaJIT/lib -lluajit-5.1 -lm" LUA_CFLAGS="-I/data/Lua/LuaJIT/include/luajit-2.0" ./configure --prefix=/data/Apache/apache --enable-lua --enable-luajit --with-lua=/dev/null --enable-file-cache --enable-cache --enable-cache-disk --enable-so --enable-ratelimit --enable-request --enable-deflate --enable-http --enable-expires --enable-remoteip --enable-proxy --enable-proxy-connect --enable-proxy-http --enable-proxy-balancer --enable-proxy-express --enable-session --enable-session-cookie --enable-ssl --enable-lbmethod-byrequests --enable-lbmethod-bytraffic --enable-lbmethod-bybusyness --enable-lbmethod-heartbeat --enable-heartbeat --enable-heartmonitor --enable-mpms-shared=event --enable-watchdog --with-apr=/data/Apache/apache/bin/apr-1-config --with-apr-util=/data/Apache/apache/bin/apu-1-config
+LUA_LIBS="-L/opt/lua/LuaJIT/lib -lluajit-5.1 -lm" LUA_CFLAGS="-I/opt/lua/LuaJIT/include/luajit-2.0" ./configure --prefix=/opt/httpd/apache --enable-lua --enable-luajit --with-lua=/dev/null --enable-file-cache --enable-cache --enable-cache-disk --enable-so --enable-ratelimit --enable-request --enable-deflate --enable-http --enable-expires --enable-remoteip --enable-proxy --enable-proxy-connect --enable-proxy-http --enable-proxy-balancer --enable-proxy-express --enable-session --enable-session-cookie --enable-ssl --enable-lbmethod-byrequests --enable-lbmethod-bytraffic --enable-lbmethod-bybusyness --enable-lbmethod-heartbeat --enable-heartbeat --enable-heartmonitor --enable-mpms-shared=event --enable-watchdog --with-apr=/opt/httpd/bin/apr-1-config --with-apr-util=/opt/httpd/bin/apu-1-config
+
+cat /etc/ld.so.conf.d/luajit.conf 
+/opt/lua/LuaJIT/lib/
