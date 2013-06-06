@@ -19,3 +19,5 @@ LUA_LIBS="-L/opt/lua/LuaJIT/lib -lluajit-5.1 -lm" LUA_CFLAGS="-I/opt/lua/LuaJIT/
 
 cat /etc/ld.so.conf.d/luajit.conf 
 /opt/lua/LuaJIT/lib/
+
+httpd -f /home/irocha/git/lua-labs/apache/httpd.conf -k start -X
