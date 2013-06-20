@@ -1,12 +1,18 @@
 apr:
 tar xfva /opt/packages/apr-1.4.6.tar.bz2
 cd apr-1.4.6
+
+vim configure
+30048: $RM -f "$cfgfile"
+
 ./configure --prefix=/opt/httpd --enable-threads
 
 apr-util:
 tar xfva /opt/packages/apr-util-1.5.2.tar.bz2
 cd apr-util-1.5.2
 ./configure --prefix=/opt/httpd --with-apr=/opt/httpd/bin/apr-1-config
+
+sudo apt-get install autoconf
 
 httpd:
 tar xfva /opt/packages/httpd-2.4.4.tar.bz2
