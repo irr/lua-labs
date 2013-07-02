@@ -17,7 +17,7 @@ public class HttpsClient {
  
    public static void main(String[] args)
    {
-        new HttpsClient().testIt();
+        new HttpsClient().testIt(args[0]);
    }
  
    TrustManager[] trustAllCerts = new TrustManager[] {
@@ -33,9 +33,8 @@ public class HttpsClient {
        }
     };
 
-   private void testIt(){
+   private void testIt(String https_url){
  
-      String https_url = "https://irrlab:8443/";
       URL url;
       try {
 
@@ -79,6 +78,8 @@ public class HttpsClient {
  
     Certificate[] certs = con.getServerCertificates();
     for(Certificate cert : certs){
+       X509Certificate xcert = (X509Certificate) cert;
+       System.out.println("Cert Name : " + xcert.getSubjectX500Principal().getName());
        System.out.println("Cert Type : " + cert.getType());
        System.out.println("Cert Hash Code : " + cert.hashCode());
        System.out.println("Cert Public Key Algorithm : " 
