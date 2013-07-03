@@ -13,8 +13,7 @@ import javax.net.ssl.X509TrustManager;
 import java.security.cert.X509Certificate;
 
 public class HttpsClient {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         new HttpsClient().testIt(args[0]);
     }
     TrustManager[] trustAllCerts = new TrustManager[] {
@@ -32,60 +31,56 @@ public class HttpsClient {
             SSLContext sc = SSLContext.getInstance("SSL");
             sc.init(null, trustAllCerts, new java.security.SecureRandom());
             HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-            // Create all-trusting host name verifier
             HostnameVerifier allHostsValid = new HostnameVerifier() {
                 public boolean verify(String hostname, SSLSession session) {
                     return true;
                 }
             };
-            // Install the all-trusting host verifier
             HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
             url = new URL(https_url);
-            HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
-            //dumpl all cert info
+            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
             print_https_cert(con);
-            //dump all the content
             print_content(con);
-            } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    private void print_https_cert(HttpsURLConnection con){
-        if(con!=null){
+    private void print_https_cert(HttpsURLConnection con) {
+        if (con != null) {
             try {
                 System.out.println("Response Code : " + con.getResponseCode());
                 System.out.println("Cipher Suite : " + con.getCipherSuite());
                 Certificate[] certs = con.getServerCertificates();
-                for(Certificate cert : certs){
+                for (Certificate cert : certs) {
                     X509Certificate xcert = (X509Certificate) cert;
                     System.out.println("Cert Name : " + xcert.getSubjectX500Principal().getName());
                     System.out.println("Cert Type : " + cert.getType());
                     System.out.println("Cert Hash Code : " + cert.hashCode());
                     System.out.println("Cert Public Key Algorithm : "
-                    + cert.getPublicKey().getAlgorithm());
+                        + cert.getPublicKey().getAlgorithm());
                     System.out.println("Cert Public Key Format : "
-                    + cert.getPublicKey().getFormat());
+                        + cert.getPublicKey().getFormat());
                 }
-                } catch (SSLPeerUnverifiedException e) {
+            } catch (SSLPeerUnverifiedException e) {
                 e.printStackTrace();
-                } catch (IOException e){
+            } catch (IOException e){
                 e.printStackTrace();
             }
         }
     }
-    private void print_content(HttpsURLConnection con){
-        if(con!=null){
+
+    private void print_content(HttpsURLConnection con) {
+        if (con != null) {
             try {
                 System.out.println("****** Body ********");
-                BufferedReader br =
-                new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
+                BufferedReader br = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
                 String input;
-                while ((input = br.readLine()) != null){
+                while ((input = br.readLine()) != null) {
                     System.out.println(input);
                 }
                 br.close();
-                } catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
