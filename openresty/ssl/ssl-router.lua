@@ -34,8 +34,8 @@ openssl x509 -req -in myirrlab.net.csr -signkey myirrlab.net.key -out myirrlab.n
 rm -rf cert_extensions *.csr
 cat myirrlab.net.crt myirrlab.org.crt multidomain-server.crt > all-certs.crt
 
-curl -1 https://myirrlab.net:8443/ --cacert all-certs.crt
-curl -3 https://myirrlab.net:8443/ --cacert all-certs.crt
+curl -v -1 https://myirrlab.net:8443/ --cacert all-certs.crt
+curl -v -3 https://myirrlab.net:8443/ --cacert all-certs.crt
 
 --]]
 
