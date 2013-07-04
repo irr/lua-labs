@@ -20,8 +20,8 @@ http://aionica.computerlink.ro/2011/08/multiple-domain-selfsigned-ssltls-certifi
 
 openssl genrsa -out multidomain-server.key 1024
 openssl req -new -key multidomain-server.key -out multidomain-server.csr
-echo "subjectAltName=DNS:myirrlab.com,DNS:myirrlab.org,DNS:myirrlab.net" > cert_extensions
-openssl x509 -req -in multidomain-server.csr -signkey multidomain-server.key -extfile cert_extensions -out multidomain-server.crt -days 1095
+echo "subjectAltName=DNS:myirrlab.com,DNS:myirrlab.org,DNS:myirrlab.net" > multidomain-server.ext
+openssl x509 -req -in multidomain-server.csr -signkey multidomain-server.key -extfile multidomain-server.ext -out multidomain-server.crt -days 1095
 
 openssl genrsa -out myirrlab.org.key 1024
 openssl req -new -key myirrlab.org.key -out myirrlab.org.csr
@@ -31,7 +31,6 @@ openssl genrsa -out myirrlab.net.key 1024
 openssl req -new -key myirrlab.net.key -out myirrlab.net.csr
 openssl x509 -req -in myirrlab.net.csr -signkey myirrlab.net.key -out myirrlab.net.crt -days 1095
 
-rm -rf cert_extensions *.csr
 cat myirrlab.net.crt myirrlab.org.crt multidomain-server.crt > all-certs.crt
 
 curl -v -1 https://myirrlab.net:8443/ --cacert all-certs.crt
