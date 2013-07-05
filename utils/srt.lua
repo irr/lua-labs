@@ -43,7 +43,7 @@ if charset ~= 'iso-8859-1' then
     end
 end
 
-local patterns = { '<%p?i>', '<%p?I>', '<%p?b>', '<%p?B>' }
+local patterns = { '<%p?%s*i>', '<%p?%s*I>', '<%p?%s*b>', '<%p?%s*B>' }
 
 for _, v in pairs(patterns) do
     content = content:gsub(v, "")
