@@ -8,8 +8,7 @@ openssl s_client -host myirrlab.org -port 8443 -CAfile irrlab.crt
 openssl s_client -host myirrlab.org -key myirrlab.org.pem -cert myirrlab.org.crt -port 8443
 --]]
 
-local server = ngx.var.server_name:sub(#ngx.var.server_name-2):upper()
-
-ngx.say("SSL-DOM = " .. ngx.var.server_name)
-ngx.say("SNI-" .. server .. " = " .. (ngx.var.ssl_cipher:find("RC4") and "DISABLED" or "ENABLED"))
-ngx.say("SSL-CPH = " .. ngx.var.ssl_cipher)
+ngx.say("SSL-DOMAIN   = " .. ngx.var.server_name)
+ngx.say("SSL-CIPHER   = " .. ngx.var.ssl_cipher)
+ngx.say("SSL-PROTOCOL = " .. ngx.var.ssl_protocol)
+ngx.say("SNI-STATUS   = " .. (ngx.var.ssl_cipher:find("RC4") and "DISABLED" or "ENABLED"))
