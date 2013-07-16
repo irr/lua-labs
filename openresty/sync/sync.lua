@@ -4,11 +4,11 @@ local tostring = tostring
 local sleep = ngx.sleep
 local unpack = unpack
 local pcall = pcall
+local key = "__SYNC__:LOCK"
 
 module("sync")
 
 function run(dict, f, t, s)
-    local key = "__SYNC__:LOCK"
     repeat
         local _, err, _ = dict:add(key, 0)
         sleep(s or 0.001)
