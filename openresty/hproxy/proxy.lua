@@ -1,4 +1,4 @@
-local json = require 'json'
+local json = require 'cjson'
 
 function get_value_from_json(value)
     if value then

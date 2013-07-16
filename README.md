@@ -65,7 +65,6 @@ Libraries
 
 ```shell
 luarocks --local install lua-iconv
-luarocks --local install json4lua 
 luarocks --local install lua-cjson
 luarocks --local install lua-llthreads
 luarocks --local install lua-zmq
@@ -97,7 +96,6 @@ limitations under the License.
 [OpenResty]: http://openresty.org/
 [LuaJIT]: http://luajit.org/
 [iconv]: http://luaforge.net/projects/lua-iconv/
-[json4lua]: http://json.luaforge.net/
 [lua-cjson]: http://www.kyne.com.au/~mark/software/lua-cjson.php
 [lua-llthreads]: http://github.com/Neopallium/lua-llthreads
 [lua-zmq]: https://github.com/Neopallium/lua-zmq
