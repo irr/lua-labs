@@ -1,4 +1,6 @@
-#!/usr/bin/env lua
+#!/usr/bin/env luajit
+
+_ = require "underscore"
 
 local port    = 8443
 local certdir = '/home/irocha/lua/openresty/ssl-xca'
@@ -72,24 +74,19 @@ local server = [[
 ]]
 
 function render_config (values)
-    local config = prologue .. fallback:gsub('%$(%w+)', values)
-
-    for _, value in ipairs(values.domains) do
-        values.domain = value
-        values.servers = ''
-        for _, server in ipairs(values[value]) do
-            values.servers = values.servers .. '        server ' .. server .. ";\n"
-        end
-        config = config .. upstream:gsub('%$(%w+)', values)
-        config = config .. server:gsub('%$(%w+)', values)
-    end
-
-    return config .. finale
+    return _.reduce(values.domains, prologue .. fallback:gsub('%$(%w+)', values), 
+        function (cfg, domain)
+            values.domain = domain
+            values.servers = _.reduce(values[domain], '', function (vs, server) 
+                return vs .. '        server ' .. server .. ";\n"
+            end)
+            return cfg .. upstream:gsub('%$(%w+)', values) .. server:gsub('%$(%w+)', values)
+        end) .. finale
 end
 
-values = { domains = { 'myirrlab.org', 'myirrlab.net' }, 
-           ['myirrlab.org'] = { 'www.uol.com.br', 'www.uol.com.br' },
+values = { ['myirrlab.org'] = { 'www.uol.com.br', 'www.uol.com.br' },
            ['myirrlab.net'] = { 'www.google.com.br', 'www.google.com.br' },
+           domains = { 'myirrlab.org', 'myirrlab.net' }, 
            certdir = certdir, 
            codedir = codedir,
            port = port }
