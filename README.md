@@ -24,13 +24,6 @@ make install
 wget http://luajit.org/download/LuaJIT-2.0.2.tar.gz
 tar xfva LuaJIT-2.0.2.tar.gz
 cd LuaJIT-2.0.2
-
-# change Makefile
-# export PREFIX=/opt/lua/LuaJIT
-
-# Before you compile LuaJIT, change LUA_ROOT from /usr/local to /usr in src/luaconf.h
-# Then, all your libraries from luarocks --local will be shared with luajit!
-
 make && make install
 ```
 
@@ -40,6 +33,12 @@ make && make install
 Explicit "luarocks.loader" in every script to share libraries with [LuaJIT] and lua interpreter, as following:
 ```shell
 require "luarocks.loader"
+...
+```
+Before you compile LuaJIT, change LUA_ROOT from /usr/local to /usr in src/luaconf.h
+```shell
+#define LUA_ROOT    "/usr/"
+...
 ```
 
 Dependencies
