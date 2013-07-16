@@ -34,10 +34,10 @@ cd LuaJIT-2.0.2
 make && make install
 ```
 
-Important
+[LuaJIT]
 -----------
 
-Ensure luarocks loader in every script to share libraries with [LuaJIT] and lua interpreter, as following:
+Explicit "luarocks.loader" in every script to share libraries with [LuaJIT] and lua interpreter, as following:
 ```shell
 require "luarocks.loader"
 ```
