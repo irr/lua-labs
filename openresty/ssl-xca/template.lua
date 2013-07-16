@@ -78,7 +78,7 @@ function render_config (values)
         function (config, domain)
             values.domain = domain
             values.servers = _.reduce(values[domain], '', function (servers, server) 
-                return servers .. '        server ' .. server .. ";\n"
+                return string.format('%s        server %s;\n', servers, server)
             end)
             return config .. upstream:gsub('%$(%w+)', values) .. server:gsub('%$(%w+)', values)
         end) .. finale
