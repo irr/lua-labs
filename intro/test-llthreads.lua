@@ -22,6 +22,8 @@
 
 -- luajit sub_threads.lua
 
+require "luarocks.loader"
+
 local llthreads = require "llthreads"
 
 local num_threads = tonumber(arg[1] or 10)
