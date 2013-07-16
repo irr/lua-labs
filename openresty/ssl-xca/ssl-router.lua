@@ -1,6 +1,8 @@
 --[[
 nginx -s stop; nginx -c /home/irocha/lua/openresty/ssl-xca/nginx-https.conf
 
+nginx -s stop; nginx -c /home/irocha/lua/openresty/ssl-xca/nginx-https-multi.conf
+
 curl -v -1 https://myirrlab.org:8443/ --cacert irrlab.crt
 curl -v -3 https://myirrlab.org:8443/ --cacert irrlab.crt
 
