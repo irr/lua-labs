@@ -42,6 +42,13 @@ require("luarocks.loader")
 Dependencies
 -----------
 
+```shell
+sudo apt-get install libzmq-dev libsqlite3-dev libmysqlclient-dev libreadline-dev libpcre3-dev libssl-dev
+```
+
+Libraries
+-----------
+
 * [OpenResty]: A full-fledged web application server by bundling the standard Nginx core, lots of 3rd-party Nginx modules, as well as most of their external dependencies
 
 * [iconv]: Lua binding to the POSIX 'iconv' library
