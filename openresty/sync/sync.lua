@@ -16,7 +16,7 @@ function run(dict, f, t, s)
     local ok, val = pcall(f, unpack(t))
     dict:delete(key)
     if not ok then
-        log(level, "do_sync (" .. key .. ") error ["..tostring(val).."]")
+        log(level, "sync.run error [" .. tostring(val) .. "]")
     end
     return ok, val
 end
