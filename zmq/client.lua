@@ -22,13 +22,19 @@ require "luarocks.loader"
 
 require("zmq")
 
-local ctx = zmq.init(1)
-local s = ctx:socket(zmq.REQ)
+if ctx then
+    print("reloading...")
+    s:close()
+    ctx:term()
+end
 
-s:connect("tcp://localhost:5555")
+ctx = zmq.init(1)
+s = ctx:socket(zmq.REQ)
+id = 0
 
-s:send("SELECT * FROM mytable")
-print(s:recv())
-
-s:close()
-ctx:term()
+function test()
+    s:connect("tcp://localhost:5555")
+    s:send("test message " .. tostring(id) .. " from " .. tostring(s))
+    id = id + 1
+    print(s:recv())
+end
