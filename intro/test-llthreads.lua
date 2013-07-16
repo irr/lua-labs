@@ -22,7 +22,7 @@
 
 -- luajit sub_threads.lua
 
-require "luarocks.loader"
+require("luarocks.loader")
 
 local llthreads = require "llthreads"
 

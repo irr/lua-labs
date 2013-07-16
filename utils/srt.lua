@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 
-require "luarocks.loader"
+require("luarocks.loader")
 
 if arg == nil then
     os.exit(1)

@@ -1,6 +1,6 @@
-require "luarocks.loader"
+require("luarocks.loader")
 
-local luasql = require "luasql.sqlite3"
+local luasql = require("luasql.sqlite3")
 
 local env = luasql.sqlite3()
 local conn = env:connect("../data/symbols.db")
