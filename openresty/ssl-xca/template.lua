@@ -1,6 +1,6 @@
 #!/usr/bin/env luajit
 
-_ = require "underscore"
+_ = require("underscore")
 
 local port    = 8443
 local certdir = '/home/irocha/lua/openresty/ssl-xca'
