@@ -52,7 +52,6 @@ Libraries
 * [OpenResty]: A full-fledged web application server by bundling the standard Nginx core, lots of 3rd-party Nginx modules, as well as most of their external dependencies
 
 * [iconv]: Lua binding to the POSIX 'iconv' library
-* [json4lua]: A simple encoding of Javascript-like objects that is ideal for lightweight transmission of relatively weakly-typed data
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
 * [lua-llthreads]: Low-Level threads(pthreads or WIN32 threads) for Lua
 * [lua-zmq]: Lua zeromq2 binding
