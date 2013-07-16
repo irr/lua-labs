@@ -36,7 +36,7 @@ Before you compile LuaJIT, change LUA_ROOT from /usr/local to /usr in src/luacon
 ```
 Make sure you load *luarocks* in every script to share libraries with [LuaJIT] and lua interpreter, as following:
 ```shell
-require "luarocks.loader"
+require("luarocks.loader")
 ```
 
 Dependencies
