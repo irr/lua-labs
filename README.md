@@ -5,19 +5,41 @@ lua-labs
 
 ```shell
 yum install readline-devel pcre-devel openssl-devel
-tar xfva ngx_openresty-1.2.7.6.tar.gz
-cd ngx_openresty-1.2.7.6
+tar xfva ngx_openresty-1.2.8.6.tar.gz
+cd ngx_openresty-1.2.8.6
 ./configure --prefix=/opt/openresty --with-luajit --with-http_stub_status_module
 make install
 ```
 
 ```shell
 apt-get install libreadline-dev libpcre3-dev libssl-dev
-tar xfva ngx_openresty-1.2.7.6.tar.gz
-cd ngx_openresty-1.2.7.6
+tar xfva ngx_openresty-1.2.8.6.tar.gz
+cd ngx_openresty-1.2.8.6
 ./configure --prefix=/opt/openresty --with-luajit --with-http_stub_status_module
 make -j4 
 make install
+```
+
+```shell
+wget http://luajit.org/download/LuaJIT-2.0.2.tar.gz
+tar xfva LuaJIT-2.0.2.tar.gz
+cd LuaJIT-2.0.2
+
+# change Makefile
+# export PREFIX=/opt/lua/LuaJIT
+
+# Before you compile LuaJIT, change LUA_ROOT from /usr/local to /usr in src/luaconf.h
+# Then, all your libraries from luarocks --local will be shared with luajit!
+
+make && make install
+```
+
+Important
+-----------
+
+Ensure luarocks loader in every script to share libraries with [LuaJIT] and lua interpreter, as following:
+```shell
+require "luarocks.loader"
 ```
 
 Dependencies
@@ -69,6 +91,7 @@ limitations under the License.
 
 [Apache]: http://httpd.apache.org/dev/devnotes.html
 [OpenResty]: http://openresty.org/
+[LuaJIT]: http://luajit.org/
 [concurrentlua]: https://github.com/lefcha/concurrentlua
 [iconv]: http://luaforge.net/projects/lua-iconv/
 [json4lua]: http://json.luaforge.net/

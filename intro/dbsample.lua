@@ -1,3 +1,5 @@
+require "luarocks.loader"
+
 local luasql = require "luasql.sqlite3"
 
 local env = luasql.sqlite3()
