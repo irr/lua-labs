@@ -1,13 +1,11 @@
 --[[
-nginx -s stop; nginx -c /home/irocha/lua/openresty/ssl-xca/nginx-https.conf
+nginx -s stop; nginx -c /home/irocha/lua/openresty/ssl-xca/nginx.conf
 
-nginx -s stop; nginx -c /home/irocha/lua/openresty/ssl-xca/nginx-https-multi.conf
+curl -v -1 https://myirrlab.org:8443/ --cacert certs/irrlab.crt
+curl -v -3 https://myirrlab.org:8443/ --cacert certs/irrlab.crt
 
-curl -v -1 https://myirrlab.org:8443/ --cacert irrlab.crt
-curl -v -3 https://myirrlab.org:8443/ --cacert irrlab.crt
-
-openssl s_client -host myirrlab.org -port 8443 -CAfile irrlab.crt
-openssl s_client -host myirrlab.org -key myirrlab.org.pem -cert myirrlab.org.crt -port 8443
+openssl s_client -host myirrlab.org -port 8443 -CAfile certs/irrlab.crt
+openssl s_client -host myirrlab.org -key certs/myirrlab.org.pem -cert certs/myirrlab.org.crt -port 8443
 --]]
 
 ngx.say("SSL-DOMAIN   = " .. ngx.var.server_name)
