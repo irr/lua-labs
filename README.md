@@ -55,6 +55,7 @@ Libraries
 * [json4lua]: A simple encoding of Javascript-like objects that is ideal for lightweight transmission of relatively weakly-typed data
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
 * [lua-llthreads]: Low-Level threads(pthreads or WIN32 threads) for Lua
+* [lua-zmq]: Lua zeromq2 binding
 * [luaposix]: Lua bindings for POSIX APIs
 * [luarocks]: Deployment and management system for Lua modules
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
@@ -67,6 +68,7 @@ luarocks --local install lua-iconv
 luarocks --local install json4lua 
 luarocks --local install lua-cjson
 luarocks --local install lua-llthreads
+luarocks --local install lua-zmq
 luarocks --local install luafilesystem
 luarocks --local install luaposix
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
@@ -98,6 +100,7 @@ limitations under the License.
 [json4lua]: http://json.luaforge.net/
 [lua-cjson]: http://www.kyne.com.au/~mark/software/lua-cjson.php
 [lua-llthreads]: http://github.com/Neopallium/lua-llthreads
+[lua-zmq]: https://github.com/Neopallium/lua-zmq
 [luaposix]: https://github.com/luaposix/luaposix
 [luarocks]: http://luarocks.org/en
 [luasql-mysql]: http://www.keplerproject.org/luasql/
