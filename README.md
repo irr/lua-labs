@@ -44,7 +44,6 @@ Dependencies
 
 * [OpenResty]: A full-fledged web application server by bundling the standard Nginx core, lots of 3rd-party Nginx modules, as well as most of their external dependencies
 
-* [concurrentlua]: Concurrency oriented programming in Lua
 * [iconv]: Lua binding to the POSIX 'iconv' library
 * [json4lua]: A simple encoding of Javascript-like objects that is ideal for lightweight transmission of relatively weakly-typed data
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
@@ -54,10 +53,9 @@ Dependencies
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
 * [redis-lua]: A Lua client library for the redis key value storage system
-* [underscore.lua]: Concurrency oriented programming in Lua
+* [underscore.lua]: Underscore.lua is a Lua library that provides a set of utility functions for dealing with iterators, arrays, tables, and functions.
 
 ```shell
-luarocks --local install concurrentlua
 luarocks --local install lua-iconv
 luarocks --local install json4lua 
 luarocks --local install lua-cjson
@@ -89,7 +87,6 @@ limitations under the License.
 [Apache]: http://httpd.apache.org/dev/devnotes.html
 [OpenResty]: http://openresty.org/
 [LuaJIT]: http://luajit.org/
-[concurrentlua]: https://github.com/lefcha/concurrentlua
 [iconv]: http://luaforge.net/projects/lua-iconv/
 [json4lua]: http://json.luaforge.net/
 [lua-cjson]: http://www.kyne.com.au/~mark/software/lua-cjson.php
