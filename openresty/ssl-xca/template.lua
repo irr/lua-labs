@@ -75,12 +75,12 @@ local server = [[
 
 function render_config (values)
     return _.reduce(values.domains, prologue .. fallback:gsub('%$(%w+)', values), 
-        function (cfg, domain)
+        function (config, domain)
             values.domain = domain
-            values.servers = _.reduce(values[domain], '', function (vs, server) 
-                return vs .. '        server ' .. server .. ";\n"
+            values.servers = _.reduce(values[domain], '', function (servers, server) 
+                return servers .. '        server ' .. server .. ";\n"
             end)
-            return cfg .. upstream:gsub('%$(%w+)', values) .. server:gsub('%$(%w+)', values)
+            return config .. upstream:gsub('%$(%w+)', values) .. server:gsub('%$(%w+)', values)
         end) .. finale
 end
 
