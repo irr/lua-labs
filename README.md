@@ -43,7 +43,7 @@ Dependencies
 -----------
 
 ```shell
-sudo apt-get install libzmq-dev libsqlite3-dev libmysqlclient-dev libreadline-dev libpcre3-dev libssl-dev
+apt-get install libzmq-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev
 ```
 
 Libraries
