@@ -4,78 +4,27 @@ require("luarocks.loader")
 
 local _ = require("underscore")
 
+function readfile(dir, file)
+    local f = io.open(dir .. "/" .. file, "rb")
+    local content = f:read("*all")
+    f:close()
+    return content
+end
+
 local port    = 8443
 local certdir = '/home/irocha/lua/openresty/ssl-xca/certs'
 local codedir = '/home/irocha/lua/openresty/ssl-xca'
 local confdir = '/home/irocha/lua/openresty/ssl-xca/includes'
+local tpltdir = '/home/irocha/lua/openresty/ssl-xca/templates'
 local basedir = '/opt/openresty/nginx'
 
-local base = [[
-worker_processes    4;
-worker_cpu_affinity 0001 0010 0100 1000;
+local base = readfile(tpltdir, 'base.tpl')
 
-error_log $basedir/logs/error.log info;
+local upstream = readfile(tpltdir, 'upstream.tpl')
 
-events {
-    worker_connections 1024;
-}
+local fallback = readfile(tpltdir, 'fallback.tpl')
 
-http {
-
-    ssl_ciphers HIGH:!kEDH:@STRENGTH;
-    ssl_prefer_server_ciphers on;
-    ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
-    ssl_session_cache shared:SSL:10m;
-
-    include $confdir/*.conf;
-}
-
-]]
-
-local upstream = [[
-upstream $domain {
-$servers}
-
-]]
-
-local fallback = [[
-server {
-    listen $port default ssl;
-    server_name _;
-
-    ssl on;  
-    ssl_certificate $certdir/multiple-domains.crt;  
-    ssl_certificate_key $certdir/multiple-domains.pem;  
-    
-    ssl_ciphers RC4:!MD5;
-
-    location / {
-        content_by_lua_file '$codedir/ssl-router.lua';
-    }
-}
-
-]]
-
-local server = [[
-server {
-    listen $port ssl;
-    server_name $domain;
-
-    ssl on;  
-    ssl_certificate $certdir/$domain.crt;
-    ssl_certificate_key $certdir/$domain.pem;        
-
-    location / {
-        proxy_redirect      off;
-        proxy_set_header    Host $host;
-        proxy_set_header    X-Real-IP $remote_addr;
-        proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header    X-Forwarded-Proto https;
-        proxy_pass          http://$domain;
-    }
-}
-
-]]
+local server = readfile(tpltdir, 'server.tpl')
 
 function render_config (values)
     local ngxconf, incconf = "$codedir/nginx.conf", "$confdir/default.conf"
@@ -102,6 +51,7 @@ values = { ['myirrlab.org'] = { 'www.uol.com.br', 'www.uol.com.br' },
            certdir = certdir, 
            codedir = codedir,
            confdir = confdir,
+           tpltdir = tpltdir,
            port = port }
 
 local config = render_config(values)
