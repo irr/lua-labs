@@ -36,7 +36,7 @@ function render_config (values)
         function (config, domain)
             values.domain = domain
             values.servers = _.reduce(values[domain], '', function (servers, server) 
-                return string.format('%s    server %s;\n', servers, server)
+                return servers .. string.format('    server %s;\n', server)
             end)
             local dconf = "$confdir/" .. domain .. ".conf" 
             config[dconf:gsub('%$(%w+)', values)] = upstream:gsub('%$(%w+)', values) .. server:gsub('%$(%w+)', values)
@@ -44,8 +44,8 @@ function render_config (values)
         end)
 end
 
-values = { ['myirrlab.org'] = { 'www.uol.com.br', 'www.uol.com.br' },
-           ['myirrlab.net'] = { 'www.google.com.br', 'www.google.com.br' },
+values = { ['myirrlab.org'] = { 'www.uol.com.br', 'www.uolhost.com.br' },
+           ['myirrlab.net'] = { 'www.google.com', 'www.google.com.br' },
            domains = { 'myirrlab.org', 'myirrlab.net' },
            basedir = basedir, 
            certdir = certdir, 

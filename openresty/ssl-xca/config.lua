@@ -3,10 +3,12 @@ nginx -s stop; nginx -c /home/irocha/lua/openresty/ssl-xca/nginx.conf
 
 curl -v -1 https://myirrlab.org:8443/ --cacert certs/irrlab.crt
 
+curl -v http://localhost:8888/
 curl -v -X POST --header 'Content-Type: application/json' http://localhost:8888/ -d@myirrlab.org.json
 curl -v -X DELETE http://localhost:8888/?domain=myirrlab.org
 --]]
 
+local _ = require("underscore")
 local json = require("cjson")
 
 function readfile(file)
@@ -28,6 +30,22 @@ end
 
 function removefile(pattern, dir, domain)
     return os.execute("rm ".. filename(pattern, dir, domain))
+end
+
+function os.capture(cmd, raw)
+  local f = assert(io.popen(cmd, 'r'))
+  local s = assert(f:read('*a'))
+  f:close()
+  if raw then return s end
+  s = string.gsub(s, '^%s+', '')
+  s = string.gsub(s, '%s+$', '')
+  s = string.gsub(s, '[\n\r]+', ' ')
+  return s
+end
+
+function split(str, sep)
+    local s = str..sep
+    return s:match((s:gsub('[^'..sep..']*'..sep, '([^'..sep..']*)'..sep)))
 end
 
 function exit(status)
@@ -59,10 +77,9 @@ if ngx.req.get_method() == "POST" then
     end
 
     local ups = string.format("%s/upstream.tpl", ngx.var.tpltd)
-    local servers = ''
-    for _, s in pairs(data.upstream) do
-        servers = servers .. string.format('    server %s;\n', s)    
-    end
+    local servers = _.reduce(data.upstream, '', function (srvs, srv) 
+                return srvs .. string.format('    server %s;\n', srv)
+            end)
     local upstream = readfile(ups):gsub('%$(%w+)', { domain = data.domain, servers = servers })
 
     local srv = string.format("%s/server.tpl", ngx.var.tpltd)
@@ -94,6 +111,20 @@ elseif ngx.req.get_method() == "DELETE" then
         exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
     end
 
+elseif ngx.req.get_method() == "GET" then
+    local confs = { split(os.capture("ls " .. ngx.var.confd .. "/"), " ") }
+    local cmap = _.reduce(confs, {}, function (cm, name)
+            if name == 'default.conf' then
+                return cm
+            end
+            local content = readfile(string.format("%s/%s", ngx.var.confd, name))
+            cm[name] = _.reduce(content:gmatch("server ([%w\\.:]+);"), {}, function (m, k)
+                    table.insert(m, k)
+                    return m
+                end)
+            return cm
+        end)
+    ngx.say(json.encode(cmap))
 else
     exit(ngx.HTTP_BAD_REQUEST)
 end
