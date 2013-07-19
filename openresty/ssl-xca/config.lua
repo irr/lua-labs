@@ -112,13 +112,14 @@ elseif ngx.req.get_method() == "DELETE" then
     end
 
 elseif ngx.req.get_method() == "GET" then
-    local confs = { split(os.capture("ls " .. ngx.var.confd .. "/"), " ") }
+    local confs = { split(os.capture("ls " .. ngx.var.confd .. "/*.conf"), " ") }
     local cmap = _.reduce(confs, {}, function (cm, name)
-            if name == 'default.conf' then
+            name = name:match("([%w\\.:]+).conf")
+            if name == 'default' then
                 return cm
             end
-            local content = readfile(string.format("%s/%s", ngx.var.confd, name))
-            cm[name:match("([%w\\.:]+).conf")] = _.reduce(content:gmatch("server ([%w\\.:]+);"), {}, function (m, k)
+            local content = readfile(string.format("%s/%s.conf", ngx.var.confd, name))
+            cm[name] = _.reduce(content:gmatch("server ([%w\\.:]+);"), {}, function (m, k)
                     table.insert(m, k)
                     return m
                 end)
