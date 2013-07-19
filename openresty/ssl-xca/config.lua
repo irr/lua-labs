@@ -3,7 +3,7 @@ nginx -s stop; nginx -c /home/irocha/lua/openresty/ssl-xca/nginx.conf
 
 curl -v -1 https://myirrlab.org:8443/ --cacert certs/irrlab.crt
 
-curl -v http://localhost:8888/
+http http://localhost:8888/
 curl -v -X POST --header 'Content-Type: application/json' http://localhost:8888/ -d@myirrlab.org.json
 curl -v -X DELETE http://localhost:8888/?domain=myirrlab.org
 --]]
@@ -118,7 +118,7 @@ elseif ngx.req.get_method() == "GET" then
                 return cm
             end
             local content = readfile(string.format("%s/%s", ngx.var.confd, name))
-            cm[name] = _.reduce(content:gmatch("server ([%w\\.:]+);"), {}, function (m, k)
+            cm[name:match("([%w\\.:]+).conf")] = _.reduce(content:gmatch("server ([%w\\.:]+);"), {}, function (m, k)
                     table.insert(m, k)
                     return m
                 end)
