@@ -7,7 +7,7 @@ lua-labs
 yum install readline-devel pcre-devel openssl-devel
 tar xfva ngx_openresty-1.2.8.6.tar.gz
 cd ngx_openresty-1.2.8.6
-./configure --prefix=/opt/openresty --with-luajit --with-http_stub_status_module
+./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module
 make install
 ```
 
@@ -15,7 +15,7 @@ make install
 apt-get install libreadline-dev libpcre3-dev libssl-dev
 tar xfva ngx_openresty-1.2.8.6.tar.gz
 cd ngx_openresty-1.2.8.6
-./configure --prefix=/opt/openresty --with-luajit --with-http_stub_status_module
+./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module
 make -j4 
 make install
 ```
