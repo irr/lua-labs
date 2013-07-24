@@ -29,7 +29,7 @@ function trim(s)
 end
 
 local source = tostring(arg[1])
-local _, charset = split(os.capture('file -bi ' .. source, true), "=")
+local _, charset = split(os.capture('file -bi "' .. source ..'"', true), "=")
 
 local file = io.open(source, 'rb')
 local content = file:read('*all')
