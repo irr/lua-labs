@@ -44,6 +44,7 @@ Dependencies
 
 ```shell
 apt-get install libzmq-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev
+yum install czmq-devel sqlite-devel mysql-devel pcre-devel
 ```
 
 Libraries
