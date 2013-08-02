@@ -57,10 +57,14 @@ end
 
 print(string.format("wlua: downloading [%s] with timeout=[%d] and retry=[%d]...", f, t, s))
 
-local cpid = go(function() run(t, s, f) end)
+local ok, cpid = pcall(go, function() run(t, s, f) end)
 
-posix.signal(posix.SIGINT, function()
-    posix.kill(cpid)
-end)
+if ok then
+    posix.signal(posix.SIGINT, function()
+        posix.kill(cpid)
+    end)
 
-posix.wait(cpid)
+    posix.wait(cpid)
+else
+    os.exit(-1)
+end
