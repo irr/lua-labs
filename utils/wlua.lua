@@ -13,9 +13,7 @@ if #arg == 0 then
 end
 
 function main(arg)
-    local t = 5
-    local s = 5
-    local f = nil
+    local t, s, f = 5, 5, nil
 
     for i = 1, #arg do
         if arg[i]:find("-t") == 1 and #arg[i] > 3 then
@@ -66,7 +64,6 @@ local cpid = go(function() main(arg) end)
 
 signal(SIGINT, function()
     kill(cpid)
-    kill(getpid('pid'))
 end)
 
 wait(cpid)
