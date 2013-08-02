@@ -4,27 +4,8 @@ require("luarocks.loader")
 
 local posix = require('posix')
 
-if #arg == 0 then
-    print("Usage: wgo [OPTIONS] <file or url (http/https)>")
-    print("       -t<n> = timeout in seconds")
-    print("       -s<n> = retry interval in seconds")
-    os.exit(1)
-end
-
-function main(arg)
-    local t, s, f = 5, 5, nil
-
-    for i = 1, #arg do
-        if arg[i]:find("-t") == 1 and #arg[i] > 3 then
-            t = tonumber(arg[i]:sub(3))
-        elseif arg[i]:find("-s") == 1 and #arg[i] > 3 then
-            s = tonumber(arg[i]:sub(3))
-        else
-            f = arg[i]
-        end
-    end
-
-    local cmd = string.format("wget -c --timeout=%d ", t)
+function run(t, s, f)
+    local cmd, status = string.format("wget -c --timeout=%d ", t), nil
 
     if f:find("http://") then
         cmd = cmd .. f
@@ -33,10 +14,6 @@ function main(arg)
     else
         cmd = cmd .. string.format("--no-check-certificate --user=%s --password=%s https://ocean:8080/%s", os.getenv("U"), os.getenv("P"), f)
     end
-
-    print(string.format("wlua: downloading [%s]...", f))
-
-    local status = nil
 
     repeat
         _, status = pcall(os.execute, cmd)
@@ -59,7 +36,28 @@ function go(fn,...)
     end
 end
 
-local cpid = go(function() main(arg) end)
+local t, s, f = 5, 5, nil
+
+for i = 1, #arg do
+    if arg[i]:find("-t") == 1 and #arg[i] > 2 then
+        t = tonumber(arg[i]:sub(3))
+    elseif arg[i]:find("-s") == 1 and #arg[i] > 2 then
+        s = tonumber(arg[i]:sub(3))
+    else
+        f = arg[i]
+    end
+end
+
+if f == nil then
+    print("Usage: wlua.lua [OPTIONS] <file or url (http/https)>")
+    print("       -t<n> = timeout in seconds")
+    print("       -s<n> = retry interval in seconds")
+    os.exit(1)
+end
+
+print(string.format("wlua: downloading [%s] with timeout=[%d] and retry=[%d]...", f, t, s))
+
+local cpid = go(function() run(t, s, f) end)
 
 posix.signal(posix.SIGINT, function()
     posix.kill(cpid)
