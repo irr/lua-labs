@@ -15,10 +15,11 @@ http {
     sendfile on;
     reset_timedout_connection on;
 
-    ssl_ciphers HIGH:!kEDH:@STRENGTH;
-    ssl_prefer_server_ciphers on;
     ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers ECDHE-RSA-AES256-SHA384:AES256-SHA256:RC4:HIGH:!MD5:!aNULL:!eNULL:!NULL:!DH:!EDH:!AESGCM;
+    ssl_prefer_server_ciphers on;
     ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
 
     include $confdir/*.conf;
 
