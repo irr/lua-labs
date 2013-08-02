@@ -26,7 +26,7 @@ require("luarocks.loader")
 
 local llthreads = require "llthreads"
 
-local num_threads = tonumber(arg[1] or 10)
+local num_threads = tonumber(10)
  
 print("MAIN-PATH: ", package.path)
 print("MAIN-CPATH: ", package.cpath)
