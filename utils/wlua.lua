@@ -42,7 +42,7 @@ function main(arg)
         _, status = pcall(os.execute, cmd)
         if status ~= 0 then
             print(string.format("wlua: waiting for %d seconds [%s]...", s, f))
-            os.execute("sleep " .. tonumber(s))
+            pcall(os.execute, "sleep " .. tonumber(s))
         end
     until (status == 0)
 
