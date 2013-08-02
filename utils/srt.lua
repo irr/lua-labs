@@ -2,7 +2,7 @@
 
 require("luarocks.loader")
 
-if arg == nil then
+if #arg == 0 then
     os.exit(1)
 end
 
