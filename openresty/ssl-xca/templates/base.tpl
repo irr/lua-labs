@@ -5,9 +5,15 @@ error_log $basedir/logs/error.log info;
 
 events {
     worker_connections 1024;
+    use epoll;
+    multi_accept on;    
 }
 
 http {
+    tcp_nopush on;
+    tcp_nodelay on;
+    sendfile on;
+    reset_timedout_connection on;
 
     ssl_ciphers HIGH:!kEDH:@STRENGTH;
     ssl_prefer_server_ciphers on;
