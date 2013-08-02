@@ -1,9 +1,8 @@
-#!/usr/bin/env lua
+#!/usr/bin/env luajit
 
 require("luarocks.loader")
 
 local posix = require('posix')
-for k,v in pairs(posix) do _G[k] = v end
 
 if #arg == 0 then
     print("Usage: wgo [OPTIONS] <file or url (http/https)>")
@@ -62,8 +61,8 @@ end
 
 local cpid = go(function() main(arg) end)
 
-signal(SIGINT, function()
-    kill(cpid)
+posix.signal(posix.SIGINT, function()
+    posix.kill(cpid)
 end)
 
-wait(cpid)
+posix.wait(cpid)
