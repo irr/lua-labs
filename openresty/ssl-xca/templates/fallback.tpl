@@ -6,6 +6,7 @@ server {
     ssl_certificate $certdir/multiple-domains.crt;  
     ssl_certificate_key $certdir/multiple-domains.pem;  
     
+    ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
     ssl_ciphers RC4:!MD5;
 
     location / {
