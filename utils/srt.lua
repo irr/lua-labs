@@ -35,12 +35,13 @@ local file = io.open(source, 'rb')
 local content = file:read('*all')
 file:close()
 
-if charset ~= 'iso-8859-1' then
-    local cd = iconv.open('ISO885915//TRANSLIT', charset)
-    local nstr, err = cd:iconv(content)
-    if not err then
-        content = nstr        
+if charset ~= 'utf-8' then
+    local cd = iconv.open('UTF-8//TRANSLIT', charset)
+    local sub, err = cd:iconv(content)
+    if err then
+      os.exit(1)
     end
+    content = sub
 end
 
 local patterns = { '<%p?%s*i>', '<%p?%s*I>', '<%p?%s*b>', '<%p?%s*B>', '<%p?%s*u>', '<%p?%s*U>' }
@@ -49,6 +50,12 @@ for _, v in pairs(patterns) do
     content = content:gsub(v, "")
 end
 
+local cd = iconv.open('ISO885915//TRANSLIT', 'UTF-8')
+local sub, err = cd:iconv(content)
+if err then
+  os.exit(1)
+end
+
 file = io.open(source, 'w+')
-file:write(content)
+file:write(sub)
 file:close()
