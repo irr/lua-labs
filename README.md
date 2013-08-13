@@ -71,7 +71,7 @@ yum install zeromq-devel sqlite-devel mysql-devel
 luarocks --local install lua-iconv
 luarocks --local install lua-cjson
 luarocks --local install lua-llthreads
-luarocks --local install lua-zmq ZEROMQ_INCDIR=/usr/include ZEROMQ_LIBDIR=/usr/lib64
+luarocks --local install lua-zmq-threads ZEROMQ_INCDIR=/usr/include ZEROMQ_LIBDIR=/usr/lib64
 luarocks --local install luafilesystem
 luarocks --local install luaposix
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
