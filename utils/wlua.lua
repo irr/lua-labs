@@ -4,8 +4,12 @@ require("luarocks.loader")
 
 local posix = require('posix')
 
-function run(t, s, f)
+function run(l, t, s, f)
     local cmd, status = string.format("wget -c --timeout=%d ", t), nil
+
+    if #l > 0 then
+        cmd = cmd .. string.format("--limit-rate=%s ", l)
+    end
 
     if f:find("http://") then
         cmd = cmd .. f
@@ -36,13 +40,15 @@ function go(fn,...)
     end
 end
 
-local t, s, f = 5, 5, nil
+local l, t, s, f = "", 5, 5, nil
 
 for i = 1, #arg do
     if arg[i]:find("-t") == 1 and #arg[i] > 2 then
         t = tonumber(arg[i]:sub(3))
     elseif arg[i]:find("-s") == 1 and #arg[i] > 2 then
         s = tonumber(arg[i]:sub(3))
+    elseif arg[i]:find("-l") == 1 and #arg[i] > 2 then
+        l = arg[i]:sub(3)
     else
         f = arg[i]
     end
@@ -50,6 +56,7 @@ end
 
 if f == nil then
     print("Usage: wlua.lua [OPTIONS] <file or url (http/https)>")
+    print("       -l<s> = limit rate")
     print("       -t<n> = timeout in seconds")
     print("       -s<n> = retry interval in seconds")
     os.exit(1)
@@ -57,7 +64,7 @@ end
 
 print(string.format("wlua: downloading [%s] with timeout=[%d] and retry=[%d]...", f, t, s))
 
-local ok, cpid = pcall(go, function() run(t, s, f) end)
+local ok, cpid = pcall(go, function() run(l, t, s, f) end)
 
 if ok then
     posix.signal(posix.SIGINT, function()
