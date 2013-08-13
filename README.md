@@ -50,11 +50,16 @@ yum install czmq-devel sqlite-devel mysql-devel pcre-devel
 Libraries
 -----------
 
+```shell
+yum install zeromq-devel sqlite-devel mysql-devel
+```
+
 * [OpenResty]: A full-fledged web application server by bundling the standard Nginx core, lots of 3rd-party Nginx modules, as well as most of their external dependencies
 
 * [iconv]: Lua binding to the POSIX 'iconv' library
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
 * [lua-llthreads]: Low-Level threads(pthreads or WIN32 threads) for Lua
+* [lua-zmq]: Lua bindings to zeromq2
 * [luaposix]: Lua bindings for POSIX APIs
 * [luarocks]: Deployment and management system for Lua modules
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
@@ -66,6 +71,7 @@ Libraries
 luarocks --local install lua-iconv
 luarocks --local install lua-cjson
 luarocks --local install lua-llthreads
+luarocks --local install lua-zmq ZEROMQ_INCDIR=/usr/include ZEROMQ_LIBDIR=/usr/lib64
 luarocks --local install luafilesystem
 luarocks --local install luaposix
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
