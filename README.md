@@ -3,11 +3,12 @@ lua-labs
 
 **lua-labs**  is a set of sample codes whose main purpose is to experiment and test *Lua* and *[OpenResty]/[Apache]*
 
+**CentOS 6.4**
 ```shell
-yum install readline-devel pcre-devel openssl-devel
+yum install readline-devel pcre-devel openssl-devel libdrizzle-devel
 tar xfva ngx_openresty-1.2.8.6.tar.gz
 cd ngx_openresty-1.2.8.6
-./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module
+./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --with-http_drizzle_module
 make install
 ```
 
