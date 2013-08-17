@@ -3,6 +3,7 @@
 require("luarocks.loader")
 
 if #arg == 0 then
+    print("Usage: srt <file>")
     os.exit(1)
 end
 
