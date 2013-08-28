@@ -1,0 +1,5 @@
+evalsha 1e82b30c662a8d20e8d9520cab7a046598be7d04 1 bayes good bad neutral
+evalsha fa84788a0ba205fad85fa4154bc01cbf0d37ee3b 2 bayes good tall handsome rich
+evalsha fa84788a0ba205fad85fa4154bc01cbf0d37ee3b 2 bayes bad bald poor ugly bitch
+evalsha fa84788a0ba205fad85fa4154bc01cbf0d37ee3b 2 bayes neutral none nothing maybe
+evalsha 2b0efa9a271c91eda47dac376df992e4d90ce9ba 1 bayes tall poor rich dummy nothing
