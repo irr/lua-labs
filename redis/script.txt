@@ -1,3 +1,7 @@
+redis-cli script load "$(cat script-bayes.lua)"
+redis-cli script load "$(cat script-learn.lua)"
+redis-cli script load "$(cat script-query.lua)"
+
 evalsha 1e82b30c662a8d20e8d9520cab7a046598be7d04 1 bayes good bad neutral
 evalsha fa84788a0ba205fad85fa4154bc01cbf0d37ee3b 2 bayes good tall handsome rich
 evalsha fa84788a0ba205fad85fa4154bc01cbf0d37ee3b 2 bayes bad bald poor ugly bitch
