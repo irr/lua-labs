@@ -71,7 +71,7 @@ end
 
 bayes = Bayes.new({"good", "bad", "neutral"})
 
-learn(bayes, "good", {"tall", "handsome", "rich", "tall", "tall"});
+learn(bayes, "good", {"tall", "handsome", "rich"});
 learn(bayes, "bad", {"bald", "poor", "ugly", "bitch"});
 learn(bayes, "neutral", {"none", "nothing", "maybe"});
 
