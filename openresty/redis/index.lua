@@ -9,13 +9,17 @@ local redis = require "resty.redis"
 local red = redis:new()
 red:set_timeout(5000)
 
+--[[
+local ok, err = red:connect("unix://tmp/redis.sock")
+unixsocket /tmp/redis.sock
+unixsocketperm 777
+]]
+
 local ok, err = red:connect("127.0.0.1", 6379)
 if not ok then
-    ngx.say(json.encode(tostring(err)))
+    ngx.say("failed to connect: ", err)
     return
 end
-
-local json = require "cjson"
 
 local keys = ngx.req.get_uri_args()
 local n = tonumber(keys["n"])
