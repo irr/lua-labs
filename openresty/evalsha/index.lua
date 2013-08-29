@@ -29,19 +29,13 @@ end
 local keys = ngx.req.get_uri_args()
 local query = {split(ngx.var.query, ":")}
 
-ngx.header.content_type = 'plain/text';
+ngx.header.content_type = 'application/json';
 
 local res, err = red:evalsha(query[1], query[2], query[3], split(keys["w"], "|"))
-if err then
-    ngx.say(json.encode(tostring(err)))
+if not err then
+    ngx.say(json.encode(res))
 else
-    if type(res) == "table" then
-        for k,v in pairs(res) do
-            ngx.say(string.format("%s: %s", k, v))
-        end
-    else
-        ngx.say(res)
-    end
+    ngx.say(json.encode(tostring(err)))
 end
 
 local ok, err = red:set_keepalive(0, 100)
