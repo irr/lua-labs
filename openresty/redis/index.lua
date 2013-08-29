@@ -5,6 +5,8 @@ curl -v "http://localhost:8080?n=10&p=1"
 redis-cli get n
 --]]
 
+local json = require "cjson"
+
 local redis = require "resty.redis"
 local red = redis:new()
 red:set_timeout(5000)
