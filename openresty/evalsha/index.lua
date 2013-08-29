@@ -34,6 +34,7 @@ ngx.header.content_type = 'application/json';
 local res, err = red:evalsha(query[1], query[2], query[3], split(keys["w"], "|"))
 if not err then
     ngx.say(json.encode(res))
+    return
 else
     ngx.say(json.encode(tostring(err)))
 end
@@ -41,4 +42,5 @@ end
 local ok, err = red:set_keepalive(0, 100)
 if not ok then
     ngx.say(json.encode(tostring(err)))
+    return
 end
