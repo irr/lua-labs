@@ -29,11 +29,11 @@ end
 local keys = ngx.req.get_uri_args()
 local ns = keys["ns"]
 local h = keys["h"]
-local n = tonumber(keys["h"])
+local n = tonumber(keys["n"])
 
 ngx.header.content_type = 'plain/text';
 
-local res, err = red:evalsha(h, 1, ns, split(keys["w"], "|"))
+local res, err = red:evalsha(h, n, ns, split(keys["w"], "|"))
 if err then
     ngx.say(json.encode(tostring(err)))
 else
