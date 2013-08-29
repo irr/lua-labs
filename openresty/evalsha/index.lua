@@ -1,6 +1,6 @@
 --[[
 redis-server
-curl -v "http://localhost:8080?ns=bayes&h=2b0efa9a271c91eda47dac376df992e4d90ce9ba&n=1&w=tall|poor|rich|dummy|nothing"
+curl -v "http://localhost:8080?m=query&w=tall|poor|rich|dummy|nothing"
 --]]
 
 function split(str, sep)
@@ -27,13 +27,11 @@ if not ok then
 end
 
 local keys = ngx.req.get_uri_args()
-local ns = keys["ns"]
-local h = keys["h"]
-local n = tonumber(keys["n"])
+local query = {split(ngx.var.query, ":")}
 
 ngx.header.content_type = 'plain/text';
 
-local res, err = red:evalsha(h, n, ns, split(keys["w"], "|"))
+local res, err = red:evalsha(query[1], query[2], query[3], split(keys["w"], "|"))
 if err then
     ngx.say(json.encode(tostring(err)))
 else
