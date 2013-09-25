@@ -8,10 +8,10 @@ local key = "__SYNC__:LOCK"
 
 module("sync")
 
-function run(dict, f, t, s)
+function run(dict, f, t)
     repeat
         local _, err, _ = dict:add(key, 0)
-        sleep(s or 0.001)
+        sleep(0)
     until not err
     local ok, val = pcall(f, unpack(t))
     dict:delete(key)

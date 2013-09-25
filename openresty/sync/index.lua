@@ -9,7 +9,6 @@ local sync = require("sync")
 local f = function (d)
     local val, _ = d:get("COUNTER")
     val = (not val and 0) or (val + 1)
-    ngx.sleep(0.001)
     d:set("COUNTER", val)
     return val
 end
