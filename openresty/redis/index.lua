@@ -3,6 +3,7 @@ redis-server
 curl -v "http://localhost:8080?n=10"
 curl -v "http://localhost:8080?n=10&p=1"
 redis-cli get n
+redis-cli subscribe nq
 --]]
 
 local json = require "cjson"
@@ -41,9 +42,9 @@ else
     ngx.say("multi")
 end
 
-red:set("n", "0")
 for i = 1, n do
     red:incr("n")
+    red:publish("nq", "msg"..tostring(i))
 end
 
 local results, err
