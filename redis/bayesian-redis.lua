@@ -61,7 +61,7 @@ function query(ns, docs)
         for _, d in pairs(docs) do
             local freq = client:get(fr(k(ns, v, "freqs"), d))
             if not freq then
-                score = score * 0.00000000001
+                score = score * 0.000000000000001
             else
                 score = score * freq / total             
             end
