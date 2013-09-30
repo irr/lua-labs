@@ -51,12 +51,6 @@ for _, v in pairs(patterns) do
     content = content:gsub(v, "")
 end
 
-local cd = iconv.open('ISO885915//TRANSLIT', 'UTF-8')
-local sub, err = cd:iconv(content)
-if err then
-  os.exit(1)
-end
-
 file = io.open(source, 'w+')
-file:write(sub)
+file:write(content)
 file:close()
