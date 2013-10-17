@@ -28,7 +28,7 @@ cd LuaJIT-2.0.2
 make && make install
 ```
 
-**OpenResty+TCP/Proxy [nginx_tcp_proxy_module]** 
+**OpenResty+TCP/Proxy ([nginx_tcp_proxy_module])** 
 ```shell
 ./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --add-module=/opt/lua/nginx_tcp_proxy_module-0.4.4 
 ```
