@@ -28,6 +28,11 @@ cd LuaJIT-2.0.2
 make && make install
 ```
 
+**TCP/Proxy**
+```shell
+./configure --with-http_ssl_module --prefix=/opt/lua/nginx --add-module=/opt/lua/nginx_tcp_proxy_module-0.4.4 --add-module=/opt/lua/headers-more-nginx-module-0.22
+```
+
 [LuaJIT]
 -----------
 
