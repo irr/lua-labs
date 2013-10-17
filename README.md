@@ -35,7 +35,7 @@ tar xfva ngx_openresty-1.4.2.8.tar.gz
 wget https://github.com/irr/nginx_tcp_proxy_module/raw/master/openresty-1.4.2.8.patch
 cd ngx_openresty-1.4.2.8
 patch -p1 < ../openresty-1.4.2.8.patch
-./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --add-module=/opt/lua/nginx_tcp_proxy_module-0.4.4 
+./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --add-module=/opt/lua/nginx_tcp_proxy_module
 make -j4
 make install
 ```
