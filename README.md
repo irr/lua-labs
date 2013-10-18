@@ -28,18 +28,6 @@ cd LuaJIT-2.0.2
 make && make install
 ```
 
-**OpenResty+TCP/Proxy ([nginx_tcp_proxy_module])** 
-```shell
-wget -c http://openresty.org/download/ngx_openresty-1.4.2.8.tar.gz
-tar xfva ngx_openresty-1.4.2.8.tar.gz
-wget https://github.com/irr/nginx_tcp_proxy_module/raw/master/openresty-1.4.2.8.patch
-cd ngx_openresty-1.4.2.8
-patch -p1 < ../openresty-1.4.2.8.patch
-./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --add-module=/opt/lua/nginx_tcp_proxy_module
-make -j4
-make install
-```
-
 [LuaJIT]
 -----------
 
@@ -79,7 +67,6 @@ yum install zeromq-devel sqlite-devel mysql-devel
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
 * [redis-lua]: A Lua client library for the redis key value storage system
 * [underscore.lua]: Underscore.lua is a Lua library that provides a set of utility functions for dealing with iterators, arrays, tables, and functions.
-* [nginx_tcp_proxy_module]: add the feature of tcp proxy with nginx, with health check and status monitor
 
 ```shell
 luarocks --local install lua-iconv
@@ -123,4 +110,3 @@ limitations under the License.
 [luasql-sqlite3]: http://www.keplerproject.org/luasql/
 [redis-lua]: http://github.com/nrk/redis-lua
 [underscore.lua]: http://mirven.github.io/underscore.lua/
-[nginx_tcp_proxy_module]: https://github.com/irr/nginx_tcp_proxy_module
