@@ -10,14 +10,14 @@ end
 local iconv = require("iconv")
 
 function os.capture(cmd, raw)
-  local f = assert(io.popen(cmd, 'r'))
-  local s = assert(f:read('*a'))
-  f:close()
-  if raw then return s end
-  s = string.gsub(s, '^%s+', '')
-  s = string.gsub(s, '%s+$', '')
-  s = string.gsub(s, '[\n\r]+', ' ')
-  return s
+    local f = assert(io.popen(cmd, 'r'))
+    local s = assert(f:read('*a'))
+    f:close()
+    if raw then return s end
+    s = string.gsub(s, '^%s+', '')
+    s = string.gsub(s, '%s+$', '')
+    s = string.gsub(s, '[\n\r]+', ' ')
+    return s
 end
 
 function split(str, sep)
@@ -26,7 +26,7 @@ function split(str, sep)
 end
 
 function trim(s)
-  return s:match '^%s*(.-)%s*$'
+    return s:match '^%s*(.-)%s*$'
 end
 
 local source = tostring(arg[1])
@@ -40,7 +40,7 @@ if charset ~= 'utf-8' then
     local cd = iconv.open('UTF-8//TRANSLIT', charset)
     local sub, err = cd:iconv(content)
     if err then
-      os.exit(1)
+        os.exit(1)
     end
     content = sub
 end
