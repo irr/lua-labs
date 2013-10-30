@@ -57,8 +57,8 @@ yum install zeromq-devel sqlite-devel mysql-devel
 
 * [OpenResty]: A full-fledged web application server by bundling the standard Nginx core, lots of 3rd-party Nginx modules, as well as most of their external dependencies
 
-* [iconv]: Lua binding to the POSIX 'iconv' library
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
+* [lua-iconv]: Lua binding to the POSIX 'iconv' library
 * [lua-llthreads]: Low-Level threads(pthreads or WIN32 threads) for Lua
 * [lua-zmq]: Lua bindings to zeromq2
 * [luaposix]: Lua bindings for POSIX APIs
@@ -100,7 +100,7 @@ limitations under the License.
 [Apache]: http://httpd.apache.org/dev/devnotes.html
 [OpenResty]: http://openresty.org/
 [LuaJIT]: http://luajit.org/
-[iconv]: http://luaforge.net/projects/lua-iconv/
+[lua-iconv]: http://luaforge.net/projects/lua-iconv/
 [lua-cjson]: http://www.kyne.com.au/~mark/software/lua-cjson.php
 [lua-llthreads]: http://github.com/Neopallium/lua-llthreads
 [lua-zmq]: https://github.com/Neopallium/lua-zmq
