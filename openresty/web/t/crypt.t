@@ -8,7 +8,7 @@ run_tests();
 
 __DATA__
 
-=== TEST 1: basic get
+=== TEST 1: basic encrypt
 --- config
     location /t {
         set $basedir '/home/irocha/lua/openresty/web/';
@@ -29,13 +29,19 @@ __DATA__
 
         content_by_lua_file '/home/irocha/lua/openresty/web/index.lua';
     }
---- request
-    GET /t?id=1
+--- more_headers
+Content-Type: application/json
+--- request eval
+"POST /t
+{\"encrypt\":\"mysql\"}\n
+\n
+"
 --- error_code: 200
---- response_body_like
-{"(mysql|redis)":{"name":"root","id":1}}
+--- response_body
+"c6f2200c6d95066c711ce4874b773ee3"
 
-=== TEST 2: basic not found
+
+=== TEST 2: basic decrypt
 --- config
     location /t {
         set $basedir '/home/irocha/lua/openresty/web/';
@@ -56,7 +62,13 @@ __DATA__
 
         content_by_lua_file '/home/irocha/lua/openresty/web/index.lua';
     }
---- request
-    GET /t?id=2
---- error_code: 404
+--- more_headers
+Content-Type: application/json
+--- request eval
+"POST /t
+{\"decrypt\":\"c6f2200c6d95066c711ce4874b773ee3\"}\n
+\n
+"
+--- error_code: 200
 --- response_body
+"mysql"

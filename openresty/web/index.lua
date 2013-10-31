@@ -1,6 +1,6 @@
 --[[
 curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/ -d "{\"encrypt\":\"mysql\"}"
-curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/ -d "{\"decrypt\":\"b2662427f814cacb39db1b4412efd685\"}"
+curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/ -d "{\"decrypt\":\"c6f2200c6d95066c711ce4874b773ee3\"}"
 curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/ -d "{\"method\":\"insert\", \"name\":\"irr\"}"
 curl -v -X DELETE http://localhost:8000/?id=2
 curl -v http://localhost:8000/?id=1
