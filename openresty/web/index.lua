@@ -112,8 +112,7 @@ function results(db, rd, n, sql, del)
         if not err then
             local body, res, err, errno, sqlstate = {}
             repeat
-                res, err, errno, sqlstate = db:read_result()
-                
+                res, err, errno, sqlstate = db:read_result()                
                 if errno then
                     if errno == 1048 then
                         exit(db, rd, ngx.HTTP_NOT_FOUND)
