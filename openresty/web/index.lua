@@ -109,35 +109,35 @@ function results(db, rd, n, sql, del)
             end 
         end
         local bytes, err = db:send_query(sql)
-        if not err then
-            local body, res, err, errno, sqlstate = {}
-            repeat
-                res, err, errno, sqlstate = db:read_result()                
-                if errno then
-                    if errno == 1048 then
-                        exit(db, rd, ngx.HTTP_NOT_FOUND)
-                    else
-                        exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
-                                string.format("results error: %s: %s %s", 
-                                    tostring(err), tostring(errno), tostring(sqlstate)))
-                    end
+        if err then
+            exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
+                            string.format("results error: %s", 
+                                tostring(err)))
+        end
+        local body, res, err, errno, sqlstate = {}
+        repeat
+            res, err, errno, sqlstate = db:read_result()                
+            if errno then
+                if errno == 1048 then
+                    exit(db, rd, ngx.HTTP_NOT_FOUND)
                 else
-                    if type(res) == "table" then
-                        if type(res[1]) == "table" then
-                            body = res[1]
-                        end
+                    exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
+                            string.format("results error: %s: %s %s", 
+                                tostring(err), tostring(errno), tostring(sqlstate)))
+                end
+            else
+                if type(res) == "table" then
+                    if type(res[1]) == "table" then
+                        body = res[1]
                     end
                 end
-
-            until err ~= "again"
-            cache = json.encode({["mysql"] = body})   
-            if not del then
-                cache_set(rd, body["id"], cache)
             end
-            return cache
-        else            
-            return cache
+
+        until err ~= "again"
+        if not del then
+            cache_set(rd, body["id"], json.encode({["redis"] = body}))
         end
+        return json.encode({["mysql"] = body})
     else
         exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
              string.format("results error: " .. tostring(err)))
@@ -146,21 +146,19 @@ end
 
 function check(db, rd, id)
     local k, cache, err = cache_get(rd, id)
-    if not cache then
-        local res, err, errno, sqlstate = db:query(string.format(SELECT, ngx.quote_sql_str(id)))
-        if errno then
-             exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
-                    string.format("check error: %s: %s %s", 
-                        tostring(err), tostring(errno), tostring(sqlstate)))
-        elseif not res or #res == 0 then
-            exit(db, rd, ngx.HTTP_NOT_FOUND)
-        else
-            cache = json.encode({["mysql"] =  res[1]})   
-            cache_set(rd, res[1]["id"], cache)
-            return cache
-        end
-    else
+    if cache then
         return cache
+    end
+    local res, err, errno, sqlstate = db:query(string.format(SELECT, ngx.quote_sql_str(id)))
+    if errno then
+         exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
+                string.format("check error: %s: %s %s", 
+                    tostring(err), tostring(errno), tostring(sqlstate)))
+    elseif not res or #res == 0 then
+        exit(db, rd, ngx.HTTP_NOT_FOUND)
+    else
+        cache_set(rd, res[1]["id"], json.encode({["redis"] =  res[1]}) )
+        return json.encode({["mysql"] =  res[1]}) 
     end
 end
 
