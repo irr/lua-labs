@@ -1,3 +1,11 @@
+--[[
+curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/ -d "{\"encrypt\":\"mysql\"}"
+curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/ -d "{\"decrypt\":\"b2662427f814cacb39db1b4412efd685\"}"
+curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/ -d "{\"method\":\"insert\", \"name\":\"irr\"}"
+curl -v -X DELETE http://localhost:8000/?id=2
+curl -v http://localhost:8000/?id=1
+--]]
+
 --------------------------------
 -- LIBRARIES
 --------------------------------
@@ -70,16 +78,30 @@ function split(str, sep)
     return s:match((s:gsub('[^'..sep..']*'..sep, '([^'..sep..']*)'..sep)))
 end
 
-function results(db, rd, n, sql, del)
-    local k, cache, err
+function cache_get(rd, n)
     if tonumber(n) then
-        k = "ID:" .. tostring(n)
-        cache, err = rd:get(k)
-        if err then       
-            ngx.log(ngx.ERR, "cache get error: " .. tostring(err))
-        end 
+        local k = "ID:" .. tostring(n)
+        local cache, err = rd:get(k)
+        if cache == ngx.null then
+            return k, nil, err
+        end    
+        return k, cache, err
     end
-    if del or not cache or cache == ngx.null then
+    return nil, nil, nil
+end
+
+function cache_set(rd, n, cache)
+    k = "ID:" .. tostring(n)
+    local ok, err = rd:set(k, cache)        
+    if err then
+        ngx.log(ngx.ERR, "cache set error: " .. tostring(err))
+    end  
+    return ok, err         
+end
+
+function results(db, rd, n, sql, del)
+    local k, cache, err = cache_get(rd, n)
+    if del or not cache then
         if del and k then
             local _, err = rd:del(k)
             if err then       
@@ -111,11 +133,7 @@ function results(db, rd, n, sql, del)
             until err ~= "again"
             cache = json.encode({["mysql"] = body})   
             if not del then
-                k = "ID:" .. tostring(body["id"])
-                local ok, err = rd:set(k, cache)        
-                if err then
-                    ngx.log(ngx.ERR, "cache set error: " .. tostring(err))
-                end            
+                cache_set(rd, body["id"], cache)
             end
             return cache
         else            
@@ -128,14 +146,8 @@ function results(db, rd, n, sql, del)
 end
 
 function check(db, rd, id)
-    if tonumber(id) then
-        k = "ID:" .. tostring(tonumber(id))
-        cache, err = rd:get(k)
-        if err then       
-            ngx.log(ngx.ERR, "cache get error: " .. tostring(err))
-        end 
-    end
-    if not cache or cache == ngx.null then
+    local k, cache, err = cache_get(rd, id)
+    if not cache then
         local res, err, errno, sqlstate = db:query(string.format(SELECT, ngx.quote_sql_str(id)))
         if errno then
              exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
@@ -145,11 +157,7 @@ function check(db, rd, id)
             exit(db, rd, ngx.HTTP_NOT_FOUND)
         else
             cache = json.encode({["mysql"] =  res[1]})   
-            k = "ID:" .. tostring(res[1]["id"])
-            local ok, err = rd:set(k, cache)        
-            if err then
-                ngx.log(ngx.ERR, "cache set error: " .. tostring(err))
-            end        
+            cache_set(rd, res[1]["id"], cache)
             return cache
         end
     else
@@ -197,14 +205,6 @@ if not ok then
          string.format("failed to connect to redis: %s", 
                        tostring(err)))
 end
-
---[[
-curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/ -d "{\"encrypt\":\"mysql\"}"
-curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/ -d "{\"decrypt\":\"b2662427f814cacb39db1b4412efd685\"}"
-curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/ -d "{\"method\":\"insert\", \"name\":\"irr\"}"
-curl -v -X DELETE http://localhost:8000/?id=2
-curl -v http://localhost:8000/?id=1
---]]
 
 if ngx.req.get_method() == "POST" then
 
