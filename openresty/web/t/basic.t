@@ -57,6 +57,6 @@ __DATA__
         content_by_lua_file '/home/irocha/lua/openresty/web/index.lua';
     }
 --- request
-    GET /t?id=2
+    GET /t?id=1972
 --- error_code: 404
 --- response_body
