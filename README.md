@@ -28,6 +28,15 @@ cd LuaJIT-2.0.2
 make && make install
 ```
 
+```shell
+cd /usr/sbin
+ln -s /opt/openresty/nginx/sbin/nginx
+
+cd /usr/local
+ln -s /opt/openresty openresty
+ln -s /opt/openresty openresty-debug
+```
+
 [LuaJIT]
 -----------
 
