@@ -1,3 +1,7 @@
+#!/usr/bin/env lua
+
+package.cpath = package.cpath .. ";/opt/lua/luaffi/?.so"
+
 local ffi = require "ffi"
 
 ffi.cdef[[
@@ -30,3 +34,6 @@ function long2ip(long)
     addr.s_addr = C.htonl(long)
     return ffi.string(C.inet_ntoa(addr))
 end
+
+print(string.format("0x%x", ip2long("127.0.0.1")))
+print(string.format("0x%x", ip2long("185.14.185.232")))
