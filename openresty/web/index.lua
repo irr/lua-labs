@@ -30,8 +30,9 @@ local iv  = "aa90025f918a9696"
 -- mysql -u root -p < db/db.sql
 
 local INSERT = [[
+SET @@AUTOCOMMIT=0;
 START TRANSACTION;
-SELECT @I:=users.id, @N:=users.name FROM users ORDER BY users.id DESC LIMIT 1;
+SELECT @I:=users.id, @N:=users.name FROM users ORDER BY users.id DESC LIMIT 1 FOR UPDATE;
 INSERT INTO users VALUES (@I + 1, %s);
 SELECT * FROM users WHERE users.id = @I + 1;
 COMMIT;
@@ -42,6 +43,7 @@ SELECT users.id, users.name FROM users WHERE users.id = %s;
 ]]
 
 local DELETE = [[
+SET @@AUTOCOMMIT=0;
 START TRANSACTION;
 DELETE FROM users WHERE users.id = %s;
 COMMIT;
@@ -170,7 +172,7 @@ end
 
 local db, err = mysql:new()
 if not db then
-    exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
+    exit(nil, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
          "failed to instantiate mysql: " .. tostring(err))
 end
 
