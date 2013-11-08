@@ -71,6 +71,7 @@ yum install zeromq-devel sqlite-devel mysql-devel
 * [lua-llthreads]: Low-Level threads(pthreads or WIN32 threads) for Lua
 * [lua-zmq]: Lua bindings to zeromq2
 * [luaposix]: Lua bindings for POSIX APIs
+* [luafilesystem]: Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution 
 * [luarocks]: Deployment and management system for Lua modules
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
@@ -114,6 +115,7 @@ limitations under the License.
 [lua-llthreads]: http://github.com/Neopallium/lua-llthreads
 [lua-zmq]: https://github.com/Neopallium/lua-zmq
 [luaposix]: https://github.com/luaposix/luaposix
+[luafilesystem]: https://github.com/keplerproject/luafilesystem
 [luarocks]: http://luarocks.org/en
 [luasql-mysql]: http://www.keplerproject.org/luasql/
 [luasql-sqlite3]: http://www.keplerproject.org/luasql/
