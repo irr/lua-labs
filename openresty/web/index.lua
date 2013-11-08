@@ -65,7 +65,8 @@ function exit(db, rd, status, msg)
                          tonumber(ngx.var.db_pool_size))
     end
     if rd then
-        rd:set_keepalive(0, 100)
+        rd:set_keepalive(tonumber(ngx.var.rd_max_idle_timeout), 
+                         tonumber(ngx.var.rd_pool_size))
     end
     if status then
         exit_now(status, msg)
