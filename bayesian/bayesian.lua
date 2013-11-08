@@ -69,13 +69,44 @@ function query(c, docs)
     return result
 end
 
-bayes = Bayes.new({"good", "bad", "neutral"})
+function load(f)
+    local f = io.open(f)
+    local s = f:read("*a")
+    f:close()
+    local t = {}
+    for w in string.gmatch(s, "(%w+)") do 
+        if #w > 2 then
+            t[#t+1] = w:lower()
+        end
+    end
+    return t
+end
 
-learn(bayes, "good", {"tall", "handsome", "rich"});
-learn(bayes, "bad", {"bald", "poor", "ugly", "bitch"});
-learn(bayes, "neutral", {"none", "nothing", "maybe"});
+function test(t)
+    local s = ""
+    for _, w in pairs(t) do
+        s = s .. w .. " "
+    end
 
-scores = query(bayes, {"tall", "poor", "rich", "dummy", "nothing"});
+    print("\n>>> testing: " .. s)
 
-debug(scores.options)
-debug(scores.selected, "\t")
+    local scores = query(bayes, t)
+    debug(scores.options)
+    debug(scores.selected, "\t")
+end
+
+print()
+
+local indexes = {"Doyle", "Dowson", "Beowulf"};
+
+bayes = Bayes.new(indexes)
+
+for _, i in pairs(indexes) do
+    local t = load(i .. ".txt")
+    print(i .. ": loaded " .. tostring(#t) .. " words...")
+    learn(bayes, i, load(i .. ".txt"))
+end
+
+test({"adventures", "sherlock", "holmes"})
+test({"comedy", "masks"})
+test({"hrothgar", "beowulf"})
