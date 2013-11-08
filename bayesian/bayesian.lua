@@ -84,8 +84,9 @@ end
 
 function test(t)
     local s = ""
-    for _, w in pairs(t) do
-        s = s .. w .. " "
+    for k, w in pairs(t) do
+        t[k] = w:lower()
+        s = s .. t[k] .. " "
     end
 
     print("\n>>> testing: " .. s)
@@ -93,6 +94,8 @@ function test(t)
     local scores = query(bayes, t)
     debug(scores.options)
     debug(scores.selected, "\t")
+
+    print()
 end
 
 print()
@@ -110,3 +113,4 @@ end
 test({"adventures", "sherlock", "holmes"})
 test({"comedy", "masks"})
 test({"hrothgar", "beowulf"})
+
