@@ -217,7 +217,7 @@ if ngx.req.get_method() == "POST" then
         local ok, cr = pcall(crypt[fn[1]], key, iv, fn[2])
         if ok then
             ngx.say("\""..cr.."\"")
-            exit()
+            exit(db, rd)
         else
             exit(db, rd, ngx.HTTP_BAD_REQUEST)   
         end
@@ -253,9 +253,14 @@ elseif ngx.req.get_method() == "DELETE" then
     exit(db, rd)
 
 elseif ngx.req.get_method() == "GET" then
+    
+    local id = ngx.var['arg_id']
 
-    local id = ngx.unescape_uri(ngx.var['arg_id'])
-    ngx.say(check(db, rd, id))
+    if not id then
+        exit(db, rd, ngx.HTTP_BAD_REQUEST)
+    end
+
+    ngx.say(check(db, rd, ngx.unescape_uri(id)))
     exit(db, rd)
 
 else
