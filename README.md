@@ -24,6 +24,8 @@ make install
 ```shell
 cd /usr/sbin
 ln -s /opt/openresty/nginx/sbin/nginx
+cd /usr/local/bin
+ln -s /opt/openresty/luajit/bin/luajit
 
 cd /usr/local
 ln -s /opt/openresty openresty
@@ -58,6 +60,10 @@ cd luarocks-2.1.1
 ./configure --with-lua=/opt/openresty/luajit --with-lua-include=/opt/openresty/luajit/include/luajit-2.0/
 gmake build
 gmake install
+```
+
+```shell
+luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/local/include/mysql MYSQL_LIBDIR=/usr/local/lib/mysql
 ```
 
 Dependencies
