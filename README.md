@@ -35,9 +35,7 @@ cd /opt/lua
 ln -s ~/.luarocks luarocks
 ```
 
-FreeBSD
------------
-
+**FreeBSD**
 ```shell
 cd /usr/ports/devel/gmake
 make install clean
