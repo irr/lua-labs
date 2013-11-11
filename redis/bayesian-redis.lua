@@ -1,3 +1,6 @@
+package.path = package.path .. ";/opt/lua/luarocks/share/lua/5.1/?.lua;"
+package.cpath = package.cpath .. ";/opt/lua/luarocks/lib/lua/5.1/?.so;"
+
 redis = require 'redis'
 client = redis.connect('127.0.0.1', 6379)
 
