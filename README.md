@@ -35,6 +35,9 @@ ln -s /opt/openresty/nginx/sbin/nginx
 cd /usr/local
 ln -s /opt/openresty openresty
 ln -s /opt/openresty openresty-debug
+
+cd /opt/lua
+ln -s ~/.luarocks luarocks
 ```
 
 Dependencies
