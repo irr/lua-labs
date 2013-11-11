@@ -5,10 +5,10 @@ lua-labs
 
 **CentOS 6.4**
 ```shell
-yum install readline-devel pcre-devel openssl-devel libdrizzle-devel
-tar xfva ngx_openresty-1.2.8.6.tar.gz
-cd ngx_openresty-1.2.8.6
-./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --with-http_drizzle_module
+yum install readline-devel pcre-devel openssl-devel
+tar xfva ngx_openresty-1.4.3.1.tar.gz
+cd ngx_openresty-1.4.3.1
+./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module
 make install
 ```
 
@@ -31,6 +31,33 @@ ln -s /opt/openresty openresty-debug
 
 cd /opt/lua
 ln -s ~/.luarocks luarocks
+```
+
+FreeBSD
+-----------
+
+```shell
+cd /usr/ports/devel/gmake
+make install clean
+cd /usr/ports/security/openssl
+make install clean
+cd /usr/ports/devel/pcre
+make install clean
+
+# ... install openresty ...
+```
+
+```shell
+cd /opt/openresty/luajit/bin/
+ln -s luajit lua
+```
+
+```shell
+tar xfvz luarocks-2.1.1.tar.gz
+cd luarocks-2.1.1
+./configure --with-lua=/opt/openresty/luajit --with-lua-include=/opt/openresty/luajit/include/luajit-2.0/
+gmake build
+gmake install
 ```
 
 Dependencies
