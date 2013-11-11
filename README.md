@@ -22,13 +22,6 @@ make install
 ```
 
 ```shell
-wget http://luajit.org/download/LuaJIT-2.0.2.tar.gz
-tar xfva LuaJIT-2.0.2.tar.gz
-cd LuaJIT-2.0.2
-make && make install
-```
-
-```shell
 cd /usr/sbin
 ln -s /opt/openresty/nginx/sbin/nginx
 
