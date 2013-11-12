@@ -54,7 +54,9 @@ COMMIT;
 --------------------------------
 
 function exit_now(status, msg)
-    ngx.status = status
+    if status ~= ngx.HTTP_OK then
+        ngx.status = status
+    end
     if msg then
         ngx.say(json.encode(msg))
     end
