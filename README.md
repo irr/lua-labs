@@ -44,6 +44,12 @@ make install clean
 cd /usr/ports/devel/pcre
 make install clean
 
+or
+
+pkg_add -r -v gmake
+pkg_add -r -v pcre
+pkg_add -r -v openssl
+
 # ... install openresty ...
 ```
 
@@ -55,7 +61,7 @@ ln -s luajit lua
 ```shell
 tar xfvz luarocks-2.1.1.tar.gz
 cd luarocks-2.1.1
-./configure --with-lua=/opt/openresty/luajit --with-lua-include=/opt/openresty/luajit/include/luajit-2.0/
+./configure --with-lua=/opt/openresty/luajit --with-lua-include=/opt/openresty/luajit/include/luajit-2.0 --with-lua-lib=/opt/openresty/luajit/lib
 gmake build
 gmake install
 ```
