@@ -9,10 +9,13 @@ local key = "__SYNC__:LOCK"
 module("sync")
 
 function run(dict, f, t)
-    repeat
-        local _, err, _ = dict:add(key, 0)
+    while true do
+        local ok, err = dict:add(key, 1, 1)
+        if ok and err ~= "exists" then
+            break
+        end
         sleep(0)
-    until not err
+    end
     local ok, val = pcall(f, unpack(t))
     dict:delete(key)
     if not ok then

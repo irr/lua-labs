@@ -1,6 +1,5 @@
 --[[
-nginx -s stop; nginx -c /home/irocha/lua/openresty/sync/nginx.conf
-nginx -s stop; nginx -c /home/irocha/lua/openresty/sync/nginx.conf && ab -n 1000 -c 100 http://localhost:8888/ && curl -v http://localhost:8888/ && nginx -s stop && echo "DONE"
+ab -n 1000 -c 100 http://localhost:8888/ && curl -v http://localhost:8888/ 
 curl -v http://localhost:8888/
 --]]
 
