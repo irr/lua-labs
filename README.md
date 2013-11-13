@@ -56,6 +56,11 @@ pkg_add -r -v openssl
 ```shell
 cd /opt/openresty/luajit/bin/
 ln -s luajit lua
+cd /usr/local/bin
+ln -s /opt/openresty/luajit/bin/lua
+ln -s /opt/openresty/luajit/bin/luajit
+cd /usr/sbin
+ln -s /opt/openresty/nginx/sbin/nginx
 ```
 
 ```shell
