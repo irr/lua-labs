@@ -1,5 +1,3 @@
-package.cpath = package.cpath .. ";" .. ngx.var.basedir .. "/lib/?.so"
-
 local tonum = tonumber
 local tostr = tostring
 local mfmod = math.fmod
