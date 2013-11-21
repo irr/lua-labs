@@ -1,4 +1,6 @@
-local mysql = require "resty.mysql"                                              
+local _ = require "underscore"
+local mysql = require "resty.mysql"
+
 local db, err = mysql:new()                                                      
 if not db then                                                                   
     ngx.say("failed to instantiate mysql: ", err)                                
@@ -20,13 +22,16 @@ if not ok then
     return                                                                       
 end                                                                              
                                                                                  
-ngx.say("connected to mysql.")                                                   
-                                                                                 
 local res, err, errno, sqlstate =                                                
-    db:query("select * from user")                                                 
+    db:query("select Host, User from user")                                                 
 if not res then                                                                  
     ngx.say("bad result: ", err, ": ", errno, ": ", sqlstate, ".")               
     return                                                                       
 end                                                                              
-                                                                                     
-ngx.say(string.format("Got %d rows", #res))
+
+if res and #res > 0 then
+    _.each(_.values(res), function (x)
+        _.each(_.values(x), ngx.say)
+    end)
+end
+
