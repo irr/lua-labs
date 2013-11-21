@@ -58,7 +58,7 @@ http {
         server_name    localhost;
 
         location / {
-            content_by_lua_file "$luaf";
+            content_by_lua_file "$file";
         }
     }
 }
@@ -97,7 +97,6 @@ local logs = tmp .. "/logs"
 local conf = tmp .. "/conf"
 local ngxf = conf .. "/nginx.conf"
 local pidf = logs .. "/nginx.pid"
-local luaf = tmp .. "/main.lua"
 
 if os.execute("mkdir -p " .. logs) ~=0 or os.execute("mkdir -p " .. conf) ~= 0 then 
     abort(tmp, "could not create nginx environment") 
@@ -107,22 +106,18 @@ local port = tostring(math.random(60000, 65500))
 
 local f, err = io.open(ngxf, "w+")
 if err then abort(tmp, "could not write nginx configuration") end
-local txt = nginx:gsub('%$(%w+)', { ["luaf"]  = luaf, 
+local txt = nginx:gsub('%$(%w+)', { ["file"]  = file, 
                                     ["port"]  = port,
                                     ["lpath"] = fix(lpath, "lua"),
                                     ["cpath"] = fix(cpath, "so") })
 f:write(txt)
 f:close()
 
-local f, err = io.open(file, "r")
-if err then abort(tmp, "could not read lua file") end
-local code = f:read("*a")
-f:close()
+local dname = os.capture("dirname " .. os.capture("readlink -f " .. file))
 
-local f, err = io.open(luaf, "w+")
-if err then abort(tmp, "could not write lua file") end
-f:write(code)
-f:close()
+if os.execute("cp -r " .. dname .. "/* " .. tmp .. "/") ~= 0 then
+    abort(tmp, "could not create lua environment")
+end
 
 if os.execute("nginx -c " .. ngxf .. " -p " .. tmp) ~= 0 then 
     abort(tmp, "could not start nginx")
