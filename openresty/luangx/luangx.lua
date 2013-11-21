@@ -11,7 +11,10 @@ function os.capture(cmd, raw)
   return s
 end
 
-function abort(tmp)
+function abort(tmp, err)
+    if not err then
+        print("luangx error: " .. tostring(err))
+    end
     os.execute("rm -rf " .. tmp)
     os.exit(1)
 end
@@ -62,28 +65,30 @@ local pidf = logs .. "/nginx.pid"
 local luaf = tmp .. "/main.lua"
 
 if not os.execute("mkdir -p " .. logs) or not os.execute("mkdir -p " .. conf) then 
-    abort(tmp) 
+    abort(tmp, "could not create nginx environment") 
 end
 
 local port = tostring(math.random(60000, 65500))
 
 local f, err = io.open(ngxf, "w+")
-if err then abort(tmp) end
+if err then abort(tmp, "could not write nginx configuration") end
 local txt = nginx:gsub('%$(%w+)', { ["luaf"] = luaf, ["port"] = port })
 f:write(txt)
 f:close()
 
 local f, err = io.open(file, "r")
-if err then abort(tmp) end
+if err then abort(tmp, "could not read lua file") end
 local code = f:read("*a")
 f:close()
 
 local f, err = io.open(luaf, "w+")
-if err then abort(tmp) end
+if err then abort(tmp, "could not write lua file") end
 f:write(code)
 f:close()
 
-if not os.execute("nginx -c " .. ngxf .. " -p " .. tmp) then abort(tmp) end
+if not os.execute("nginx -c " .. ngxf .. " -p " .. tmp) then 
+    abort(tmp, "could not start nginx")
+end
 
 local f, err = io.open(pidf, "r")
 if err then abort(tmp) end
