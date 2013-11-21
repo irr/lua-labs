@@ -27,6 +27,13 @@ function show(flag, file)
     end
 end
 
+function fix(path, ext)
+    if path and #path > 0 then
+        path = path .. "/?." .. ext
+    end
+    return path
+end
+
 local nginx = [[
 worker_processes  1;
 
@@ -68,9 +75,9 @@ for i = 1, #arg do
         log = true
     elseif arg[i]:find("-cfg") == 1 then
         cfg = true
-    elseif arg[i]:find("-lp") == 1 and #arg[i] > 2 then
+    elseif arg[i]:find("-lp") == 1 and #arg[i] > 4 then
         lpath = arg[i]:sub(5)
-    elseif arg[i]:find("-cp") == 1 and #arg[i] > 2 then
+    elseif arg[i]:find("-cp") == 1 and #arg[i] > 4 then
         cpath = arg[i]:sub(5)
     else
         file = arg[i]
@@ -102,8 +109,8 @@ local f, err = io.open(ngxf, "w+")
 if err then abort(tmp, "could not write nginx configuration") end
 local txt = nginx:gsub('%$(%w+)', { ["luaf"]  = luaf, 
                                     ["port"]  = port,
-                                    ["lpath"] = lpath,
-                                    ["cpath"] = cpath})
+                                    ["lpath"] = fix(lpath, "lua"),
+                                    ["cpath"] = fix(cpath, "so") })
 f:write(txt)
 f:close()
 
