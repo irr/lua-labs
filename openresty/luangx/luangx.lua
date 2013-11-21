@@ -12,11 +12,19 @@ function os.capture(cmd, raw)
 end
 
 function abort(tmp, err)
-    if not err then
+    if err then
         print("luangx error: " .. tostring(err))
     end
     os.execute("rm -rf " .. tmp)
     os.exit(1)
+end
+
+function show(flag, file)
+    if flag then
+        print("--[[" .. file)
+        os.execute("cat " .. file)
+        print("--]]\n")
+    end
 end
 
 local nginx = [[
@@ -31,28 +39,48 @@ events {
 
 http {
     default_type       application/octet-stream;
-    access_log         logs/access.log  combined;
+    access_log         logs/access.log combined;
     sendfile           on;
-    keepalive_timeout  65;
+    keepalive_timeout  10;
 
-    lua_package_path   '/usr/local/openresty/lualib/?.lua;;';
-    lua_package_cpath  ';;';
+    lua_package_path   '$lpath;/usr/local/openresty/lualib/?.lua;;';
+    lua_package_cpath  '$cpath;;';
 
     server {
-        listen       $port backlog=512;
-        server_name  localhost;
+        listen         $port;
+        server_name    localhost;
 
-        location /lua {
+        location / {
             content_by_lua_file "$luaf";
         }
     }
 }
 ]]
 
-local file = arg[1]
+local file = nil
+local lpath = ""
+local cpath = ""
+local log = false
+local cfg = false
+
+for i = 1, #arg do
+    if arg[i]:find("-log") == 1 then
+        log = true
+    elseif arg[i]:find("-cfg") == 1 then
+        cfg = true
+    elseif arg[i]:find("-lp") == 1 and #arg[i] > 2 then
+        lpath = arg[i]:sub(5)
+    elseif arg[i]:find("-cp") == 1 and #arg[i] > 2 then
+        cpath = arg[i]:sub(5)
+    else
+        file = arg[i]
+    end
+end
 
 if not file then
-    print("usage: luangx <lua file>")
+    print("usage: luangx [-log] [-cfg] <lua file>")
+    print("               -log: show error log content")
+    print("               -cfg: show nginx config")
     os.exit(1)
 end
 
@@ -64,7 +92,7 @@ local ngxf = conf .. "/nginx.conf"
 local pidf = logs .. "/nginx.pid"
 local luaf = tmp .. "/main.lua"
 
-if not os.execute("mkdir -p " .. logs) or not os.execute("mkdir -p " .. conf) then 
+if os.execute("mkdir -p " .. logs) ~=0 or os.execute("mkdir -p " .. conf) ~= 0 then 
     abort(tmp, "could not create nginx environment") 
 end
 
@@ -72,7 +100,10 @@ local port = tostring(math.random(60000, 65500))
 
 local f, err = io.open(ngxf, "w+")
 if err then abort(tmp, "could not write nginx configuration") end
-local txt = nginx:gsub('%$(%w+)', { ["luaf"] = luaf, ["port"] = port })
+local txt = nginx:gsub('%$(%w+)', { ["luaf"]  = luaf, 
+                                    ["port"]  = port,
+                                    ["lpath"] = lpath,
+                                    ["cpath"] = cpath})
 f:write(txt)
 f:close()
 
@@ -86,7 +117,7 @@ if err then abort(tmp, "could not write lua file") end
 f:write(code)
 f:close()
 
-if not os.execute("nginx -c " .. ngxf .. " -p " .. tmp) then 
+if os.execute("nginx -c " .. ngxf .. " -p " .. tmp) ~= 0 then 
     abort(tmp, "could not start nginx")
 end
 
@@ -95,7 +126,10 @@ if err then abort(tmp) end
 local pid = f:read("*a")
 f:close()
 
-print(os.capture("curl localhost:" .. port .. "/lua 2>/dev/null", true))
+print(os.capture("curl localhost:" .. port .. "/ 2>/dev/null", true))
+
+show(log, logs .. "/error.log")
+show(cfg, conf .. "/nginx.conf")
 
 os.execute("kill " .. pid)
 os.execute("rm -rf " .. tmp)
