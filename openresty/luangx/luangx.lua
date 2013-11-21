@@ -133,7 +133,7 @@ if err then abort(tmp) end
 local pid = f:read("*a")
 f:close()
 
-print(os.capture("curl localhost:" .. port .. "/ 2>/dev/null", true))
+print(os.capture("curl http://localhost:" .. port .. "/ 2>/dev/null", true))
 
 show(log, logs .. "/error.log")
 show(cfg, conf .. "/nginx.conf")
