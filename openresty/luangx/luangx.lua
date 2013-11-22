@@ -115,7 +115,7 @@ f:close()
 
 local dname = os.capture("dirname " .. os.capture("readlink -f " .. file))
 
-if os.execute("cp -r " .. dname .. "/* " .. tmp .. "/") ~= 0 then
+if os.execute("cp -r " .. dname .. "/. " .. tmp .. "/") ~= 0 then
     abort(tmp, "could not create lua environment")
 end
 
