@@ -16,6 +16,7 @@ local crypt = require "crypto"
 local json = require "cjson" 
 local mysql = require "resty.mysql"
 local redis = require "resty.redis"
+local lock = require "resty.lock" 
 
 --------------------------------
 -- CONSTs
@@ -139,24 +140,39 @@ function results(db, rd, n, sql, del)
     return json.encode({["mysql"] = body})
 end
 
+function unlock(lock, db, rd)
+    local ok, err = lock:unlock()
+    if not ok then
+        exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR)
+    end
+end
+
 function check(db, rd, id)
+    local lock = lock:new("locks")
+    local elapsed, lockerr = lock:lock("mysql")
+
     local k, cache, err = cache_get(rd, id)
     if cache then
+        unlock(lock, db, rd)
         return cache
     end
-    
+   
     local res, err, errno, sqlstate = db:query(string.format(SELECT, ngx.quote_sql_str(id)))    
+
     if errno then
-         exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
+        unlock(lock, db, rd)
+        exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
                 string.format("check error: %s: %s %s", 
                     tostring(err), tostring(errno), tostring(sqlstate)))
     end
 
     if not res or #res == 0 then
+        unlock(lock, db, rd)
         exit(db, rd, ngx.HTTP_NOT_FOUND)
     end
     
     cache_set(rd, res[1]["id"], json.encode({["redis"] =  res[1]}) )
+    unlock(lock, db, rd)
     return json.encode({["mysql"] =  res[1]}) 
 end
 
@@ -266,6 +282,7 @@ elseif ngx.req.get_method() == "GET" then
     end
 
     ngx.say(check(db, rd, ngx.unescape_uri(id)))
+
     exit(db, rd)
 
 else
