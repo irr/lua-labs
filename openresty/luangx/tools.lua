@@ -1,6 +1,8 @@
 local _ = require "underscore"
 local mysql = require "resty.mysql"
 
+ngx.say("MySQL")
+
 local db, err = mysql:new()                                                      
 if not db then                                                                   
     ngx.say("failed to instantiate mysql: ", err)                                
@@ -35,3 +37,17 @@ if res and #res > 0 then
     end)
 end
 
+ngx.say("\nRedis")
+
+local redis = require "resty.redis"
+
+local red = redis:new()
+red:set_timeout(5000)
+
+local ok, err = red:connect("127.0.0.1", 6379)
+if not ok then
+    ngx.say("failed to connect: ", err)
+    return
+end
+
+ngx.say(red:info())
