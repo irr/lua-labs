@@ -102,7 +102,14 @@ if os.execute("mkdir -p " .. logs) ~=0 or os.execute("mkdir -p " .. conf) ~= 0 t
     abort(tmp, "could not create nginx environment") 
 end
 
-local port = tostring(math.random(60000, 65500))
+local port = 0
+
+while true do
+    port = math.random(60000, 65500)
+    if os.execute("nc -z localhost " .. tostring(port)) ~= 0 then
+        break
+    end
+end
 
 local f, err = io.open(ngxf, "w+")
 if err then abort(tmp, "could not write nginx configuration") end
