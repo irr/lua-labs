@@ -27,13 +27,6 @@ function show(flag, file)
     end
 end
 
-function fix(path, ext)
-    if path and #path > 0 then
-        path = path .. "/?." .. ext
-    end
-    return path
-end
-
 local nginx = [[
 worker_processes  1;
 
@@ -85,9 +78,15 @@ for i = 1, #arg do
 end
 
 if not file then
-    print("usage: luangx [-log] [-cfg] <lua file>")
-    print("               -log: show error log content")
-    print("               -cfg: show nginx config")
+    print("\nLuangx 1.0 Copyright (c) 2013 Ivan R. Rocha\n")
+    print("Usage: ")
+    print("    luangx [-log] [-cfg] [-cp] [-lp] <lua file>")
+    print("           -log show error log content")
+    print("           -cfg show nginx config")
+    print("           -lp=<package.path/?.lua>")
+    print("           -cp=<package.cpath/?.so>")
+    print("Sample: ")
+    print("    luangx -lp=\"/tmp/?.lua\" -cp=\"/tmp/lib/?.so\" -cfg -log test.lua\n")
     os.exit(1)
 end
 
@@ -115,8 +114,8 @@ local f, err = io.open(ngxf, "w+")
 if err then abort(tmp, "could not write nginx configuration") end
 local txt = nginx:gsub('%$(%w+)', { ["file"]  = file, 
                                     ["port"]  = port,
-                                    ["lpath"] = fix(lpath, "lua"),
-                                    ["cpath"] = fix(cpath, "so") })
+                                    ["lpath"] = lpath,
+                                    ["cpath"] = cpath })
 f:write(txt)
 f:close()
 
