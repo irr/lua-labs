@@ -6,9 +6,9 @@ local unpack = unpack
 local pcall = pcall
 local key = "__SYNC__:LOCK"
 
-module("sync")
+local _M = {}
 
-function run(dict, f, t)
+function _M.run(dict, f, t)
     while true do
         local ok, err = dict:add(key, 1, 1)
         if ok and err ~= "exists" then
@@ -23,3 +23,5 @@ function run(dict, f, t)
     end
     return ok, val
 end
+
+return _M
