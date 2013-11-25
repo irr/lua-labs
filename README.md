@@ -97,6 +97,7 @@ yum install zeromq-devel sqlite-devel mysql-devel
 * [lua-llthreads]: Low-Level threads(pthreads or WIN32 threads) for Lua
 * [lua-zmq]: Lua bindings to zeromq2
 * [luaposix]: Lua bindings for POSIX APIs
+* [luasec]: LuaSec is a binding for OpenSSL library to provide TLS/SSL communication
 * [luafilesystem]: Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution 
 * [luarocks]: Deployment and management system for Lua modules
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
@@ -111,6 +112,7 @@ luarocks --local install lua-llthreads
 luarocks --local install lua-zmq-threads ZEROMQ_INCDIR=/usr/include ZEROMQ_LIBDIR=/usr/lib64
 luarocks --local install luafilesystem
 luarocks --local install luaposix
+luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
 luarocks --local install luasql-sqlite3
 luarocks --local install redis-lua
@@ -141,6 +143,7 @@ limitations under the License.
 [lua-llthreads]: http://github.com/Neopallium/lua-llthreads
 [lua-zmq]: https://github.com/Neopallium/lua-zmq
 [luaposix]: https://github.com/luaposix/luaposix
+[luasec]: https://github.com/brunoos/luasec
 [luafilesystem]: https://github.com/keplerproject/luafilesystem
 [luarocks]: http://luarocks.org/en
 [luasql-mysql]: http://www.keplerproject.org/luasql/
