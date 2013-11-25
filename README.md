@@ -103,7 +103,6 @@ yum install zeromq-devel sqlite-devel mysql-devel
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
 * [redis-lua]: A Lua client library for the redis key value storage system
-* [stdlib]: General Lua libraries
 * [underscore.lua]: Underscore.lua is a Lua library that provides a set of utility functions for dealing with iterators, arrays, tables, and functions.
 
 ```shell
@@ -117,7 +116,6 @@ luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
 luarocks --local install luasql-sqlite3
 luarocks --local install redis-lua
-luarocks --local install stdlib
 luarocks --local install underscore.lua --from=http://marcusirven.s3.amazonaws.com/rocks/
 ```
 
@@ -151,5 +149,4 @@ limitations under the License.
 [luasql-mysql]: http://www.keplerproject.org/luasql/
 [luasql-sqlite3]: http://www.keplerproject.org/luasql/
 [redis-lua]: http://github.com/nrk/redis-lua
-[stdlib]: https://github.com/rrthomas/lua-stdlib
 [underscore.lua]: http://mirven.github.io/underscore.lua/
