@@ -1,5 +1,5 @@
 --[[
-httperf --server localhost --port 8888 --num-calls 1000 --rate 100 --num-conns 100 && curl -v http://localhost:8888/
+httperf --server localhost --port 8888 --num-calls 10000 --rate 1000 --num-conns 100 && curl -v http://localhost:8888/
 --]]
 
 local sync = require("sync")
