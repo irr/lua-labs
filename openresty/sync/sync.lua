@@ -11,9 +11,7 @@ local _M = {}
 function _M.run(dict, f, t)
     while true do
         local ok, err = dict:add(key, 1, 1)
-        if ok and err ~= "exists" then
-            break
-        end
+        if ok and not err then break end
         sleep(0)
     end
     local ok, val = pcall(f, unpack(t))
