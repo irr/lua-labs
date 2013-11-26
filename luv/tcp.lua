@@ -28,7 +28,7 @@ local function create_server(host, port, on_connection)
   return server
 end
 
-server = create_server("0.0.0.0", 12345, function (client)
+local server = create_server("0.0.0.0", 12345, function (client)
         p("new client", client, uv.tcp_getsockname(client), uv.tcp_getpeername(client))
         function client:ondata(chunk)
             p("client:ondata", chunk)
@@ -45,7 +45,6 @@ server = create_server("0.0.0.0", 12345, function (client)
         end
         function client:onclose()
             p("client:onclose")
-            uv.close(server)
         end
         uv.read_start(client)
     end)
