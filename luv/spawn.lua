@@ -9,27 +9,27 @@ local handle, stdin, stdout, stderr, pid = uv.spawn("sleep", {"100"})
 p(handle, {stdin=stdin,stdout=stdout,stderr=stderr, pid=pid})
 
 function handle:onexit(code, signal)
-  p("EXIT", {code=code,signal=signal})
-  uv.close(handle)
-  uv.close(stdin)
+    p("EXIT", {code=code,signal=signal})
+    uv.close(handle)
+    uv.close(stdin)
 end
 
 function stdout:ondata(chunk)
-  p("STDOUT.DATA", chunk)
+    p("STDOUT.DATA", chunk)
 end
 
 function stderr:ondata(chunk)
-  p("STDERR.DATA", chunk)
+    p("STDERR.DATA", chunk)
 end
 
 function stdout:onend()
-  p("STDOUT.END")
-  uv.close(stdout)
+    p("STDOUT.END")
+    uv.close(stdout)
 end
 
 function stderr:onend()
-  p("STDERR.END")
-  uv.close(stderr)
+    p("STDERR.END")
+    uv.close(stderr)
 end
 
 uv.read_start(stderr)
@@ -39,7 +39,7 @@ uv.process_kill(handle, "SIGTERM")
 --uv.kill(pid, "SIGHUP")
 
 repeat
-  print("\ntick.")
+    print("\ntick.")
 until uv.run('once') == 0
 
 print("done")
