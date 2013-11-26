@@ -1,7 +1,7 @@
 #!/bin/bash
-pandoc -S -o lua-nginx-module.html ../lua-nginx-module/README.markdown 
-pandoc -S -o lua-resty-memcached.html ../lua-resty-memcached/README.markdown 
-pandoc -S -o lua-resty-mysql.html ../lua-resty-mysql/README.markdown 
-pandoc -S -o lua-resty-redis.html ../lua-resty-redis/README.markdown 
-pandoc -S -o lua-resty-string.html ../lua-resty-string/README.markdown 
-pandoc -S -o lua-resty-upload.html ../lua-resty-upload/README.markdown 
+pandoc -S -o /opt/lua/docs/lua-nginx-module.html /opt/lua/lua-nginx-module/README.markdown 
+pandoc -S -o /opt/lua/docs/lua-resty-memcached.html /opt/lua/lua-resty-memcached/README.markdown 
+pandoc -S -o /opt/lua/docs/lua-resty-mysql.html /opt/lua/lua-resty-mysql/README.markdown 
+pandoc -S -o /opt/lua/docs/lua-resty-redis.html /opt/lua/lua-resty-redis/README.markdown 
+pandoc -S -o /opt/lua/docs/lua-resty-string.html /opt/lua/lua-resty-string/README.markdown 
+pandoc -S -o /opt/lua/docs/lua-resty-upload.html /opt/lua/lua-resty-upload/README.markdown 
