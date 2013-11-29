@@ -1,4 +1,4 @@
-#!/usr/bin/env luajit
+#!/usr/bin/env lua
 
 function os.capture(cmd, raw)
   local f = assert(io.popen(cmd, 'r'))
