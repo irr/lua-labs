@@ -53,6 +53,17 @@ COMMIT;
 -- FUNCTIONS
 --------------------------------
 
+function os.capture(cmd, raw)
+  local f = assert(io.popen(cmd, 'r'))
+  local s = assert(f:read('*a'))
+  f:close()
+  if raw then return s end
+  s = string.gsub(s, '^%s+', '')
+  s = string.gsub(s, '%s+$', '')
+  s = string.gsub(s, '[\n\r]+', ' ')
+  return s
+end
+
 function exit_now(status, msg)
     if status ~= ngx.HTTP_OK then
         ngx.status = status
