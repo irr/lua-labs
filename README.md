@@ -3,19 +3,21 @@ lua-labs
 
 **lua-labs**  is a set of sample codes whose main purpose is to experiment and test *Lua* and *[OpenResty]/[Apache]*
 
-**CentOS 6.4**
+**CentOS 6.5**
 ```shell
 yum install readline-devel pcre-devel openssl-devel
-tar xfva ngx_openresty-1.4.3.1.tar.gz
-cd ngx_openresty-1.4.3.1
+wget http://openresty.org/download/ngx_openresty-1.4.3.6.tar.gz
+tar xfva ngx_openresty-1.4.3.6.tar.gz
+cd ngx_openresty-1.4.3.6
 ./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module
 make install
 ```
 
 ```shell
 apt-get install libreadline-dev libpcre3-dev libssl-dev
-tar xfva ngx_openresty-1.2.8.6.tar.gz
-cd ngx_openresty-1.2.8.6
+wget http://openresty.org/download/ngx_openresty-1.4.3.6.tar.gz
+tar xfva ngx_openresty-1.4.3.6.tar.gz
+cd ngx_openresty-1.4.3.6
 ./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module
 make -j4 
 make install
@@ -79,15 +81,8 @@ Dependencies
 -----------
 
 ```shell
-apt-get install libzmq-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev
-yum install czmq-devel sqlite-devel mysql-devel pcre-devel
-```
-
-Libraries
------------
-
-```shell
-yum install zeromq-devel sqlite-devel mysql-devel
+apt-get install libsqlite3-dev libmysqlclient-dev libpcre3-dev
+yum install sqlite-devel mysql-devel pcre-devel
 ```
 
 * [OpenResty]: A full-fledged web application server by bundling the standard Nginx core, lots of 3rd-party Nginx modules, as well as most of their external dependencies
@@ -95,7 +90,6 @@ yum install zeromq-devel sqlite-devel mysql-devel
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
 * [lua-iconv]: Lua binding to the POSIX 'iconv' library
 * [lua-llthreads]: Low-Level threads(pthreads or WIN32 threads) for Lua
-* [lua-zmq]: Lua bindings to zeromq2
 * [luaposix]: Lua bindings for POSIX APIs
 * [luasec]: LuaSec is a binding for OpenSSL library to provide TLS/SSL communication
 * [luafilesystem]: Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution 
@@ -109,7 +103,6 @@ yum install zeromq-devel sqlite-devel mysql-devel
 luarocks --local install lua-iconv
 luarocks --local install lua-cjson
 luarocks --local install lua-llthreads
-luarocks --local install lua-zmq-threads ZEROMQ_INCDIR=/usr/include ZEROMQ_LIBDIR=/usr/lib64
 luarocks --local install luafilesystem
 luarocks --local install luaposix
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
@@ -141,7 +134,6 @@ limitations under the License.
 [lua-iconv]: http://luaforge.net/projects/lua-iconv/
 [lua-cjson]: http://www.kyne.com.au/~mark/software/lua-cjson.php
 [lua-llthreads]: http://github.com/Neopallium/lua-llthreads
-[lua-zmq]: https://github.com/Neopallium/lua-zmq
 [luaposix]: https://github.com/luaposix/luaposix
 [luasec]: https://github.com/brunoos/luasec
 [luafilesystem]: https://github.com/keplerproject/luafilesystem
