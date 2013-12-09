@@ -13,12 +13,15 @@ cd ngx_openresty-1.4.3.6
 make install
 ```
 
+**CentOS 6.5 + [nginx_tcp_proxy_module]**
 ```shell
 apt-get install libreadline-dev libpcre3-dev libssl-dev
 wget http://openresty.org/download/ngx_openresty-1.4.3.6.tar.gz
 tar xfva ngx_openresty-1.4.3.6.tar.gz
 cd ngx_openresty-1.4.3.6
-./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module
+wget https://github.com/irr/nginx_tcp_proxy_module/raw/master/tcp-ngx-1.4.3.6.patch
+patch -p1 < tcp-ngx-1.4.3.6.patch
+./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --add-module=../nginx_tcp_proxy_module-0.4.4
 make -j4 
 make install
 ```
@@ -137,8 +140,9 @@ limitations under the License.
 [luaposix]: https://github.com/luaposix/luaposix
 [luasec]: https://github.com/brunoos/luasec
 [luafilesystem]: https://github.com/keplerproject/luafilesystem
-[luarocks]: http://luarocks.org/en
+[luarocks]: http://luarocks.org/entcp-ngx-1.4.3.6
 [luasql-mysql]: http://www.keplerproject.org/luasql/
 [luasql-sqlite3]: http://www.keplerproject.org/luasql/
 [redis-lua]: http://github.com/nrk/redis-lua
 [underscore.lua]: http://mirven.github.io/underscore.lua/
+[nginx_tcp_proxy_module]: https://github.com/irr/nginx_tcp_proxy_module
