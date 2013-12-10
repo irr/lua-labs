@@ -93,6 +93,7 @@ yum install sqlite-devel mysql-devel pcre-devel
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
 * [lua-iconv]: Lua binding to the POSIX 'iconv' library
 * [lua-llthreads]: Low-Level threads(pthreads or WIN32 threads) for Lua
+* [lualogging]: LuaLogging provides a simple API to use logging features in Lua
 * [luaposix]: Lua bindings for POSIX APIs
 * [luasec]: LuaSec is a binding for OpenSSL library to provide TLS/SSL communication
 * [luafilesystem]: Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution 
@@ -107,6 +108,7 @@ luarocks --local install lua-iconv
 luarocks --local install lua-cjson
 luarocks --local install lua-llthreads
 luarocks --local install luafilesystem
+luarocks --local install lualogging
 luarocks --local install luaposix
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
@@ -137,6 +139,7 @@ limitations under the License.
 [lua-iconv]: http://luaforge.net/projects/lua-iconv/
 [lua-cjson]: http://www.kyne.com.au/~mark/software/lua-cjson.php
 [lua-llthreads]: http://github.com/Neopallium/lua-llthreads
+[lualogging]: http://www.keplerproject.org/lualogging/
 [luaposix]: https://github.com/luaposix/luaposix
 [luasec]: https://github.com/brunoos/luasec
 [luafilesystem]: https://github.com/keplerproject/luafilesystem
