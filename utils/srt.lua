@@ -1,13 +1,11 @@
 #!/usr/bin/env lua
 
-require("luarocks.loader")
+local iconv = require "iconv"
 
 if #arg == 0 then
     print("Usage: srt <file>")
     os.exit(1)
 end
-
-local iconv = require("iconv")
 
 function os.capture(cmd, raw)
     local f = assert(io.popen(cmd, 'r'))
