@@ -9,7 +9,7 @@ yum install readline-devel pcre-devel openssl-devel
 wget http://openresty.org/download/ngx_openresty-1.4.3.6.tar.gz
 tar xfva ngx_openresty-1.4.3.6.tar.gz
 cd ngx_openresty-1.4.3.6
-./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module
+./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --with-debug
 make install
 ```
 
@@ -21,7 +21,7 @@ tar xfva ngx_openresty-1.4.3.6.tar.gz
 cd ngx_openresty-1.4.3.6
 wget https://github.com/irr/nginx_tcp_proxy_module/raw/master/tcp-ngx-1.4.3.6.patch
 patch -p1 < tcp-ngx-1.4.3.6.patch
-./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --add-module=../nginx_tcp_proxy_module-0.4.4
+./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --add-module=../nginx_tcp_proxy_module-0.4.4 --with-debug
 make -j4 
 make install
 ```
