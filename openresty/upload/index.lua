@@ -138,7 +138,7 @@ if ngx.req.get_method() == "POST" then
             md5:update(res)
             file:write(res)
         elseif typ == "body" and field == "meta" then
-            meta = meta .. tostring(res)
+            meta = meta .. res
         elseif typ == "part_end" and field == "meta" then
             meta = json.decode(meta)
             md5 = resty_md5:new()
