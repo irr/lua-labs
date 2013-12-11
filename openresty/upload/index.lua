@@ -38,9 +38,11 @@ function exit_now(status, msg)
     if status ~= ngx.HTTP_OK then
         ngx.status = status
     end
+
     if msg then
         ngx.say(json.encode(msg))
     end
+    
     ngx.exit(ngx.HTTP_OK)
 end
 
@@ -49,13 +51,16 @@ function exit(db, rd, status, msg)
         db:set_keepalive(tonumber(ngx.var.db_max_idle_timeout), 
                          tonumber(ngx.var.db_pool_size))
     end
+
     if rd then
         rd:set_keepalive(tonumber(ngx.var.rd_max_idle_timeout), 
                          tonumber(ngx.var.rd_pool_size))
     end
+
     if status then
         exit_now(status, msg)
     end
+
     exit_now(ngx.HTTP_OK, msg)
 end
 
@@ -71,12 +76,14 @@ end
 ngx.header.content_type = 'application/json';
 
 local rd = redis:new()
+
 if not rd then
     exit(nil, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
          "failed to instantiate redis")
 end
 
 local db, err = mysql:new()
+
 if not db then
     exit(nil, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
          "failed to instantiate mysql: " .. tostring(err))
@@ -99,6 +106,7 @@ if not ok then
 end
 
 local ok, err = rd:connect(ngx.var.rd_host, ngx.var.rd_port)
+
 if not ok then
     exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
          string.format("failed to connect to redis: %s", 
@@ -106,10 +114,10 @@ if not ok then
 end
 
 if ngx.req.get_method() == "POST" then
-   
     local file, md5, field, save, meta = nil, nil, nil, false, ""
     
     local form, err = upload:new(tonumber(ngx.var.upload_chunksize))
+
     if not form then
         exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
             string.format("failed to new upload: %s",  tostring(err)))
@@ -160,7 +168,7 @@ if ngx.req.get_method() == "POST" then
         ngx.say(json.encode({ ["meta"] = meta, ["md5"] = str.to_hex(md5:final()) }))
         exit(db, rd)
     end
-    
+
     exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR)
 end
 
