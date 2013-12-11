@@ -107,18 +107,15 @@ end
 
 if ngx.req.get_method() == "POST" then
    
-    local md5, field, save, meta = nil, nil, false, ""
+    local file, md5, field, save, meta = nil, nil, nil, false, ""
     
-    local chunk_size = 65535
-    local form, err = upload:new(chunk_size)
+    local form, err = upload:new(tonumber(ngx.var.upload_chunksize))
     if not form then
         exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
             string.format("failed to new upload: %s",  tostring(err)))
     end
 
-    form:set_timeout(1000)
-
-    local file = nil
+    form:set_timeout(tonumber(ngx.var.upload_timeout))
 
     while true do
         local typ, res, err = form:read()
