@@ -120,9 +120,7 @@ if ngx.req.get_method() == "POST" then
     while true do
         local typ, res, err = form:read()
         if not typ then
-            if file then
-                file:close()
-            end
+            if file then file:close() end
             exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
                 string.format("failed to read: %s",  tostring(err)))
         end
@@ -137,28 +135,20 @@ if ngx.req.get_method() == "POST" then
                 end
             end
         elseif typ == "body" and field == "data" then
-            if not file then
-                exit(db, rd, ngx.HTTP_BAD_REQUEST)
-            end
+            if not file then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
             md5:update(res)
             file:write(res)
         elseif typ == "body" and field == "meta" then
             meta = meta .. res
         elseif typ == "part_end" and field == "meta" then
             ok, meta = pcall(json.decode, meta)
-            if not ok then
-                exit(db, rd, ngx.HTTP_BAD_REQUEST)
-            end
+            if not ok then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
             md5 = resty_md5:new()
             file = io.open(string.format("%s/%s", ngx.var.upload_dir, meta["name"]), "wb+")
-            if not file then
-                exit(db, rd, ngx.HTTP_BAD_REQUEST)
-            end
+            if not file then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
             field = nil
         elseif typ == "part_end" and type(meta) == "table" and field == "data" then
-            if not file then
-                exit(db, rd, ngx.HTTP_BAD_REQUEST)
-            end
+            if not file then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
             file:close()
             save = true
         elseif typ == "eof" then
