@@ -143,7 +143,7 @@ if ngx.req.get_method() == "POST" then
         elseif typ == "body" and field == "data" then
             if not file then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
             if not sha1:update(res) then exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR) end
-            file:write(res)
+            if not file:write(res) then exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR) end
         elseif typ == "body" and field == "meta" then
             meta = meta .. res
         elseif typ == "part_end" and field == "meta" then
@@ -155,7 +155,7 @@ if ngx.req.get_method() == "POST" then
             field = nil
         elseif typ == "part_end" and type(meta) == "table" and field == "data" then
             if not file then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
-            file:close()
+            if not file:close() then exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR) end
             save = true
         elseif typ == "eof" then
             break
