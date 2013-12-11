@@ -9,7 +9,7 @@ local json = require "cjson"
 local mysql = require "resty.mysql"
 local redis = require "resty.redis"
 local upload = require "resty.upload"
-local resty_md5 = require "resty.md5"
+local resty_sha1 = require "resty.sha1"
 local str = require "resty.string"
 
 --------------------------------
@@ -42,7 +42,7 @@ function exit_now(status, msg)
     if msg then
         ngx.say(json.encode(msg))
     end
-    
+
     ngx.exit(ngx.HTTP_OK)
 end
 
@@ -114,7 +114,7 @@ if not ok then
 end
 
 if ngx.req.get_method() == "POST" then
-    local file, md5, field, save, meta = nil, nil, nil, false, ""
+    local file, sha1, field, save, meta = nil, nil, nil, false, ""
     
     local form, err = upload:new(tonumber(ngx.var.upload_chunksize))
 
@@ -144,14 +144,14 @@ if ngx.req.get_method() == "POST" then
             end
         elseif typ == "body" and field == "data" then
             if not file then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
-            md5:update(res)
+            sha1:update(res)
             file:write(res)
         elseif typ == "body" and field == "meta" then
             meta = meta .. res
         elseif typ == "part_end" and field == "meta" then
             ok, meta = pcall(json.decode, meta)
             if not ok then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
-            md5 = resty_md5:new()
+            sha1 = resty_sha1:new()
             file = io.open(string.format("%s/%s", ngx.var.upload_dir, meta["name"]), "wb+")
             if not file then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
             field = nil
@@ -165,7 +165,7 @@ if ngx.req.get_method() == "POST" then
     end
 
     if save then
-        ngx.say(json.encode({ ["meta"] = meta, ["md5"] = str.to_hex(md5:final()) }))
+        ngx.say(json.encode({ ["meta"] = meta, ["sha1"] = str.to_hex(sha1:final()) }))
         exit(db, rd)
     end
 
