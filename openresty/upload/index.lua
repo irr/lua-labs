@@ -2,8 +2,6 @@
 -- LIBRARIES
 --------------------------------
 
-local _ = require "underscore"
-
 local crypt = require "crypto" 
 local json = require "cjson" 
 local mysql = require "resty.mysql"
