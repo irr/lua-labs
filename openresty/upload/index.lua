@@ -107,7 +107,7 @@ end
 
 if ngx.req.get_method() == "POST" then
    
-    local field, save, meta = nil, false, ""
+    local md5, field, save, meta = nil, nil, false, ""
     
     local chunk_size = 65535
     local form, err = upload:new(chunk_size)
@@ -138,14 +138,13 @@ if ngx.req.get_method() == "POST" then
                 end
             end
         elseif typ == "body" and field == "data" then
-            local md5 = resty_md5:new()
-            local ok = md5:update(res)
-            local digest = md5:final()
+            md5:update(res)
             file:write(res)
         elseif typ == "body" and field == "meta" then
             meta = meta .. tostring(res)
         elseif typ == "part_end" and field == "meta" then
             meta = json.decode(meta)
+            md5 = resty_md5:new()
             file = io.open(string.format("%s/%s", ngx.var.upload_dir, meta["name"]), "wb+")
             field = nil
         elseif typ == "part_end" and type(meta) == "table" and field == "data" then
@@ -156,6 +155,7 @@ if ngx.req.get_method() == "POST" then
         end
     end
     if save then
+        ngx.say(json.encode({ ["md5"] = str.to_hex(md5:final()) }))
         exit(db, rd)
     end
     exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR)
