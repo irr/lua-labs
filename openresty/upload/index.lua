@@ -125,7 +125,7 @@ if ngx.req.get_method() == "POST" then
 
     while true do
         local typ, res, err = form:read()
-        if not typ then
+        if not typ or err then
             if file then file:close() end
             exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
                 string.format("failed to read: %s",  tostring(err)))
