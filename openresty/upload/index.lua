@@ -109,7 +109,7 @@ if ngx.req.get_method() == "POST" then
    
     local field, save, meta = nil, false, ""
     
-    local chunk_size = 1024
+    local chunk_size = 65535
     local form, err = upload:new(chunk_size)
     if not form then
         exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
