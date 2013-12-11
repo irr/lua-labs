@@ -144,7 +144,7 @@ if ngx.req.get_method() == "POST" then
             end
         elseif typ == "body" and field == "data" then
             if not file then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
-            sha1:update(res)
+            if not sha1:update(res) then exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR) end
             file:write(res)
         elseif typ == "body" and field == "meta" then
             meta = meta .. res
