@@ -1,0 +1,1 @@
+curl -v -H "Content-Type: multipart/related" --form "meta=@data/meta.json;type=application/json" --form "data=@data/test.png;type=image/png" http://localhost:8000/;echo && md5sum data/test.png /tmp/test.png; rm -rf /tmp/test.png

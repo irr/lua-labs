@@ -107,13 +107,9 @@ end
 
 if ngx.req.get_method() == "POST" then
    
-    local name = ngx.var['arg_name']
+    local field, save, meta = nil, false, ""
     
-    if not name then
-        exit(db, rd, ngx.HTTP_BAD_REQUEST)
-    end
-
-    local chunk_size = 8192
+    local chunk_size = 1024
     local form, err = upload:new(chunk_size)
     if not form then
         exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
@@ -122,7 +118,7 @@ if ngx.req.get_method() == "POST" then
 
     form:set_timeout(1000)
 
-    file = io.open(string.format("%s/%s", ngx.var.upload_dir, name), "wb+")
+    local file = nil
 
     while true do
         local typ, res, err = form:read()
@@ -131,22 +127,38 @@ if ngx.req.get_method() == "POST" then
             exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
                 string.format("failed to read: %s",  tostring(err)))
         end
-        if typ == "body" then
+        if typ == "header" then
+            for k, v in pairs(res) do
+                if v:find("name=\"data\"") then
+                    field = "data"
+                    break
+                elseif v:find("name=\"meta\"") then
+                    field = "meta"
+                    break
+                end
+            end
+        elseif typ == "body" and field == "data" then
             local md5 = resty_md5:new()
             local ok = md5:update(res)
             local digest = md5:final()
             file:write(res)
-            ngx.say("md5: ", str.to_hex(digest))
+        elseif typ == "body" and field == "meta" then
+            meta = meta .. tostring(res)
+        elseif typ == "part_end" and field == "meta" then
+            meta = json.decode(meta)
+            file = io.open(string.format("%s/%s", ngx.var.upload_dir, meta["name"]), "wb+")
+            field = nil
+        elseif typ == "part_end" and type(meta) == "table" and field == "data" then
+            file:close()
+            save = true
         elseif typ == "eof" then
             break
         end
     end
-    file:close()
-    exit(db, rd)
+    if save then
+        exit(db, rd)
+    end
+    exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR)
 end
 
 exit(db, rd, ngx.HTTP_METHOD_NOT_IMPLEMENTED)
-
---[[
-curl -v -H "Content-Type: multipart/related" --form "data=@/home/irocha/Pictures/Ivan.jpg;type=image/jpeg" http://localhost:8000/;echo
---]]
