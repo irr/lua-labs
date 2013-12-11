@@ -155,10 +155,12 @@ if ngx.req.get_method() == "POST" then
             break
         end
     end
+
     if save then
         ngx.say(json.encode({ ["meta"] = meta, ["md5"] = str.to_hex(md5:final()) }))
         exit(db, rd)
     end
+    
     exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR)
 end
 
