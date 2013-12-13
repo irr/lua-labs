@@ -134,6 +134,10 @@ if ngx.req.get_method() == "POST" then
             for k, v in pairs(res) do
                 if v:find("name=\"data\"") then
                     field = "data"
+                    sha1 = resty_sha1:new()
+                    file = io.open(string.format("%s/%s", ngx.var.upload_dir, 
+                        v:match("filename=\"(%w+.%w+)")), "wb+")
+                    if not file then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
                     break
                 elseif v:find("name=\"meta\"") then
                     field = "meta"
@@ -149,9 +153,6 @@ if ngx.req.get_method() == "POST" then
         elseif typ == "part_end" and field == "meta" then
             ok, meta = pcall(json.decode, meta)
             if not ok then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
-            sha1 = resty_sha1:new()
-            file = io.open(string.format("%s/%s", ngx.var.upload_dir, meta["name"]), "wb+")
-            if not file then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
             field = nil
         elseif typ == "part_end" and type(meta) == "table" and field == "data" then
             if not file then exit(db, rd, ngx.HTTP_BAD_REQUEST) end
