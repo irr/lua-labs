@@ -5,3 +5,10 @@ curl -H "Content-Type: multipart/form-data" --form "meta=@data/meta.json;type=ap
 REMOTE
 ======
 curl -H "Content-Type: multipart/form-data" --form "meta=@data/meta.json;type=application/json" --form "data=@data/hello.war;type=application/x-zip" http://localhost:28000/;echo && redis-cli get a541046b9b4f71b6c86ddb03efb3835f
+
+META
+====
+curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/ -d@data/meta.json;echo && redis-cli get a541046b9b4f71b6c86ddb03efb3835f
+
+redis-cli ltrim queue 1 0 ; redis-cli del a541046b9b4f71b6c86ddb03efb3835f
+redis-cli flushdb ; redis-cli script load "$(cat script-enqueue.lua)"
