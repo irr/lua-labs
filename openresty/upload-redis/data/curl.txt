@@ -1,0 +1,7 @@
+LOCAL
+=====
+curl -H "Content-Type: multipart/form-data" --form "meta=@data/meta.json;type=application/json" --form "data=@data/hello.war;type=application/x-zip" http://localhost:8000/;sha1sum /tmp/hello.war && rm -rf /tmp/hello.war && redis-cli get a541046b9b4f71b6c86ddb03efb3835f
+
+REMOTE
+======
+curl -H "Content-Type: multipart/form-data" --form "meta=@data/meta.json;type=application/json" --form "data=@data/hello.war;type=application/x-zip" http://localhost:28000/;echo && redis-cli get a541046b9b4f71b6c86ddb03efb3835f
