@@ -30,7 +30,7 @@ make install
 cd /usr/sbin
 ln -s /opt/openresty/nginx/sbin/nginx
 cd /usr/local/bin
-ln -s /opt/openresty/luajit/bin/luajit
+ln -s /opt/openresty/luajit/bin/luajit-2.1.0-alpha luajit
 
 cd /usr/local
 ln -s /opt/openresty openresty
