@@ -84,7 +84,7 @@ Dependencies
 -----------
 
 ```shell
-apt-get install libsqlite3-dev libmysqlclient-dev libpcre3-dev
+apt-get install libsqlite3-dev libmysqlclient-dev libpcre3-dev libssl0.9.8 libssl-dev
 yum install sqlite-devel mysql-devel pcre-devel
 ```
 
@@ -110,7 +110,8 @@ luarocks --local install lua-llthreads
 luarocks --local install luafilesystem
 luarocks --local install lualogging
 luarocks --local install luaposix
-luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
+luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/ #CentOS 6.x
+luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu # Ubuntu LTS 12.04
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
 luarocks --local install luasql-sqlite3
 luarocks --local install redis-lua
