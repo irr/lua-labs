@@ -1,4 +1,4 @@
-#!/usr/bin/env lua
+#!/usr/bin/env luajit
 
 function run(l, t, s, f)
     local cmd, status = string.format("wget -c --timeout=%d ", t), nil

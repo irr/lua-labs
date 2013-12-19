@@ -1,6 +1,4 @@
-#!/usr/bin/env lua
-
-package.cpath = package.cpath .. ";/opt/lua/luaffi/?.so"
+#!/usr/bin/env luajit
 
 local ffi = require "ffi"
 

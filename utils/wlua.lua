@@ -1,6 +1,4 @@
-#!/usr/bin/env lua
-
-require("luarocks.loader")
+#!/usr/bin/env luajit
 
 local posix = require('posix')
 
