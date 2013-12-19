@@ -1,8 +1,10 @@
+#!/usr/bin/env luajit
+
 local ffi = require("ffi")
 local newlisp = ffi.load("newlisp")
 
 ffi.cdef[[
-char* newlispEvalStr(char *cmd);
+char* newlispEvalStr(const char *cmd);
 ]]
 
 local lisp = [=[[cmd]
@@ -21,7 +23,6 @@ local lisp = [=[[cmd]
 (bayes-query (parse "hrothgar and beowulf") 'DDB))
 [/cmd]]=]
 
-local code = ffi.new(string.format("char[%d]", #lisp), lisp)
-local res = ffi.string(newlisp.newlispEvalStr(code))
+local res = ffi.string(newlisp.newlispEvalStr(lisp))
 print(res)
 
