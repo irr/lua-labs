@@ -17,10 +17,10 @@ make install
 ```shell
 apt-get install libreadline-dev libpcre3-dev libssl-dev
 wget http://openresty.org/download/ngx_openresty-1.4.3.9.tar.gz
-tar xfva ngx_openresty-1.4.3.9.tar.gz
-cd ngx_openresty-1.4.3.9
-wget https://github.com/irr/nginx_tcp_proxy_module/raw/master/tcp-ngx-1.4.3.9.patch
-patch -p1 < tcp-ngx-1.4.3.9.patch
+tar xfva ngx_openresty-1.5.8.1.tar.gz
+cd ngx_openresty-1.5.8.1
+wget https://github.com/irr/nginx_tcp_proxy_module/raw/master/tcp-ngx-1.5.8.1.patch
+patch -p1 < tcp-ngx-1.5.8.1.patch
 ./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --add-module=../nginx_tcp_proxy_module-0.4.4 --with-debug
 make -j4 
 make install
