@@ -6,3 +6,4 @@ pandoc -S -o /opt/lua/docs/lua-resty-redis.html /opt/lua/lua-resty-redis/README.
 pandoc -S -o /opt/lua/docs/lua-resty-string.html /opt/lua/lua-resty-string/README.markdown 
 pandoc -S -o /opt/lua/docs/lua-resty-upload.html /opt/lua/lua-resty-upload/README.markdown 
 pandoc -S -o /opt/lua/docs/lua-resty-dns.html /opt/lua/lua-resty-dns/README.markdown 
+pandoc -S -o /opt/lua/docs/lua-resty-upstream.html /opt/lua/lua-resty-upstream/README.md
