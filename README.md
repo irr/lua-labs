@@ -9,19 +9,19 @@ yum install readline-devel pcre-devel openssl-devel
 wget http://openresty.org/download/ngx_openresty-1.5.8.1.tar.gz
 tar xfva ngx_openresty-1.5.8.1.tar.gz
 cd ngx_openresty-1.5.8.1
-./configure --prefix=/opt/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --with-debug
+./configure --prefix=/opt/lua/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --with-debug
 make install
 ```
 
 ```shell
 cd /usr/sbin
-ln -s /opt/openresty/nginx/sbin/nginx
+ln -s /opt/lua/openresty/nginx/sbin/nginx
 cd /usr/local/bin
-ln -s /opt/openresty/luajit/bin/luajit-2.1.0-alpha luajit
+ln -s /opt/lua/openresty/luajit/bin/luajit-2.1.0-alpha luajit
 
 cd /usr/local
-ln -s /opt/openresty openresty
-ln -s /opt/openresty openresty-debug
+ln -s /opt/lua/openresty openresty
+ln -s /opt/lua/openresty openresty-debug
 
 cd /opt/lua
 ln -s ~/.luarocks luarocks
@@ -58,7 +58,7 @@ ln -s /opt/openresty/nginx/sbin/nginx
 ```shell
 tar xfvz luarocks-2.1.1.tar.gz
 cd luarocks-2.1.1
-./configure --with-lua=/opt/openresty/luajit --with-lua-include=/opt/openresty/luajit/include/luajit-2.0 --with-lua-lib=/opt/openresty/luajit/lib
+./configure --with-lua=/opt/lua/openresty/luajit --with-lua-include=/opt/openresty/luajit/include/luajit-2.0 --with-lua-lib=/opt/openresty/luajit/lib
 gmake build
 gmake install
 ```
