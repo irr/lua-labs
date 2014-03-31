@@ -71,8 +71,7 @@ Dependencies
 -----------
 
 ```shell
-apt-get install libsqlite3-dev libmysqlclient-dev libpcre3-dev libssl0.9.8 libssl-dev
-yum install sqlite-devel mysql-devel pcre-devel
+yum install sqlite-devel mysql-devel pcre-devel perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base
 ```
 
 * [OpenResty]: A full-fledged web application server by bundling the standard Nginx core, lots of 3rd-party Nginx modules, as well as most of their external dependencies
