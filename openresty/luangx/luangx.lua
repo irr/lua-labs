@@ -43,7 +43,7 @@ http {
     sendfile           on;
     keepalive_timeout  10;
 
-    lua_package_path   '$lpath;/usr/local/openresty/lualib/?.lua;;';
+    lua_package_path   '$lpath;/opt/openresty/lualib/?.lua;;';
     lua_package_cpath  '$cpath;;';
 
     server {
@@ -78,7 +78,7 @@ for i = 1, #arg do
 end
 
 if not file then
-    print("\nLuangx 1.0 Copyright (c) 2013 Ivan R. Rocha\n")
+    print("\nLuangx 1.0 Copyright (c) 2014 Ivan R. Rocha\n")
     print("Usage: ")
     print("    luangx [-log] [-cfg] [-cp] [-lp] <lua file>")
     print("           -log show error log content")
@@ -134,7 +134,7 @@ if err then abort(tmp) end
 local pid = f:read("*a")
 f:close()
 
-print(os.capture("curl http://localhost:" .. port .. "/ 2>/dev/null", true))
+print(os.capture("curl -s http://localhost:" .. port .. "/ 2>/dev/null", true))
 
 show(log, logs .. "/error.log")
 show(cfg, conf .. "/nginx.conf")
