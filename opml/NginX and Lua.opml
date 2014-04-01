@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+  <head>
+    <title>Subscriptions of Ivan Rocha tagged as NginX and Lua from InoReader [http://www.inoreader.com]</title>
+  </head>
+  <body>
+    <outline text="Joshua Zhu's Blog" title="Joshua Zhu's Blog" type="rss" xmlUrl="http://feeds.feedburner.com/JoshuaZhusBlog" htmlUrl="http://blog.zhuzhaoyuan.com/"/>
+    <outline text="Lua: news" title="Lua: news" type="rss" xmlUrl="http://www.lua.org/news.rss" htmlUrl="http://www.lua.org/news.html"/>
+    <outline text="Nginx Guts" title="Nginx Guts" type="rss" xmlUrl="http://www.nginxguts.com/feed/" htmlUrl="http://www.nginxguts.com/"/>
+    <outline text="OpenResty" title="OpenResty" type="rss" xmlUrl="http://openresty.org/index.xml" htmlUrl=""/>
+    <outline text="Planet Ngx" title="Planet Ngx" type="rss" xmlUrl="http://planet.ngx.cc/rss20.xml" htmlUrl="http://planet.ngx.cc/"/>
+    <outline text="Human &amp; Machine" title="Human &amp; Machine" type="rss" xmlUrl="http://agentzh.blogspot.com/feeds/posts/default" htmlUrl="http://agentzh.blogspot.com/"/>
+  </body>
+</opml>
