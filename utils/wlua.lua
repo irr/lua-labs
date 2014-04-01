@@ -14,7 +14,7 @@ function run(l, t, s, f)
     elseif f:find("https://") then
         cmd = cmd .. string.format("--no-check-certificate %s", f)
     else
-        cmd = cmd .. string.format("--no-check-certificate --user=%s --password=%s https://ocean:8080/%s", os.getenv("U"), os.getenv("P"), f)
+        cmd = cmd .. string.format("--no-check-certificate --user=%s --password=%s \"https://enderseed.shell.seedhost.eu/enderseed/downloads/irr/%s\"", os.getenv("U"), os.getenv("P"), f)
     end
 
     repeat
