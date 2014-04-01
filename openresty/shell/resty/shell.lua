@@ -11,7 +11,7 @@ local shell = {
     _VERSION = '0.01'
 }
 
-local sockproc_socket = "unix:/tmp/shell.sock"
+local sockproc_socket = "unix:/tmp/resty-shell.sock"
 
 
 function shell.execute(cmd, args)
