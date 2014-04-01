@@ -15,6 +15,8 @@ patch -p1 < tcp-ngx-1.5.8.1.patch
 make install
 ```
 
+* [nginx_tcp_proxy_module]: add the feature of tcp proxy with nginx, with health check and status monitor
+
 ```shell
 cd /usr/sbin
 ln -s /opt/lua/openresty/nginx/sbin/nginx
