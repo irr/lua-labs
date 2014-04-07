@@ -125,7 +125,7 @@ if os.execute("cp -r " .. dname .. "/. " .. tmp .. "/") ~= 0 then
     abort(tmp, "could not create lua environment")
 end
 
-if os.execute("nginx -c " .. ngxf .. " -p " .. tmp) ~= 0 then 
+if os.execute("/opt/openresty/nginx/sbin/nginx -c " .. ngxf .. " -p " .. tmp) ~= 0 then 
     abort(tmp, "could not start nginx")
 end
 
