@@ -6,14 +6,18 @@
  */
 
 /*
+sudo yum install -y glibc-static
+
 gcc -o test test.c -llua
   or
-gcc -o test test.c -I/data/Lua/LuaJIT/include/luajit-2.0/ -L/data/Lua/LuaJIT/lib/ -lluajit-5.1 -ldl -lm
+gcc -o test test.c -I/opt/openresty/luajit/include/luajit-2.0/ -L/opt/openresty/luajit/lib/ -lluajit-5.1 -ldl -lm
 
 cd /path/to/lua-5.1.4/src
 make clean ansi CFLAGS='-ULUA_DL_DLOPEN'
 
-gcc -static -static-libgcc -o test test.c -I/data/Lua/LuaJIT/include/luajit-2.0/ -L/data/Lua/LuaJIT/lib/ /data/Lua/LuaJIT/lib/libluajit-5.1.a -lm -lc -ldl
+gcc -static -static-libgcc -o test test.c -I/opt/openresty/luajit/include/luajit-2.0/ -L/opt/openresty/luajit/lib/ /opt/openresty/luajit/lib/libluajit-5.1.a -lm -lc -ldl
+
+LD_LIBRARY_PATH=/opt/openresty/luajit/lib ./test
 */
 
 #include <lua.h>
