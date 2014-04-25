@@ -2,6 +2,7 @@
 pandoc -S -o /opt/lua/docs/array-var-nginx-module.html /opt/lua/modules/nginx/array-var-nginx-module/README
 pandoc -S -o /opt/lua/docs/headers-more-nginx-module.html /opt/lua/modules/nginx/headers-more-nginx-module/README.markdown
 pandoc -S -o /opt/lua/docs/iconv-nginx-module.html /opt/lua/modules/nginx/iconv-nginx-module/README
+pandoc -S -o /opt/lua/docs/openresty-docker.html /opt/lua/openresty-docker/README.md
 pandoc -S -o /opt/lua/docs/lua-nginx-module.html /opt/lua/modules/nginx/lua-nginx-module/README.markdown 
 pandoc -S -o /opt/lua/docs/lua-resty-dns.html /opt/lua/modules/nginx/lua-resty-dns/README.markdown 
 pandoc -S -o /opt/lua/docs/lua-resty-memcached.html /opt/lua/modules/nginx/lua-resty-memcached/README.markdown 
