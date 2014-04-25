@@ -91,7 +91,6 @@ yum install sqlite-devel mysql-devel pcre-devel perl-CPAN perl-Text-Diff perl-Te
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
 * [redis-lua]: A Lua client library for the redis key value storage system
-* [underscore.lua]: A Lua library that provides a set of utility functions for dealing with iterators, arrays, tables, and functions
 
 ```shell
 luarocks --local install lua-iconv
@@ -105,7 +104,6 @@ luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu # Ubunt
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
 luarocks --local install luasql-sqlite3
 luarocks --local install redis-lua
-luarocks --local install underscore.lua --from=http://marcusirven.s3.amazonaws.com/rocks/
 ```
 
 Copyright and License
