@@ -19,7 +19,7 @@ local res, code, response_headers = http.request
     sink = ltn12.sink.table(response_body);
 }
 
-print(res, code, response_headers, response_body)
-
 d(response_headers)
-d(response_body)
+
+local body = table.concat(response_body)
+print(res, code, body)
