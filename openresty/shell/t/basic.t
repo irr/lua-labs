@@ -14,10 +14,10 @@ __DATA__
 --- config
     location /test {
             content_by_lua '
-            local shell = require("resty.shell")
-            local status, out, err = shell.execute("/bin/uname -a")
-            local body = out:gsub("%s+", " ")
-            ngx.say(string.sub(body,1,12))
+                local shell = require("resty.shell")
+                local status, out, err = shell.execute("/bin/uname -a")
+                local body = out:gsub("%s+", " ")
+                ngx.say(string.sub(body,1,12))
            ';
     }     
 --- request
