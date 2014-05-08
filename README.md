@@ -105,6 +105,7 @@ luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu # Ubunt
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
 luarocks --local install luasql-sqlite3
 luarocks --local install redis-lua
+luarocks --local install underscore.lua --from=http://marcusirven.s3.amazonaws.com/rocks/
 ```
 
 Copyright and License
