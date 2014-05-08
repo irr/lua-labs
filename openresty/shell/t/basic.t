@@ -1,4 +1,4 @@
-# sockproc /tmp/shell.sock
+`sockproc /tmp/shell.sock`;
 
 use Test::Nginx::Socket;
 
