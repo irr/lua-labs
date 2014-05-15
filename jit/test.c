@@ -10,7 +10,7 @@ sudo yum install -y glibc-static
 
 gcc -o test test.c -llua
   or
-gcc -o test test.c -I/opt/openresty/luajit/include/luajit-2.0/ -L/opt/openresty/luajit/lib/ -lluajit-5.1 -ldl -lm
+gcc -o test test.c -I/opt/openresty/luajit/include/luajit-2.1/ -L/opt/openresty/luajit/lib/ -lluajit-5.1 -ldl -lm
 
 cd /path/to/lua-5.1.4/src
 make clean ansi CFLAGS='-ULUA_DL_DLOPEN'
