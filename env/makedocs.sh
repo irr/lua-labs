@@ -10,6 +10,7 @@ pandoc -S -o /opt/lua/docs/lua-resty-mysql.html /opt/lua/modules/nginx/lua-resty
 pandoc -S -o /opt/lua/docs/lua-resty-redis.html /opt/lua/modules/nginx/lua-resty-redis/README.markdown 
 pandoc -S -o /opt/lua/docs/lua-resty-string.html /opt/lua/modules/nginx/lua-resty-string/README.markdown 
 pandoc -S -o /opt/lua/docs/lua-resty-upload.html /opt/lua/modules/nginx/lua-resty-upload/README.markdown 
+pandoc -S -o /opt/lua/docs/lua-resty-http.html /opt/lua/modules/nginx/lua-resty-http/README.md
 pandoc -S -o /opt/lua/docs/lua-resty-upstream.html /opt/lua/modules/nginx/lua-resty-upstream/README.md
 pandoc -S -o /opt/lua/docs/lua-pycrypto-aes.html /opt/lua/modules/forked/lua-pycrypto-aes/readme.md
 pandoc -S -o /opt/lua/docs/lua-resty-shell.html /opt/lua/modules/forked/lua-resty-shell/README.md 
