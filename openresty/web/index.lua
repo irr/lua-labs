@@ -6,7 +6,7 @@ curl -v -X DELETE http://localhost:8000/?id=2
 curl -v http://localhost:8000/?id=1
 --]]
 
-package.cpath = package.cpath .. ";/home/irocha/lua/openresty/web/lib/?.so;;"
+--package.cpath = package.cpath .. ";/home/irocha/lua/openresty/web/lib/?.so;;"
 
 --------------------------------
 -- LIBRARIES

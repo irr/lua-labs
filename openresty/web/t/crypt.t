@@ -1,6 +1,10 @@
 use Test::Nginx::Socket;
 
-repeat_each(1);
+our $CPInit = <<_EOC_
+lua_package_cpath '/home/irocha/lua/openresty/web/lib/?.so;;';
+_EOC_
+
+;repeat_each(1);
 
 plan tests => $Test::Nginx::Socket::RepeatEach * 2 * blocks();
 
@@ -9,6 +13,7 @@ run_tests();
 __DATA__
 
 === TEST 1: basic encrypt
+--- http_config eval: $::CPInit
 --- config
     location /t {
         set $basedir '/home/irocha/lua/openresty/web/';
@@ -42,6 +47,7 @@ Content-Type: application/json
 
 
 === TEST 2: basic decrypt
+--- http_config eval: $::CPInit
 --- config
     location /t {
         set $basedir '/home/irocha/lua/openresty/web/';
