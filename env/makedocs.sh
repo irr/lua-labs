@@ -16,3 +16,4 @@ pandoc -S -o /opt/lua/docs/lua-resty-shell.html /opt/lua/modules/forked/lua-rest
 pandoc -S -o /opt/lua/docs/nginx_tcp_proxy_module.html /opt/lua/modules/forked/nginx_tcp_proxy_module/README
 pandoc -S -o /opt/lua/docs/sockproc.html /opt/lua/modules/forked/sockproc/README.md
 pandoc -S -o /opt/lua/docs/openresty-docker.html /opt/lua/openresty-docker/README.md
+pandoc -S -o /opt/lua/docs/test-nginx.html /opt/lua/test-nginx/README

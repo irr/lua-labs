@@ -4,6 +4,7 @@ sudo chown -R irocha: /opt/lua
 cd /opt/lua
 git clone https://github.com/openresty/openresty.org.git
 git clone https://github.com/openresty/nginx-tutorials.git
+git clone https://github.com/openresty/test-nginx.git
 mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
 cd /opt/lua/modules/nginx/
@@ -60,6 +61,7 @@ ln -s /opt/lua/modules/nginx/lua-resty-upload
 ln -s /opt/lua/modules/nginx/lua-resty-upstream
 ln -s /opt/lua/openresty.org
 ln -s /opt/lua/nginx-tutorials
+ln -s /opt/lua/test-nginx
 cd ~/gitf
 ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
