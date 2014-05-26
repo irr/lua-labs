@@ -3,6 +3,7 @@ mkdir -p /opt/lua
 sudo chown -R irocha: /opt/lua
 cd /opt/lua
 git clone https://github.com/openresty/openresty.org.git
+git clone https://github.com/openresty/nginx-tutorials.git
 mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
 cd /opt/lua/modules/nginx/
