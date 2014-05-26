@@ -55,3 +55,7 @@ end
 file = io.open(source, 'w+')
 file:write(content)
 file:close()
+
+print("File   : " .. source)
+print("Charset: " .. trim(charset))
+print("Size   : " .. tostring(#content))
