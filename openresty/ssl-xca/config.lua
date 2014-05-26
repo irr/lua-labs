@@ -1,6 +1,6 @@
 --[[
 nginx -s stop; nginx -c /home/irocha/lua/openresty/ssl-xca/nginx.conf
-tail -f /opt/openresty/nginx/logs/error.log
+tail -f /opt/lua/openresty/nginx/logs/error.log
 
 curl -v -1 https://myirrlab.org:8443/ --cacert certs/irrlab.crt
 

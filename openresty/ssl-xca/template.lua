@@ -16,7 +16,7 @@ local certdir = '/home/irocha/lua/openresty/ssl-xca/certs'
 local codedir = '/home/irocha/lua/openresty/ssl-xca'
 local confdir = '/home/irocha/lua/openresty/ssl-xca/includes'
 local tpltdir = '/home/irocha/lua/openresty/ssl-xca/templates'
-local basedir = '/opt/openresty/nginx'
+local basedir = '/opt/lua/openresty/nginx'
 
 local base = readfile(tpltdir, 'base.tpl')
 
