@@ -43,7 +43,7 @@ http {
     sendfile           on;
     keepalive_timeout  10;
 
-    lua_package_path   '$lpath;/opt/openresty/lualib/?.lua;;';
+    lua_package_path   '$lpath;/opt/lua/openresty/lualib/?.lua;;';
     lua_package_cpath  '$cpath;;';
 
     server {
@@ -125,7 +125,7 @@ if os.execute("cp -r " .. dname .. "/. " .. tmp .. "/") ~= 0 then
     abort(tmp, "could not create lua environment")
 end
 
-if os.execute("/opt/openresty/nginx/sbin/nginx -c " .. ngxf .. " -p " .. tmp) ~= 0 then 
+if os.execute("/opt/lua/openresty/nginx/sbin/nginx -c " .. ngxf .. " -p " .. tmp) ~= 0 then 
     abort(tmp, "could not start nginx")
 end
 
