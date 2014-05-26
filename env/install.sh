@@ -58,6 +58,8 @@ ln -s /opt/lua/modules/nginx/lua-resty-redis
 ln -s /opt/lua/modules/nginx/lua-resty-string
 ln -s /opt/lua/modules/nginx/lua-resty-upload
 ln -s /opt/lua/modules/nginx/lua-resty-upstream
+ln -s /opt/lua/openresty.org
+ln -s /opt/lua/nginx-tutorials
 cd ~/gitf
 ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
