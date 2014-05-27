@@ -1,6 +1,10 @@
 use Test::Nginx::Socket;
 
-repeat_each(1);
+our $SDInit = <<_EOC_
+lua_shared_dict flags 1m;
+_EOC_
+
+;repeat_each(1);
 
 plan tests => $Test::Nginx::Socket::RepeatEach * 2 * blocks();
 
@@ -9,6 +13,7 @@ run_tests();
 __DATA__
 
 === TEST 1: basic get
+--- http_config eval: $::SDInit
 --- config
     location /test {
         content_by_lua_file '/home/irocha/lua/openresty/http/index.lua';
@@ -20,6 +25,7 @@ __DATA__
 {"name":"alessandra"}
 
 === TEST 2: basic decrypt
+--- http_config eval: $::SDInit
 --- config
     location /test {
         content_by_lua_file '/home/irocha/lua/openresty/http/index.lua';
