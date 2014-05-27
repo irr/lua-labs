@@ -57,6 +57,38 @@ end
 -------------
 -- MAIN
 -------------
+local flags = ngx.shared.flags
+local timer = flags:get("timer")
+
+ngx.log(ngx.WARN, "TIMER="..tostring(timer))
+
+if not timer then
+  local delay = 5
+  local handler
+  handler = function (premature)
+      if premature then
+          return
+      end
+      ngx.log(ngx.WARN, "TIMER HANDLER OK!")
+      local ok, err = ngx.timer.at(delay, handler)
+      if not ok then
+          ngx.log(ngx.ERR, "failed to create the timer: ", err)
+          return
+      end
+  end
+
+  local ok, err = ngx.timer.at(delay, handler)
+  if not ok then
+      ngx.log(ngx.ERR, "failed to create the timer: ", err)
+      return
+  else
+    flags:set("timer", true)
+  end
+end
+
+-------------
+-- MAIN
+-------------
 
 ngx.header.content_type = 'application/json';
 
