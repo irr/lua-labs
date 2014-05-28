@@ -20,20 +20,23 @@ function exit(status, msg)
     exit_now(ngx.HTTP_OK, msg)
 end
 
+function split(str, sep)
+    local s = str..sep
+    return s:match((s:gsub('[^'..sep..']*'..sep, '([^'..sep..']*)'..sep)))
+end
+
 function d(o)
     if type(o) == "table" then
         for k, v in pairs(o) do
-            ngx.say(k,v)
+            ngx.print(k,v)
         end
     else 
-        ngx.say(o)
+        ngx.print(o)
     end
 end
 
-ngx.header.content_type = 'application/json';
 
-ngx.req.set_header("Accept", "*/*")
-ngx.req.set_header("Accept-Encoding", nil)
+ngx.header.content_type = 'application/json';
 
 ngx.req.set_header("Authorization",  "Basic " .. ngx.encode_base64(ngx.var.userpass))
 
@@ -43,7 +46,7 @@ if ngx.req.get_method() == "GET" then
     ngx.print(res.body)
     exit()
 
--- curl -v -d "zone=ZE1&vlan=356" http://localhost:8888/api/esm/security-zones
+-- curl -v -d "zone=ALESSANDRA&vlan=356" http://localhost:8888/api/esm/security-zones
 elseif ngx.req.get_method() == "POST" then
     ngx.req.read_body()
     local keys = ngx.req.get_post_args()
@@ -62,20 +65,29 @@ elseif ngx.req.get_method() == "POST" then
         }
     ]]
     ngx.req.set_header("Content-Type", "application/json")
-    res = ngx.location.capture("/proxy" .. ngx.var.uri, 
+    local res = ngx.location.capture("/proxy" .. ngx.var.uri, 
         { share_all_vars = true,
           method = ngx.HTTP_POST,
           body = jbody:format(keys.zone, keys.vlan) })
     ngx.say(res.body)
     exit()
--- curl -v http://localhost:8888/api/esm/security-zones
--- curl -v -X DELETE http://localhost:8888/api/esm/security-zones/78156a84-8c2f-4134-accf-8e7a51c1d6f6
+-- curl -v -X DELETE http://localhost:8888/api/esm/security-zones?zone=ALESSANDRA
 elseif ngx.req.get_method() == "DELETE" then
-    res = ngx.location.capture("/proxy" .. ngx.var.uri, 
-        { share_all_vars = true,
-          method = ngx.HTTP_DELETE })
-    ngx.say(res.body)
-    exit()
+    local keys = ngx.req.get_uri_args()
+    local res = ngx.location.capture("/proxy" .. ngx.var.uri, { share_all_vars = true })
+    local map = json.decode(res.body)
+    for _, entry in pairs(map.entries) do        
+        if entry.name == keys.zone then
+            local uri = split(ngx.var.uri, "?")
+            local id = {split(tostring(entry.links[1].href), "/")}
+            local res = ngx.location.capture("/proxy" .. uri .. "/" .. id[#id], 
+                { share_all_vars = true,
+                  method = ngx.HTTP_DELETE })
+            ngx.say(res.body)
+            exit()
+        end
+    end
+    exit(ngx.HTTP_NOT_FOUND)
 else
     exit(ngx.HTTP_METHOD_NOT_IMPLEMENTED)
 end
