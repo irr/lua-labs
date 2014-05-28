@@ -14,4 +14,4 @@ for k, v in pairs(res.header) do
     ngx.say(k .. ": " .. tostring(v))
 end
 
-ngx.say("Body: " .. res.body:sub(1,100))
+ngx.say("Body(" .. tostring(#res.body) .."): " .. res.body:sub(1,100))
