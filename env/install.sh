@@ -1,7 +1,6 @@
 #!/bin/bash
 cd /opt/lua
 git clone https://github.com/openresty/openresty.org.git
-git clone https://github.com/openresty/nginx-tutorials.git
 git clone https://github.com/openresty/test-nginx.git
 mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
