@@ -3,15 +3,14 @@ lua-labs
 
 **lua-labs**  is a set of sample codes whose main purpose is to experiment and test *Lua* and *[OpenResty]/[Apache]*
 
-**CentOS 6.5/Ubuntu 14.04 LTS**
+**CentOS 6.5**
 ```shell
-yum install readline-devel pcre-devel openssl-devel
-apt-get install libreadline6-dev libpcre3-dev libssl-dev
-wget http://openresty.org/download/ngx_openresty-1.5.11.1.tar.gz
-tar xfva ngx_openresty-1.5.11.1.tar.gz
-cd ngx_openresty-1.5.11.1
-wget https://github.com/irr/nginx_tcp_proxy_module/raw/master/tcp-ngx-1.5.11.1.patch
-patch -p1 < tcp-ngx-1.5.11.1.patch
+yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base perl-IO-Socket-SSL
+wget http://openresty.org/download/ngx_openresty-1.5.12.1.tar.gz
+tar xfva ngx_openresty-1.5.12.1.tar.gz
+cd ngx_openresty-1.5.12.1
+wget https://github.com/irr/nginx_tcp_proxy_module/raw/master/tcp-ngx-1.5.12.1.patch
+patch -p1 < tcp-ngx-1.5.12.1.patch
 ./configure --prefix=/opt/lua/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --with-debug --add-module=/opt/lua/nginx_tcp_proxy_module-0.4.5
 make install
 ```
@@ -76,8 +75,8 @@ Dependencies
 -----------
 
 ```shell
-yum install sqlite-devel mysql-devel pcre-devel perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base perl-IO-Socket-SSL
-apt-get install libsqlite3-dev libmysqlclient-dev libpcre3-dev cpanminus libtext-diff-perl libtest-longstring-perl liblist-moreutils-perl libtest-base-perl
+# Ubuntu 14.04 LTS
+apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev cpanminus libtext-diff-perl libtest-longstring-perl liblist-moreutils-perl libtest-base-perl
 ```
 
 * [OpenResty]: A full-fledged web application server by bundling the standard Nginx core, lots of 3rd-party Nginx modules, as well as most of their external dependencies
