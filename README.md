@@ -5,7 +5,7 @@ lua-labs
 
 **CentOS 6.5**
 ```shell
-yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base perl-IO-Socket-SSL
+sudo yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base perl-IO-Socket-SSL
 wget http://openresty.org/download/ngx_openresty-1.5.12.1.tar.gz
 tar xfva ngx_openresty-1.5.12.1.tar.gz
 cd ngx_openresty-1.5.12.1
@@ -19,13 +19,13 @@ make install
 
 ```shell
 cd /usr/sbin
-ln -s /opt/lua/openresty/nginx/sbin/nginx
+sudo ln -s /opt/lua/openresty/nginx/sbin/nginx
 cd /usr/local/bin
-ln -s /opt/lua/openresty/luajit/bin/luajit-2.1.0-alpha luajit
+sudo ln -s /opt/lua/openresty/luajit/bin/luajit-2.1.0-alpha luajit
 
 cd /usr/local
-ln -s /opt/lua/openresty openresty
-ln -s /opt/lua/openresty openresty-debug
+sudo ln -s /opt/lua/openresty openresty
+sudo ln -s /opt/lua/openresty openresty-debug
 
 cd /opt/lua
 ln -s ~/.luarocks luarocks
