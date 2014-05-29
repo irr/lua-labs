@@ -31,6 +31,10 @@ cd /opt/lua
 ln -s ~/.luarocks luarocks
 ```
 
+```shell
+sudo yum install python-mechanize python-lxml python-imaging python-genshi python-dateutil python-cherrypy python-BeautifulSoup pyPdf PyQt4 PyQt4-webkit django-tagging podofo-libs clipgrab
+```
+
 **FreeBSD**
 ```shell
 cd /usr/ports/devel/gmake
