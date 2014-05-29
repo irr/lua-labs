@@ -71,9 +71,6 @@ gmake install
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/local/include/mysql MYSQL_LIBDIR=/usr/local/lib/mysql
 ```
 
-Dependencies
------------
-
 ```shell
 # Ubuntu 14.04 LTS
 apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev cpanminus libtext-diff-perl libtest-longstring-perl liblist-moreutils-perl libtest-base-perl
