@@ -1,7 +1,7 @@
 package = "underscore.lua"
 version = "0.4-0"
 source = {
-	url = "https://github.com/irr/lua-labs/raw/master/rocks/"..package.."-"..version..".zip"
+	url = "http://github.com/irr/lua-labs/raw/master/rocks/"..package.."-"..version..".zip"
 }
 description = {
 	summary = "An utility library adding functional programming support",
