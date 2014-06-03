@@ -31,10 +31,6 @@ cd ..
 git clone git@github.com:irr/sockproc.git
 cd sockproc
 git remote add upstream https://github.com/juce/sockproc.git
-cd ..
-git clone git@github.com:irr/nginx_tcp_proxy_module.git
-cd nginx_tcp_proxy_module
-git remote add upstream https://github.com/yaoweibin/nginx_tcp_proxy_module.git
 cd /opt/lua
 git clone git@github.com:irr/underscore.lua.git
 cd underscore.lua
