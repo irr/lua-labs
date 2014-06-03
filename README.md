@@ -81,7 +81,6 @@ apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysql
 ```
 
 * [OpenResty]: A full-fledged web application server by bundling the standard Nginx core, lots of 3rd-party Nginx modules, as well as most of their external dependencies
-
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
 * [lua-iconv]: Lua binding to the POSIX 'iconv' library
 * [lua-llthreads]: Low-Level threads(pthreads or WIN32 threads) for Lua
