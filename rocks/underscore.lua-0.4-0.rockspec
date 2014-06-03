@@ -1,14 +1,14 @@
 package = "underscore.lua"
 version = "0.4-0"
 source = {
-	url = "http://marcusirven.s3.amazonaws.com/rocks/"..package.."-"..version..".zip"
+	url = "https://github.com/irr/lua-labs/raw/master/rocks/"..package.."-"..version..".zip"
 }
 description = {
 	summary = "An utility library adding functional programming support",
 	detailed = [[
 		An utility library adding functional programming support
 	]],
-	homepage = "http://mirven.github.com/underscore.lua/", 
+	homepage = "https://github.com/irr/underscore.lua/", 
 	license = "MIT/X11" -- same a Lua
 }
 dependencies = {
