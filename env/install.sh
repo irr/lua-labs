@@ -36,10 +36,6 @@ git clone git@github.com:irr/nginx_tcp_proxy_module.git
 cd nginx_tcp_proxy_module
 git remote add upstream https://github.com/yaoweibin/nginx_tcp_proxy_module.git
 cd /opt/lua
-git clone git@github.com:irr/underscore.lua.git
-cd underscore.lua
-git remote add upstream https://github.com/mirven/underscore.lua.git
-cd ..
 git clone git@github.com:irr/openresty-docker.git
 cd openresty-docker
 git remote add upstream https://github.com/torhve/openresty-docker.git
