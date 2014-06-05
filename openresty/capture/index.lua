@@ -1,6 +1,6 @@
 local json = require "cjson" 
 
-function exit_now(status, msg)
+function exit(status, msg)
     if status ~= ngx.HTTP_OK then
         ngx.status = status
     end
@@ -10,14 +10,6 @@ function exit_now(status, msg)
     end
 
     ngx.exit(ngx.HTTP_OK)
-end
-
-function exit(status, msg)
-    if status then
-        exit_now(status, msg)
-    end
-
-    exit_now(ngx.HTTP_OK, msg)
 end
 
 function split(str, sep)
