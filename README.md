@@ -6,11 +6,11 @@ lua-labs
 **CentOS 6.5**
 ```shell
 sudo yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base perl-IO-Socket-SSL
-wget http://openresty.org/download/ngx_openresty-1.5.12.1.tar.gz
-tar xfva ngx_openresty-1.5.12.1.tar.gz
-cd ngx_openresty-1.5.12.1
-wget https://github.com/irr/nginx_tcp_proxy_module/raw/master/tcp-ngx-1.5.12.1.patch
-patch -p1 < tcp-ngx-1.5.12.1.patch
+wget http://openresty.org/download/ngx_openresty-1.7.0.1.tar.gz
+tar xfva ngx_openresty-1.7.0.1.tar.gz
+cd ngx_openresty-1.7.0.1
+wget https://github.com/irr/nginx_tcp_proxy_module/raw/master/tcp-ngx-1.7.0.1.patch
+patch -p1 < tcp-ngx-1.7.0.1.patch
 ./configure --prefix=/opt/lua/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --with-debug --add-module=/opt/lua/nginx_tcp_proxy_module-0.4.5
 make install
 ```
