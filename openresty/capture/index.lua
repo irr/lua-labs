@@ -1,7 +1,7 @@
 local json = require "cjson" 
 
 function exit(status, msg)
-    if status ~= ngx.HTTP_OK then
+    if status and status ~= ngx.HTTP_OK then
         ngx.status = status
     end
 
