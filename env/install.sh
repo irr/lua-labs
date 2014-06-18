@@ -64,6 +64,5 @@ ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/modules/forked/nginx_tcp_proxy_module
-ln -s /opt/lua/underscore.lua
 ln -s /opt/lua/openresty-docker
 cd
