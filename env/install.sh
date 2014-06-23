@@ -3,6 +3,10 @@ cd /opt/lua
 git clone https://github.com/openresty/openresty.org.git
 git clone https://github.com/openresty/test-nginx.git
 git clone https://github.com/openresty/nginx-tutorials.git
+git clone git@github.com:irr/underscore.lua.git
+cd underscore.lua
+git remote add upstream https://github.com/mirven/underscore.lua.git
+cd ..
 mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
 cd /opt/lua/modules/nginx/
@@ -33,10 +37,6 @@ cd ..
 git clone git@github.com:irr/sockproc.git
 cd sockproc
 git remote add upstream https://github.com/juce/sockproc.git
-cd ..
-git clone git@github.com:irr/underscore.lua.git
-cd underscore.lua
-git remote add upstream https://github.com/mirven/underscore.lua.git
 cd ..
 git clone git@github.com:irr/nginx_tcp_proxy_module.git
 cd nginx_tcp_proxy_module
