@@ -57,7 +57,7 @@ end
 -------------
 -- MAIN
 -------------
-local flags = ngx.shared.flags
+local flags = ngx.shared.flags1 or ngx.shared.flags2
 local timer = flags:get("timer")
 
 ngx.log(ngx.WARN, "TIMER="..tostring(timer))
