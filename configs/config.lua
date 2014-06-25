@@ -4,7 +4,6 @@ package.cpath = package.cpath .. ";/opt/lua/luarocks/lib/lua/5.1/?.so;"
 _ = require "underscore"
 
 function d(o)
-    o = o or _G
     if type(o) == "table" then
         for k, v in pairs(o) do
             print(k,v)
