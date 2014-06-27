@@ -2,6 +2,9 @@
 -- call from parent directory
 test = require "sub.testmod3"
 test.info(1,2,"a",{a=100})
+or
+require "sub.testmod3"
+sub.testmod3.info(1,2,"a",{a=100})
 ]]
 
 local print = print
