@@ -1,7 +1,7 @@
 use Test::Nginx::Socket;
 
 our $SDInit = <<_EOC_
-lua_shared_dict flags 1m;
+lua_shared_dict flags1 1m;
 _EOC_
 
 ;repeat_each(1);
