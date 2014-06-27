@@ -1,5 +1,6 @@
 --[[
-test = require "testmod2"
+-- call from parent directory
+test = require "sub.testmod3"
 test.info(1,2,"a",{a=100})
 ]]
 
@@ -8,7 +9,7 @@ local type = type
 local tostring = tostring
 local pairs = pairs
 
-module('testmod2')
+module('sub.testmod3')
 
 _VERSION = '1.00'
 
@@ -19,6 +20,6 @@ local function debug(args)
 end
 
 function info(...)  
-    print("testmod v" .._VERSION)
+    print("testmod3 v" .._VERSION)
     debug({...})
 end
