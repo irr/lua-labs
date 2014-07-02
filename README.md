@@ -16,6 +16,7 @@ patch -p1 < tcp-ngx-1.7.2.1-rc1.patch
 make install
 ```
 
+* [perl-labs]: https://github.com/irr/perl-labs
 * [nginx_tcp_proxy_module]: add the feature of tcp proxy with nginx, with health check and status monitor
 
 ```shell
@@ -142,3 +143,4 @@ limitations under the License.
 [redis-lua]: http://github.com/nrk/redis-lua
 [underscore.lua]: https://github.com/irr/underscore.lua
 [nginx_tcp_proxy_module]: https://github.com/irr/nginx_tcp_proxy_module
+[perl-labs]: https://github.com/irr/perl-labs
