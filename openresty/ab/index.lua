@@ -2,7 +2,7 @@
 -- TEST
 --------------------------------
 --[=[
-curl -v "http://localhost:8080/?size=1000
+curl -v "http://localhost:8080/?size=100"
 --]=]
 
 ngx.header.content_type = 'text/plain';
