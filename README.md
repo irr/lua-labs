@@ -16,7 +16,7 @@ patch -p1 < tcp-ngx-1.7.2.1-rc1.patch
 make install
 ```
 
-* [perl-labs]: https://github.com/irr/perl-labs
+* [perl-labs]: perl programming lab
 * [nginx_tcp_proxy_module]: add the feature of tcp proxy with nginx, with health check and status monitor
 
 ```shell
