@@ -83,23 +83,25 @@ apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysql
 ```
 
 * [OpenResty]: A full-fledged web application server by bundling the standard Nginx core, lots of 3rd-party Nginx modules, as well as most of their external dependencies
+* [luarocks]: Deployment and management system for Lua modules
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
 * [lua-iconv]: Lua binding to the POSIX 'iconv' library
 * [lua-llthreads]: Low-Level threads(pthreads or WIN32 threads) for Lua
+* [luacrypto]: Provides a Lua frontend to the OpenSSL cryptographic library
+* [luafilesystem]: Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution 
 * [lualogging]: LuaLogging provides a simple API to use logging features in Lua
 * [luaposix]: Lua bindings for POSIX APIs
 * [luasec]: LuaSec is a binding for OpenSSL library to provide TLS/SSL communication
-* [luafilesystem]: Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution 
-* [luarocks]: Deployment and management system for Lua modules
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
 * [redis-lua]: A Lua client library for the redis key value storage system
 * [underscore.lua]: A Lua library that provides a set of utility functions for dealing with iterators, arrays, tables, and functions
 
 ```shell
-luarocks --local install lua-iconv
 luarocks --local install lua-cjson
+luarocks --local install lua-iconv
 luarocks --local install lua-llthreads
+luarocks --local install luacrypto
 luarocks --local install luafilesystem
 luarocks --local install lualogging
 luarocks --local install luaposix
@@ -130,17 +132,18 @@ limitations under the License.
 [Apache]: http://httpd.apache.org/dev/devnotes.html
 [OpenResty]: http://openresty.org/
 [LuaJIT]: http://luajit.org/
-[lua-iconv]: http://luaforge.net/projects/lua-iconv/
+[nginx_tcp_proxy_module]: https://github.com/irr/nginx_tcp_proxy_module
+[perl-labs]: https://github.com/irr/perl-labs
 [lua-cjson]: http://www.kyne.com.au/~mark/software/lua-cjson.php
+[lua-iconv]: http://luaforge.net/projects/lua-iconv/
 [lua-llthreads]: http://github.com/Neopallium/lua-llthreads
+[luacrypto]: http://luacrypto.luaforge.net/index.html
+[luafilesystem]: https://github.com/keplerproject/luafilesystem
 [lualogging]: http://www.keplerproject.org/lualogging/
 [luaposix]: https://github.com/luaposix/luaposix
-[luasec]: https://github.com/brunoos/luasec
-[luafilesystem]: https://github.com/keplerproject/luafilesystem
 [luarocks]: http://luarocks.org/entcp-ngx-1.4.3.6
+[luasec]: https://github.com/brunoos/luasec
 [luasql-mysql]: http://www.keplerproject.org/luasql/
 [luasql-sqlite3]: http://www.keplerproject.org/luasql/
 [redis-lua]: http://github.com/nrk/redis-lua
 [underscore.lua]: https://github.com/irr/underscore.lua
-[nginx_tcp_proxy_module]: https://github.com/irr/nginx_tcp_proxy_module
-[perl-labs]: https://github.com/irr/perl-labs
