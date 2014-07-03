@@ -87,7 +87,7 @@ apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysql
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
 * [lua-iconv]: Lua binding to the POSIX 'iconv' library
 * [lua-llthreads]: Low-Level threads(pthreads or WIN32 threads) for Lua
-* [luacrypto]: Provides a Lua frontend to the OpenSSL cryptographic library
+* [luacrypto]: LuaCrypto is a Lua frontend to the OpenSSL cryptographic library
 * [luafilesystem]: Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution 
 * [lualogging]: LuaLogging provides a simple API to use logging features in Lua
 * [luaposix]: Lua bindings for POSIX APIs
@@ -137,7 +137,7 @@ limitations under the License.
 [lua-cjson]: http://www.kyne.com.au/~mark/software/lua-cjson.php
 [lua-iconv]: http://luaforge.net/projects/lua-iconv/
 [lua-llthreads]: http://github.com/Neopallium/lua-llthreads
-[luacrypto]: http://luacrypto.luaforge.net/index.html
+[luacrypto]: http://luacrypto.luaforge.net/manual.html
 [luafilesystem]: https://github.com/keplerproject/luafilesystem
 [lualogging]: http://www.keplerproject.org/lualogging/
 [luaposix]: https://github.com/luaposix/luaposix
