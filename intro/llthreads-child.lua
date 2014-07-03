@@ -7,7 +7,7 @@ print("CHILD: received from ROOT params:", ...)
 print("SUB-PATH: ", package.path)
 print("SUB-CPATH: ", package.cpath)
 
-local llthreads = require "llthreads" -- need to re-declare this under this scope
+local llthreads = require "llthreads2" -- need to re-declare this under this scope
 local t = {} -- thread storage table
 
 -- create a new child sub-thread execution code - it requires level 1 literal string [=[ ]=] enclosures, level 2 would be [==[ ]==]

@@ -1,4 +1,4 @@
-local llthreads = require "llthreads"
+local llthreads = require "llthreads2"
 
 function readFile(file)
     local f = io.open(file, "rb")
