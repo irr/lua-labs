@@ -5,7 +5,7 @@ lua-labs
 
 **CentOS 6.5**
 ```shell
-sudo yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base perl-IO-Socket-SSL
+sudo yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base perl-IO-Socket-SSL zeromq3 zeromq3-devel
 wget http://openresty.org/download/ngx_openresty-1.7.2.1rc1.tar.gz
 tar xfva ngx_openresty-1.7.2.1rc1.tar.gz
 cd ngx_openresty-1.7.2.1rc1
