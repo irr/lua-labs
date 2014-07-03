@@ -86,7 +86,7 @@ apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysql
 * [luarocks]: Deployment and management system for Lua modules
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
 * [lua-iconv]: Lua binding to the POSIX 'iconv' library
-* [lua-llthreads]: Low-Level threads(pthreads or WIN32 threads) for Lua
+* [lua-llthreads2]: Low-Level threads(pthreads or WIN32 threads) for Lua (`llthreads` library rewritten without `LuaNativeObjects` code generator)
 * [luacrypto]: LuaCrypto is a Lua frontend to the OpenSSL cryptographic library
 * [luafilesystem]: Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution 
 * [lualogging]: LuaLogging provides a simple API to use logging features in Lua
@@ -95,12 +95,13 @@ apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysql
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
 * [redis-lua]: A Lua client library for the redis key value storage system
+* [lzmq]: Lua binding to ZeroMQ
 * [underscore.lua]: A Lua library that provides a set of utility functions for dealing with iterators, arrays, tables, and functions
 
 ```shell
 luarocks --local install lua-cjson
 luarocks --local install lua-iconv
-luarocks --local install lua-llthreads
+luarocks --local install lua-llthreads2
 luarocks --local install luacrypto
 luarocks --local install luafilesystem
 luarocks --local install lualogging
@@ -109,6 +110,7 @@ luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/ #CentOS 6.x
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu # Ubuntu LTS 12.04
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
 luarocks --local install luasql-sqlite3
+luarocks --local install lzmq
 luarocks --local install redis-lua
 luarocks --local install underscore.lua --from=http://github.com/irr/underscore.lua/raw/master/rocks
 ```
@@ -136,7 +138,7 @@ limitations under the License.
 [perl-labs]: https://github.com/irr/perl-labs
 [lua-cjson]: http://www.kyne.com.au/~mark/software/lua-cjson.php
 [lua-iconv]: http://luaforge.net/projects/lua-iconv/
-[lua-llthreads]: http://github.com/Neopallium/lua-llthreads
+[lua-llthreads2]: https://github.com/moteus/lua-llthreads2
 [luacrypto]: http://luacrypto.luaforge.net/manual.html
 [luafilesystem]: https://github.com/keplerproject/luafilesystem
 [lualogging]: http://www.keplerproject.org/lualogging/
@@ -145,5 +147,6 @@ limitations under the License.
 [luasec]: https://github.com/brunoos/luasec
 [luasql-mysql]: http://www.keplerproject.org/luasql/
 [luasql-sqlite3]: http://www.keplerproject.org/luasql/
+[lzmq]: https://github.com/zeromq/lzmq
 [redis-lua]: http://github.com/nrk/redis-lua
 [underscore.lua]: https://github.com/irr/underscore.lua
