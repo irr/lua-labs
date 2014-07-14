@@ -90,7 +90,6 @@ apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysql
 * [luacrypto]: LuaCrypto is a Lua frontend to the OpenSSL cryptographic library
 * [luafilesystem]: Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution 
 * [lualogging]: LuaLogging provides a simple API to use logging features in Lua
-* [luaposix]: Lua bindings for POSIX APIs
 * [luasec]: LuaSec is a binding for OpenSSL library to provide TLS/SSL communication
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
@@ -106,7 +105,6 @@ luarocks --local install lua-llthreads2
 luarocks --local install luacrypto
 luarocks --local install luafilesystem
 luarocks --local install lualogging
-luarocks --local install luaposix
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/ #CentOS 6.x
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu # Ubuntu LTS 12.04
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
@@ -144,7 +142,6 @@ limitations under the License.
 [luacrypto]: http://luacrypto.luaforge.net/manual.html
 [luafilesystem]: https://github.com/keplerproject/luafilesystem
 [lualogging]: http://www.keplerproject.org/lualogging/
-[luaposix]: https://github.com/luaposix/luaposix
 [luarocks]: http://luarocks.org/entcp-ngx-1.4.3.6
 [luasec]: https://github.com/brunoos/luasec
 [luasql-mysql]: http://www.keplerproject.org/luasql/
