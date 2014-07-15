@@ -4,14 +4,9 @@ if [ ! -d "luarocks" ]; then ln -s ~/.luarocks luarocks; fi
 git clone https://github.com/openresty/openresty.org.git
 git clone https://github.com/openresty/test-nginx.git
 git clone https://github.com/openresty/nginx-tutorials.git
-git clone git@github.com:irr/underscore.lua.git
-cd underscore.lua
-git remote add upstream https://github.com/mirven/underscore.lua.git
-cd ..
 mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
 cd /opt/lua/modules/nginx/
-git clone https://github.com/openresty/array-var-nginx-module.git
 git clone https://github.com/openresty/headers-more-nginx-module.git
 git clone https://github.com/calio/iconv-nginx-module.git
 git clone https://github.com/openresty/lua-nginx-module.git
@@ -48,7 +43,6 @@ cd openresty-docker
 git remote add upstream https://github.com/torhve/openresty-docker.git
 cd ..
 cd ~/git
-ln -s /opt/lua/modules/nginx/array-var-nginx-module
 ln -s /opt/lua/modules/nginx/headers-more-nginx-module
 ln -s /opt/lua/modules/nginx/iconv-nginx-module
 ln -s /opt/lua/modules/nginx/lua-nginx-module
@@ -70,5 +64,4 @@ ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/modules/forked/nginx_tcp_proxy_module
 ln -s /opt/lua/openresty-docker
-ln -s /opt/lua/underscore.lua
 cd
