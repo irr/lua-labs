@@ -11,7 +11,8 @@ tar xfva ngx_openresty-1.7.2.1.tar.gz
 cd ngx_openresty-1.7.2.1
 wget https://github.com/irr/nginx_tcp_proxy_module/raw/master/tcp-ngx-1.7.2.1.patch
 patch -p1 < tcp-ngx-1.7.2.1.patch
-./configure --prefix=/opt/lua/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --with-debug --add-module=/opt/lua/nginx_tcp_proxy_module-0.4.5
+ # switch to perl: `perlbrew use perl-5.20.0`
+-./configure --prefix=/opt/lua/openresty --with-http_perl_module --with-luajit --with-http_iconv_module --with-http_stub_status_module --with-debug --add-module=/opt/lua/nginx_tcp_proxy_module-0.4.5
 make install
 ```
 
