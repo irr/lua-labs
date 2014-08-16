@@ -83,6 +83,21 @@ luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/local/include/mysql MYSQ
 apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev cpanminus libtext-diff-perl libtest-longstring-perl liblist-moreutils-perl libtest-base-perl
 ```
 
+```shell
+[irocha@irrlab test-nginx (master)]$ sudo make install
+[sudo] password for irocha: 
+Installing /usr/local/share/perl5/Test/Nginx.pm
+Installing /usr/local/share/perl5/Test/Nginx/Util.pm
+Installing /usr/local/share/perl5/Test/Nginx/Socket.pm
+Installing /usr/local/share/perl5/Test/Nginx/LWP.pm
+Installing /usr/local/share/perl5/Test/Nginx/Socket/Lua.pm
+Installing /usr/local/share/man/man3/Test::Nginx.3pm
+Installing /usr/local/share/man/man3/Test::Nginx::Socket.3pm
+Installing /usr/local/share/man/man3/Test::Nginx::Socket::Lua.3pm
+Installing /usr/local/share/man/man3/Test::Nginx::LWP.3pm
+Appending installation info to /usr/lib64/perl5/perllocal.pod
+```
+
 * [OpenResty]: A full-fledged web application server by bundling the standard Nginx core, lots of 3rd-party Nginx modules, as well as most of their external dependencies
 * [luarocks]: Deployment and management system for Lua modules
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
