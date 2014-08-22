@@ -59,3 +59,6 @@ file:close()
 print("File   : " .. source)
 print("Charset: " .. trim(charset))
 print("Size   : " .. tostring(#content))
+
+os.execute("zenity --info --text='" .. 
+    string.format("%s\n%s\n%d\nOK'", source, trim(charset), #content))
