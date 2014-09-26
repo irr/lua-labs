@@ -1,4 +1,4 @@
-/#!/bin/bash
+#!/bin/bash
 cd /opt/lua
 if [ ! -d "luarocks" ]; then ln -s ~/.luarocks luarocks; fi
 git clone https://github.com/openresty/openresty.org.git
