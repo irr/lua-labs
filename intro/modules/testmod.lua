@@ -3,9 +3,13 @@ test = require "testmod"
 test.info(1,2,"a",{a=100})
 ]]
 
+local modname = ...
+
 local _M = {
     _VERSION = '1.00'
 }
+
+_G[modname] = _M
 
 local print = print
 local type = type
