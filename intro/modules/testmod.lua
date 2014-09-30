@@ -10,6 +10,7 @@ local _M = {
 }
 
 _G[modname] = _M
+package.loaded[modname] = _M
 
 local print = print
 local type = type
