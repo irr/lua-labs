@@ -1,9 +1,8 @@
-local Set = {}
-local mt = {}
+local Set = { mt = {} }
 
 function Set.new(l)
-    local set = {}
-    setmetatable(set, mt)
+    local set = {}    
+    setmetatable(set, Set.mt)
     for _, v in ipairs(l) do set[v] = true end
     return set
 end
@@ -35,25 +34,26 @@ function Set.print(s)
     print(Set.tostring(s))
 end
 
-mt.__add = Set.union
-mt.__mul = Set.intersection
+-- BEGIN: Metatable definitions
+Set.mt.__add = Set.union
+Set.mt.__mul = Set.intersection
 
-mt.__le = function (a, b)
+Set.mt.__le = function (a, b)
     for k in pairs(a) do
         if not b[k] then return false end
     end
     return true
 end
 
-mt.__lt = function (a, b)
+Set.mt.__lt = function (a, b)
     return a <= b and not (b <= a)
 end
 
-mt.__eq = function (a, b)
+Set.mt.__eq = function (a, b)
     return a <= b and b <= a
 end
 
-mt.__metatable = "protected"
+-- END: Metatable definitions
 
 s1 = Set.new{10, 20, 30, 50}
 s2 = Set.new{30, 1}
