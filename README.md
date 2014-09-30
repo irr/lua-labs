@@ -105,6 +105,7 @@ Appending installation info to /usr/lib64/perl5/perllocal.pod
 * [luasec]: LuaSec is a binding for OpenSSL library to provide TLS/SSL communication
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
+* [lzmq]: Lua binding to ZeroMQ
 * [penlight]: Penlight Lua Libraries
 * [redis-lua]: A Lua client library for the redis key value storage system
 * [underscore.lua]: A Lua library that provides a set of utility functions for dealing with iterators, arrays, tables, and functions
@@ -120,6 +121,7 @@ luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/ #CentOS 6.x
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu # Ubuntu LTS 12.04
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
 luarocks --local install luasql-sqlite3
+luarocks --local install lzmq
 luarocks --local install penlight
 luarocks --local install redis-lua
 luarocks --local install underscore.lua --from=http://github.com/irr/underscore.lua/raw/master/rocks
@@ -155,6 +157,7 @@ limitations under the License.
 [luasec]: https://github.com/brunoos/luasec
 [luasql-mysql]: http://www.keplerproject.org/luasql/
 [luasql-sqlite3]: http://www.keplerproject.org/luasql/
+[lzmq]: https://github.com/zeromq/lzmq
 [penlight]: http://stevedonovan.github.io/Penlight/
 [redis-lua]: http://github.com/nrk/redis-lua
 [underscore.lua]: https://github.com/irr/underscore.lua
