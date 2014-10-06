@@ -100,6 +100,7 @@ Appending installation info to /usr/lib64/perl5/perllocal.pod
 * [lua-iconv]: Lua binding to the POSIX 'iconv' library
 * [lua-llthreads2]: Low-Level threads(pthreads or WIN32 threads) for Lua (`llthreads` library rewritten without `LuaNativeObjects` code generator)
 * [luacrypto]: LuaCrypto is a Lua frontend to the OpenSSL cryptographic library
+* [luadbi]: LuaDBI is a database interface library for Lua
 * [luafilesystem]: Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution 
 * [lualogging]: LuaLogging provides a simple API to use logging features in Lua
 * [luasec]: LuaSec is a binding for OpenSSL library to provide TLS/SSL communication
@@ -119,6 +120,8 @@ luarocks --local install luafilesystem
 luarocks --local install lualogging
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/ #CentOS 6.x
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu # Ubuntu LTS 12.04
+luarocks --local install luadbi-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
+luarocks --local install luadbi-sqlite3
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
 luarocks --local install luasql-sqlite3
 luarocks --local install lzmq
@@ -155,6 +158,7 @@ limitations under the License.
 [lualogging]: http://www.keplerproject.org/lualogging/
 [luarocks]: http://luarocks.org/entcp-ngx-1.4.3.6
 [luasec]: https://github.com/brunoos/luasec
+[luadbi]: https://code.google.com/p/luadbi/
 [luasql-mysql]: http://www.keplerproject.org/luasql/
 [luasql-sqlite3]: http://www.keplerproject.org/luasql/
 [lzmq]: https://github.com/zeromq/lzmq
