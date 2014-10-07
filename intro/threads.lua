@@ -1,10 +1,10 @@
 local threads = require "llthreads2.ex"
 
 local t = threads.new(function(...)
-    local n = ...
+    local n, m = ...
     os.execute("sleep 3")
-    return n + 1
-end, 1000)
+    return n + m, n * m
+end, 1000, 2000)
 
 t:start()
 
@@ -13,6 +13,6 @@ while t:alive() do
   os.execute("sleep 1")
 end
 
-local ok, v = t:join()
-assert(v == 1001)
-print(string.format("OK: %d\n", v))
+local ok, v1, v2 = t:join()
+assert(v1 == 3000 and v2 == 2000000)
+print(string.format("OK: %d and %d\n", v1, v2))
