@@ -31,3 +31,8 @@ function trim(s)
     return s:match '^%s*(.-)%s*$'
 end
 
+function expand(s)
+    return (string.gsub(s, "$(%w+)", function(n)
+                return tostring(_G[n])
+            end))
+end
