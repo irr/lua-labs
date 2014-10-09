@@ -5,16 +5,13 @@ lua-labs
 
 **CentOS 6.5**
 ```shell
-sudo yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base perl-IO-Socket-SSL
-sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev cpanminus libtext-diff-perl libtest-longstring-perl liblist-moreutils-perl libtest-base-perl
+sudo yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel zeromq3 zeromq3-devel
 wget http://openresty.org/download/ngx_openresty-1.7.2.1.tar.gz
 tar xfva ngx_openresty-1.7.2.1.tar.gz
 cd ngx_openresty-1.7.2.1
 ./configure --prefix=/opt/lua/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --with-debug
 make install
 ```
-
-* [perl-labs]: perl programming lab
 
 ```shell
 cd /usr/sbin
@@ -31,57 +28,9 @@ ln -s ~/.luarocks luarocks
 ```
 
 ```shell
-sudo yum install python-mechanize python-lxml python-imaging python-genshi python-dateutil python-cherrypy python-BeautifulSoup pyPdf PyQt4 PyQt4-webkit django-tagging podofo-libs clipgrab
-```
-
-**FreeBSD**
-```shell
-cd /usr/ports/devel/gmake
-make install clean
-cd /usr/ports/security/openssl
-make install clean
-cd /usr/ports/devel/pcre
-make install clean
-
-or
-
-pkg_add -r -v gmake
-pkg_add -r -v pcre
-pkg_add -r -v openssl
-
-# ... install openresty ...
-```
-
-```shell
-cd /opt/openresty/luajit/bin/
-ln -s luajit lua
-cd /usr/local/bin
-ln -s /opt/openresty/luajit/bin/lua
-ln -s /opt/openresty/luajit/bin/luajit
-cd /usr/sbin
-ln -s /opt/openresty/nginx/sbin/nginx
-```
-
-```shell
-tar xfvz luarocks-2.1.1.tar.gz
-cd luarocks-2.1.1
-./configure --with-lua=/opt/lua/openresty/luajit --with-lua-include=/opt/openresty/luajit/include/luajit-2.0 --with-lua-lib=/opt/openresty/luajit/lib
-gmake build
-gmake install
-```
-
-```shell
-luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/local/include/mysql MYSQL_LIBDIR=/usr/local/lib/mysql
-```
-
-```shell
-# Ubuntu 14.04 LTS
-apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev cpanminus libtext-diff-perl libtest-longstring-perl liblist-moreutils-perl libtest-base-perl
-```
-
-```shell
-[irocha@irrlab test-nginx (master)]$ sudo make install
-[sudo] password for irocha: 
+sudo yum install perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base perl-IO-Socket-SSL
+# Test::Nginx
+sudo make install
 Installing /usr/local/share/perl5/Test/Nginx.pm
 Installing /usr/local/share/perl5/Test/Nginx/Util.pm
 Installing /usr/local/share/perl5/Test/Nginx/Socket.pm
@@ -100,14 +49,12 @@ Appending installation info to /usr/lib64/perl5/perllocal.pod
 * [lua-iconv]: Lua binding to the POSIX 'iconv' library
 * [lua-llthreads2]: Low-Level threads(pthreads or WIN32 threads) for Lua (`llthreads` library rewritten without `LuaNativeObjects` code generator)
 * [luacrypto]: LuaCrypto is a Lua frontend to the OpenSSL cryptographic library
-* [luadbi]: LuaDBI is a database interface library for Lua
 * [luafilesystem]: Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution 
 * [lualogging]: LuaLogging provides a simple API to use logging features in Lua
 * [luasec]: LuaSec is a binding for OpenSSL library to provide TLS/SSL communication
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
 * [lzmq]: Lua binding to ZeroMQ
-* [penlight]: Penlight Lua Libraries
 * [redis-lua]: A Lua client library for the redis key value storage system
 
 ```shell
@@ -118,13 +65,9 @@ luarocks --local install luacrypto
 luarocks --local install luafilesystem
 luarocks --local install lualogging
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/ #CentOS 6.x
-luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu # Ubuntu LTS 12.04
-luarocks --local install luadbi-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
-luarocks --local install luadbi-sqlite3
 luarocks --local install luasql-sqlite3
 luarocks --local install lzmq
-luarocks --local install penlight
 luarocks --local install redis-lua
 ```
 
@@ -147,7 +90,6 @@ limitations under the License.
 [Apache]: http://httpd.apache.org/dev/devnotes.html
 [OpenResty]: http://openresty.org/
 [LuaJIT]: http://luajit.org/
-[perl-labs]: https://github.com/irr/perl-labs
 [lua-cjson]: http://www.kyne.com.au/~mark/software/lua-cjson.php
 [lua-iconv]: http://luaforge.net/projects/lua-iconv/
 [lua-llthreads2]: https://github.com/moteus/lua-llthreads2
@@ -156,10 +98,7 @@ limitations under the License.
 [lualogging]: http://www.keplerproject.org/lualogging/
 [luarocks]: http://luarocks.org/entcp-ngx-1.4.3.6
 [luasec]: https://github.com/brunoos/luasec
-[luadbi]: https://code.google.com/p/luadbi/
 [luasql-mysql]: http://www.keplerproject.org/luasql/
 [luasql-sqlite3]: http://www.keplerproject.org/luasql/
 [lzmq]: https://github.com/zeromq/lzmq
-[penlight]: http://stevedonovan.github.io/Penlight/
 [redis-lua]: http://github.com/nrk/redis-lua
-[underscore.lua]: https://github.com/irr/underscore.lua
