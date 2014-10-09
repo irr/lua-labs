@@ -109,7 +109,6 @@ Appending installation info to /usr/lib64/perl5/perllocal.pod
 * [lzmq]: Lua binding to ZeroMQ
 * [penlight]: Penlight Lua Libraries
 * [redis-lua]: A Lua client library for the redis key value storage system
-* [underscore.lua]: A Lua library that provides a set of utility functions for dealing with iterators, arrays, tables, and functions
 
 ```shell
 luarocks --local install lua-cjson
@@ -127,7 +126,6 @@ luarocks --local install luasql-sqlite3
 luarocks --local install lzmq
 luarocks --local install penlight
 luarocks --local install redis-lua
-luarocks --local install underscore.lua --from=http://github.com/irr/underscore.lua/raw/master/rocks
 ```
 
 Copyright and License
