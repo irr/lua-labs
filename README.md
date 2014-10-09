@@ -5,12 +5,12 @@ lua-labs
 
 **CentOS 6.5**
 ```shell
-sudo yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base perl-IO-Socket-SSL zeromq3 zeromq3-devel
+sudo yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base perl-IO-Socket-SSL
 sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev cpanminus libtext-diff-perl libtest-longstring-perl liblist-moreutils-perl libtest-base-perl
-wget http://openresty.org/download/ngx_openresty-1.7.4.1rc1.tar.gz
-tar xfva ngx_openresty-1.7.4.1rc1.tar.gz
-cd ngx_openresty-1.7.4.1rc1
-./configure --prefix=/opt/lua/openresty --with-http_perl_module --with-luajit --with-http_iconv_module --with-http_stub_status_module --with-debug
+wget http://openresty.org/download/ngx_openresty-1.7.2.1.tar.gz
+tar xfva ngx_openresty-1.7.2.1.tar.gz
+cd ngx_openresty-1.7.2.1
+./configure --prefix=/opt/lua/openresty --with-luajit --with-http_iconv_module --with-http_stub_status_module --with-debug
 make install
 ```
 
