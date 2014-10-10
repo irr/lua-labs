@@ -22,9 +22,15 @@ function os.capture(cmd, raw)
     return s
 end
 
-function split(str, sep)
-    local s = str..sep
-    return s:match((s:gsub('[^'..sep..']*'..sep, '([^'..sep..']*)'..sep)))
+function split(s, delimiter)
+    if not delimiter or delimiter == "" then
+        return s
+    end
+    result = {}
+    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+        table.insert(result, match)
+    end
+    return result
 end
 
 function trim(s)
