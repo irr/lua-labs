@@ -103,6 +103,7 @@ elseif ngx.req.get_method() == "GET" then
 end
 
 if keys["name"] then
+    keys["arg_name"] = ngx.var.arg_name
     ngx.say(json.encode(keys))
     exit()
 end
