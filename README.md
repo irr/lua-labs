@@ -3,11 +3,15 @@ lua-labs
 
 **lua-labs**  is a set of sample codes whose main purpose is to experiment and test *Lua* and *[OpenResty]/[Apache]*
 
-**CentOS 6.5/Ubuntu 14.04 LTS**
+**CentOS 6.5**
 ```shell
 sudo yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel zeromq3 zeromq3-devel
+```
 
+**Ubuntu 14.04 LTS**
+```shell
 sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev cpanminus libtext-diff-perl libtest-longstring-perl liblist-moreutils-perl libtest-base-perl libzmq3-dev
+```
 
 wget http://openresty.org/download/ngx_openresty-1.7.4.1.tar.gz
 tar xfva ngx_openresty-1.7.4.1.tar.gz
