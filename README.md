@@ -6,7 +6,7 @@ lua-labs
 **CentOS 6.5**
 ```shell
 sudo yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel zeromq3 zeromq3-devel
-sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev cpanminus libtext-diff-perl libtest-longstring-perl liblist-moreutils-perl libtest-base-perl
+sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev cpanminus libtext-diff-perl libtest-longstring-perl liblist-moreutils-perl libtest-base-perl libzmq3-dev
 wget http://openresty.org/download/ngx_openresty-1.7.4.1.tar.gz
 tar xfva ngx_openresty-1.7.4.1.tar.gz
 cd ngx_openresty-1.7.4.1
@@ -66,8 +66,13 @@ luarocks --local install lua-llthreads2
 luarocks --local install luacrypto
 luarocks --local install luafilesystem
 luarocks --local install lualogging
-luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/ #CentOS 6.x
+
+luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
+luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/i386-linux-gnu
+
 luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
+luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib/i386-linux-gnu
+
 luarocks --local install luasql-sqlite3
 luarocks --local install lzmq
 luarocks --local install redis-lua
