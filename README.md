@@ -62,7 +62,6 @@ Appending installation info to /usr/lib64/perl5/perllocal.pod
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
 * [lzmq]: Lua binding to ZeroMQ
 * [redis-lua]: A Lua client library for the redis key value storage system
-* [underscore.lua]: A Lua library that provides a set of utility functions for dealing with iterators, arrays, tables, and functions
 
 ```shell
 luarocks --local install lua-cjson
@@ -81,7 +80,6 @@ luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBD
 luarocks --local install luasql-sqlite3
 luarocks --local install lzmq
 luarocks --local install redis-lua
-luarocks --local install underscore.lua --from=http://github.com/irr/underscore.lua/raw/master/rocks
 ```
 
 Copyright and License
@@ -115,4 +113,3 @@ limitations under the License.
 [luasql-sqlite3]: http://www.keplerproject.org/luasql/
 [lzmq]: https://github.com/zeromq/lzmq
 [redis-lua]: http://github.com/nrk/redis-lua
-[underscore.lua]: https://github.com/irr/underscore.lua
