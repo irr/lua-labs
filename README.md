@@ -64,21 +64,19 @@ Installing /usr/local/share/man/man3/Test::Nginx::Socket::Lua.3pm
 Installing /usr/local/share/man/man3/Test::Nginx::LWP.3pm
 Appending installation info to /usr/lib64/perl5/perllocal.pod
 ```
-
-* [OpenResty]: A full-fledged web application server by bundling the standard Nginx core, lots of 3rd-party Nginx modules, as well as most of their external dependencies
+* [OpenResty]: A fast and scalable web application platform by extending NGINX with Lua
 * [luarocks]: Deployment and management system for Lua modules
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
 * [lua-iconv]: Lua binding to the POSIX 'iconv' library
-* [lua-llthreads2]: Low-Level threads(pthreads or WIN32 threads) for Lua (`llthreads` library rewritten without `LuaNativeObjects` code generator)
+* [lua-llthreads2]: Low-Level threads(pthreads or WIN32 threads) for Lua
 * [luacrypto]: LuaCrypto is a Lua frontend to the OpenSSL cryptographic library
-* [luafilesystem]: Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution 
 * [lualogging]: LuaLogging provides a simple API to use logging features in Lua
 * [luasec]: LuaSec is a binding for OpenSSL library to provide TLS/SSL communication
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
 * [lzmq]: Lua binding to ZeroMQ
 * [redis-lua]: A Lua client library for the redis key value storage system
-* [underscore.lua]: A Lua library that provides a set of utility functions for dealing with iterators, arrays, tables, and functions
+* [underscore.lua]: A utility library for Lua
 
 ```shell
 luarocks --local install lua-cjson
@@ -91,13 +89,18 @@ luarocks --local install lualogging
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/i386-linux-gnu
 
-luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib64/mysql
-luarocks --local install luasql-mysql MYSQL_INCDIR=/usr/include/mysql MYSQL_LIBDIR=/usr/lib/i386-linux-gnu
+luarocks --local install luasql-mysql \
+                         MYSQL_INCDIR=/usr/include/mysql \
+                         MYSQL_LIBDIR=/usr/lib64/mysql
+luarocks --local install luasql-mysql \
+                         MYSQL_INCDIR=/usr/include/mysql \
+                         MYSQL_LIBDIR=/usr/lib/i386-linux-gnu
 
 luarocks --local install luasql-sqlite3
 luarocks --local install lzmq
 luarocks --local install redis-lua
-luarocks --local install underscore.lua --from=http://github.com/irr/underscore.lua/raw/master/rocks
+luarocks --local install underscore.lua \
+                         --from=http://github.com/irr/underscore.lua/raw/master/rocks
 ```
 
 Copyright and License
@@ -123,7 +126,6 @@ limitations under the License.
 [lua-iconv]: http://luaforge.net/projects/lua-iconv/
 [lua-llthreads2]: https://github.com/moteus/lua-llthreads2
 [luacrypto]: http://luacrypto.luaforge.net/manual.html
-[luafilesystem]: https://github.com/keplerproject/luafilesystem
 [lualogging]: http://www.keplerproject.org/lualogging/
 [luarocks]: http://luarocks.org/entcp-ngx-1.4.3.6
 [luasec]: https://github.com/brunoos/luasec
