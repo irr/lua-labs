@@ -5,16 +5,25 @@ lua-labs
 
 ```shell
 # CentOS 6.x
-sudo yum install readline-devel pcre-devel openssl-devel sqlite-devel mysql-devel pcre-devel zeromq3 zeromq3-devel
+sudo yum install readline-devel pcre-devel openssl-devel \
+                 sqlite-devel mysql-devel \
+                 zeromq3 zeromq3-devel
 # Ubuntu 14.04 LTS
-sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev libsqlite3-dev libmysqlclient-dev libpcre3-dev libzmq3-dev
+sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev \
+                     libsqlite3-dev libmysqlclient-dev \
+                     libzmq3-dev
 ```
 
 ```shell
 wget http://openresty.org/download/ngx_openresty-1.7.4.1.tar.gz
 tar xfva ngx_openresty-1.7.4.1.tar.gz
 cd ngx_openresty-1.7.4.1
-./configure --prefix=/opt/lua/openresty --with-luajit --with-http_realip_module --with-http_iconv_module --with-http_stub_status_module --with-debug
+./configure --prefix=/opt/lua/openresty \
+            --with-luajit \
+            --with-http_realip_module \
+            --with-http_iconv_module \
+            --with-http_stub_status_module \
+            --with-debug
 make install
 ```
 
@@ -34,9 +43,14 @@ ln -s ~/.luarocks luarocks
 
 ```shell
 # CentOS 6.x
-sudo yum install perl-CPAN perl-Text-Diff perl-Test-LongString perl-List-MoreUtils perl-Test-Base perl-IO-Socket-SSL
+sudo yum install perl-CPAN perl-Text-Diff perl-Test-LongString \
+                 perl-List-MoreUtils perl-Test-Base \
+                 perl-IO-Socket-SSL
 # Ubuntu 14.04 LTS
-sudo apt-get install cpanminus libtext-diff-perl libtest-longstring-perl liblist-moreutils-perl libtest-base-perl
+sudo apt-get install cpanminus libtext-diff-perl \
+                     libtest-longstring-perl \
+                     liblist-moreutils-perl \
+                     libtest-base-perl
 # Test::Nginx
 sudo make install
 Installing /usr/local/share/perl5/Test/Nginx.pm
