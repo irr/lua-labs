@@ -18,6 +18,7 @@ git clone https://github.com/openresty/lua-resty-mysql.git
 git clone https://github.com/openresty/lua-resty-redis.git
 git clone https://github.com/openresty/lua-resty-string.git
 git clone https://github.com/openresty/lua-resty-upload.git
+git clone https://github.com/openresty/lua-resty-upstream-healthcheck.git
 git clone https://github.com/hamishforbes/lua-resty-upstream.git
 git clone https://github.com/openresty/lua-resty-lrucache.git
 git clone https://github.com/bungle/lua-resty-template.git
@@ -56,6 +57,7 @@ ln -s /opt/lua/modules/nginx/lua-resty-redis
 ln -s /opt/lua/modules/nginx/lua-resty-string
 ln -s /opt/lua/modules/nginx/lua-resty-upload
 ln -s /opt/lua/modules/nginx/lua-resty-upstream
+ln -s /opt/lua/modules/nginx/lua-resty-upstream-healthcheck
 ln -s /opt/lua/modules/nginx/lua-resty-lrucache
 ln -s /opt/lua/openresty.org
 ln -s /opt/lua/nginx-tutorials
