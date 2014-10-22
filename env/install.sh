@@ -8,6 +8,7 @@ mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
 cd /opt/lua/modules/nginx/
 git clone https://github.com/openresty/headers-more-nginx-module.git
+git clone https://github.com/openresty/set-misc-nginx-module.git
 git clone https://github.com/calio/iconv-nginx-module.git
 git clone https://github.com/openresty/lua-nginx-module.git
 git clone https://github.com/openresty/lua-resty-dns.git
@@ -44,6 +45,7 @@ git remote add upstream https://github.com/mirven/underscore.lua.git
 cd ..
 cd ~/git
 ln -s /opt/lua/modules/nginx/headers-more-nginx-module
+ln -s /opt/lua/modules/nginx/set-misc-nginx-module
 ln -s /opt/lua/modules/nginx/iconv-nginx-module
 ln -s /opt/lua/modules/nginx/lua-nginx-module
 ln -s /opt/lua/modules/nginx/lua-resty-dns

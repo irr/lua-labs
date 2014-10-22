@@ -1,5 +1,6 @@
 #!/bin/bash
 pandoc -S -o /opt/lua/docs/headers-more-nginx-module.html /opt/lua/modules/nginx/headers-more-nginx-module/README.markdown
+pandoc -S -o /opt/lua/docs/set-misc-nginx-module.html /opt/lua/modules/nginx/set-misc-nginx-module/README.markdown
 pandoc -S -o /opt/lua/docs/lua-nginx-module.html /opt/lua/modules/nginx/lua-nginx-module/README.markdown 
 pandoc -S -o /opt/lua/docs/lua-resty-dns.html /opt/lua/modules/nginx/lua-resty-dns/README.markdown 
 pandoc -S -o /opt/lua/docs/lua-resty-memcached.html /opt/lua/modules/nginx/lua-resty-memcached/README.markdown 
