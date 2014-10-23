@@ -27,23 +27,37 @@ cd /opt/lua/modules/forked/
 git clone git@github.com:irr/lua-resty-shell.git
 cd lua-resty-shell
 git remote add upstream https://github.com/juce/lua-resty-shell.git
+git fetch upstream && git merge upstream/master && git push
 cd ..
 git clone git@github.com:irr/lua-pycrypto-aes.git
 cd lua-pycrypto-aes
 git remote add upstream https://github.com/siddontang/lua-pycrypto-aes.git
+git fetch upstream && git merge upstream/master && git push
 cd ..
 git clone git@github.com:irr/sockproc.git
 cd sockproc
 git remote add upstream https://github.com/juce/sockproc.git
+git fetch upstream && git merge upstream/master && git push
 cd /opt/lua
 git clone git@github.com:irr/openresty-docker.git
 cd openresty-docker
 git remote add upstream https://github.com/torhve/openresty-docker.git
+git fetch upstream && git merge upstream/master && git push
 cd ..
 git clone git@github.com:irr/underscore.lua.git
 cd underscore.lua
 git remote add upstream https://github.com/mirven/underscore.lua.git
+git fetch upstream && git merge upstream/master && git push
 cd ..
+git clone git@github.com:irr/luv.git
+cd luv
+git remote add upstream https://github.com/luvit/luv.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
+git clone git@github.com:irr/luvit.git
+cd luvit
+git remote add upstream https://github.com/luvit/luvit.git
+git fetch upstream && git merge upstream/master && git push
 cd ~/git
 ln -s /opt/lua/modules/nginx/headers-more-nginx-module
 ln -s /opt/lua/modules/nginx/set-misc-nginx-module
@@ -63,6 +77,8 @@ ln -s /opt/lua/openresty.org
 ln -s /opt/lua/nginx-tutorials
 ln -s /opt/lua/test-nginx
 cd ~/gitf
+ln -s /opt/lua/luv
+ln -s /opt/lua/luvit
 ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/sockproc
