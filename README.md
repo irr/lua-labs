@@ -45,7 +45,7 @@ ln -s ~/.luarocks luarocks
 # CentOS 6.x
 sudo yum install perl-CPAN perl-Text-Diff perl-Test-LongString \
                  perl-List-MoreUtils perl-Test-Base \
-                 perl-IO-Socket-SSL
+                 perl-IO-Socket-SSLi perl-Time-HiRes
 # Ubuntu 14.04 LTS
 sudo apt-get install cpanminus libtext-diff-perl \
                      libtest-longstring-perl \
