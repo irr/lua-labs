@@ -54,7 +54,7 @@ cd luv
 git remote add upstream https://github.com/luvit/luv.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
-git clone git@github.com:irr/luvit.git
+git clone git@github.com:irr/luvit.git --recursive
 cd luvit
 git remote add upstream https://github.com/luvit/luvit.git
 git fetch upstream && git merge upstream/master && git push
