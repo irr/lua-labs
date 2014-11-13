@@ -38,11 +38,6 @@ git clone git@github.com:irr/sockproc.git
 cd sockproc
 git remote add upstream https://github.com/juce/sockproc.git
 git fetch upstream && git merge upstream/master && git push
-cd /opt/lua
-git clone git@github.com:irr/openresty-docker.git
-cd openresty-docker
-git remote add upstream https://github.com/torhve/openresty-docker.git
-git fetch upstream && git merge upstream/master && git push
 cd ~/git
 ln -s /opt/lua/modules/nginx/headers-more-nginx-module
 ln -s /opt/lua/modules/nginx/set-misc-nginx-module
@@ -65,5 +60,4 @@ cd ~/gitf
 ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/sockproc
-ln -s /opt/lua/openresty-docker
 cd
