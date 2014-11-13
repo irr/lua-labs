@@ -15,6 +15,13 @@ sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev \
 ```
 
 ```shell
+mkdir -p ~/.vim/colors
+cp ~/lua/configs/calmar256-dark.vim ~/.vim/colors/
+rm -rf ~/.vimrc
+ln -s ~/lua/configs/.vimrc ~/.vimrc
+```
+
+```shell
 wget http://openresty.org/download/ngx_openresty-1.7.4.1.tar.gz
 tar xfva ngx_openresty-1.7.4.1.tar.gz
 cd ngx_openresty-1.7.4.1
@@ -55,7 +62,7 @@ sudo apt-get install cpanminus libtext-diff-perl \
 sudo make install
 Installing /usr/local/share/perl5/Test/Nginx.pm
 Installing /usr/local/share/perl5/Test/Nginx/Util.pm
-Installing /usr/local/share/perl5/Test/Nginx/Socket.pm
+Installing /usr/local/share/perl5/Test/Nginx/Socket.pmln -s ~/cl/configs/.vimrc ~/.vimrc
 Installing /usr/local/share/perl5/Test/Nginx/LWP.pm
 Installing /usr/local/share/perl5/Test/Nginx/Socket/Lua.pm
 Installing /usr/local/share/man/man3/Test::Nginx.3pm
