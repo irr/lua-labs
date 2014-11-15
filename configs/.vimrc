@@ -30,10 +30,9 @@ cmap <C-V> <C-R>+
 cmap <S-Insert> <C-R>+
 
 map <F2> :set fileencoding=utf-8<CR>:set fileformat=unix<CR>:w<CR>
-map <F8> :set fileencoding=utf-8<CR>:set fileformat=unix<CR>:set expandtab<CR>:retab<CR>:w<CR>
+map <F8> :set expandtab<CR>:retab<CR>
 
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
-colorscheme calmar256-dark
