@@ -1,4 +1,4 @@
-set guifont=Monaco\ 12
+set guifont=Monaco\ 10
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
