@@ -28,9 +28,11 @@ cd luarocks-2.0.6
 ./configure
 make
 sudo make install
+```
+
+```shell
 mkdir ~/.luarocks
 mkdir -p /opt/lua
-cd /opt/lua
 ln -s ~/.luarocks /opt/lua/luarocks
 ```
 
