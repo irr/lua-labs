@@ -16,9 +16,22 @@ sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev \
 
 ```shell
 mkdir -p ~/.vim/colors
-cp ~/lua/configs/calmar256-dark.vim ~/.vim/colors/
+cp ~/lua/configs/github.vim ~/.vim/colors/
 rm -rf ~/.vimrc
 ln -s ~/lua/configs/.vimrc ~/.vimrc
+```
+
+```shell
+wget http://luarocks.org/releases/luarocks-2.0.6.tar.gz
+tar zxvf luarocks-2.0.6.tar.gz
+cd luarocks-2.0.6
+./configure
+make
+sudo make install
+mkdir ~/.luarocks
+mkdir -p /opt/lua
+cd /opt/lua
+ln -s ~/.luarocks /opt/lua/luarocks
 ```
 
 ```shell
@@ -43,9 +56,6 @@ sudo ln -s /opt/lua/openresty/luajit/bin/luajit-2.1.0-alpha luajit
 cd /usr/local
 sudo ln -s /opt/lua/openresty openresty
 sudo ln -s /opt/lua/openresty openresty-debug
-
-cd /opt/lua
-ln -s ~/.luarocks luarocks
 ```
 
 ```shell
