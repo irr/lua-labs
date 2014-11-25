@@ -2,7 +2,6 @@ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0
 export HADOOP_INSTALL=/opt/java/hadoop
 export HADOOP_CLASSPATH=$JAVA_HOME/lib/tools.jar
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HADOOP_INSTALL/lib/native
 export PATH=$PATH:$HADOOP_INSTALL/bin:$HADOOP_INSTALL/sbin
 
 hadoop namenode -format
