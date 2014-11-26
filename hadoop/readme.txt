@@ -1,18 +1,21 @@
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0
-export HADOOP_INSTALL=/opt/java/hadoop
-export HADOOP_CLASSPATH=$JAVA_HOME/lib/tools.jar
-export PATH=$PATH:$HADOOP_INSTALL/bin:$HADOOP_INSTALL/sbin
+/etc/hosts
+127.0.0.1       localhost.localdomain localhost irrlab quickstart.cloudera
 
-hadoop namenode -format
-hdfs dfs -rm -r -f user/irr/gutenberg*
-hdfs dfs -mkdir -p user/irr
-hdfs dfs -copyFromLocal gutenberg user/irr
-hdfs dfs -ls user/irr/gutenberg
-hadoop jar hadoop-*streaming*.jar \
+cd ~/remote/hadoop
+scp -P 52222 -r cloudera@localhost:/etc/hadoop/conf .
+
+sudo yum install hadoop-client
+
+export HADOOP_USER_NAME=cloudera
+
+hdfs --config ~/remote/hadoop/conf dfs -rm -r -f user/irr/gutenberg*
+hdfs --config ~/remote/hadoop/conf dfs -mkdir -p user/irr
+hdfs --config ~/remote/hadoop/conf dfs -copyFromLocal gutenberg user/irr
+hdfs --config ~/remote/hadoop/conf dfs -ls user/irr/gutenberg
+hadoop --config ~/remote/hadoop/conf jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
     -file mapper.lua -mapper mapper.lua \
     -file reducer.lua -reducer reducer.lua \
     -input user/irr/gutenberg/* -output user/irr/gutenberg-output
-hdfs dfs -ls user/irr/gutenberg-output
-hdfs dfs -cat user/irr/gutenberg-output/part-00000
-hdfs dfs -rm -r -f user/irr/gutenberg*
+hdfs --config ~/remote/hadoop/conf dfs -ls user/irr/gutenberg-output
+hdfs --config ~/remote/hadoop/conf dfs -cat user/irr/gutenberg-output/part-00000
+hdfs --config ~/remote/hadoop/conf dfs -rm -r -f user/irr/gutenberg*
