@@ -119,6 +119,8 @@ luarocks --local install luasql-sqlite3
 luarocks --local install lzmq
 luarocks --local install redis-lua
 
+luarocks --local install stdlib
+
 luarocks --local install underscore.lua \
                          --from=http://github.com/irr/underscore.lua/raw/master/rocks
 ```
@@ -153,4 +155,5 @@ limitations under the License.
 [luasql-sqlite3]: http://www.keplerproject.org/luasql/
 [lzmq]: http://github.com/zeromq/lzmq
 [redis-lua]: http://github.com/nrk/redis-lua
+[stdlib]: https://github.com/lua-stdlib/lua-stdlib
 [underscore.lua]: http://github.com/irr/underscore.lua
