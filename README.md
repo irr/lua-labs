@@ -95,6 +95,7 @@ Appending installation info to /usr/lib64/perl5/perllocal.pod
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
 * [lzmq]: Lua binding to ZeroMQ
 * [redis-lua]: A Lua client library for the redis key value storage system
+* [stdlib]: General Lua libraries
 * [underscore.lua]: A utility library for Lua
 
 ```shell
