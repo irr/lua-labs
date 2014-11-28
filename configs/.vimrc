@@ -1,4 +1,4 @@
-set guifont=Ubuntu\ Mono\ 12
+set guifont=Envy\ Code\ R\ 12
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -11,11 +11,13 @@ set paste
 set pastetoggle=<F5>
 set expandtab
 retab
-syntax on
 set guioptions-=T
 set laststatus=2
 set statusline=%02n:%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 set showtabline=0
+
+syntax on
+filetype plugin indent on
 
 vnoremap <C-X> "+x
 vnoremap <S-Del> "+x
@@ -37,4 +39,5 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 colorscheme ron
+highlight Normal guibg=#2E3336 guifg=white
 
