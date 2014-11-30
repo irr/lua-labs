@@ -1,4 +1,4 @@
-set guifont=monofur\ 12
+set guifont=monofur\ 13
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -38,6 +38,5 @@ if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
-colorscheme ron
-highlight Normal guibg=#2E3336 guifg=white
+colorscheme calmar256-dark
 
