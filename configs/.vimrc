@@ -1,4 +1,4 @@
-set guifont=Envy\ Code\ R\ 12
+set guifont=monofur\ 12
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
