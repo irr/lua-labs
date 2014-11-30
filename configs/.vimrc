@@ -1,4 +1,4 @@
-set guifont=monofur\ 13
+set guifont=monofur\ Bold\ 12
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
