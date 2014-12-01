@@ -12,3 +12,15 @@ hdfs --config ~/remote/hadoop/conf dfs -ls ncdc/max_temp
 hdfs --config ~/remote/hadoop/conf dfs -cat ncdc/max_temp/part-r-00000
 hdfs --config ~/remote/hadoop/conf dfs -rm -r -f ncdc/max_temp
 */
+
+hive --config ~/remote/hadoop/conf 
+CREATE EXTERNAL TABLE ncdc (year STRING, temperature INT)
+    ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
+    LOCATION '/user/cloudera/ncdc';
+
+records = LOAD 'ncdc' USING org.apache.hcatalog.pig.HCatLoader();
+...
+DUMP...
+STORE...
+
+
