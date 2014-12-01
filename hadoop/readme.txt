@@ -4,9 +4,10 @@
 cd ~/remote/hadoop
 scp -P 52222 -r cloudera@localhost:/etc/hadoop/conf .
 
-sudo yum install hadoop-client
+sudo yum install hadoop-client hive-hcatalog
 
 export HADOOP_USER_NAME=cloudera
+export HADOOP_CONF_DIR=~/remote/hadoop/conf
 
 hdfs --config ~/remote/hadoop/conf dfs -rm -r -f gutenberg*
 hdfs --config ~/remote/hadoop/conf dfs -mkdir -p gutenberg
@@ -18,3 +19,5 @@ hadoop --config ~/remote/hadoop/conf jar /usr/lib/hadoop-mapreduce/hadoop-stream
     -input gutenberg/* -output gutenberg-output
 hdfs --config ~/remote/hadoop/conf dfs -ls gutenberg-output
 hdfs --config ~/remote/hadoop/conf dfs -cat gutenberg-output/part-00000
+
+hdfs --config ~/remote/hadoop/conf dfs -rm -r -f ncdc*
