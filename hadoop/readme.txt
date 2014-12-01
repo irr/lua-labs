@@ -21,3 +21,6 @@ hdfs --config ~/remote/hadoop/conf dfs -ls gutenberg-output
 hdfs --config ~/remote/hadoop/conf dfs -cat gutenberg-output/part-00000
 
 hdfs --config ~/remote/hadoop/conf dfs -rm -r -f ncdc*
+hdfs --config ~/remote/hadoop/conf dfs -mkdir -p ncdc
+hdfs --config ~/remote/hadoop/conf dfs -copyFromLocal ncdc
+hdfs --config ~/remote/hadoop/conf dfs -ls ncdc
