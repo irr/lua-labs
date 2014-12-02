@@ -1,5 +1,5 @@
-set guifont=monofur\ Bold\ 12
-set lines=35 columns=120
+set guifont=Courier\ 10\ Pitch\ 11
+set lines=35 columns=135
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -32,8 +32,7 @@ map <S-Insert> "+p
 cmap <C-V> <C-R>+
 cmap <S-Insert> <C-R>+
 
-map <F2> :set fileencoding=utf-8<CR>:set fileformat=unix<CR>:w<CR>
-map <F8> :set expandtab<CR>:retab<CR>
+map <F8> :set fileencoding=utf-8<CR>:set fileformat=unix<CR>:w<CR>
 
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
