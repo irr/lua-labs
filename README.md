@@ -16,7 +16,7 @@ sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev \
 
 ```shell
 mkdir -p ~/.vim/colors
-cp ~/lua/configs/calmar256-dark.vim ~/.vim/colors/
+cp ~/lua/configs/github.vim ~/.vim/colors/
 rm -rf ~/.vimrc
 ln -s ~/lua/configs/.vimrc ~/.vimrc
 ```
