@@ -42,6 +42,12 @@ cd /opt/lua
 git clone git@github.com:irr/underscore.lua.git
 cd underscore.lua
 git remote add upstream https://github.com/mirven/underscore.lua.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
+git clone git@github.com:irr/nginx_tcp_proxy_module.git
+cd nginx_tcp_proxy_module
+git remote add upstream https://github.com/yaoweibin/nginx_tcp_proxy_module.git
+git fetch upstream && git merge upstream/master && git push
 cd ~/git
 ln -s /opt/lua/modules/nginx/headers-more-nginx-module
 ln -s /opt/lua/modules/nginx/set-misc-nginx-module
@@ -65,4 +71,5 @@ ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/underscore.lua
+ln -s /opt/lua/nginx_tcp_proxy_module
 cd
