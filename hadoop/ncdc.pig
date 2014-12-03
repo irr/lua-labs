@@ -31,4 +31,18 @@ records = LOAD 'ncdc' USING org.apache.hcatalog.pig.HCatLoader();
 DUMP...
 STORE...
 
+pig -x local 
+records = LOAD 'ncdc' AS (year:chararray, temperature:int);
+years = STREAM records THROUGH `cut -f 1`;
+DUMP years;
+
+
+copyToLocal ncdc/transform.lua transform.lua;
+DEFINE transform `transform.lua` SHIP ('transform.lua');
+
+DEFINE transform `transform.lua` SHIP ('ncdc/transform.lua');
+
+years = STREAM records THROUGH transform;
+DUMP years;
+
 
