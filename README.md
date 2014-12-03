@@ -45,7 +45,7 @@ cd ngx_openresty-1.7.4.1
             --with-http_realip_module \
             --with-http_iconv_module \
             --with-http_stub_status_module \
-            --with-debug
+            --with-debug --add-module=../nginx_tcp_proxy_module
 make install
 ```
 
