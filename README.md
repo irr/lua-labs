@@ -37,9 +37,9 @@ ln -s ~/.luarocks /opt/lua/luarocks
 ```
 
 ```shell
-wget http://openresty.org/download/ngx_openresty-1.7.7.1rc2.tar.gz
-tar xfva ngx_openresty-1.7.7.1rc2.tar.gz
-cd ngx_openresty-1.7.7.1rc2
+wget http://openresty.org/download/ngx_openresty-1.7.7.1.tar.gz
+tar xfva ngx_openresty-1.7.7.1.tar.gz
+cd ngx_openresty-1.7.7.1
 ./configure --prefix=/opt/lua/openresty \
             --with-luajit \
             --with-http_realip_module \
