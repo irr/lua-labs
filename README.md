@@ -40,6 +40,7 @@ ln -s ~/.luarocks /opt/lua/luarocks
 wget http://openresty.org/download/ngx_openresty-1.7.7.1.tar.gz
 tar xfva ngx_openresty-1.7.7.1.tar.gz
 cd ngx_openresty-1.7.7.1
+patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.7.1.patch
 ./configure --prefix=/opt/lua/openresty \
             --with-luajit \
             --with-http_realip_module \
