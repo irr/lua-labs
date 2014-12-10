@@ -24,3 +24,18 @@ hdfs --config ~/remote/hadoop/conf dfs -rm -r -f ncdc*
 hdfs --config ~/remote/hadoop/conf dfs -mkdir -p ncdc
 hdfs --config ~/remote/hadoop/conf dfs -copyFromLocal ncdc
 hdfs --config ~/remote/hadoop/conf dfs -ls ncdc
+
+hdfs --config ~/remote/hadoop/conf dfs -mkdir -p words
+hdfs --config ~/remote/hadoop/conf dfs -copyFromLocal words 
+hdfs --config ~/remote/hadoop/conf dfs -ls words
+hdfs --config ~/remote/hadoop/conf dfs -cat words/pocket.txt
+
+hdfs --config ~/remote/hadoop/conf dfs -mkdir -p catalog
+hdfs --config ~/remote/hadoop/conf dfs -copyFromLocal catalog 
+hdfs --config ~/remote/hadoop/conf dfs -ls catalog
+hdfs --config ~/remote/hadoop/conf dfs -cat catalog/words.txt
+
+CREATE EXTERNAL TABLE catalog (word STRING)
+    LOCATION '/user/cloudera/catalog';
+
+SELECT * FROM catalog ORDER BY word;
