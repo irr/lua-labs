@@ -1,5 +1,5 @@
-set guifont=Ubuntu\ Mono\ 13
-set lines=35 columns=135
+set guifont=Monaco\ 11
+set lines=33 columns=135
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -38,5 +38,5 @@ if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
-colorscheme github
+colorscheme shadesofamber
 
