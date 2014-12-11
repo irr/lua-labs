@@ -1,4 +1,4 @@
-set guifont=Courier\ 10\ Pitch\ Bold\ 12
+set guifont=Courier\ 10\ Pitch\ Bold\ 11
 set lines=33 columns=140
 set tabstop=4
 set shiftwidth=4
