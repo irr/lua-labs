@@ -1,5 +1,5 @@
-set guifont=Ubuntu\ Mono\ 13
-set lines=33 columns=135
+set guifont=Courier\ 10\ Pitch\ Bold\ 12
+set lines=33 columns=140
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -37,6 +37,4 @@ map <F8> :set fileencoding=utf-8<CR>:set fileformat=unix<CR>:w<CR>
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
-
-colorscheme mirodark
 
