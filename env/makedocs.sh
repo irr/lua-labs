@@ -16,4 +16,4 @@ pandoc -S -o /opt/lua/docs/lua-pycrypto-aes.html /opt/lua/modules/forked/lua-pyc
 pandoc -S -o /opt/lua/docs/lua-resty-template.html /opt/lua/modules/nginx/lua-resty-template/README.md
 pandoc -S -o /opt/lua/docs/lua-resty-shell.html /opt/lua/modules/forked/lua-resty-shell/README.md 
 pandoc -S -o /opt/lua/docs/sockproc.html /opt/lua/modules/forked/sockproc/README.md
-pandoc -S -o /opt/lua/docs/test-nginx.html /opt/lua/test-nginx/README.md
+pandoc -S -o /opt/lua/docs/test-nginx.html /opt/lua/test-nginx/README.md || rm -rf /opt/lua/docs/test-nginx.html
