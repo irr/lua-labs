@@ -1,5 +1,5 @@
-set guifont=Monaco\ 11
-set lines=32 columns=135
+set guifont=Monaco\ 10
+set lines=33 columns=145
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
