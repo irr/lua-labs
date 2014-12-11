@@ -31,6 +31,8 @@ function trim(s)
 end
 
 local source = tostring(arg[1])
+local silent = arg[2]
+
 local _, charset = split(os.capture('file -bi "' .. source ..'"', true), "=")
 
 local file = io.open(source, 'rb')
@@ -60,5 +62,8 @@ print("File   : " .. source)
 print("Charset: " .. trim(charset))
 print("Size   : " .. tostring(#content))
 
-os.execute("zenity --info --text='" .. 
-    string.format("Filename: %s [%s]\nSize: %d'", source, trim(charset), #content))
+if not silent then
+    os.execute("zenity --info --text='" .. 
+        string.format("Filename: %s [%s]\nSize: %d'", source, trim(charset), #content))
+end
+
