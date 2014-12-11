@@ -15,13 +15,6 @@ sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev \
 ```
 
 ```shell
-mkdir -p ~/.vim/colors
-cp ~/lua/configs/github.vim ~/.vim/colors/
-rm -rf ~/.vimrc
-ln -s ~/lua/configs/.vimrc ~/.vimrc
-```
-
-```shell
 wget http://luarocks.org/releases/luarocks-2.0.6.tar.gz
 tar zxvf luarocks-2.0.6.tar.gz
 cd luarocks-2.0.6
