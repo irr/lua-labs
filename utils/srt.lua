@@ -41,11 +41,15 @@ file:close()
 
 if charset ~= 'utf-8' then
     local cd = iconv.open('UTF-8//TRANSLIT', charset)
-    local sub, err = cd:iconv(content)
-    if err then
+    if cd then
+        local sub, err = cd:iconv(content)
+        if err then
+            os.exit(1)
+        end
+        content = sub
+    else
         os.exit(1)
     end
-    content = sub
 end
 
 local patterns = { '<%p?%s*i>', '<%p?%s*I>', '<%p?%s*b>', '<%p?%s*B>', '<%p?%s*u>', '<%p?%s*U>' }
