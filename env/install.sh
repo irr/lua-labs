@@ -48,6 +48,11 @@ git clone git@github.com:irr/nginx_tcp_proxy_module.git
 cd nginx_tcp_proxy_module
 git remote add upstream https://github.com/yaoweibin/nginx_tcp_proxy_module.git
 git fetch upstream && git merge upstream/master && git push
+cd ..
+git clone git@github.com:irr/luajit-examples.git
+cd luajit-examples
+git remote add upstream https://github.com/hnakamur/luajit-examples.git
+git fetch upstream && git merge upstream/master && git push
 cd ~/git
 ln -s /opt/lua/modules/nginx/headers-more-nginx-module
 ln -s /opt/lua/modules/nginx/set-misc-nginx-module
@@ -72,4 +77,5 @@ ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/underscore.lua
 ln -s /opt/lua/nginx_tcp_proxy_module
+ln -s /opt/lua/luajit-examples
 cd
