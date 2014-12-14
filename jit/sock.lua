@@ -70,7 +70,7 @@ assert(rc == 0)
 rc = C.listen(listenfd, 1024)
 assert(rc == 0)
 
-local len = ffi.new("int32_t[1]")
+local len = ffi.new("int32_t[1]", ffi.sizeof(servaddr))
 rc = C.getsockname(listenfd, ffi.cast("struct sockaddr *", servaddr), len)
 assert(rc == 0)
 
