@@ -21,7 +21,7 @@ repeat
         year, temperature = split(trim(line), "\t")
         if year and temperature then
             if tonumber(year) > 2000 then
-                print(string.format("%s\t%s", tostring(year), tonumber(temperature) + 1000))
+                print(string.format("%s\t%s", tostring(year), tostring(tonumber(temperature) + 1000)))
             end
         end
     end

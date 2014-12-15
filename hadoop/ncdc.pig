@@ -45,4 +45,7 @@ DEFINE transform `transform.lua` SHIP ('ncdc/transform.lua');
 years = STREAM records THROUGH transform;
 DUMP years;
 
-
+hive:
+list FILES;
+ADD FILE ncdc/transform.py;
+FROM ncdc SELECT TRANSFORM(year, temperature) USING 'transform.py' AS year, temperature;
