@@ -47,5 +47,5 @@ DUMP years;
 
 hive:
 list FILES;
-ADD FILE ncdc/transform.py;
+ADD FILE ncdc/transform.lua;
 FROM ncdc SELECT TRANSFORM(year, temperature) USING 'transform.py' AS year, temperature;
