@@ -36,16 +36,12 @@ records = LOAD 'ncdc' AS (year:chararray, temperature:int);
 years = STREAM records THROUGH `cut -f 1`;
 DUMP years;
 
-
-copyToLocal ncdc/transform.lua transform.lua;
 DEFINE transform `transform.lua` SHIP ('transform.lua');
-
-DEFINE transform `transform.lua` SHIP ('ncdc/transform.lua');
 
 years = STREAM records THROUGH transform;
 DUMP years;
 
 hive:
 list FILES;
-ADD FILE ncdc/transform.lua;
-FROM ncdc SELECT TRANSFORM(year, temperature) USING 'transform.py' AS year, temperature;
+ADD FILE transform.lua;
+FROM ncdc SELECT TRANSFORM(year, temperature) USING 'transform.lua' AS year, temperature;
