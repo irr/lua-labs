@@ -1,6 +1,12 @@
 #!/usr/bin/env lua
 
-local socket = require("socket")
+local ok, socket = pcall(function ()
+    return require("socket")
+end)
+
+if not ok then
+    socket = nil
+end
 
 function os.capture(cmd, raw)
   local f = assert(io.popen(cmd, 'r'))
@@ -103,9 +109,20 @@ if os.execute("mkdir -p " .. logs) ~=0 or os.execute("mkdir -p " .. conf) ~= 0 t
     abort(tmp, "could not create nginx environment") 
 end
 
-local server = assert(socket.bind("*", 0))
-local _, port = server:getsockname()
-server:close()
+local port = 0
+
+if socket then
+    local server = assert(socket.bind("*", 0))
+    _, port = server:getsockname()
+    server:close()
+else
+    while true do
+        port = math.random(60000, 65500)
+        if os.execute("nc -z localhost " .. tostring(port)) ~= 0 then
+            break
+        end
+    end
+end
 
 local f, err = io.open(ngxf, "w+")
 if err then abort(tmp, "could not write nginx configuration") end
