@@ -30,6 +30,12 @@ ln -s ~/.luarocks /opt/lua/luarocks
 ```
 
 ```shell
+cd /opt/lua
+git clone git@github.com:irr/nginx_tcp_proxy_module.git
+cd nginx_tcp_proxy_module
+git remote add upstream https://github.com/yaoweibin/nginx_tcp_proxy_module.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 wget http://openresty.org/download/ngx_openresty-1.7.7.1.tar.gz
 tar xfva ngx_openresty-1.7.7.1.tar.gz
 cd ngx_openresty-1.7.7.1
