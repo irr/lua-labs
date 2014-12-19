@@ -53,6 +53,15 @@ git clone git@github.com:irr/luajit-examples.git
 cd luajit-examples
 git remote add upstream https://github.com/hnakamur/luajit-examples.git
 git fetch upstream && git merge upstream/master && git push
+git clone git@github.com:irr/docker-openresty.git
+cd docker-openresty
+git remote add upstream https://github.com/3scale/docker-openresty.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
+git clone git@github.com:irr/openresty-docker.git
+cd openresty-docker
+git remote add upstream https://github.com/torhve/openresty-docker.git
+git fetch upstream && git merge upstream/master && git push
 cd ~/git
 ln -s /opt/lua/modules/nginx/headers-more-nginx-module
 ln -s /opt/lua/modules/nginx/set-misc-nginx-module
@@ -78,4 +87,6 @@ ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/underscore.lua
 ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
+ln -s /opt/lua/docker-openresty
+ln -s /opt/lua/openresty-docker
 cd

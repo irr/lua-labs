@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir -p /opt/lua/docs
 pandoc -S -o /opt/lua/docs/headers-more-nginx-module.html /opt/lua/modules/nginx/headers-more-nginx-module/README.markdown
 pandoc -S -o /opt/lua/docs/set-misc-nginx-module.html /opt/lua/modules/nginx/set-misc-nginx-module/README.markdown
 pandoc -S -o /opt/lua/docs/lua-nginx-module.html /opt/lua/modules/nginx/lua-nginx-module/README.markdown 
@@ -17,3 +18,5 @@ pandoc -S -o /opt/lua/docs/lua-resty-template.html /opt/lua/modules/nginx/lua-re
 pandoc -S -o /opt/lua/docs/lua-resty-shell.html /opt/lua/modules/forked/lua-resty-shell/README.md 
 pandoc -S -o /opt/lua/docs/sockproc.html /opt/lua/modules/forked/sockproc/README.md
 pandoc -S -o /opt/lua/docs/test-nginx.html /opt/lua/test-nginx/README.md || rm -rf /opt/lua/docs/test-nginx.html
+pandoc -S -o /opt/lua/docs/docker-openresty.html /opt/lua/docker-openresty/README.md
+pandoc -S -o /opt/lua/docs/openresty-docker.html /opt/lua/openresty-docker/README.md
