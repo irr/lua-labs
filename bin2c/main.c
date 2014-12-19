@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     lua_rawset(L, -3);
   }
   lua_setglobal(L, "arg");
-#include "code.c"
+#include "/tmp/code.c"
   lua_close(L);
   return 0;
 }
