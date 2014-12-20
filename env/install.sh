@@ -53,6 +53,7 @@ git clone git@github.com:irr/luajit-examples.git
 cd luajit-examples
 git remote add upstream https://github.com/hnakamur/luajit-examples.git
 git fetch upstream && git merge upstream/master && git push
+cd ..
 git clone git@github.com:irr/docker-openresty.git
 cd docker-openresty
 git remote add upstream https://github.com/3scale/docker-openresty.git
