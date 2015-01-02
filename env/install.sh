@@ -39,6 +39,10 @@ cd sockproc
 git remote add upstream https://github.com/juce/sockproc.git
 git fetch upstream && git merge upstream/master && git push
 cd /opt/lua
+git clone http://luajit.org/git/luajit-2.0.git
+cd luajit-2.0
+git checkout v2.1
+cd ..
 git clone git@github.com:irr/underscore.lua.git
 cd underscore.lua
 git remote add upstream https://github.com/mirven/underscore.lua.git
