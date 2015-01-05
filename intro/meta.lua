@@ -1,6 +1,8 @@
 Rectangle = {x = 100, y = 1000, width = 10, height = 20}
 Rectangle.__index = Rectangle
 
+print(Rectangle)
+
 function Rectangle:new (o)
     local o = o or {}
     print(o, self)
