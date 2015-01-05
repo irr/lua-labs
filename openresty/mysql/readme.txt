@@ -40,6 +40,23 @@ COMMIT;
 ]]
 
 ...
+function exit(db, status, msg, reload)
+    if db then
+        db:set_keepalive(tonumber(ngx.var.db_max_idle_timeout), 
+                         tonumber(ngx.var.db_pool_size))
+    end
+    if status then
+        exit_now(status, msg)
+    end
+    if reload then
+        -- set $execn "/usr/sbin/nginx";
+        if os.execute(ngx.var.execn .. " -s reload") == 0 then
+            exit_now(ngx.HTTP_OK, msg)
+        end
+    end
+    exit_now(ngx.HTTP_OK, msg)
+end
+
 function results(db, sql)
     local bytes, err = db:send_query(sql)
     if not err then
@@ -110,6 +127,15 @@ if not ok then
                        tostring(err), tostring(errno), tostring(sqlstate)))
 end
 
-
 ngx.say(results(db, string.format(p, t, d, t, d)))
+
+...
+
+if not ok then
+    exit(db, ngx.HTTP_BAD_REQUEST)
+end
+
+exit(db, nil, nil, true)
+
+
 
