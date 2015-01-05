@@ -15,15 +15,6 @@ sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev \
 ```
 
 ```shell
-wget http://luarocks.org/releases/luarocks-2.0.6.tar.gz
-tar zxvf luarocks-2.0.6.tar.gz
-cd luarocks-2.0.6
-./configure
-make
-sudo make install
-```
-
-```shell
 mkdir ~/.luarocks
 mkdir -p /opt/lua
 ln -s ~/.luarocks /opt/lua/luarocks
@@ -103,11 +94,10 @@ luarocks --local install lua-cjson
 luarocks --local install lua-iconv
 luarocks --local install lua-llthreads2
 luarocks --local install luacrypto
-luarocks --local install luafilesystem
 luarocks --local install lualogging
 
-luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu/
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
+luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu 
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/i386-linux-gnu
 
 luarocks --local install luasql-mysql \
