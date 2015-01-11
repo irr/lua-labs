@@ -21,6 +21,15 @@ ln -s ~/.luarocks /opt/lua/luarocks
 ```
 
 ```shell
+wget http://luarocks.org/releases/luarocks-2.2.0.tar.gz    
+tar zxvf luarocks-2.2.0.tar.gz                                             
+cd luarocks-2.2.0
+./configure                                                                          
+make build
+sudo make install
+```
+
+```shell
 cd /opt/lua
 git clone git@github.com:irr/nginx_tcp_proxy_module.git
 cd nginx_tcp_proxy_module
