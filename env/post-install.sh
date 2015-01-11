@@ -10,3 +10,7 @@ sudo ln -s /opt/lua/openresty openresty
 sudo ln -s /opt/lua/openresty openresty-debug
 
 ls -alF /usr/local/bin;echo
+
+sudo cp ~/lua/configs/luajit.conf /etc/ld.so.conf.d/
+sudo ldconfig
+
