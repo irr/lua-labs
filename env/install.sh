@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "installing dependencies..."
-sudo yum install -y pandoc readline-devel pcre-devel openssl-devel \
+sudo yum install -y lua-devel pandoc readline-devel pcre-devel openssl-devel \
                  sqlite-devel mysql-devel \
                  zeromq3 zeromq3-devel
 sudo yum install -y perl-CPAN perl-Text-Diff perl-Test-LongString \
@@ -41,6 +41,11 @@ cd /opt/lua
 if [ ! -d "luarocks" ]; then ln -s ~/.luarocks luarocks; fi
 git clone https://github.com/openresty/openresty.org.git
 git clone https://github.com/openresty/test-nginx.git
+cd test-nginx
+perl Makefile.PL
+make
+sudo make install
+cd ..
 git clone https://github.com/openresty/nginx-tutorials.git
 mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
@@ -76,6 +81,9 @@ git clone git@github.com:irr/sockproc.git
 cd sockproc
 git remote add upstream https://github.com/juce/sockproc.git
 git fetch upstream && git merge upstream/master && git push
+make
+sudo mv sockproc /usr/local/bin/
+make clean
 cd /opt/lua
 git clone http://luajit.org/git/luajit-2.0.git
 cd luajit-2.0
@@ -84,11 +92,6 @@ cd ..
 git clone git@github.com:irr/underscore.lua.git
 cd underscore.lua
 git remote add upstream https://github.com/mirven/underscore.lua.git
-git fetch upstream && git merge upstream/master && git push
-cd ..
-git clone git@github.com:irr/nginx_tcp_proxy_module.git
-cd nginx_tcp_proxy_module
-git remote add upstream https://github.com/yaoweibin/nginx_tcp_proxy_module.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
 git clone git@github.com:irr/luajit-examples.git
@@ -149,10 +152,6 @@ luarocks --local install redis-lua
 luarocks --local install stdlib
 luarocks --local install underscore.lua \
                          --from=http://github.com/irr/underscore.lua/raw/master/rocks
-echo "installing sockproc..."
-cd ~/gitf/sockproc
-make
-sudo mv sockproc /usr/local/bin/
 echo "installing squish..."
 cd /opt/lua
 tar xfva ~/lua/squish/package/squish-0.2.0.tar.gz
