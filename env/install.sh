@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "installing dependencies..."
-sudo yum install -y readline-devel pcre-devel openssl-devel \
+sudo yum install -y pandoc readline-devel pcre-devel openssl-devel \
                  sqlite-devel mysql-devel \
                  zeromq3 zeromq3-devel
 sudo yum install -y perl-CPAN perl-Text-Diff perl-Test-LongString \
@@ -149,3 +149,14 @@ luarocks --local install redis-lua
 luarocks --local install stdlib
 luarocks --local install underscore.lua \
                          --from=http://github.com/irr/underscore.lua/raw/master/rocks
+echo "installing sockproc..."
+cd ~/gitf/sockproc
+make
+sudo mv sockproc /usr/local/bin/
+echo "installing squish..."
+cd /opt/lua
+tar xfva ~/lua/squish/package/squish-0.2.0.tar.gz
+cd squish-0.2.0
+make
+sudo make install
+
