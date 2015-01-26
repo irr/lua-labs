@@ -5,35 +5,37 @@ cd ~/remote/hadoop
 scp -P 52222 -r cloudera@localhost:/etc/hadoop/conf .
 
 sudo yum install hadoop-client hive-hcatalog
+sudo apt-get install hadoop-client pig hive
 
 export HADOOP_USER_NAME=cloudera
-export HADOOP_CONF_DIR=~/remote/hadoop/conf
+export HADOOP_CONF_DIR=/home/irocha/lua/hadoop/quickstart/hadoop-conf
 
-hdfs --config ~/remote/hadoop/conf dfs -rm -r -f gutenberg*
-hdfs --config ~/remote/hadoop/conf dfs -mkdir -p gutenberg
-hdfs --config ~/remote/hadoop/conf dfs -copyFromLocal gutenberg 
-hdfs --config ~/remote/hadoop/conf dfs -ls gutenberg
-hadoop --config ~/remote/hadoop/conf jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
+hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -rm -r -f gutenberg*
+
+hdfs dfs -mkdir -p gutenberg
+hdfs dfs -copyFromLocal gutenberg 
+hdfs dfs -ls gutenberg
+hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
     -file mapper.lua -mapper mapper.lua \
     -file reducer.lua -reducer reducer.lua \
     -input gutenberg/* -output gutenberg-output
-hdfs --config ~/remote/hadoop/conf dfs -ls gutenberg-output
-hdfs --config ~/remote/hadoop/conf dfs -cat gutenberg-output/part-00000
+hdfs dfs -ls gutenberg-output
+hdfs dfs -cat gutenberg-output/part-00000
 
-hdfs --config ~/remote/hadoop/conf dfs -rm -r -f ncdc*
-hdfs --config ~/remote/hadoop/conf dfs -mkdir -p ncdc
-hdfs --config ~/remote/hadoop/conf dfs -copyFromLocal ncdc
-hdfs --config ~/remote/hadoop/conf dfs -ls ncdc
+hdfs dfs -rm -r -f ncdc*
+hdfs dfs -mkdir -p ncdc
+hdfs dfs -copyFromLocal ncdc
+hdfs dfs -ls ncdc
 
-hdfs --config ~/remote/hadoop/conf dfs -mkdir -p words
-hdfs --config ~/remote/hadoop/conf dfs -copyFromLocal words 
-hdfs --config ~/remote/hadoop/conf dfs -ls words
-hdfs --config ~/remote/hadoop/conf dfs -cat words/pocket.txt
+hdfs fs -mkdir -p words
+hdfs dfs -copyFromLocal words 
+hdfs dfs -ls words
+hdfs dfs -cat words/pocket.txt
 
-hdfs --config ~/remote/hadoop/conf dfs -mkdir -p catalog
-hdfs --config ~/remote/hadoop/conf dfs -copyFromLocal catalog 
-hdfs --config ~/remote/hadoop/conf dfs -ls catalog
-hdfs --config ~/remote/hadoop/conf dfs -cat catalog/words.txt
+hdfs dfs -mkdir -p catalog
+hdfs dfs -copyFromLocal catalog 
+hdfs dfs -ls catalog
+hdfs dfs -cat catalog/words.txt
 
 CREATE EXTERNAL TABLE catalog (word STRING)
     LOCATION '/user/cloudera/catalog';

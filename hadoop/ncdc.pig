@@ -4,7 +4,10 @@ grouped_records = GROUP filtered_records BY year;
 max_temp = FOREACH grouped_records GENERATE group, MAX(filtered_records.temperature);
 DUMP max_temp;
 STORE max_temp INTO 'ncdc/max_temp';
+
 /*
+http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/cdh_ig_cdh5_install.html
+
 export HADOOP_USER_NAME=cloudera
 export HADOOP_CONF_DIR=/home/irocha/lua/hadoop/quickstart/hadoop-conf
 
@@ -20,7 +23,7 @@ hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -rm -r -f ncdc/
 
 pig -useHCatalog
 
-hive --config ~/remote/hadoop/conf 
+hive --config /home/irocha/lua/hadoop/quickstart/hadoop-conf
 CREATE EXTERNAL TABLE ncdc (year STRING, temperature INT)
     ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
     LOCATION '/user/cloudera/ncdc';
