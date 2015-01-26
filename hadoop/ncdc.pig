@@ -6,16 +6,16 @@ DUMP max_temp;
 STORE max_temp INTO 'ncdc/max_temp';
 /*
 export HADOOP_USER_NAME=cloudera
-export HADOOP_CONF_DIR=~/remote/hadoop/conf
+export HADOOP_CONF_DIR=/home/irocha/lua/hadoop/quickstart/hadoop-conf
 
-hdfs --config ~/remote/hadoop/conf dfs -rm -r -f ncdc*
-hdfs --config ~/remote/hadoop/conf dfs -mkdir -p ncdc
-hdfs --config ~/remote/hadoop/conf dfs -copyFromLocal ncdc
+hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -rm -r -f ncdc*
+hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -mkdir -p ncdc
+hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -copyFromLocal ncdc
 
-hdfs --config ~/remote/hadoop/conf dfs -ls ncdc
-hdfs --config ~/remote/hadoop/conf dfs -ls ncdc/max_temp
-hdfs --config ~/remote/hadoop/conf dfs -cat ncdc/max_temp/part-r-00000
-hdfs --config ~/remote/hadoop/conf dfs -rm -r -f ncdc/max_temp
+hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -ls ncdc
+hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -ls ncdc/max_temp
+hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -cat ncdc/max_temp/part-r-00000
+hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -rm -r -f ncdc/max_temp
 */
 
 pig -useHCatalog
