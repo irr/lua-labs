@@ -143,10 +143,10 @@ luarocks --local install lua-iconv
 luarocks --local install lua-llthreads2
 luarocks --local install luacrypto
 luarocks --local install lualogging
-luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
+luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu 
 luarocks --local install luasql-mysql \
                          MYSQL_INCDIR=/usr/include/mysql \
-                         MYSQL_LIBDIR=/usr/lib64/mysql
+                         MYSQL_LIBDIR=/usr/lib/x86_64-linux-gnu
 luarocks --local install luasql-sqlite3
 luarocks --local install lzmq
 luarocks --local install redis-lua
