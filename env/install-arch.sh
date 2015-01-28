@@ -35,7 +35,7 @@ echo "updating libraries..."
 sudo cp ~/lua/configs/luajit.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p | grep luaj
 cd /opt/lua
-if [ ! -d "luarocks" ]; then ln -s ~/.luarocks luarocks; fi
+if [ ! -d "luarocks-5.1" ]; then ln -s ~/.luarocks-5.1 luarocks-5.1; fi
 git clone https://github.com/openresty/openresty.org.git
 wget http://search.cpan.org/CPAN/authors/id/R/RG/RGARCIA/Test-LongString-0.17.tar.gz
 tar xfva Test-LongString-0.17.tar.gz
@@ -111,7 +111,7 @@ cd ..
 git clone git@github.com:irr/openresty-docker.git
 cd openresty-docker
 git remote add upstream https://github.com/torhve/openresty-docker.git
-git fetch upstream && git merge upstream/master && git push
+git fetch upstream && git merge upstream/master && git pushlibmariadbclient
 cd ~/git
 ln -s /opt/lua/modules/nginx/headers-more-nginx-module
 ln -s /opt/lua/modules/nginx/set-misc-nginx-module
@@ -141,24 +141,18 @@ ln -s /opt/lua/docker-openresty
 ln -s /opt/lua/openresty-docker
 cd
 echo "installing rocks..."
-luarocks --local install lua-cjson
-luarocks --local install lua-iconv
-luarocks --local install lua-llthreads2
-luarocks --local install luacrypto
-luarocks --local install lualogging
-luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
-luarocks --local install luasql-mysql \
+luarocks-5.1 --local install lua-cjson
+luarocks-5.1 --local install lua-iconv
+luarocks-5.1 --local install lua-llthreads2
+luarocks-5.1 --local install luacrypto
+luarocks-5.1 --local install lualogging
+luarocks-5.1 --local install luasec OPENSSL_LIBDIR=/usr/lib64/
+luarocks-5.1 --local install luasql-mysql \
                          MYSQL_INCDIR=/usr/include/mysql \
-                         MYSQL_LIBDIR=/usr/lib64/mysql
-luarocks --local install luasql-sqlite3
-luarocks --local install redis-lua
-luarocks --local install stdlib
-luarocks --local install underscore.lua \
+                         MYSQL_LIBDIR=/usr/lib/mysql
+luarocks-5.1 --local install luasql-sqlite3
+luarocks-5.1 --local install redis-lua
+luarocks-5.1 --local install stdlib
+luarocks-5.1 --local install underscore.lua \
                          --from=http://github.com/irr/underscore.lua/raw/master/rocks
-echo "installing squish..."
-cd /opt/lua
-tar xfva ~/lua/squish/package/squish-0.2.0.tar.gz
-cd squish-0.2.0
-make
-sudo make install
 
