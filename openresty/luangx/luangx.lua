@@ -1,4 +1,4 @@
-#!/usr/bin/env lua
+#!/usr/local/bin/luajit
 
 local ok, socket = pcall(function ()
     return require("socket")
