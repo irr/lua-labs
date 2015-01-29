@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "installing dependencies..."
 sudo pacman -S readline openssl pcre sqlite libmariadbclient
-sudo pacman -S cpanminus perl-text-diff perl-list-moreutils perl-lwp-protocol-https
+sudo pacman -S cpanminus perl-text-diff perl-list-moreutils perl-lwp-protocol-https perl-test-base
 echo "installing openresty..."
 cd /opt/lua
 git clone git@github.com:irr/nginx_tcp_proxy_module.git
