@@ -1,26 +1,23 @@
-/etc/hosts
-127.0.0.1       localhost.localdomain localhost irrlab quickstart.cloudera
-
-cd ~/remote/hadoop
-scp -P 52222 -r cloudera@localhost:/etc/hadoop/conf .
-
-sudo yum install hadoop-client hive-hcatalog
-sudo apt-get install hadoop-client pig hive
-
 export HADOOP_USER_NAME=cloudera
 export HADOOP_CONF_DIR=/home/irocha/lua/hadoop/quickstart/hadoop-conf
 
-hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -rm -r -f gutenberg*
+hdfs dfs -ls /user
+hdfs dfs -ls /user/cloudera
 
-hdfs dfs -mkdir -p gutenberg
-hdfs dfs -copyFromLocal gutenberg 
-hdfs dfs -ls gutenberg
-hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
+hdfs dfs -rm -r -f /user/cloudera/gutenberg*
+hdfs dfs -copyFromLocal gutenberg /user/cloudera
+hdfs dfs -ls /user/cloudera/gutenberg
+
+hadoop jar hadoop-*streaming*.jar \
     -file mapper.lua -mapper mapper.lua \
     -file reducer.lua -reducer reducer.lua \
-    -input gutenberg/* -output gutenberg-output
-hdfs dfs -ls gutenberg-output
-hdfs dfs -cat gutenberg-output/part-00000
+    -input /user/cloudera/gutenberg/* -output /user/cloudera/gutenberg-output
+
+hdfs dfs -ls /user/cloudera/gutenberg-output
+hdfs dfs -cat /user/cloudera/gutenberg-output/part-00000
+hdfs dfs -rm -r -f /user/cloudera/gutenberg*
+hdfs dfs -rm -r -f /user/cloudera/.Trash
+hdfs dfs -ls /user/cloudera
 
 hdfs dfs -rm -r -f ncdc*
 hdfs dfs -mkdir -p ncdc
