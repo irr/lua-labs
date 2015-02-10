@@ -53,6 +53,10 @@ git clone http://luajit.org/git/luajit-2.0.git
 cd luajit-2.0
 git checkout v2.1
 cd ..
+git clone git@github.com:irr/luajit-examples.git
+cd luajit-examples
+git remote add upstream https://github.com/hnakamur/luajit-examples.git
+git fetch upstream && git merge upstream/master && git push
 mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
 cd /opt/lua/modules/nginx/
@@ -91,10 +95,6 @@ make
 sudo mv sockproc /usr/local/bin/
 make clean
 cd ..
-git clone git@github.com:irr/luajit-examples.git
-cd luajit-examples
-git remote add upstream https://github.com/hnakamur/luajit-examples.git
-git fetch upstream && git merge upstream/master && git push
 cd ~/git
 ln -s /opt/lua/modules/nginx/headers-more-nginx-module
 ln -s /opt/lua/modules/nginx/set-misc-nginx-module
