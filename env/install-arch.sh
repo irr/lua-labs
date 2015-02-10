@@ -49,6 +49,11 @@ sudo make install
 cd ..
 git clone https://github.com/openresty/openresty.org.git
 git clone https://github.com/openresty/nginx-tutorials.git
+git clone http://luajit.org/git/luajit-2.0.git
+cd luajit-2.0
+git checkout v2.1
+cd ..
+mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
 cd /opt/lua/modules/nginx/
 git clone https://github.com/openresty/headers-more-nginx-module.git
@@ -85,10 +90,6 @@ git fetch upstream && git merge upstream/master && git push
 make
 sudo mv sockproc /usr/local/bin/
 make clean
-cd ..
-git clone http://luajit.org/git/luajit-2.0.git
-cd luajit-2.0
-git checkout v2.1
 cd ..
 git clone git@github.com:irr/luajit-examples.git
 cd luajit-examples
