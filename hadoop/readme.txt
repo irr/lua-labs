@@ -1,4 +1,4 @@
-export HADOOP_USER_NAME=cloudera
+export HADOOP_USER_NAME=admin
 export HADOOP_CONF_DIR=/home/irocha/lua/hadoop/cloudera/hadoop-conf
 
 hdfs dfs -ls /user
