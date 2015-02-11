@@ -38,7 +38,6 @@ echo "updating libraries..."
 sudo cp ~/lua/configs/luajit.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p | grep luaj
 cd /opt/lua
-if [ ! -d "luarocks" ]; then ln -s ~/.luarocks luarocks; fi
 git clone https://github.com/openresty/openresty.org.git
 git clone https://github.com/openresty/test-nginx.git
 cd test-nginx
@@ -136,22 +135,6 @@ ln -s /opt/lua/luajit-examples
 ln -s /opt/lua/docker-openresty
 ln -s /opt/lua/openresty-docker
 cd
-echo "installing rocks..."
-luarocks --local install lua-cjson
-luarocks --local install lua-iconv
-luarocks --local install lua-llthreads2
-luarocks --local install luacrypto
-luarocks --local install lualogging
-luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
-luarocks --local install luasql-mysql \
-                         MYSQL_INCDIR=/usr/include/mysql \
-                         MYSQL_LIBDIR=/usr/lib64/mysql
-luarocks --local install luasql-sqlite3
-luarocks --local install lzmq
-luarocks --local install redis-lua
-luarocks --local install stdlib
-luarocks --local install underscore.lua \
-                         --from=http://github.com/irr/underscore.lua/raw/master/rocks
 echo "installing squish..."
 cd /opt/lua
 tar xfva ~/lua/squish/package/squish-0.2.0.tar.gz
