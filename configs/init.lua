@@ -1,3 +1,5 @@
+package.path = package.path .. ";/opt/lua/underscore.lua/lib/?.lua;"
+
 function d(o)
     if type(o) == "table" then
         for k, v in pairs(o) do
