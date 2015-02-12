@@ -21,6 +21,7 @@ patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.7.2.patch
 make install
 echo "creating symlinks..."
 cd /usr/sbin
+sudo ln -s /opt/lua/openresty/bin/resty
 sudo ln -s /opt/lua/openresty/nginx/sbin/nginx
 cd /usr/local/bin
 sudo ln -s /opt/lua/openresty/luajit/bin/luajit-2.1.0-alpha luajit
