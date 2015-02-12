@@ -57,6 +57,11 @@ git clone git@github.com:irr/luajit-examples.git
 cd luajit-examples
 git remote add upstream https://github.com/hnakamur/luajit-examples.git
 git fetch upstream && git merge upstream/master && git push
+cd ..
+git clone git@github.com:irr/underscore.lua.git
+cd underscore.lua
+git remote add upstream https://github.com/mirven/underscore.lua.git
+git fetch upstream && git merge upstream/master && git push
 mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
 cd /opt/lua/modules/nginx/
@@ -120,5 +125,6 @@ ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
+ln -s /opt/lua/underscore.lua
 cd
 
