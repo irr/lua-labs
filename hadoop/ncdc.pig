@@ -1,4 +1,4 @@
-records = LOAD 'hdfs://quickstart.cloudera:8020/user/cloudera/ncdc' AS (year:chararray, temperature:int);
+records = LOAD 'hdfs://cdh:8020/user/admin/ncdc' AS (year:chararray, temperature:int);
 filtered_records = FILTER records BY temperature > 0;
 grouped_records = GROUP filtered_records BY year;
 max_temp = FOREACH grouped_records GENERATE group, MAX(filtered_records.temperature);
@@ -6,27 +6,22 @@ DUMP max_temp;
 STORE max_temp INTO 'ncdc/max_temp';
 
 /*
-http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/cdh_ig_cdh5_install.html
+hdfs --config /home/irocha/lua/hadoop/cloudera/hadoop-conf dfs -rm -r -f ncdc*
+hdfs --config /home/irocha/lua/hadoop/cloudera/hadoop-conf dfs -mkdir -p ncdc
+hdfs --config /home/irocha/lua/hadoop/cloudera/hadoop-conf dfs -copyFromLocal ncdc
 
-export HADOOP_USER_NAME=cloudera
-export HADOOP_CONF_DIR=/home/irocha/lua/hadoop/quickstart/hadoop-conf
-
-hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -rm -r -f ncdc*
-hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -mkdir -p ncdc
-hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -copyFromLocal ncdc
-
-hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -ls ncdc
-hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -ls ncdc/max_temp
-hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -cat ncdc/max_temp/part-r-00000
-hdfs --config /home/irocha/lua/hadoop/quickstart/hadoop-conf dfs -rm -r -f ncdc/max_temp
+hdfs --config /home/irocha/lua/hadoop/cloudera/hadoop-conf dfs -ls ncdc
+hdfs --config /home/irocha/lua/hadoop/cloudera/hadoop-conf dfs -ls ncdc/max_temp
+hdfs --config /home/irocha/lua/hadoop/cloudera/hadoop-conf dfs -cat ncdc/max_temp/part-r-00000
+hdfs --config /home/irocha/lua/hadoop/cloudera/hadoop-conf dfs -rm -r -f ncdc/max_temp
 */
 
 pig -useHCatalog
 
-hive --config /home/irocha/lua/hadoop/quickstart/hadoop-conf
+hive --config /home/irocha/lua/hadoop/cloudera/hadoop-conf
 CREATE EXTERNAL TABLE ncdc (year STRING, temperature INT)
     ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
-    LOCATION '/user/cloudera/ncdc';
+    LOCATION '/user/admin/ncdc';
 
 
 records = LOAD 'ncdc' USING org.apache.hcatalog.pig.HCatLoader();
