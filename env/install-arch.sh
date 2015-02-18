@@ -47,7 +47,8 @@ sudo ln -s /opt/lua/openresty openresty-debug
 ls -alF /usr/local/bin;echo
 echo "updating libraries..."
 sudo cp ~/lua/configs/luajit.conf /etc/ld.so.conf.d/
-sudo ldconfig && ldconfig -p | grep luaj
+sudo ldconfig
+ldconfig -p | grep luaj
 cd /opt/lua
 wget http://search.cpan.org/CPAN/authors/id/R/RG/RGARCIA/Test-LongString-0.17.tar.gz
 tar xfva Test-LongString-0.17.tar.gz
