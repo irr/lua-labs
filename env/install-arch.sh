@@ -31,6 +31,7 @@ patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.7.2.patch
             --with-http_realip_module \
             --with-http_iconv_module \
             --with-http_stub_status_module \
+            --with-http_drizzle_module \
             --with-debug --add-module=../nginx_tcp_proxy_module
 make install
 echo "creating symlinks..."
