@@ -8,6 +8,20 @@ cd nginx_tcp_proxy_module
 git remote add upstream https://github.com/yaoweibin/nginx_tcp_proxy_module.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
+wget http://agentzh.org/misc/nginx/drizzle7-2011.07.21.tar.gz
+cd drizzle7-2011.07.21/
+./configure --without-server
+sudo rm /usr/bin/python
+sudo ln -s /usr/bin/python2 /usr/bin/python
+make libdrizzle-1.0
+sudo make install-libdrizzle-1.0
+sudo rm /usr/bin/python
+sudo ln -s /usr/bin/python3 /usr/bin/python
+sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
+sudo ldconfig
+ldconfig -p |grep drizzle
+cd ..
+rm -rf drizzle7-2011.07.21.tar.gz
 wget http://openresty.org/download/ngx_openresty-1.7.7.2.tar.gz
 tar xfva ngx_openresty-1.7.7.2.tar.gz
 cd ngx_openresty-1.7.7.2
