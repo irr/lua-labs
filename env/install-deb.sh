@@ -14,15 +14,26 @@ cd nginx_tcp_proxy_module
 git remote add upstream https://github.com/yaoweibin/nginx_tcp_proxy_module.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
-wget http://openresty.org/download/ngx_openresty-1.7.7.1.tar.gz
-tar xfva ngx_openresty-1.7.7.1.tar.gz
-cd ngx_openresty-1.7.7.1
-patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.7.1.patch
+wget http://agentzh.org/misc/nginx/drizzle7-2011.07.21.tar.gz
+tar xfva drizzle7-2011.07.21.tar.gz
+cd drizzle7-2011.07.21/
+./configure --without-server
+make libdrizzle-1.0
+sudo make install-libdrizzle-1.0
+sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
+sudo ldconfig && ldconfig -p |grep drizzle
+cd ..
+rm -rf drizzle7-2011.07.21.tar.gz
+wget http://openresty.org/download/ngx_openresty-1.7.7.2.tar.gz
+tar xfva ngx_openresty-1.7.7.2.tar.gz
+cd ngx_openresty-1.7.7.2
+patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.7.2.patch
 ./configure --prefix=/opt/lua/openresty \
             --with-luajit \
             --with-http_realip_module \
             --with-http_iconv_module \
             --with-http_stub_status_module \
+            --with-http_drizzle_module \
             --with-debug --add-module=../nginx_tcp_proxy_module
 make install
 echo "creating symlinks..."

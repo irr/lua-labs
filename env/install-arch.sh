@@ -9,6 +9,7 @@ git remote add upstream https://github.com/yaoweibin/nginx_tcp_proxy_module.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
 wget http://agentzh.org/misc/nginx/drizzle7-2011.07.21.tar.gz
+tar xfva drizzle7-2011.07.21.tar.gz
 cd drizzle7-2011.07.21/
 ./configure --without-server
 sudo rm /usr/bin/python
