@@ -51,6 +51,7 @@ echo "updating libraries..."
 sudo cp ~/lua/configs/luajit.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p | grep luaj
 cd /opt/lua
+mkdir -p ~/.luarocks
 if [ ! -d "luarocks" ]; then ln -s ~/.luarocks luarocks; fi
 git clone https://github.com/openresty/openresty.org.git
 git clone https://github.com/openresty/test-nginx.git
