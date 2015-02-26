@@ -1,4 +1,5 @@
-package.path = package.path .. ";/opt/lua/underscore.lua/lib/?.lua;"
+package.path = package.path .. ";/home/irocha/.luarocks/share/lua/5.1/?.lua;"
+package.cpath = package.cpath .. ";/home/irocha/.luarocks/lib/lua/5.1/?.so;"
 
 __ = require "underscore"
 
