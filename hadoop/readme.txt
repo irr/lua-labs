@@ -8,6 +8,11 @@ hdfs dfs -rm -r -f /user/cloudera/gutenberg*
 hdfs dfs -copyFromLocal gutenberg /user/cloudera
 hdfs dfs -ls /user/cloudera/gutenberg
 
+hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
+    -file mapper.lua -mapper mapper.lua \
+    -file reducer.lua -reducer reducer.lua \
+    -input /user/cloudera/gutenberg/* -output /user/cloudera/gutenberg-output
+
 hadoop jar hadoop-*streaming*.jar \
     -file mapper.lua -mapper mapper.lua \
     -file reducer.lua -reducer reducer.lua \
