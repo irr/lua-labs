@@ -1,4 +1,17 @@
 #!/bin/bash
+echo "uninstalling all lua environment..."
+cd
+rm -rf ~/.luarocks ~/.cache/luarocks
+sudo rm -rf /usr/sbin/nginx /usr/local/openresty* /usr/local/bin/lua* /usr/local/bin/resty /usr/local/bin/squish /usr/local/bin/sockproc /etc/ld.so.conf.d/drizzle7.conf /etc/ld.so.conf.d/luajit.conf /usr/local/lib/libdrizzle.*
+sudo ldconfig
+sudo rm -rf /opt/lua
+sudo mkdir -p /opt/lua
+sudo chown irocha: /opt/lua
+cd ~/git
+rm -rf headers-more-nginx-module set-misc-nginx-module iconv-nginx-module lua-nginx-module lua-resty* openresty* nginx-tutorials test-nginx
+cd ~/gitf
+rm -rf lua-resty-shell lua-pycrypto-aes sockproc underscore.lua nginx_tcp_proxy_module luajit-examples docker-openresty openresty-docker
+cd
 echo "installing dependencies..."
 sudo yum install -y lua-devel pandoc readline-devel pcre-devel openssl-devel \
                  sqlite-devel mysql-devel \
@@ -154,4 +167,7 @@ tar xfva ~/lua/squish/package/squish-0.2.0.tar.gz
 cd squish-0.2.0
 make
 sudo make install
+cd
+echo "generating documentation..."
+sh lua/env/makedocs.sh
 
