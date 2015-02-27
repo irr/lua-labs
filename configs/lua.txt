@@ -5,5 +5,5 @@ Installation prefix: /usr/local
 LuaRocks configuration directory: /usr/local/etc/luarocks
 Using Lua from: /usr/local
 
-7z a -r -xr\!\.git* -xr\!\ngx_openresty* nginx_tcp_proxy_module.7z nginx_tcp_proxy_module/
+7z a -r -xr\!\.git -xr\!\ngx_openresty* nginx_tcp_proxy_module.7z nginx_tcp_proxy_module/
 
