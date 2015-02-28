@@ -10,6 +10,7 @@ lua-labs
 * [lua-llthreads2]: Low-Level threads(pthreads or WIN32 threads) for Lua
 * [luacrypto]: LuaCrypto is a Lua frontend to the OpenSSL cryptographic library
 * [lualogging]: LuaLogging provides a simple API to use logging features in Lua
+* [luaposix]: Lua bindings for POSIX APIs
 * [luasec]: LuaSec is a binding for OpenSSL library to provide TLS/SSL communication
 * [luasql-mysql]: LuaSQL is a simple interface from Lua to a DBMS (MySQL)
 * [luasql-sqlite3]: LuaSQL is a simple interface from Lua to a DBMS (sqlite3)
@@ -24,6 +25,7 @@ luarocks --local install lua-iconv
 luarocks --local install lua-llthreads2
 luarocks --local install luacrypto
 luarocks --local install lualogging
+luarocks --local install luaposix
 
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu 
@@ -74,6 +76,7 @@ limitations under the License.
 [luacrypto]: http://luacrypto.luaforge.net/manual.html
 [lualogging]: http://www.keplerproject.org/lualogging/
 [luarocks]: http://luarocks.org/entcp-ngx-1.4.3.6
+[luaposix]: https://github.com/luaposix/luaposix
 [luasec]: http://github.com/brunoos/luasec
 [luasql-mysql]: http://www.keplerproject.org/luasql/
 [luasql-sqlite3]: http://www.keplerproject.org/luasql/
