@@ -36,10 +36,10 @@ sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p |grep drizzle
 cd ..
 rm -rf drizzle7-2011.07.21.tar.gz
-wget http://openresty.org/download/ngx_openresty-1.7.7.2.tar.gz
-tar xfva ngx_openresty-1.7.7.2.tar.gz
-cd ngx_openresty-1.7.7.2
-patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.7.2.patch
+wget http://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz
+tar xfva ngx_openresty-1.7.10.1.tar.gz
+cd ngx_openresty-1.7.10.1
+patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.10.1.patch
 ./configure --prefix=/opt/lua/openresty \
             --with-luajit \
             --with-http_realip_module \
