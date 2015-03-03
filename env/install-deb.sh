@@ -1,4 +1,12 @@
 #!/bin/bash
+echo "uninstalling all lua environment..."
+cd
+rm -rf ~/.luarocks ~/.cache/luarocks
+sudo rm -rf /usr/sbin/nginx /usr/local/openresty* /usr/local/bin/lua* /usr/local/bin/resty /usr/local/bin/squish /usr/local/bin/sockproc /etc/ld.so.conf.d/drizzle7.conf /etc/ld.so.conf.d/luajit.conf /usr/local/lib/libdrizzle.*
+sudo ldconfig
+sudo rm -rf /opt/lua
+sudo mkdir -p /opt/lua
+sudo chown irocha: /opt/lua
 echo "installing dependencies..."
 sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev \
                      libsqlite3-dev libmysqlclient-dev \
@@ -24,10 +32,10 @@ sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p |grep drizzle
 cd ..
 rm -rf drizzle7-2011.07.21.tar.gz
-wget http://openresty.org/download/ngx_openresty-1.7.7.2.tar.gz
-tar xfva ngx_openresty-1.7.7.2.tar.gz
-cd ngx_openresty-1.7.7.2
-patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.7.2.patch
+wget http://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz
+tar xfva ngx_openresty-1.7.10.1.tar.gz
+cd ngx_openresty-1.7.10.1
+patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.10.1.patch
 ./configure --prefix=/opt/lua/openresty \
             --with-luajit \
             --with-http_realip_module \
@@ -151,6 +159,7 @@ ln -s /opt/lua/docker-openresty
 ln -s /opt/lua/openresty-docker
 cd
 echo "installing rocks..."
+luarocks --local install lpeg
 luarocks --local install lua-cjson
 luarocks --local install lua-iconv
 luarocks --local install lua-llthreads2
@@ -172,4 +181,6 @@ tar xfva ~/lua/squish/package/squish-0.2.0.tar.gz
 cd squish-0.2.0
 make
 sudo make install
-
+cd
+echo "generating documentation..."
+sh lua/env/makedocs.sh
