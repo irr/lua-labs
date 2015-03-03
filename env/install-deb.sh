@@ -8,7 +8,7 @@ sudo rm -rf /opt/lua
 sudo mkdir -p /opt/lua
 sudo chown irocha: /opt/lua
 echo "installing dependencies..."
-sudo apt-get install libreadline6-dev libpcre3-dev libssl-dev \
+sudo apt-get install lua5.1 lua5.1-doc luarocks libreadline6-dev libpcre3-dev libssl-dev \
                      libsqlite3-dev libmysqlclient-dev \
                      libzmq3-dev
 sudo apt-get install cpanminus libtext-diff-perl \
