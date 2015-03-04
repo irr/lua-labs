@@ -105,6 +105,7 @@ git remote add upstream https://github.com/juce/sockproc.git
 git fetch upstream && git merge upstream/master && git push
 make
 sudo mv sockproc /usr/local/bin/
+sudo chown root: /usr/local/bin/sockproc
 make clean
 cd /opt/lua
 git clone http://luajit.org/git/luajit-2.0.git
