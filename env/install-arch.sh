@@ -1,4 +1,18 @@
 #!/bin/bash
+echo "uninstalling all lua environment..."
+cd
+rm -rf ~/.luarocks ~/.cache/luarocks
+sudo rm -rf /usr/sbin/nginx /usr/local/openresty* /usr/local/bin/lua* /usr/local/bin/resty /usr/local/bin/squish /usr/local/bin/sockproc /e
+tc/ld.so.conf.d/drizzle7.conf /etc/ld.so.conf.d/luajit.conf /usr/local/lib/libdrizzle.*
+sudo ldconfig
+sudo rm -rf /opt/lua
+sudo mkdir -p /opt/lua
+sudo chown irocha: /opt/lua
+cd ~/git
+rm -rf headers-more-nginx-module set-misc-nginx-module iconv-nginx-module lua-nginx-module lua-resty* openresty* nginx-tutorials test-nginx
+cd ~/gitf
+rm -rf lua-resty-shell lua-pycrypto-aes sockproc underscore.lua nginx_tcp_proxy_module luajit-examples docker-openresty openresty-docker
+cd
 echo "installing dependencies..."
 sudo pacman -S pcre libmariadbclient cpanminus perl-text-diff perl-list-moreutils perl-lwp-protocol-https perl-test-base
 echo "installing openresty..."
@@ -23,10 +37,10 @@ sudo ldconfig
 ldconfig -p |grep drizzle
 cd ..
 rm -rf drizzle7-2011.07.21.tar.gz
-wget http://openresty.org/download/ngx_openresty-1.7.7.2.tar.gz
-tar xfva ngx_openresty-1.7.7.2.tar.gz
-cd ngx_openresty-1.7.7.2
-patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.7.2.patch
+wget http://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz
+tar xfva ngx_openresty-1.7.10.1.tar.gz
+cd ngx_openresty-1.7.10.1
+patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.10.1.patch
 ./configure --prefix=/opt/lua/openresty \
             --with-luajit \
             --with-http_realip_module \
