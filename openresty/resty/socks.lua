@@ -24,10 +24,15 @@ local packet = {
 local bytes, err = sock:send(packet)
 error(err)
 
+local dump = true
+
 repeat
     local line, err, partial = sock:receive()
-    if line then
-        print(line)
+    if line and dump then
+        print(tostring(line))
+        if line == "" then
+            dump = false
+        end
     end
 until err
 
