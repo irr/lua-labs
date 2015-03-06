@@ -18,7 +18,7 @@ sudo yum install -y lua-devel pandoc readline-devel pcre-devel openssl-devel \
                  zeromq3 zeromq3-devel
 sudo yum install -y perl-CPAN perl-Text-Diff perl-Test-LongString \
                  perl-List-MoreUtils perl-Test-Base \
-                 perl-IO-Socket-SSLi perl-Time-HiRes
+                 perl-IO-Socket-SSL perl-Time-HiRes
 echo "installing openresty..."
 cd /opt/lua
 git clone git@github.com:irr/nginx_tcp_proxy_module.git
@@ -170,4 +170,24 @@ sudo make install
 cd
 echo "generating documentation..."
 sh lua/env/makedocs.sh
+echo "luarocks..."
+luarocks --local install lpeg
+luarocks --local install lua-cjson
+luarocks --local install lua-iconv
+luarocks --local install lua-llthreads2
+luarocks --local install luacrypto
+luarocks --local install lualogging
+luarocks --local install luaposix
+luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
+luarocks --local install luasql-mysql \
+                         MYSQL_INCDIR=/usr/include/mysql \
+                         MYSQL_LIBDIR=/usr/lib64/mysql
+luarocks --local install luasql-sqlite3
+luarocks --local install lzmq
+luarocks --local install redis-lua
+luarocks --local install stdlib
+luarocks --local install underscore.lua \
+                         --from=http://github.com/irr/underscore.lua/raw/master/rocks
+echo "setup ok."
+cd
 
