@@ -1,5 +1,5 @@
-package.path = package.path .. ";/home/irocha/.luarocks/share/lua/5.1/?.lua;/usr/local/openresty/lualib/?.lua;;"
-package.cpath = package.cpath .. ";/home/irocha/.luarocks/lib/lua/5.1/?.so;/usr/local/openresty/lualib/?.so;;"
+package.path = package.path .. ";/home/irocha/.luarocks/share/lua/5.1/?.lua;"
+package.cpath = package.cpath .. ";/home/irocha/.luarocks/lib/lua/5.1/?.so;"
 
 function d(o)
     if type(o) == "table" then
