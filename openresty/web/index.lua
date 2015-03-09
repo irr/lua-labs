@@ -73,6 +73,10 @@ function exit_now(status, msg)
     if msg then
         ngx.say(json.encode(msg))
     end
+
+    local request_time = (ngx.now() - ngx.req.start_time())
+    ngx.log(ngx.INFO, "request time: " .. tostring(request_time))
+
     ngx.exit(ngx.HTTP_OK)
 end
 
