@@ -92,6 +92,11 @@ git clone https://github.com/openresty/lua-resty-lrucache.git
 git clone https://github.com/bungle/lua-resty-template.git
 mkdir -p /opt/lua/modules/forked
 cd /opt/lua/modules/forked/
+git clone git@github.com:irr/awesome-lua.git
+cd awesome-lua
+git remote add upstream https://github.com/LewisJEllis/awesome-lua.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 git clone git@github.com:irr/lua-resty-shell.git
 cd lua-resty-shell
 git remote add upstream https://github.com/juce/lua-resty-shell.git
@@ -153,6 +158,7 @@ ln -s /opt/lua/openresty.org
 ln -s /opt/lua/nginx-tutorials
 ln -s /opt/lua/test-nginx
 cd ~/gitf
+ln -s /opt/lua/modules/forked/awesome-lua
 ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/sockproc
