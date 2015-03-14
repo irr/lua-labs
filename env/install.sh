@@ -13,7 +13,7 @@ cd ~/gitf
 rm -rf lua-resty-shell lua-pycrypto-aes sockproc underscore.lua nginx_tcp_proxy_module luajit-examples docker-openresty openresty-docker
 cd
 echo "installing dependencies..."
-sudo yum install -y lua-devel pandoc readline-devel pcre-devel openssl-devel \
+sudo yum install -y luarocks lua-devel pandoc readline-devel pcre-devel openssl-devel \
                  sqlite-devel mysql-devel \
                  zeromq3 zeromq3-devel
 sudo yum install -y perl-CPAN perl-Text-Diff perl-Test-LongString \
