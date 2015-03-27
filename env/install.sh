@@ -168,7 +168,6 @@ ln -s /opt/lua/luajit-examples
 ln -s /opt/lua/docker-openresty
 ln -s /opt/lua/openresty-docker
 cd
-UNSET LUA_INIT
 echo "installing squish..."
 cd /opt/lua
 tar xfva ~/lua/squish/package/squish-0.2.0.tar.gz
