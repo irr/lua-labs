@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=
+Terminal=true
+Name=LuaJIT
+Exec=rlwrap -H /dev/null luajit
+Type=Application
+Icon=/home/irocha/lua/art/luajit.png
+Categories=Development;IDE;
