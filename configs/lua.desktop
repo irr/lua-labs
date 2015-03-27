@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=
+Terminal=true
+Name=Lua
+Exec=rlwrap -H /dev/null lua
+Type=Application
+Icon=/home/irocha/lua/art/luajit.png
+Categories=Development;IDE;
