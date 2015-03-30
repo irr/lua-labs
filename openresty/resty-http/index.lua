@@ -29,6 +29,7 @@ if ngx.req.get_method() == "POST" then
     
     ngx.req.read_body()
     keys = ngx.req.get_post_args()
+    keys.home = os.getenv("HOME")
     ngx.say(json.encode(keys))
 
 elseif ngx.req.get_method() == "GET" then
