@@ -8,13 +8,15 @@ sudo rm -rf /opt/lua
 sudo mkdir -p /opt/lua
 sudo chown irocha: /opt/lua
 echo "installing dependencies..."
-sudo apt-get install lua5.1 lua5.1-doc luarocks libreadline6-dev libpcre3-dev libssl-dev \
+sudo apt-get install lua5.1 lua5.1-doc luarocks pandoc libreadline6-dev libpcre3-dev libssl-dev \
                      libsqlite3-dev libmysqlclient-dev \
                      libzmq3-dev
 sudo apt-get install cpanminus libtext-diff-perl \
                      libtest-longstring-perl \
                      liblist-moreutils-perl \
-                     libtest-base-perl
+                     libtest-base-perl \
+                     liblwp-useragent-determined-perl \
+                     
 echo "installing openresty..."
 cd /opt/lua
 git clone git@github.com:irr/nginx_tcp_proxy_module.git
@@ -31,7 +33,7 @@ sudo make install-libdrizzle-1.0
 sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p |grep drizzle
 cd ..
-rm -rf drizzle7-2011.07.21.tar.gz
+rm -rf drizzle7-2011.07.21*
 wget http://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz
 tar xfva ngx_openresty-1.7.10.1.tar.gz
 cd ngx_openresty-1.7.10.1
