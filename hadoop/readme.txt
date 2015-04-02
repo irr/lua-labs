@@ -4,7 +4,7 @@ export HADOOP_CONF_DIR=/home/irocha/lua/hadoop/admin/hadoop-conf
 hdfs dfs -ls /user
 hdfs dfs -ls /user/admin
 
-hdfs dfs -rm -r -f /user/admin/gutenberg*
+hdfs dfs -rm -r -f -skipTrash  /user/admin/gutenberg*
 hdfs dfs -copyFromLocal gutenberg /user/admin
 hdfs dfs -ls /user/admin/gutenberg
 
@@ -20,8 +20,7 @@ hadoop jar hadoop-*streaming*.jar \
 
 hdfs dfs -ls /user/admin/gutenberg-output
 hdfs dfs -cat /user/admin/gutenberg-output/part-00000
-hdfs dfs -rm -r -f /user/admin/gutenberg*
-hdfs dfs -rm -r -f /user/admin/.Trash
+hdfs dfs -rm -r -f -skipTrash /user/admin/gutenberg*
 hdfs dfs -ls /user/admin
 
 hdfs dfs -rm -r -f ncdc*

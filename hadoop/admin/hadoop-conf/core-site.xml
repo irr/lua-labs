@@ -4,7 +4,7 @@
 <configuration>
   <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://cloudera1.localdomain:8020</value>
+    <value>hdfs://cloudera:8020</value>
   </property>
   <property>
     <name>fs.trash.interval</name>
