@@ -48,6 +48,8 @@ patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.10.1.patch
             --with-http_drizzle_module \
             --with-debug --add-module=../nginx_tcp_proxy_module
 make install
+cd ..
+rm -rf ngx_openresty-1.7.10.1.tar.gz
 echo "creating symlinks..."
 cd /usr/sbin
 sudo ln -s /opt/lua/openresty/bin/resty

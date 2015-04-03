@@ -1,27 +1,27 @@
-export HADOOP_USER_NAME=admin
-export HADOOP_CONF_DIR=/home/irocha/lua/hadoop/admin/hadoop-conf
+export HADOOP_USER_NAME=cloudera
+export HADOOP_CONF_DIR=/home/irocha/lua/hadoop/cloudera/hadoop-conf
 
 hdfs dfs -ls /user
-hdfs dfs -ls /user/admin
+hdfs dfs -ls /user/cloudera
 
-hdfs dfs -rm -r -f -skipTrash  /user/admin/gutenberg*
-hdfs dfs -copyFromLocal gutenberg /user/admin
-hdfs dfs -ls /user/admin/gutenberg
+hdfs dfs -rm -r -f -skipTrash  /user/cloudera/gutenberg*
+hdfs dfs -copyFromLocal gutenberg /user/cloudera
+hdfs dfs -ls /user/cloudera/gutenberg
 
 hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
     -file mapper.lua -mapper mapper.lua \
     -file reducer.lua -reducer reducer.lua \
-    -input /user/admin/gutenberg/* -output /user/admin/gutenberg-output
+    -input /user/cloudera/gutenberg/* -output /user/cloudera/gutenberg-output
 
 hadoop jar hadoop-*streaming*.jar \
     -file mapper.lua -mapper mapper.lua \
     -file reducer.lua -reducer reducer.lua \
-    -input /user/admin/gutenberg/* -output /user/admin/gutenberg-output
+    -input /user/cloudera/gutenberg/* -output /user/cloudera/gutenberg-output
 
-hdfs dfs -ls /user/admin/gutenberg-output
-hdfs dfs -cat /user/admin/gutenberg-output/part-00000
-hdfs dfs -rm -r -f -skipTrash /user/admin/gutenberg*
-hdfs dfs -ls /user/admin
+hdfs dfs -ls /user/cloudera/gutenberg-output
+hdfs dfs -cat /user/cloudera/gutenberg-output/part-00000
+hdfs dfs -rm -r -f -skipTrash /user/cloudera/gutenberg*
+hdfs dfs -ls /user/cloudera
 
 hdfs dfs -rm -r -f ncdc*
 hdfs dfs -mkdir -p ncdc
@@ -39,6 +39,6 @@ hdfs dfs -ls catalog
 hdfs dfs -cat catalog/words.txt
 
 CREATE EXTERNAL TABLE catalog (word STRING)
-    LOCATION '/user/admin/catalog';
+    LOCATION '/user/cloudera/catalog';
 
 SELECT * FROM catalog ORDER BY word;
