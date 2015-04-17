@@ -112,6 +112,14 @@ cd luajit.io
 git remote add upstream https://github.com/kingluo/luajit.io.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
+git clone git@github.com:irr/wrk.git
+cd wrk
+git remote add upstream https://github.com/wg/wrk.git
+git fetch upstream && git merge upstream/master && git push
+make 
+sudo mv wrk /usr/local/bin
+make clean
+cd ..
 git clone git@github.com:irr/sockproc.git
 cd sockproc
 git remote add upstream https://github.com/juce/sockproc.git
@@ -167,6 +175,7 @@ ln -s /opt/lua/modules/forked/awesome-lua
 ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/luajit.io
+ln -s /opt/lua/modules/forked/wrk
 ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/underscore.lua
 ln -s /opt/lua/nginx_tcp_proxy_module
