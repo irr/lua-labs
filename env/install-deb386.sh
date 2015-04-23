@@ -119,6 +119,11 @@ cd underscore.lua
 git remote add upstream https://github.com/mirven/underscore.lua.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
+git clone git@github.com:irr/lua-bit-numberlua.git
+cd lua-bit-numberlua
+git remote add upstream https://github.com/davidm/lua-bit-numberlua.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 git clone git@github.com:irr/luajit-examples.git
 cd luajit-examples
 git remote add upstream https://github.com/hnakamur/luajit-examples.git
@@ -149,6 +154,7 @@ ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/underscore.lua
 ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
+ln -s /opt/lua/lua-bit-numberlua
 cd
 echo "installing rocks..."
 luarocks --local install lpeg
@@ -167,7 +173,6 @@ luarocks --local install redis-lua
 luarocks --local install stdlib
 luarocks --local install underscore.lua \
                          --from=http://github.com/irr/underscore.lua/raw/master/rocks
-luarocks --local install luabitop
 echo "installing squish..."
 cd /opt/lua
 tar xfva ~/lua/squish/package/squish-0.2.0.tar.gz
