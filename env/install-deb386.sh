@@ -167,6 +167,7 @@ luarocks --local install redis-lua
 luarocks --local install stdlib
 luarocks --local install underscore.lua \
                          --from=http://github.com/irr/underscore.lua/raw/master/rocks
+luarocks --local install luabitop
 echo "installing squish..."
 cd /opt/lua
 tar xfva ~/lua/squish/package/squish-0.2.0.tar.gz
