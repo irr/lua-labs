@@ -51,6 +51,8 @@ luarocks --local install stdlib
 
 luarocks --local install underscore.lua \
                          --from=http://github.com/irr/underscore.lua/raw/master/rocks
+
+luarocks --local install luabitop
 ```
 
 Copyright and License
