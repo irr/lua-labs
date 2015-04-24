@@ -138,6 +138,11 @@ cd underscore.lua
 git remote add upstream https://github.com/mirven/underscore.lua.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
+git clone git@github.com:irr/lua-bit-numberlua.git
+cd lua-bit-numberlua
+git remote add upstream https://github.com/davidm/lua-bit-numberlua.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 git clone git@github.com:irr/luajit-examples.git
 cd luajit-examples
 git remote add upstream https://github.com/hnakamur/luajit-examples.git
@@ -180,6 +185,7 @@ ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/underscore.lua
 ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
+ln -s /opt/lua/lua-bit-numberlua
 ln -s /opt/lua/docker-openresty
 ln -s /opt/lua/openresty-docker
 cd
