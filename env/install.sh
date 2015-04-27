@@ -18,7 +18,8 @@ sudo yum install -y luarocks lua-devel pandoc readline-devel pcre-devel openssl-
                  zeromq3 zeromq3-devel
 sudo yum install -y perl-CPAN perl-Text-Diff perl-Test-LongString \
                  perl-List-MoreUtils perl-Test-Base \
-                 perl-IO-Socket-SSL perl-Time-HiRes
+                 perl-IO-Socket-SSL perl-Time-HiRes \
+                 perl-Protocol-WebSocket
 echo "installing openresty..."
 cd /opt/lua
 git clone git@github.com:irr/nginx_tcp_proxy_module.git
@@ -87,6 +88,7 @@ git clone https://github.com/openresty/lua-resty-redis.git
 git clone https://github.com/openresty/lua-resty-string.git
 git clone https://github.com/openresty/lua-resty-upload.git
 git clone https://github.com/openresty/lua-resty-upstream-healthcheck.git
+git clone https://github.com/openresty/lua-resty-websocket.git
 git clone https://github.com/hamishforbes/lua-resty-upstream.git
 git clone https://github.com/openresty/lua-resty-lrucache.git
 git clone https://github.com/bungle/lua-resty-template.git
@@ -171,6 +173,7 @@ ln -s /opt/lua/modules/nginx/lua-resty-string
 ln -s /opt/lua/modules/nginx/lua-resty-upload
 ln -s /opt/lua/modules/nginx/lua-resty-upstream
 ln -s /opt/lua/modules/nginx/lua-resty-upstream-healthcheck
+ln -s /opt/lua/modules/nginx/lua-resty-websocket
 ln -s /opt/lua/modules/nginx/lua-resty-lrucache
 ln -s /opt/lua/openresty.org
 ln -s /opt/lua/nginx-tutorials
