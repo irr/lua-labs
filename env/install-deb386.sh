@@ -91,6 +91,11 @@ git clone https://github.com/openresty/lua-resty-lrucache.git
 git clone https://github.com/bungle/lua-resty-template.git
 mkdir -p /opt/lua/modules/forked
 cd /opt/lua/modules/forked/
+git clone git@github.com:irr/router.lua.git
+cd router.lua
+git remote add upstream https://github.com/APItools/router.lua.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 git clone git@github.com:irr/lua-resty-shell.git
 cd lua-resty-shell
 git remote add upstream https://github.com/juce/lua-resty-shell.git
