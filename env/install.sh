@@ -99,6 +99,11 @@ cd awesome-lua
 git remote add upstream https://github.com/LewisJEllis/awesome-lua.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
+git clone git@github.com:irr/router.lua.git
+cd router.lua
+git remote add upstream https://github.com/APItools/router.lua.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 git clone git@github.com:irr/lua-resty-shell.git
 cd lua-resty-shell
 git remote add upstream https://github.com/juce/lua-resty-shell.git
@@ -185,6 +190,7 @@ ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/luajit.io
 ln -s /opt/lua/modules/forked/wrk
 ln -s /opt/lua/modules/forked/sockproc
+ln -s /opt/lua/modules/forked/router.lua
 ln -s /opt/lua/underscore.lua
 ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
@@ -201,24 +207,24 @@ sudo make install
 cd
 echo "generating documentation..."
 sh lua/env/makedocs.sh
-echo "luarocks..."
-luarocks --local install lpeg
-luarocks --local install lua-cjson
-luarocks --local install lua-iconv
-luarocks --local install lua-llthreads2
-luarocks --local install luacrypto
-luarocks --local install lualogging
-luarocks --local install luaposix
-luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
-luarocks --local install luasql-mysql \
-                         MYSQL_INCDIR=/usr/include/mysql \
-                         MYSQL_LIBDIR=/usr/lib64/mysql
-luarocks --local install luasql-sqlite3
-luarocks --local install lzmq
-luarocks --local install redis-lua
-luarocks --local install stdlib
-luarocks --local install underscore.lua \
-                         --from=http://github.com/irr/underscore.lua/raw/master/rocks
+#echo "luarocks..."
+#luarocks --local install lpeg
+#luarocks --local install lua-cjson
+#luarocks --local install lua-iconv
+#luarocks --local install lua-llthreads2
+#luarocks --local install luacrypto
+#luarocks --local install lualogging
+#luarocks --local install luaposix
+#luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
+#luarocks --local install luasql-mysql \
+#                         MYSQL_INCDIR=/usr/include/mysql \
+#                         MYSQL_LIBDIR=/usr/lib64/mysql
+#luarocks --local install luasql-sqlite3
+#luarocks --local install lzmq
+#luarocks --local install redis-lua
+#luarocks --local install stdlib
+#luarocks --local install underscore.lua \
+#                         --from=http://github.com/irr/underscore.lua/raw/master/rocks
 echo "setup ok."
 cd
 
