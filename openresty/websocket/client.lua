@@ -1,6 +1,6 @@
 local client = require "resty.websocket.client"
 local wb, err = client:new()
-local uri = "ws://127.0.0.1:8000"
+local uri = "ws://127.0.0.1:8000/l"
 local ok, err = wb:connect(uri)
 if not ok then
     ngx.say("failed to connect: " .. err)
