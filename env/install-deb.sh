@@ -89,6 +89,11 @@ git clone https://github.com/openresty/lua-resty-lrucache.git
 git clone https://github.com/bungle/lua-resty-template.git
 mkdir -p /opt/lua/modules/forked
 cd /opt/lua/modules/forked/
+git clone git@github.com:irr/router.lua.git
+cd router.lua
+git remote add upstream https://github.com/APItools/router.lua.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 git clone git@github.com:irr/lua-resty-shell.git
 cd lua-resty-shell
 git remote add upstream https://github.com/juce/lua-resty-shell.git
@@ -122,6 +127,11 @@ cd luajit-examples
 git remote add upstream https://github.com/hnakamur/luajit-examples.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
+git clone git@github.com:irr/lua-bit-numberlua.git
+cd lua-bit-numberlua
+git remote add upstream https://github.com/davidm/lua-bit-numberlua.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 git clone git@github.com:irr/docker-openresty.git
 cd docker-openresty
 git remote add upstream https://github.com/3scale/docker-openresty.git
@@ -153,9 +163,11 @@ cd ~/gitf
 ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/sockproc
+ln -s /opt/lua/modules/forked/router.lua
 ln -s /opt/lua/underscore.lua
 ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
+ln -s /opt/lua/lua-bit-numberlua
 ln -s /opt/lua/docker-openresty
 ln -s /opt/lua/openresty-docker
 cd
