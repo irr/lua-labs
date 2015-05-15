@@ -1,6 +1,13 @@
 --[[
+luarocks --local install luaxml
+cd /home/irocha/lua/openresty/xml
 cp /home/irocha/.luarocks/lib/lua/5.1/LuaXML_lib.so lib/
 cp /home/irocha/.luarocks/share/lua/5.1/LuaXML.lua .
+
+OpenResty Install:
+cp lib/LuaXML_lib.so /opt/lua/openresty/lualib/
+  or 
+cp /home/irocha/.luarocks/lib/lua/5.1/LuaXML_lib.so /opt/lua/openresty/lualib/
 --]]
 
 require("LuaXML")
