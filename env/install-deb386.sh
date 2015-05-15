@@ -114,6 +114,12 @@ make
 sudo mv sockproc /usr/local/bin/
 sudo chown root: /usr/local/bin/sockproc
 make clean
+cd ..
+git clone git@github.com:irr/luaxml.git
+cd luaxml
+git remote add upstream https://github.com/kidd/luaxml.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 cd /opt/lua
 git clone http://luajit.org/git/luajit-2.0.git
 cd luajit-2.0
