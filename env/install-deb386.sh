@@ -82,6 +82,7 @@ git clone https://github.com/openresty/lua-resty-dns.git
 git clone https://github.com/pintsized/lua-resty-http.git
 git clone https://github.com/openresty/lua-resty-memcached.git
 git clone https://github.com/openresty/lua-resty-mysql.git
+git clone https://github.com/azurewang/lua-resty-postgres.git
 git clone https://github.com/openresty/lua-resty-redis.git
 git clone https://github.com/openresty/lua-resty-string.git
 git clone https://github.com/openresty/lua-resty-upload.git
@@ -149,6 +150,7 @@ ln -s /opt/lua/modules/nginx/lua-resty-dns
 ln -s /opt/lua/modules/nginx/lua-resty-http
 ln -s /opt/lua/modules/nginx/lua-resty-memcached
 ln -s /opt/lua/modules/nginx/lua-resty-mysql
+ln -s /opt/lua/modules/nginx/lua-resty-postgres
 ln -s /opt/lua/modules/nginx/lua-resty-redis
 ln -s /opt/lua/modules/nginx/lua-resty-string
 ln -s /opt/lua/modules/nginx/lua-resty-upload
