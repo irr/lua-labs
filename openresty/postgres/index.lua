@@ -19,7 +19,7 @@ function exit_now(status, msg)
     ngx.exit(ngx.HTTP_OK)
 end
 
-function exit(db, rd, status, msg)
+function exit(status, msg)
     if status then
         exit_now(status, msg)
     end
