@@ -1,3 +1,4 @@
+local json = require("cjson")
 local pg = require("resty.postgres")
 
 --------------------------------
@@ -41,13 +42,15 @@ if not ok then
     ngx.say(err)
 end
 
-local res, err = db:query("SELECT loc_id, loc_name, ST_AsGeoJSON(geog)::json FROM locations;")
+local res, err = db:query("SELECT loc_id, loc_name, ST_AsGeoJSON(geog)::json as loc_json FROM locations;")
 db:set_keepalive(0, 10)
 
+local r = {}
 if not err then
     for i,v in ipairs(res) do
-        ngx.say(string.format("%s\t%s",v.loc_id,v.loc_name, v.st_asgeojson))
+        r[v.loc_id] = { [v.loc_name] = v.loc_json }
     end
+    ngx.say(json.encode(r))
     exit()
 end
 
