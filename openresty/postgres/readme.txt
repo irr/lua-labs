@@ -1,13 +1,16 @@
+CENTOS 6.6
 sudo yum install http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
 sudo vi /etc/yum.repos.d/remi.repo
 > exclude=memcached
 sudo yum remove libevent-last
-
 sudo yum install postgis2_94 postgis2_94-docs postgresql94-devel postgresql94-server postgresql94-docs pgadmin3_94-docs pgadmin3_94
 
 sudo service postgresql-9.4 initdb
 sudo service postgresql-9.4 start
 sudo chkconfig postgresql-9.4 on
+
+Ubuntu 15.04
+sudo apt-get install postgresql-9.4-postgis-2.1 postgis-doc postgresql-doc pgadmin3
 
 sudo -u postgres psql postgres
 \password postgres
