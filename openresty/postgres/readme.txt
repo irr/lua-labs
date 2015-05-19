@@ -3,7 +3,7 @@ sudo vi /etc/yum.repos.d/remi.repo
 > exclude=memcached
 sudo yum remove libevent-last
 
-sudo yum install postgis2_94 postgis2_94-docs postgresql94-devel postgresql94-server postgresql94-docs
+sudo yum install postgis2_94 postgis2_94-docs postgresql94-devel postgresql94-server postgresql94-docs pgadmin3_94-docs pgadmin3_94
 
 sudo service postgresql-9.4 initdb
 sudo service postgresql-9.4 start
