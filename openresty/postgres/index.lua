@@ -54,6 +54,7 @@ if not err then
     exit()
 end
 
+ngx.say(err)
 exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
 
 
