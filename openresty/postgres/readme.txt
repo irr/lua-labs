@@ -37,5 +37,5 @@ COMMIT
 
 SELECT loc_id, loc_name, ST_AsGeoJSON(geog)::json as loc_json FROM locations;
 
-SELECT ST_Distance_Sphere(ST_GeomFromText('POINT(-72.1235 42.3521)',4326),ST_GeomFromText('LINESTRING(-72.1260 42.45, -72.123 42.1546)', 4326));
+SELECT ST_Distance_Sphere(ST_GeomFromText('POINT(-23.643439 -46.759648)',4326),ST_GeomFromText('POINT(-23.569582 -46.691784)', 4326));
 
