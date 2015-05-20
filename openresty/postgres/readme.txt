@@ -27,6 +27,7 @@ create extension postgis;
 create extension postgis_topology;
 
 CREATE TABLE locations(loc_id integer primary key, loc_name varchar(70), geog geography(POINT));
+CREATE INDEX locations_gix ON locations USING GIST(geog);
 
 INSERT INTO locations(loc_id, loc_name, geog) VALUES
   (0, 'Vila do Rossio, Sao Paulo, SP', ST_GeogFromText('POINT(-23.643439 -46.759648)')),
