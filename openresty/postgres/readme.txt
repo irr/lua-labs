@@ -27,15 +27,17 @@ create extension postgis;
 create extension postgis_topology;
 
 CREATE TABLE locations(loc_id integer primary key, loc_name varchar(70), geog geography(POINT));
+
 INSERT INTO locations(loc_id, loc_name, geog) VALUES
-    (0, 'Sao Paulo, SP', ST_GeogFromText('POINT(-23.6824124 -46.5952992)'));
-INSERT INTO locations(loc_id, loc_name, geog) VALUES 
-    (1, 'Waltham, MA', ST_GeogFromText('POINT(42.40047 -71.2577)')),
-    (2, 'Manchester, NH', ST_GeogFromText('POINT(42.99019 -71.46259)')),
-    (3, 'TI Blvd, TX', ST_GeogFromText('POINT(-96.75724 32.90977)'));
-COMMIT
+  (0, 'Vila do Rossio, Sao Paulo, SP', ST_GeogFromText('POINT(-23.643439 -46.759648)')),
+  (1, 'UOL, Sao Paulo, SP', ST_GeogFromText('POINT(-23.569582 -46.691784)')),
+  (2, 'Ladrillo, Sao Paulo, SP', ST_GeogFromText('POINT(-23.604196 -46.671072)')),
+  (3, 'Shopping Jardim Sul, Sao Paulo, SP', ST_GeogFromText('POINT(-23.630906 -46.735837)'));
+
+COMMIT;
 
 SELECT loc_id, loc_name, ST_AsGeoJSON(geog)::json as loc_json FROM locations;
 
-SELECT ST_Distance_Sphere(ST_GeomFromText('POINT(-23.643439 -46.759648)',4326),ST_GeomFromText('POINT(-23.569582 -46.691784)', 4326));
+SELECT * FROM locations WHERE ST_DWithin(geog, ST_GeogFromText('POINT(-23.643439 -46.759648)'), 3000);
+SELECT * FROM locations WHERE ST_DWithin(geog, ST_GeogFromText('SRID=4326;POINT(-23.643439 -46.759648)'), 5000);
 
