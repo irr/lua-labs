@@ -3,11 +3,35 @@ sudo yum install http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos9
 sudo vi /etc/yum.repos.d/remi.repo
 > exclude=memcached
 sudo yum remove libevent-last
-sudo yum install postgis2_94 postgis2_94-docs postgresql94-devel postgresql94-server postgresql94-docs pgadmin3_94-docs pgadmin3_94
-
 sudo service postgresql-9.4 initdb
 sudo service postgresql-9.4 start
 sudo chkconfig postgresql-9.4 on
+
+CENTOS 6.6/7
+sudo yum install postgis2_94 postgis2_94-docs postgresql94-devel postgresql94-server postgresql94-docs pgadmin3_94-docs pgadmin3_94
+
+CENTOS 7
+sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
+sudo systemctl restart postgresql-9.4
+
+firewall-cmd --permanent --add-port=5432/tcp
+firewall-cmd --permanent --add-port=80/tcp
+firewall-cmd --reload
+setsebool -P httpd_can_network_connect_db 1
+
+su -
+su - postgres
+psql
+\password postgres
+\q
+
+sudo vi /var/lib/pgsql/9.4/data/pg_hba.conf
+# "local" is for Unix domain socket connections only
+local   all             all                                     md5
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
 
 Ubuntu 15.04
 sudo apt-get install postgresql-9.4-postgis-2.1 postgis-doc postgresql-doc pgadmin3
@@ -17,10 +41,7 @@ sudo apt-get install postgresql-9.3-postgis-2.1 postgis-doc postgresql-doc pgadm
 
 sudo -u postgres psql postgres
 \password postgres
-
-sudo vi /var/lib/pgsql/9.4/data/pg_hba.conf
-local   all all md5
-host    all 127.0.0.1/32    md5
+\q
 
 psql -h localhost -U postgres
 create database postgis;
