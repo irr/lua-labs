@@ -13,6 +13,7 @@ sudo yum install postgis2_94 postgis2_94-docs postgresql94-devel postgresql94-se
 CENTOS 7
 sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
 sudo systemctl restart postgresql-9.4
+sudo systemctl enable postgresql-9.4
 
 firewall-cmd --permanent --add-port=5432/tcp
 firewall-cmd --permanent --add-port=80/tcp
