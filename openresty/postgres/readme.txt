@@ -8,7 +8,7 @@ sudo service postgresql-9.4 start
 sudo chkconfig postgresql-9.4 on
 
 CENTOS 6.6/7
-sudo yum install postgis2_94 postgis2_94-docs postgresql94-devel postgresql94-server postgresql94-docs pgadmin3_94-docs pgadmin3_94
+sudo yum install postgis2_94 postgis2_94-docs postgresql94-devel postgresql94-server postgresql94-docs pgadmin3_94-docs pgadmin3_94 postgresql94-contrib
 
 CENTOS 7
 sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
