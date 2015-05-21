@@ -12,6 +12,9 @@ sudo chkconfig postgresql-9.4 on
 Ubuntu 15.04
 sudo apt-get install postgresql-9.4-postgis-2.1 postgis-doc postgresql-doc pgadmin3
 
+Ubuntu 14.04
+sudo apt-get install postgresql-9.3-postgis-2.1 postgis-doc postgresql-doc pgadmin3
+
 sudo -u postgres psql postgres
 \password postgres
 
