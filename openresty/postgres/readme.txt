@@ -45,6 +45,7 @@ sudo -u postgres psql postgres
 \q
 
 psql -h localhost -U postgres
+create extension adminpack;
 create database postgis;
 
 psql -h localhost -U postgres postgis
