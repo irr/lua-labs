@@ -33,15 +33,14 @@ CREATE TABLE locations(loc_id integer primary key, loc_name varchar(70), geog ge
 CREATE INDEX locations_gix ON locations USING GIST(geog);
 
 INSERT INTO locations(loc_id, loc_name, geog) VALUES
-  (0, 'Vila do Rossio, Sao Paulo, SP', ST_GeogFromText('POINT(-23.643439 -46.759648)')),
-  (1, 'UOL, Sao Paulo, SP', ST_GeogFromText('POINT(-23.569582 -46.691784)')),
-  (2, 'Ladrillo, Sao Paulo, SP', ST_GeogFromText('POINT(-23.604196 -46.671072)')),
-  (3, 'Shopping Jardim Sul, Sao Paulo, SP', ST_GeogFromText('POINT(-23.630906 -46.735837)'));
+  (0, 'Vila do Rossio, Sao Paulo, SP', ST_GeogFromText('POINT(-46.759648 -23.643439)')),
+  (1, 'UOL, Sao Paulo, SP', ST_GeogFromText('POINT(-46.691784 -23.569582)')),
+  (2, 'Ladrillo, Sao Paulo, SP', ST_GeogFromText('POINT(-46.671072 -23.604196)')),
+  (3, 'Shopping Jardim Sul, Sao Paulo, SP', ST_GeogFromText('POINT(-46.735837 -23.630906)'));
 
 COMMIT;
 
 SELECT loc_id, loc_name, ST_AsGeoJSON(geog)::json as loc_json FROM locations;
 
-SELECT * FROM locations WHERE ST_DWithin(geog, ST_GeogFromText('POINT(-23.643439 -46.759648)'), 3000);
-SELECT * FROM locations WHERE ST_DWithin(geog, ST_GeogFromText('SRID=4326;POINT(-23.643439 -46.759648)'), 5000);
+SELECT * FROM locations WHERE ST_DWithin(geog, ST_GeogFromText('SRID=4326;POINT(-46.759648 -23.643439)'), 5000);
 
