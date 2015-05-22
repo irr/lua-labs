@@ -40,6 +40,15 @@ sudo apt-get install postgresql-9.4-postgis-2.1 postgis-doc postgresql-doc pgadm
 Ubuntu 14.04
 sudo apt-get install postgresql-9.3-postgis-2.1 postgis-doc postgresql-doc pgadmin3
 
+...
+Setting up postgresql-9.3 (9.3.6-0ubuntu0.14.04) ...
+Creating new cluster 9.3/main ...
+  config /etc/postgresql/9.3/main
+  data   /var/lib/postgresql/9.3/main
+  locale en_US.UTF-8
+  port   5432
+...
+
 sudo -u postgres psql postgres
 \password postgres
 \q
