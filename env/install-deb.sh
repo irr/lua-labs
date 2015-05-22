@@ -8,13 +8,15 @@ sudo rm -rf /opt/lua
 sudo mkdir -p /opt/lua
 sudo chown irocha: /opt/lua
 echo "installing dependencies..."
-sudo apt-get install lua5.1 lua5.1-doc luarocks libreadline6-dev libpcre3-dev libssl-dev \
+sudo apt-get install lua5.1 lua5.1-doc luarocks pandoc libreadline6-dev libpcre3-dev libssl-dev \
                      libsqlite3-dev libmysqlclient-dev \
                      libzmq3-dev
 sudo apt-get install cpanminus libtext-diff-perl \
                      libtest-longstring-perl \
                      liblist-moreutils-perl \
-                     libtest-base-perl
+                     libtest-base-perl \
+                     liblwp-useragent-determined-perl \
+                     
 echo "installing openresty..."
 cd /opt/lua
 git clone git@github.com:irr/nginx_tcp_proxy_module.git
@@ -31,7 +33,7 @@ sudo make install-libdrizzle-1.0
 sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p |grep drizzle
 cd ..
-rm -rf drizzle7-2011.07.21.tar.gz
+rm -rf drizzle7-2011.07.21*
 wget http://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz
 tar xfva ngx_openresty-1.7.10.1.tar.gz
 cd ngx_openresty-1.7.10.1
@@ -80,6 +82,7 @@ git clone https://github.com/openresty/lua-resty-dns.git
 git clone https://github.com/pintsized/lua-resty-http.git
 git clone https://github.com/openresty/lua-resty-memcached.git
 git clone https://github.com/openresty/lua-resty-mysql.git
+git clone https://github.com/azurewang/lua-resty-postgres.git
 git clone https://github.com/openresty/lua-resty-redis.git
 git clone https://github.com/openresty/lua-resty-string.git
 git clone https://github.com/openresty/lua-resty-upload.git
@@ -112,6 +115,12 @@ make
 sudo mv sockproc /usr/local/bin/
 sudo chown root: /usr/local/bin/sockproc
 make clean
+cd ..
+git clone git@github.com:irr/luaxml.git
+cd luaxml
+git remote add upstream https://github.com/kidd/luaxml.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 cd /opt/lua
 git clone http://luajit.org/git/luajit-2.0.git
 cd luajit-2.0
@@ -122,14 +131,14 @@ cd underscore.lua
 git remote add upstream https://github.com/mirven/underscore.lua.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
-git clone git@github.com:irr/luajit-examples.git
-cd luajit-examples
-git remote add upstream https://github.com/hnakamur/luajit-examples.git
-git fetch upstream && git merge upstream/master && git push
-cd ..
 git clone git@github.com:irr/lua-bit-numberlua.git
 cd lua-bit-numberlua
 git remote add upstream https://github.com/davidm/lua-bit-numberlua.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
+git clone git@github.com:irr/luajit-examples.git
+cd luajit-examples
+git remote add upstream https://github.com/hnakamur/luajit-examples.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
 git clone git@github.com:irr/docker-openresty.git
@@ -150,6 +159,7 @@ ln -s /opt/lua/modules/nginx/lua-resty-dns
 ln -s /opt/lua/modules/nginx/lua-resty-http
 ln -s /opt/lua/modules/nginx/lua-resty-memcached
 ln -s /opt/lua/modules/nginx/lua-resty-mysql
+ln -s /opt/lua/modules/nginx/lua-resty-postgres
 ln -s /opt/lua/modules/nginx/lua-resty-redis
 ln -s /opt/lua/modules/nginx/lua-resty-string
 ln -s /opt/lua/modules/nginx/lua-resty-upload
@@ -164,6 +174,7 @@ ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/modules/forked/router.lua
+ln -s /opt/lua/modules/forked/luaxml
 ln -s /opt/lua/underscore.lua
 ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
