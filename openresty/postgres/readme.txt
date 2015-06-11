@@ -1,8 +1,12 @@
 CENTOS 6.6
 sudo yum install http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+
+###################################
 sudo vi /etc/yum.repos.d/remi.repo
 > exclude=memcached
 sudo yum remove libevent-last
+###################################
+
 sudo service postgresql-9.4 initdb
 sudo service postgresql-9.4 start
 sudo chkconfig postgresql-9.4 on
