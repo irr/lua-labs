@@ -55,10 +55,10 @@ patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.10.1.patch
             --with-http_drizzle_module \
             --with-md5-asm \
             --with-sha1-asm \
-            --with-file-aio \            
+            --with-file-aio \
             --without-http_fastcgi_module \
             --without-http_uwsgi_module \
-            --without-http_scgi_module \            
+            --without-http_scgi_module \
             --with-debug --add-module=../nginx_tcp_proxy_module
 make install
 echo "creating symlinks..."
