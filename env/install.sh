@@ -15,7 +15,7 @@ cd
 echo "installing dependencies..."
 sudo yum install -y luarocks lua-devel pandoc readline-devel pcre-devel openssl-devel \
                  sqlite-devel mysql-devel \
-                 zeromq3 zeromq3-devel
+                 zeromq3 zeromq3-devel GeoIP-devel
 sudo yum install -y perl-CPAN perl-Text-Diff perl-Test-LongString \
                  perl-List-MoreUtils perl-Test-Base \
                  perl-IO-Socket-SSL perl-Time-HiRes \
