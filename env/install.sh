@@ -43,11 +43,22 @@ tar xfva ngx_openresty-1.7.10.1.tar.gz
 cd ngx_openresty-1.7.10.1
 patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.10.1.patch
 ./configure --prefix=/opt/lua/openresty \
+            --with-http_gunzip_module \
             --with-luajit \
+            --with-http_geoip_module \
             --with-http_realip_module \
             --with-http_iconv_module \
             --with-http_stub_status_module \
+            --with-http_ssl_module \
+            --with-http_realip_module \
+            --with-http_spdy_module \
             --with-http_drizzle_module \
+            --with-md5-asm \
+            --with-sha1-asm \
+            --with-file-aio \            
+            --without-http_fastcgi_module \
+            --without-http_uwsgi_module \
+            --without-http_scgi_module \            
             --with-debug --add-module=../nginx_tcp_proxy_module
 make install
 echo "creating symlinks..."
