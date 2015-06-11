@@ -38,6 +38,8 @@ host    all             all             127.0.0.1/32            md5
 # IPv6 local connections:
 host    all             all             ::1/128                 md5
 
+sudo service postgresql-9.4 restart
+
 Ubuntu 15.04
 sudo apt-get install postgresql-9.4-postgis-2.1 postgis-doc postgresql-doc pgadmin3
 
