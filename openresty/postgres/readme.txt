@@ -1,3 +1,24 @@
+ANTERGOS
+sudo pacman -S postgresql postgresql-docs postgis pgadmin3
+sudo systemctl enable postgresql.service
+sudo su - postgres -c "initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'"
+
+sudo systemctl start postgresql.service
+sudo su - postgres
+psql
+psql (9.4.4)
+Type "help" for help.
+
+postgres=# show hba_file;
+              hba_file              
+------------------------------------
+ /var/lib/postgres/data/pg_hba.conf
+(1 row)
+
+sudo vi /var/lib/postgres/data/pg_hba.conf
+sudo systemctl restart postgresql.service
+
+
 CENTOS 6.6
 sudo yum install http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
 
@@ -32,7 +53,7 @@ psql
 
 sudo vi /var/lib/pgsql/9.4/data/pg_hba.conf
 # "local" is for Unix domain socket connections only
-local   all             all                                     md5
+local   all             all                                     trust
 # IPv4 local connections:
 host    all             all             127.0.0.1/32            md5
 # IPv6 local connections:
