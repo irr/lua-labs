@@ -113,6 +113,11 @@ cd lua-resty-shell
 git remote add upstream https://github.com/juce/lua-resty-shell.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
+git clone git@github.com:irr/lua-resty-postgres.git
+cd lua-resty-postgres
+git remote add upstream https://github.com/azurewang/lua-resty-postgres.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 git clone git@github.com:irr/lua-pycrypto-aes.git
 cd lua-pycrypto-aes
 git remote add upstream https://github.com/siddontang/lua-pycrypto-aes.git
@@ -173,6 +178,7 @@ ln -s /opt/lua/nginx-tutorials
 ln -s /opt/lua/test-nginx
 cd ~/gitf
 ln -s /opt/lua/modules/forked/lua-resty-shell
+ln -s /opt/lua/modules/forked/lua-resty-postgres
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/modules/forked/router.lua
