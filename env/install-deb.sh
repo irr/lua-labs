@@ -93,7 +93,6 @@ git clone https://github.com/openresty/lua-resty-dns.git
 git clone https://github.com/pintsized/lua-resty-http.git
 git clone https://github.com/openresty/lua-resty-memcached.git
 git clone https://github.com/openresty/lua-resty-mysql.git
-git clone https://github.com/azurewang/lua-resty-postgres.git
 git clone https://github.com/openresty/lua-resty-redis.git
 git clone https://github.com/openresty/lua-resty-string.git
 git clone https://github.com/openresty/lua-resty-upload.git
@@ -111,11 +110,6 @@ cd ..
 git clone git@github.com:irr/lua-resty-shell.git
 cd lua-resty-shell
 git remote add upstream https://github.com/juce/lua-resty-shell.git
-git fetch upstream && git merge upstream/master && git push
-cd ..
-git clone git@github.com:irr/lua-resty-postgres.git
-cd lua-resty-postgres
-git remote add upstream https://github.com/azurewang/lua-resty-postgres.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
 git clone git@github.com:irr/lua-pycrypto-aes.git
@@ -166,7 +160,6 @@ ln -s /opt/lua/modules/nginx/lua-resty-dns
 ln -s /opt/lua/modules/nginx/lua-resty-http
 ln -s /opt/lua/modules/nginx/lua-resty-memcached
 ln -s /opt/lua/modules/nginx/lua-resty-mysql
-ln -s /opt/lua/modules/nginx/lua-resty-postgres
 ln -s /opt/lua/modules/nginx/lua-resty-redis
 ln -s /opt/lua/modules/nginx/lua-resty-string
 ln -s /opt/lua/modules/nginx/lua-resty-upload
@@ -178,7 +171,6 @@ ln -s /opt/lua/nginx-tutorials
 ln -s /opt/lua/test-nginx
 cd ~/gitf
 ln -s /opt/lua/modules/forked/lua-resty-shell
-ln -s /opt/lua/modules/forked/lua-resty-postgres
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/modules/forked/router.lua
