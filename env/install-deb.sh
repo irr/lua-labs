@@ -9,8 +9,8 @@ sudo mkdir -p /opt/lua
 sudo chown irocha: /opt/lua
 echo "installing dependencies..."
 sudo apt-get install lua5.1 lua5.1-doc luarocks pandoc libreadline6-dev libpcre3-dev libssl-dev \
-                     libsqlite3-dev libmysqlclient-dev \
-                     libzmq3-dev
+                     libsqlite3-dev libmysqlclient-dev libzmq3-dev \
+                     geoip-bin geoip-database libgeoip-dev
 sudo apt-get install cpanminus libtext-diff-perl \
                      libtest-longstring-perl \
                      liblist-moreutils-perl \
