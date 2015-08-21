@@ -2,7 +2,7 @@
 echo "uninstalling all lua environment..."
 cd
 rm -rf ~/.luarocks ~/.cache/luarocks
-sudo rm -rf /usr/sbin/nginx /usr/local/openresty* /usr/local/bin/lua* /usr/local/bin/resty /usr/local/bin/squish /usr/local/bin/sockproc /etc/ld.so.conf.d/drizzle7.conf /etc/ld.so.conf.d/luajit.conf /usr/local/lib/libdrizzle.*
+sudo rm -rf /usr/sbin/nginx /usr/local/openresty* /usr/local/bin/lua* /usr/local/bin/resty /usr/local/bin/squish /usr/local/bin/sockproc /etc/ld.so.conf.d/luajit.conf
 sudo ldconfig
 sudo rm -rf /opt/lua
 sudo mkdir -p /opt/lua
@@ -10,7 +10,7 @@ sudo chown irocha: /opt/lua
 cd ~/git
 rm -rf headers-more-nginx-module set-misc-nginx-module iconv-nginx-module lua-nginx-module lua-resty* openresty* nginx-tutorials test-nginx
 cd ~/gitf
-rm -rf lua-resty-shell lua-pycrypto-aes sockproc underscore.lua nginx_tcp_proxy_module luajit-examples docker-openresty openresty-docker
+rm -rf lua-resty-shell lua-pycrypto-aes sockproc underscore.lua nginx_tcp_proxy_module luajit-examples 
 cd
 echo "installing dependencies..."
 sudo pacman -S pcre libmariadbclient cpanminus perl-text-diff perl-list-moreutils perl-lwp-protocol-https perl-test-base geoip
@@ -21,25 +21,10 @@ cd nginx_tcp_proxy_module
 git remote add upstream https://github.com/yaoweibin/nginx_tcp_proxy_module.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
-wget http://agentzh.org/misc/nginx/drizzle7-2011.07.21.tar.gz
-tar xfva drizzle7-2011.07.21.tar.gz
-cd drizzle7-2011.07.21/
-./configure --without-server
-sudo rm /usr/bin/python
-sudo ln -s /usr/bin/python2 /usr/bin/python
-make libdrizzle-1.0
-sudo make install-libdrizzle-1.0
-sudo rm /usr/bin/python
-sudo ln -s /usr/bin/python3 /usr/bin/python
-sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
-sudo ldconfig
-ldconfig -p |grep drizzle
-cd ..
-rm -rf drizzle7-2011.07.21*
-wget http://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz
-tar xfva ngx_openresty-1.7.10.1.tar.gz
-cd ngx_openresty-1.7.10.1
-patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.10.1.patch
+wget http://openresty.org/download/ngx_openresty-1.9.3.1.tar.gz
+tar xfva ngx_openresty-1.9.3.1.tar.gz
+cd ngx_openresty-1.9.3.1
+patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.9.3.1.patch
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
@@ -50,7 +35,6 @@ patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.10.1.patch
             --with-http_ssl_module \
             --with-http_realip_module \
             --with-http_spdy_module \
-            --with-http_drizzle_module \
             --with-md5-asm \
             --with-sha1-asm \
             --with-file-aio \
@@ -58,9 +42,8 @@ patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.10.1.patch
             --without-http_uwsgi_module \
             --without-http_scgi_module \
             --with-debug --add-module=../nginx_tcp_proxy_module
-make install
+make -j4 && make install
 cd ..
-rm -rf ngx_openresty-1.7.10.1.tar.gz
 echo "creating symlinks..."
 cd /usr/sbin
 sudo ln -s /opt/lua/openresty/bin/resty
@@ -112,15 +95,6 @@ cd lua-bit-numberlua
 git remote add upstream https://github.com/davidm/lua-bit-numberlua.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
-git clone git@github.com:irr/docker-openresty.git
-cd docker-openresty
-git remote add upstream https://github.com/3scale/docker-openresty.git
-git fetch upstream && git merge upstream/master && git push
-cd ..
-git clone git@github.com:irr/openresty-docker.git
-cd openresty-docker
-git remote add upstream https://github.com/torhve/openresty-docker.git
-git fetch upstream && git merge upstream/master && git push
 mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
 cd /opt/lua/modules/nginx/
@@ -132,7 +106,6 @@ git clone https://github.com/openresty/lua-resty-dns.git
 git clone https://github.com/pintsized/lua-resty-http.git
 git clone https://github.com/openresty/lua-resty-memcached.git
 git clone https://github.com/openresty/lua-resty-mysql.git
-git clone https://github.com/azurewang/lua-resty-postgres.git
 git clone https://github.com/openresty/lua-resty-redis.git
 git clone https://github.com/openresty/lua-resty-string.git
 git clone https://github.com/openresty/lua-resty-upload.git
@@ -198,7 +171,6 @@ ln -s /opt/lua/modules/nginx/lua-resty-dns
 ln -s /opt/lua/modules/nginx/lua-resty-http
 ln -s /opt/lua/modules/nginx/lua-resty-memcached
 ln -s /opt/lua/modules/nginx/lua-resty-mysql
-ln -s /opt/lua/modules/nginx/lua-resty-postgres
 ln -s /opt/lua/modules/nginx/lua-resty-redis
 ln -s /opt/lua/modules/nginx/lua-resty-string
 ln -s /opt/lua/modules/nginx/lua-resty-upload
@@ -222,7 +194,25 @@ ln -s /opt/lua/underscore.lua
 ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
 ln -s /opt/lua/lua-bit-numberlua
-ln -s /opt/lua/docker-openresty
-ln -s /opt/lua/openresty-docker
 cd
+echo "installing rocks..."
+luarocks --local install lpeg
+luarocks --local install lua-cjson
+luarocks --local install lua-iconv
+luarocks --local install lua-llthreads2
+luarocks --local install luabitop
+luarocks --local install luacrypto
+luarocks --local install lualogging
+luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
+luarocks --local install luasql-mysql \
+                         MYSQL_INCDIR=/usr/include/mysql \
+                         MYSQL_LIBDIR=/usr/lib64/mysql
+luarocks --local install luasql-sqlite3
+luarocks --local install redis-lua
+luarocks --local install stdlib
+luarocks --local install underscore.lua \
+                         --from=http://github.com/irr/underscore.lua/raw/master/rocks
+cd
+echo "generating documentation..."
+sh lua/env/makedocs.sh
 
