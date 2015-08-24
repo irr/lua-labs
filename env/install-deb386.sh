@@ -16,7 +16,7 @@ sudo apt-get install cpanminus libtext-diff-perl \
                      liblist-moreutils-perl \
                      libtest-base-perl \
                      liblwp-useragent-determined-perl \
-                     
+
 echo "installing openresty..."
 cd /opt/lua
 git clone git@github.com:irr/nginx_tcp_proxy_module.git
@@ -55,7 +55,7 @@ patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.9.3.1.patch
             --without-http_fastcgi_module \
             --without-http_uwsgi_module \
             --without-http_scgi_module \
-            --with-debug --add-module=../nginx_tcp_proxy_module            
+            --with-debug --add-module=../nginx_tcp_proxy_module
 make -j4 && make install
 echo "creating symlinks..."
 cd /usr/sbin
@@ -126,6 +126,14 @@ sudo mv sockproc /usr/local/bin/
 sudo chown root: /usr/local/bin/sockproc
 make clean
 cd ..
+git clone git@github.com:irr/wrk.git
+cd wrk
+git remote add upstream https://github.com/wg/wrk.git
+git fetch upstream && git merge upstream/master && git push
+make
+sudo mv wrk /usr/local/bin
+make clean
+cd ..
 git clone git@github.com:irr/luaxml.git
 cd luaxml
 git remote add upstream https://github.com/kidd/luaxml.git
@@ -172,6 +180,7 @@ ln -s /opt/lua/test-nginx
 cd ~/gitf
 ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
+ln -s /opt/lua/modules/forked/wrk
 ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/modules/forked/router.lua
 ln -s /opt/lua/modules/forked/luaxml
