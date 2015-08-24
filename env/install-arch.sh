@@ -196,21 +196,21 @@ ln -s /opt/lua/luajit-examples
 ln -s /opt/lua/lua-bit-numberlua
 cd
 echo "installing rocks..."
-luarocks --local install lpeg
-luarocks --local install lua-cjson
-luarocks --local install lua-iconv
-luarocks --local install lua-llthreads2
-luarocks --local install luabitop
-luarocks --local install luacrypto
-luarocks --local install lualogging
-luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
-luarocks --local install luasql-mysql \
+luarocks-5.1 --local install lpeg
+luarocks-5.1 --local install lua-cjson
+luarocks-5.1 --local install lua-iconv
+luarocks-5.1 --local install lua-llthreads2
+luarocks-5.1 --local install luabitop
+luarocks-5.1 --local install luacrypto
+luarocks-5.1 --local install lualogging
+luarocks-5.1 --local install luasec OPENSSL_LIBDIR=/usr/lib64/
+luarocks-5.1 --local install luasql-mysql \
                          MYSQL_INCDIR=/usr/include/mysql \
                          MYSQL_LIBDIR=/usr/lib64/mysql
-luarocks --local install luasql-sqlite3
-luarocks --local install redis-lua
-luarocks --local install stdlib
-luarocks --local install underscore.lua \
+luarocks-5.1 --local install luasql-sqlite3
+luarocks-5.1 --local install redis-lua
+luarocks-5.1 --local install stdlib
+luarocks-5.1 --local install underscore.lua \
                          --from=http://github.com/irr/underscore.lua/raw/master/rocks
 cd
 echo "generating documentation..."
