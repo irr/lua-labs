@@ -21,6 +21,8 @@ lua-labs
 * [underscore.lua]: A utility library for Lua
 
 ```shell
+# http://download.eclipse.org/ldt/releases
+
 luarocks --local install lpeg
 luarocks --local install lua-cjson
 luarocks --local install lua-iconv
@@ -30,7 +32,7 @@ luarocks --local install lualogging
 luarocks --local install luaposix
 
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
-luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu 
+luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu
 luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib/i386-linux-gnu
 
 luarocks --local install luasql-mysql \
