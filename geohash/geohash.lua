@@ -27,65 +27,44 @@ BORDERS.top.odd = BORDERS.right.even
 BORDERS.left.odd = BORDERS.bottom.even
 BORDERS.right.odd = BORDERS.top.even
 
-function d(o)
-    if type(o) == "table" then
-        for k, v in pairs(o) do
-            print(k,v)
-        end
-    else
-        print(o)
-    end
-end
-
-function refine_interval(interval, cd, mask)
-    if bit.band(cd, mask) > 0 then
-        interval[1] = (interval[1] + interval[2]) / 2
-    else
-        interval[2] = (interval[1] + interval[2]) / 2
-    end
-end
-
 function decode(hash)
-    local is_even = true;
-    local lat = { -90.0, 90.0, 0 }
-    local lon = { -180.0, 180.0, 0 }
-    local lat_err, lon_err = 90.0, 180.0;
+    local flip = true;
+    local latitude = { -90.0, 90.0 }
+    local longitude = { -180.0, 180.0 }
 
     for i = 1, #hash do
         local c = hash:sub(i, i)
-        local cd = BASE32:find(c)
+        local cd = BASE32:find(c) - 1
         for j = 1, 5 do
             mask = BITS[j]
-            if is_even then
-                lon_err = lon_err / 2
-                refine_interval(lon, cd - 1, mask)
+            local interval = (flip and longitude) or latitude
+            if bit.band(cd, mask) > 0 then
+                interval[1] = (interval[1] + interval[2]) / 2
             else
-                lat_err = lat_err / 2
-                refine_interval(lat, cd - 1, mask)
+                interval[2] = (interval[1] + interval[2]) / 2
             end
-            is_even = not is_even
+            flip = not flip
         end
     end
 
-    lat[3] = (lat[1] + lat[2]) / 2
-    lon[3] = (lon[1] + lon[2]) / 2
+    latitude[3] = (latitude[1] + latitude[2]) / 2
+    longitude[3] = (longitude[1] + longitude[2]) / 2
 
-    return { latitude = lat, longitude = lon}
+    return { lat = latitude, lon = longitude }
 
 end
 
 function encode(latitude, longitude, precision)
-    local is_even = true
-    local i = 0
+    local flip = true
     local lat = { -90.0, 90.0 }
     local lon = { -180.0, 180.0 }
     local b = 0
-    local ch =0
+    local ch = 0
     local precision = precision or 12
     local geohash = "";
 
     while #geohash < precision do
-        if is_even then
+        if flip then
             mid = (lon[1] + lon[2]) / 2
             if longitude > mid then
                 ch = bit.bor(ch, BITS[b + 1])
@@ -103,7 +82,8 @@ function encode(latitude, longitude, precision)
             end
         end
 
-        is_even = not is_even;
+        flip = not flip;
+
         if b < 4 then
             b = b + 1
         else
@@ -117,24 +97,19 @@ end
 
 function calculate_distance(lat1, lon1, lat2, lon2)
     local R = 6371000
-    local r1 = math.rad(lat1)
-    local r2 = math.rad(lat2)
-    local dlat = math.rad((lat2-lat1))
-    local dlon = math.rad((lon2-lon1))
+    local r1, r2 = math.rad(lat1), math.rad(lat2)
+    local dlat, dlon = math.rad((lat2-lat1)), math.rad((lon2-lon1))
     local a = math.sin(dlat/2) * math.sin(dlat/2) +
               math.cos(r1) * math.cos(r2) *
               math.sin(dlon/2) * math.sin(dlon/2)
     local c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
-    local d = R * c
-    return d
+    return R * c
 end
 
 function distance(hash1, hash2)
-    local t1 = decode(hash1)
-    local t2 = decode(hash2)
-    local c1 = coord(t1)
-    local c2 = coord(t2)
-    return calculate_distance(c1.lat, c1.lon, c2.lat, c2.lon)
+    local t1, t2 = decode(hash1), decode(hash2)
+    return calculate_distance(coord(t1).lat, coord(t1).lon,
+                              coord(t2).lat, coord(t2).lon)
 end
 
 function neighbor(hash, dir)
@@ -164,7 +139,7 @@ end
 
 function coord(t)
     if type(t) == 'table' then
-        return { lat = t.latitude[2], lon = t.longitude[2] }
+        return { lat = t.lat[2], lon = t.lon[2] }
     else
         return coord(decode(t))
     end
@@ -176,12 +151,12 @@ function coord_str(t)
 end
 
 function test()
-    local precision = 4
+    local precision = 12
     print("\nencoding", "lat/long (-23.643380, -46.759670)")
     local h1 = encode(-23.643380, -46.759670, precision)
     print("result/decode", h1, "\n")
     local t = decode(h1)
-    for _, l in pairs({'latitude', 'longitude'}) do
+    for _, l in pairs({'lat', 'lon'}) do
         print(l)
         for k, v in pairs(t[l]) do
             print("\t", k, v)
