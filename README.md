@@ -21,6 +21,12 @@ lua-labs
 * [underscore.lua]: A utility library for Lua
 
 ```shell
+# LDT
+# 1. Uncheck Execution Environment
+# 2. Add Lua JIT Interpreter
+#    /opt/lua/openresty/luajit/bin/luajit-2.1.0-alpha
+# 3. Add Variable
+#    LUA_INIT=@/home/irocha/lua/configs/init.lua
 # http://download.eclipse.org/ldt/releases
 
 luarocks --local install lpeg
