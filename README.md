@@ -6,6 +6,7 @@ lua-labs
 * [OpenResty]: A fast and scalable web application platform by extending NGINX with Lua
 * [luarocks]: Deployment and management system for Lua modules
 * [lpeg]: LPeg is a new pattern-matching library for Lua
+* [luabitop]: Lua BitOp is a C extension module for bitwise operations on numbers
 * [lua-cjson]: Lua CJSON provides JSON support for Lua
 * [lua-iconv]: Lua binding to the POSIX 'iconv' library
 * [lua-llthreads2]: Low-Level threads(pthreads or WIN32 threads) for Lua
@@ -30,6 +31,7 @@ lua-labs
 # http://download.eclipse.org/ldt/releases
 
 luarocks --local install lpeg
+luarocks --local install luabitop
 luarocks --local install lua-cjson
 luarocks --local install lua-iconv
 luarocks --local install lua-llthreads2
@@ -83,6 +85,7 @@ limitations under the License.
 [OpenResty]: http://openresty.org/
 [LuaJIT]: http://luajit.org/
 [lpeg]: http://www.inf.puc-rio.br/~roberto/lpeg/
+[luabitop]: http://bitop.luajit.org/
 [lua-cjson]: http://www.kyne.com.au/~mark/software/lua-cjson.php
 [lua-iconv]: http://luaforge.net/projects/lua-iconv/
 [lua-llthreads2]: https://github.com/moteus/lua-llthreads2
