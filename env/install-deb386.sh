@@ -126,11 +126,6 @@ sudo mv sockproc /usr/local/bin/
 sudo chown root: /usr/local/bin/sockproc
 make clean
 cd ..
-git clone git@github.com:irr/geohash.git
-cd geohash
-git remote add upstream https://github.com/dauer/geohash.git
-git fetch upstream && git merge upstream/master && git push
-cd ..
 git clone git@github.com:irr/wrk.git
 cd wrk
 git remote add upstream https://github.com/wg/wrk.git
@@ -187,7 +182,6 @@ ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
 ln -s /opt/lua/modules/forked/wrk
 ln -s /opt/lua/modules/forked/sockproc
-ln -s /opt/lua/modules/forked/geohash
 ln -s /opt/lua/modules/forked/router.lua
 ln -s /opt/lua/modules/forked/luaxml
 ln -s /opt/lua/underscore.lua
