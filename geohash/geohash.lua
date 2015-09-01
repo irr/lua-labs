@@ -45,14 +45,14 @@ function refine_interval(interval, cd, mask)
     end
 end
 
-function decode(geohash)
+function decode(hash)
     local is_even = true;
     local lat = { -90.0, 90.0, 0 }
     local lon = { -180.0, 180.0, 0 }
     local lat_err, lon_err = 90.0, 180.0;
 
-    for i = 1, #geohash do
-        local c = geohash:sub(i, i)
+    for i = 1, #hash do
+        local c = hash:sub(i, i)
         local cd = BASE32:find(c)
         for j = 1, 5 do
             mask = BITS[j]
@@ -150,11 +150,11 @@ function neighbor(hash, dir)
     return base..BASE32:sub(n, n)
 end
 
-function neighbors(geohash)
-    local neighbors = { top = neighbor(geohash, 'top'),
-                        bottom = neighbor(geohash, 'bottom'),
-                        right = neighbor(geohash, 'right'),
-                        left = neighbor(geohash, 'left') }
+function neighbors(hash)
+    local neighbors = { top = neighbor(hash, 'top'),
+                        bottom = neighbor(hash, 'bottom'),
+                        right = neighbor(hash, 'right'),
+                        left = neighbor(hash, 'left') }
     neighbors['topleft'] = neighbor(neighbors['left'], 'top');
     neighbors['topright'] = neighbor(neighbors['right'], 'top');
     neighbors['bottomleft'] = neighbor(neighbors['left'], 'bottom');
@@ -203,5 +203,3 @@ function test()
             h1, coord_str(h1), h2, coord_str(h2), dist, dist/1000))
     end
 end
-
-test()
