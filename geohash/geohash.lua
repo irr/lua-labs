@@ -1,7 +1,7 @@
 -- Geohash
 -- (c) 2015 Ivan Ribeiro Rocha (ivan.ribeiro@gmail.com)
 
-bit = require("bit")
+local bit = require("bit")
 
 local BITS = { 16, 8, 4, 2, 1 }
 
