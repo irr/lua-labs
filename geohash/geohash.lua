@@ -55,31 +55,23 @@ function decode(hash)
 end
 
 function encode(latitude, longitude, precision)
-    local flip = true
     local lat = { -90.0, 90.0 }
     local lon = { -180.0, 180.0 }
-    local b = 0
-    local ch = 0
+    local b, ch, flip = 0, 0, true
     local precision = precision or 12
     local geohash = "";
 
     while #geohash < precision do
-        if flip then
-            mid = (lon[1] + lon[2]) / 2
-            if longitude > mid then
-                ch = bit.bor(ch, BITS[b + 1])
-                lon[1] = mid
-            else
-                lon[2] = mid
-            end
+        local tab = flip and lon or lat
+        local grd = flip and longitude or latitude
+
+        mid = (tab[1] + tab[2]) / 2
+
+        if grd > mid then
+            ch = bit.bor(ch, BITS[b + 1])
+            tab[1] = mid
         else
-            mid = (lat[1] + lat[2]) / 2
-            if (latitude > mid) then
-                ch = bit.bor(ch, BITS[b + 1])
-                lat[1] = mid;
-            else
-                lat[2] = mid;
-            end
+            tab[2] = mid
         end
 
         flip = not flip;
@@ -88,10 +80,10 @@ function encode(latitude, longitude, precision)
             b = b + 1
         else
             geohash = geohash..BASE32:sub(ch + 1, ch + 1);
-            b = 0
-            ch = 0
+            b, ch = 0, 0
         end
     end
+
     return geohash
 end
 
@@ -116,12 +108,12 @@ function neighbor(hash, dir)
     hash = hash:lower()
     local len = #hash
     local last = hash:sub(len, len);
-    local t = ((math.mod(len,2) == 0) and 'even') or 'odd'
+    local flip = ((math.mod(len,2) == 0) and 'even') or 'odd'
     local base = hash:sub(1, len - 1)
-    if BORDERS[dir][t]:find(last) then
+    if BORDERS[dir][flip]:find(last) then
         base = neighbor(base, dir)
     end
-    local n = NEIGHBORS[dir][t]:find(last)
+    local n = NEIGHBORS[dir][flip]:find(last)
     return base..BASE32:sub(n, n)
 end
 
@@ -130,19 +122,18 @@ function neighbors(hash)
                         bottom = neighbor(hash, 'bottom'),
                         right = neighbor(hash, 'right'),
                         left = neighbor(hash, 'left') }
-    neighbors['topleft'] = neighbor(neighbors['left'], 'top');
-    neighbors['topright'] = neighbor(neighbors['right'], 'top');
-    neighbors['bottomleft'] = neighbor(neighbors['left'], 'bottom');
-    neighbors['bottomright'] = neighbor(neighbors['right'], 'bottom');
+    neighbors.topleft = neighbor(neighbors.left, 'top');
+    neighbors.topright = neighbor(neighbors.right, 'top');
+    neighbors.bottomleft = neighbor(neighbors.left, 'bottom');
+    neighbors.bottomright = neighbor(neighbors.right, 'bottom');
     return neighbors
 end
 
 function coord(t)
     if type(t) == 'table' then
         return { lat = t.lat[3], lon = t.lon[3] }
-    else
-        return coord(decode(t))
     end
+    return coord(decode(t))
 end
 
 function coord_str(t)
