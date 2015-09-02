@@ -29,28 +29,26 @@ BORDERS.right.odd = BORDERS.top.even
 
 function decode(hash)
     local flip = true;
-    local latitude = { -90.0, 90.0 }
-    local longitude = { -180.0, 180.0 }
+    local coords = { latitude = { -90.0, 90.0 },
+                     longitude = { -180.0, 180.0 } }
 
     for i = 1, #hash do
         local c = hash:sub(i, i)
         local cd = BASE32:find(c) - 1
         for j = 1, 5 do
             mask = BITS[j]
-            local interval = (flip and longitude) or latitude
-            if bit.band(cd, mask) > 0 then
-                interval[1] = (interval[1] + interval[2]) / 2
-            else
-                interval[2] = (interval[1] + interval[2]) / 2
-            end
+            local tab = (flip and coords.longitude) or coords.latitude
+            local idx = (bit.band(cd, mask) > 0) and 1 or 2
+            tab[idx] = (tab[1] + tab[2]) / 2
             flip = not flip
         end
     end
 
-    latitude[3] = (latitude[1] + latitude[2]) / 2
-    longitude[3] = (longitude[1] + longitude[2]) / 2
+    for k, _ in pairs(coords) do
+        coords[k][3] = (coords[k][1] + coords[k][2]) / 2
+    end
 
-    return { lat = latitude, lon = longitude }
+    return { lat = coords.latitude, lon = coords.longitude }
 
 end
 
