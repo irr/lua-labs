@@ -58,6 +58,8 @@ patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.9.3.1.patch
             --with-debug --add-module=../nginx_tcp_proxy_module
 make -j4 && make install
 echo "creating symlinks..."
+cd /opt/lua/openresty/luajit/bin/
+ln -s luajit-2.1.0-alpha lua
 cd /usr/sbin
 sudo ln -s /opt/lua/openresty/nginx/sbin/nginx
 cd /usr/local/bin
