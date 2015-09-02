@@ -139,7 +139,7 @@ end
 
 function coord(t)
     if type(t) == 'table' then
-        return { lat = t.lat[2], lon = t.lon[2] }
+        return { lat = t.lat[3], lon = t.lon[3] }
     else
         return coord(decode(t))
     end
