@@ -22,6 +22,7 @@ lua-labs
 * [underscore.lua]: A utility library for Lua
 
 ```shell
+# sudo vi /usr/local/lib/perl/5.18.2/perllocal.pod
 # LDT
 # 1. Uncheck Execution Environment
 # 2. Add Lua JIT Interpreter
