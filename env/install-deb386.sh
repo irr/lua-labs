@@ -102,6 +102,7 @@ git clone https://github.com/openresty/lua-resty-upstream-healthcheck.git
 git clone https://github.com/hamishforbes/lua-resty-upstream.git
 git clone https://github.com/openresty/lua-resty-lrucache.git
 git clone https://github.com/bungle/lua-resty-template.git
+git clone https://github.com/openresty/lua-resty-limit-traffic.git
 mkdir -p /opt/lua/modules/forked
 cd /opt/lua/modules/forked/
 git clone git@github.com:irr/router.lua.git
@@ -176,6 +177,7 @@ ln -s /opt/lua/modules/nginx/lua-resty-upload
 ln -s /opt/lua/modules/nginx/lua-resty-upstream
 ln -s /opt/lua/modules/nginx/lua-resty-upstream-healthcheck
 ln -s /opt/lua/modules/nginx/lua-resty-lrucache
+ln -s /opt/lua/modules/nginx/lua-resty-limit-traffic
 ln -s /opt/lua/openresty.org
 ln -s /opt/lua/nginx-tutorials
 ln -s /opt/lua/test-nginx
