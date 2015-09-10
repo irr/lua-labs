@@ -197,6 +197,7 @@ ln -s /opt/lua/lua-bit-numberlua
 cd
 echo "installing rocks..."
 luarocks --local install lpeg
+luarocks --local install luabitop
 luarocks --local install lua-cjson
 luarocks --local install lua-iconv
 luarocks --local install lua-llthreads2
