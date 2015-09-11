@@ -99,6 +99,7 @@ git clone https://github.com/openresty/lua-resty-redis.git
 git clone https://github.com/openresty/lua-resty-string.git
 git clone https://github.com/openresty/lua-resty-upload.git
 git clone https://github.com/openresty/lua-resty-upstream-healthcheck.git
+git clone https://github.com/openresty/lua-resty-websocket.git
 git clone https://github.com/hamishforbes/lua-resty-upstream.git
 git clone https://github.com/openresty/lua-resty-lrucache.git
 git clone https://github.com/bungle/lua-resty-template.git

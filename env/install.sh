@@ -38,10 +38,10 @@ sudo ldconfig && ldconfig -p |grep drizzle
 cd ..
 rm -rf drizzle7-2011.07.21*
 cd /opt/lua
-wget http://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz
-tar xfva ngx_openresty-1.7.10.1.tar.gz
-cd ngx_openresty-1.7.10.1
-patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.7.10.1.patch
+wget http://openresty.org/download/ngx_openresty-1.9.3.1.tar.gz
+tar xfva ngx_openresty-1.9.3.1.tar.gz
+cd ngx_openresty-1.9.3.1
+patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.9.3.1.patch
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
@@ -76,6 +76,8 @@ echo "updating libraries..."
 sudo cp ~/lua/configs/luajit.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p | grep luaj
 cd /opt/lua
+mkdir -p ~/.luarocks
+if [ ! -d "luarocks" ]; then ln -s ~/.luarocks luarocks; fi
 git clone https://github.com/openresty/openresty.org.git
 git clone https://github.com/openresty/test-nginx.git
 cd test-nginx
@@ -95,7 +97,6 @@ git clone https://github.com/openresty/lua-resty-dns.git
 git clone https://github.com/pintsized/lua-resty-http.git
 git clone https://github.com/openresty/lua-resty-memcached.git
 git clone https://github.com/openresty/lua-resty-mysql.git
-git clone https://github.com/azurewang/lua-resty-postgres.git
 git clone https://github.com/openresty/lua-resty-redis.git
 git clone https://github.com/openresty/lua-resty-string.git
 git clone https://github.com/openresty/lua-resty-upload.git
@@ -104,6 +105,8 @@ git clone https://github.com/openresty/lua-resty-websocket.git
 git clone https://github.com/hamishforbes/lua-resty-upstream.git
 git clone https://github.com/openresty/lua-resty-lrucache.git
 git clone https://github.com/bungle/lua-resty-template.git
+git clone https://github.com/openresty/lua-resty-limit-traffic.git
+git clone https://github.com/jbochi/lua-resty-cassandra.git
 mkdir -p /opt/lua/modules/forked
 cd /opt/lua/modules/forked/
 git clone git@github.com:irr/awesome-lua.git
@@ -171,16 +174,6 @@ git clone git@github.com:irr/luajit-examples.git
 cd luajit-examples
 git remote add upstream https://github.com/hnakamur/luajit-examples.git
 git fetch upstream && git merge upstream/master && git push
-cd ..
-git clone git@github.com:irr/docker-openresty.git
-cd docker-openresty
-git remote add upstream https://github.com/3scale/docker-openresty.git
-git fetch upstream && git merge upstream/master && git push
-cd ..
-git clone git@github.com:irr/openresty-docker.git
-cd openresty-docker
-git remote add upstream https://github.com/torhve/openresty-docker.git
-git fetch upstream && git merge upstream/master && git push
 cd ~/git
 ln -s /opt/lua/modules/nginx/headers-more-nginx-module
 ln -s /opt/lua/modules/nginx/set-misc-nginx-module
@@ -190,7 +183,6 @@ ln -s /opt/lua/modules/nginx/lua-resty-dns
 ln -s /opt/lua/modules/nginx/lua-resty-http
 ln -s /opt/lua/modules/nginx/lua-resty-memcached
 ln -s /opt/lua/modules/nginx/lua-resty-mysql
-ln -s /opt/lua/modules/nginx/lua-resty-postgres
 ln -s /opt/lua/modules/nginx/lua-resty-redis
 ln -s /opt/lua/modules/nginx/lua-resty-string
 ln -s /opt/lua/modules/nginx/lua-resty-upload
@@ -198,6 +190,8 @@ ln -s /opt/lua/modules/nginx/lua-resty-upstream
 ln -s /opt/lua/modules/nginx/lua-resty-upstream-healthcheck
 ln -s /opt/lua/modules/nginx/lua-resty-websocket
 ln -s /opt/lua/modules/nginx/lua-resty-lrucache
+ln -s /opt/lua/modules/nginx/lua-resty-limit-traffic
+ln -s /opt/lua/modules/nginx/lua-resty-cassandra
 ln -s /opt/lua/openresty.org
 ln -s /opt/lua/nginx-tutorials
 ln -s /opt/lua/test-nginx
@@ -214,8 +208,6 @@ ln -s /opt/lua/underscore.lua
 ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
 ln -s /opt/lua/lua-bit-numberlua
-ln -s /opt/lua/docker-openresty
-ln -s /opt/lua/openresty-docker
 cd
 echo "installing squish..."
 cd /opt/lua
@@ -234,6 +226,7 @@ sh lua/env/makedocs.sh
 # sudo luarocks install luasocket
 # lua
 luarocks --local install lpeg
+luarocks --local install luabitop
 luarocks --local install lua-cjson
 luarocks --local install lua-iconv
 luarocks --local install lua-llthreads2
@@ -249,7 +242,9 @@ luarocks --local install lzmq
 luarocks --local install redis-lua
 luarocks --local install stdlib
 luarocks --local install underscore.lua \
-                         --from=http://github.com/irr/underscore.lua/raw/master/rocks
+                         --from=http://marcusirven.s3.amazonaws.com/rocks/
+#luarocks --local install underscore.lua \
+#                         --from=http://github.com/irr/underscore.lua/raw/master/rocks
 echo "setup ok."
 cd
 
