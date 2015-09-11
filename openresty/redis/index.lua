@@ -67,9 +67,7 @@ for i, res in ipairs(results) do
     end
 end
 
-redis.add_commands("geoadd")
-redis.add_commands("geohash")
-redis.add_commands("georadius")
+redis.add_commands("geoadd", "geohash", "georadius")
 
 local res, err = red:geoadd('Sicily', '13.361389', '38.115556',  'Palermo')
 if not res then
