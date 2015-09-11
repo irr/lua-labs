@@ -67,7 +67,40 @@ for i, res in ipairs(results) do
     end
 end
 
+redis.add_commands("geoadd")
+redis.add_commands("geohash")
+redis.add_commands("georadius")
+
+local res, err = red:geoadd('Sicily', '13.361389', '38.115556',  'Palermo')
+if not res then
+    ngx.say("failed to geoadd: ", err)
+else
+    ngx.say("geoadd (Palermo): ", tostring(res))
+end
+
+local res, err = red:geoadd('Sicily', '15.087269', '37.502669', 'Catania')
+if not res then
+    ngx.say("failed to geoadd: ", err)
+else
+    ngx.say("geoadd (Catania): ", tostring(res))
+end
+
+local res, err = red:geohash('Sicily', 'Palermo', 'Catania')
+if not res then
+    ngx.say("failed to geohash: ", err)
+else
+    ngx.say("geohash (Palermo): ", tostring(json.encode(res)))
+end
+
+local res, err = red:georadius('Sicily', '15', '37', '200', 'km', 'WITHDIST', 'WITHCOORD')
+if not res then
+    ngx.say("failed to geohash: ", err)
+else
+    ngx.say("georadius: ", tostring(json.encode(res)))
+end
+
 local ok, err = red:set_keepalive(0, 100)
 if not ok then
     ngx.say(json.encode(tostring(err)))
 end
+
