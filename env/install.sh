@@ -15,7 +15,8 @@ cd
 echo "installing dependencies..."
 sudo yum install -y luarocks lua-devel pandoc readline-devel pcre-devel openssl-devel \
                  sqlite-devel mysql-devel \
-                 zeromq3 zeromq3-devel GeoIP-devel
+                 zeromq3 zeromq3-devel GeoIP-devel \
+                 apr-devel apr-util-devel libapreq2 libapreq2-devel
 sudo yum install -y perl-CPAN perl-Text-Diff perl-Test-LongString \
                  perl-List-MoreUtils perl-Test-Base \
                  perl-IO-Socket-SSL perl-Time-HiRes \
@@ -227,6 +228,7 @@ sh lua/env/makedocs.sh
 # lua
 luarocks --local install lpeg
 luarocks --local install luabitop
+luarocks --local install lua-apr
 luarocks --local install lua-cjson
 luarocks --local install lua-iconv
 luarocks --local install lua-llthreads2

@@ -17,7 +17,7 @@ session:set_keyspace("irr")
 local table_created, err = session:execute [[
     CREATE TABLE IF NOT EXISTS rt_series (
         id text,
-        ts text,
+        ts timeuuid,
         val int,
         PRIMARY KEY (id, ts),
     ) WITH CLUSTERING ORDER BY (ts DESC);
@@ -25,26 +25,28 @@ local table_created, err = session:execute [[
 
 -- query with arguments
 local lim = 10
-local now = os.time()
 
 for i = 1, lim do
-    local ts = tostring(now - i)
     local res, err = session:execute([[
-        INSERT INTO rt_series (id, ts, val) VALUES (?, ?, ?) USING TTL 10;
-    ]], {"rt_id", ts, i * 50})
-    print(string.format("inserting data (%02d) from timestamp %s [res=%s][err=%s]",
-        i, ts, tostring(res), tostring(err)))
+        INSERT INTO rt_series (id, ts, val) VALUES (?, now(), ?) USING TTL 3600;
+    ]], {"rt_id", i * 50})
+    print(string.format("inserting data (%02d) [res=%s][err=%s]",
+        i, tostring(res), tostring(err)))
+end
+
+function gmtime(t)
+	return os.date("!%c UTC", math.floor(t/1000))
 end
 
 -- select statement
-local series, err = session:execute(string.format("SELECT id, ts, val FROM rt_series LIMIT %d", lim))
+local series, err = session:execute(string.format("SELECT id, unixTimestampOf(ts) as ts, val FROM rt_series LIMIT %d", lim))
 
 if not err then
     print(string.format("retrieving last %d results...", lim))
     for _, t in pairs(series) do
         if type(t) == "table" then
-            if t['ts'] then
-                print(string.format("\t%s = [%03d]", tostring(t['ts']), t['val']))
+            if t['id'] then
+                print(string.format("\t%s (%s) = [%03d]", tostring(t['ts']), gmtime(t['ts']), t['val']))
             end
         end
     end
