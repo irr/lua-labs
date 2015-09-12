@@ -1,3 +1,7 @@
+package.path = package.path .. ";/home/irocha/.luarocks/share/lua/5.1/?.lua;"
+package.cpath = package.cpath .. ";/home/irocha/.luarocks/lib/lua/5.1/?.so;"
+
+local apr = require "apr"
 local cassandra = require "cassandra"
 
 local session = cassandra.new()
@@ -35,11 +39,14 @@ for i = 1, lim do
 end
 
 function gmtime(t)
-	return os.date("!%c UTC", math.floor(t/1000))
+	-- return os.date("!%c UTC", math.floor(t/1000))
+    -- return apr.time_explode(t/1000)
+    return apr.time_format('rfc822', t/1000)
 end
 
 -- select statement
-local series, err = session:execute(string.format("SELECT id, unixTimestampOf(ts) as ts, val FROM rt_series LIMIT %d", lim))
+local series, err = session:execute(
+    string.format("SELECT id, unixTimestampOf(ts) as ts, val FROM rt_series LIMIT %d", lim))
 
 if not err then
     print(string.format("retrieving last %d results...", lim))
@@ -51,3 +58,4 @@ if not err then
         end
     end
 end
+
