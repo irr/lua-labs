@@ -10,7 +10,8 @@ sudo chown irocha: /opt/lua
 echo "installing dependencies..."
 sudo apt-get install lua5.1 lua5.1-doc luarocks pandoc libreadline6-dev libpcre3-dev libssl-dev \
                      libsqlite3-dev libmysqlclient-dev \
-                     libzmq3-dev geoip-bin geoip-database libgeoip-dev
+                     libzmq3-dev geoip-bin geoip-database libgeoip-dev \
+                     apr-devel apr-util-devel libapreq2 libapreq2-devel
 sudo apt-get install cpanminus libtext-diff-perl \
                      libtest-longstring-perl \
                      liblist-moreutils-perl \
@@ -64,7 +65,6 @@ cd /usr/sbin
 sudo ln -s /opt/lua/openresty/nginx/sbin/nginx
 cd /usr/local/bin
 sudo ln -s /opt/lua/openresty/luajit/bin/luajit-2.1.0-alpha luajit
-sudo ln -s /home/irocha/lua/openresty/luangx/luangx.lua luangx
 sudo ln -s /opt/lua/openresty/bin/resty
 cd /usr/local
 sudo ln -s /opt/lua/openresty openresty
@@ -199,6 +199,7 @@ cd
 echo "installing rocks..."
 luarocks --local install lpeg
 luarocks --local install luabitop
+luarocks --local install lua-apr
 luarocks --local install lua-cjson
 luarocks --local install lua-iconv
 luarocks --local install lua-llthreads2
