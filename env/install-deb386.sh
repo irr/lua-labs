@@ -11,13 +11,13 @@ echo "installing dependencies..."
 sudo apt-get install lua5.1 lua5.1-doc luarocks pandoc libreadline6-dev libpcre3-dev libssl-dev \
                      libsqlite3-dev libmysqlclient-dev \
                      libzmq3-dev geoip-bin geoip-database libgeoip-dev \
-                     apr-devel apr-util-devel libapreq2 libapreq2-devel
+                     libapr1 libaprutil1 libaprutil1-dev libaprutil1-dbd-sqlite3 \
+                     libapreq2-3 libapr1-dev libapreq2-dev
 sudo apt-get install cpanminus libtext-diff-perl \
                      libtest-longstring-perl \
                      liblist-moreutils-perl \
                      libtest-base-perl \
-                     liblwp-useragent-determined-perl \
-
+                     liblwp-useragent-determined-perl
 echo "installing openresty..."
 cd /opt/lua
 git clone git@github.com:irr/nginx_tcp_proxy_module.git
