@@ -28,14 +28,15 @@ local table_created, err = session:execute [[
 ]]
 
 -- query with arguments
-local lim = 10
+local lim = 99
 
 for i = 1, lim do
+    local now = (apr.time_now() * 1000) 
     local res, err = session:execute([[
         INSERT INTO rt_series (id, ts, val) VALUES (?, now(), ?) USING TTL 10;
     ]], {"rt_id", i * 50})
-    print(string.format("inserting data (%02d) [res=%s][err=%s]",
-        i, tostring(res), tostring(err)))
+    print(string.format("inserting data (%02d) at %s [res=%s][err=%s]",
+        i, tostring(now - now % 1), tostring(res), tostring(err)))
 end
 
 function gmtime(t)
