@@ -32,7 +32,7 @@ local lim = 10
 
 for i = 1, lim do
     local res, err = session:execute([[
-        INSERT INTO rt_series (id, ts, val) VALUES (?, now(), ?) USING TTL 3600;
+        INSERT INTO rt_series (id, ts, val) VALUES (?, now(), ?) USING TTL 10;
     ]], {"rt_id", i * 50})
     print(string.format("inserting data (%02d) [res=%s][err=%s]",
         i, tostring(res), tostring(err)))
