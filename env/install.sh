@@ -86,7 +86,10 @@ make
 sudo make install
 cd ..
 git clone https://github.com/openresty/nginx-tutorials.git
-git clone https://github.com/openresty/nginx-systemtap-toolkit.git
+git clone git@github.com:irr/nginx-systemtap-toolkit.git
+cd nginx-systemtap-toolkit
+git remote add upstream https://github.com/openresty/nginx-systemtap-toolkit.git
+git fetch upstream && git merge upstream/master && git push
 mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
 cd /opt/lua/modules/nginx/
@@ -195,9 +198,9 @@ ln -s /opt/lua/modules/nginx/lua-resty-limit-traffic
 ln -s /opt/lua/modules/nginx/lua-resty-cassandra
 ln -s /opt/lua/openresty.org
 ln -s /opt/lua/nginx-tutorials
-ln -s /opt/lua/nginx-systemtap-toolkit
 ln -s /opt/lua/test-nginx
 cd ~/gitf
+ln -s /opt/lua/nginx-systemtap-toolkit
 ln -s /opt/lua/modules/forked/awesome-lua
 ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
