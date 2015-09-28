@@ -164,6 +164,11 @@ git clone http://luajit.org/git/luajit-2.0.git
 cd luajit-2.0
 git checkout v2.1
 cd ..
+git clone git@github.com:irr/plc.git
+cd plc
+git remote add upstream https://github.com/philanc/plc.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 git clone git@github.com:irr/underscore.lua.git
 cd underscore.lua
 git remote add upstream https://github.com/mirven/underscore.lua.git
@@ -210,6 +215,7 @@ ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/modules/forked/router.lua
 ln -s /opt/lua/modules/forked/luaxml
 ln -s /opt/lua/underscore.lua
+ln -s /opt/lua/plc
 ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
 ln -s /opt/lua/lua-bit-numberlua
