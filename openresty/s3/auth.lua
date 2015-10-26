@@ -17,14 +17,14 @@ ngx.say(curl .. ";echo")
 
 local ContentType = "text/plain"
 
-local StringToSign=string.format("PUT\n\n%s\n%s\n/%s/%s", ContentType, Now, Bucket, Key)
+local StringToSign = string.format("PUT\n\n%s\n%s\n/%s/%s", ContentType, Now, Bucket, Key)
 local Signature = ngx.encode_base64(ngx.hmac_sha1(AWSSecretAccessKey, StringToSign))
 
 curl = string.format("\ncurl -v -X PUT -T \"%s\" -H \"Date: %s\" -H \"Authorization: AWS %s:%s\" -H \"Host: %s\" -H \"Content-Type: %s\" http://%s/%s", Key, Now, AWSAccessKeyId, Signature, Host, ContentType, Host, Key)
 
 ngx.say(curl .. ";echo")
 
-local StringToSign=string.format("DELETE\n\n\n%s\n/%s/%s", Now, Bucket, Key)
+local StringToSign = string.format("DELETE\n\n\n%s\n/%s/%s", Now, Bucket, Key)
 local Signature = ngx.encode_base64(ngx.hmac_sha1(AWSSecretAccessKey, StringToSign))
 
 curl = string.format("\ncurl -v -X DELETE -H \"Date: %s\" -H \"Authorization: AWS %s:%s\" -H \"Host: %s\" http://%s/%s", Now, AWSAccessKeyId, Signature, Host, Host, Key)
