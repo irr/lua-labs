@@ -1,12 +1,16 @@
+function patch(date, digest)
+    ngx.req.set_header("Host", string.format("%s.%s", ngx.var.bucket, ngx.var.aws))
+    ngx.req.set_header("Date", date)
+    ngx.req.set_header("Authorization", string.format("AWS %s:%s", ngx.var.awsid, digest))
+end
+
 if ngx.req.get_method() == "GET" then
 
     local now = ngx.cookie_time(ngx.now())
     local request = string.format("GET\n\n\n%s\n/%s/%s", now, ngx.var.bucket, ngx.var.uri:sub(2))
     local digest = ngx.encode_base64(ngx.hmac_sha1(ngx.var.awssecret, request))
 
-    ngx.req.set_header("Host", string.format("%s.%s", ngx.var.bucket, ngx.var.aws))
-    ngx.req.set_header("Date", now)
-    ngx.req.set_header("Authorization", string.format("AWS %s:%s", ngx.var.awsid, digest))
+    patch(now, digest)
 
     return
 
@@ -16,12 +20,11 @@ elseif ngx.req.get_method() == "PUT" then
     local key = ngx.var.uri:sub(2)
     local headers = ngx.req.get_headers()
     local ctype = headers["Content-Type"] or "application/octet-stream"
+    ngx.req.set_header("Content-Type", ctype)
     local tosign = string.format("PUT\n\n%s\n%s\n/%s/%s", ctype, now, ngx.var.bucket, key)
     local signature = ngx.encode_base64(ngx.hmac_sha1(ngx.var.awssecret, tosign))
 
-    ngx.req.set_header("Host", string.format("%s.%s", ngx.var.bucket, ngx.var.aws))
-    ngx.req.set_header("Date", now)
-    ngx.req.set_header("Authorization", string.format("AWS %s:%s", ngx.var.awsid, signature))
+    patch(now, signature)
     
     return 
 
@@ -32,9 +35,7 @@ elseif ngx.req.get_method() == "DELETE" then
     local tosign = string.format("DELETE\n\n\n%s\n/%s/%s", now, ngx.var.bucket, key)
     local signature = ngx.encode_base64(ngx.hmac_sha1(ngx.var.awssecret, tosign))
 
-    ngx.req.set_header("Host", string.format("%s.%s", ngx.var.bucket, ngx.var.aws))
-    ngx.req.set_header("Date", now)
-    ngx.req.set_header("Authorization", string.format("AWS %s:%s", ngx.var.awsid, signature))
+    patch(now, signature)
 
     return 
 
