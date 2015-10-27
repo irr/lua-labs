@@ -50,7 +50,6 @@ sudo ln -s /opt/lua/openresty/bin/resty
 sudo ln -s /opt/lua/openresty/nginx/sbin/nginx
 cd /usr/local/bin
 sudo ln -s /opt/lua/openresty/luajit/bin/luajit-2.1.0-alpha luajit
-sudo ln -s /home/irocha/lua/openresty/luangx/luangx.lua luangx
 cd /usr/local
 sudo ln -s /opt/lua/openresty openresty
 sudo ln -s /opt/lua/openresty openresty-debug
@@ -74,6 +73,11 @@ perl Makefile.PL
 make
 sudo make install
 cd ..
+git clone git@github.com:irr/nginx-systemtap-toolkit.git
+cd nginx-systemtap-toolkit
+git remote add upstream https://github.com/openresty/nginx-systemtap-toolkit.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 git clone https://github.com/openresty/openresty.org.git
 git clone https://github.com/openresty/nginx-tutorials.git
 git clone http://luajit.org/git/luajit-2.0.git
@@ -95,6 +99,11 @@ cd lua-bit-numberlua
 git remote add upstream https://github.com/davidm/lua-bit-numberlua.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
+git clone git@github.com:irr/plc.git
+cd plc
+git remote add upstream https://github.com/philanc/plc.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 mkdir -p /opt/lua/docs
 mkdir -p /opt/lua/modules/nginx
 cd /opt/lua/modules/nginx/
@@ -114,6 +123,8 @@ git clone https://github.com/openresty/lua-resty-websocket.git
 git clone https://github.com/hamishforbes/lua-resty-upstream.git
 git clone https://github.com/openresty/lua-resty-lrucache.git
 git clone https://github.com/bungle/lua-resty-template.git
+git clone https://github.com/openresty/lua-resty-limit-traffic.git
+git clone https://github.com/jbochi/lua-resty-cassandra.git
 mkdir -p /opt/lua/modules/forked
 cd /opt/lua/modules/forked/
 git clone git@github.com:irr/awesome-lua.git
@@ -178,10 +189,13 @@ ln -s /opt/lua/modules/nginx/lua-resty-upstream
 ln -s /opt/lua/modules/nginx/lua-resty-upstream-healthcheck
 ln -s /opt/lua/modules/nginx/lua-resty-websocket
 ln -s /opt/lua/modules/nginx/lua-resty-lrucache
+ln -s /opt/lua/modules/nginx/lua-resty-limit-traffic
+ln -s /opt/lua/modules/nginx/lua-resty-cassandra
 ln -s /opt/lua/openresty.org
 ln -s /opt/lua/nginx-tutorials
 ln -s /opt/lua/test-nginx
 cd ~/gitf
+ln -s /opt/lua/nginx-systemtap-toolkit
 ln -s /opt/lua/modules/forked/awesome-lua
 ln -s /opt/lua/modules/forked/lua-resty-shell
 ln -s /opt/lua/modules/forked/lua-pycrypto-aes
@@ -191,16 +205,18 @@ ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/modules/forked/router.lua
 ln -s /opt/lua/modules/forked/luaxml
 ln -s /opt/lua/underscore.lua
+ln -s /opt/lua/plc
 ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
 ln -s /opt/lua/lua-bit-numberlua
 cd
 echo "installing rocks..."
 luarocks-5.1 --local install lpeg
+luarocks-5.1 --local install luabitop
+luarocks-5.1 --local install lua-apr
 luarocks-5.1 --local install lua-cjson
 luarocks-5.1 --local install lua-iconv
 luarocks-5.1 --local install lua-llthreads2
-luarocks-5.1 --local install luabitop
 luarocks-5.1 --local install luacrypto
 luarocks-5.1 --local install lualogging
 luarocks-5.1 --local install luasec OPENSSL_LIBDIR=/usr/lib64/
