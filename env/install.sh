@@ -23,11 +23,6 @@ sudo yum install -y perl-CPAN perl-Text-Diff perl-Test-LongString \
                  perl-Protocol-WebSocket
 echo "installing openresty..."
 cd /opt/lua
-git clone git@github.com:irr/nginx_tcp_proxy_module.git
-cd nginx_tcp_proxy_module
-git remote add upstream https://github.com/yaoweibin/nginx_tcp_proxy_module.git
-git fetch upstream && git merge upstream/master && git push
-cd ..
 wget http://agentzh.org/misc/nginx/drizzle7-2011.07.21.tar.gz
 tar xfva drizzle7-2011.07.21.tar.gz
 cd drizzle7-2011.07.21/
