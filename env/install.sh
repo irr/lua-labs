@@ -10,7 +10,7 @@ sudo chown irocha: /opt/lua
 cd ~/git
 rm -rf headers-more-nginx-module set-misc-nginx-module iconv-nginx-module lua-nginx-module lua-resty* openresty* nginx-tutorials test-nginx
 cd ~/gitf
-rm -rf lua-resty-shell lua-pycrypto-aes sockproc underscore.lua nginx_tcp_proxy_module luajit-examples docker-openresty openresty-docker
+rm -rf lua-resty-shell lua-pycrypto-aes sockproc underscore.lua luajit-examples docker-openresty openresty-docker
 cd
 echo "installing dependencies..."
 sudo yum install -y luarocks lua-devel pandoc readline-devel pcre-devel openssl-devel \
@@ -212,7 +212,6 @@ ln -s /opt/lua/modules/forked/router.lua
 ln -s /opt/lua/modules/forked/luaxml
 ln -s /opt/lua/underscore.lua
 ln -s /opt/lua/plc
-ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
 ln -s /opt/lua/lua-bit-numberlua
 cd
