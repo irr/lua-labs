@@ -20,11 +20,6 @@ sudo apt-get install cpanminus libtext-diff-perl \
                      liblwp-useragent-determined-perl
 echo "installing openresty..."
 cd /opt/lua
-git clone git@github.com:irr/nginx_tcp_proxy_module.git
-cd nginx_tcp_proxy_module
-git remote add upstream https://github.com/yaoweibin/nginx_tcp_proxy_module.git
-git fetch upstream && git merge upstream/master && git push
-cd ..
 wget http://agentzh.org/misc/nginx/drizzle7-2011.07.21.tar.gz
 tar xfva drizzle7-2011.07.21.tar.gz
 cd drizzle7-2011.07.21/
@@ -35,10 +30,9 @@ sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p |grep drizzle
 cd ..
 rm -rf drizzle7-2011.07.21*
-wget http://openresty.org/download/ngx_openresty-1.9.3.1.tar.gz
-tar xfva ngx_openresty-1.9.3.1.tar.gz
-cd ngx_openresty-1.9.3.1
-patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.9.3.1.patch
+wget http://openresty.org/download/ngx_openresty-1.9.3.2rc1.tar.gz
+tar xfva ngx_openresty-1.9.3.2rc1.tar.gz
+cd ngx_openresty-1.9.3.2rc1
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
@@ -53,14 +47,13 @@ patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.9.3.1.patch
             --with-md5-asm \
             --with-sha1-asm \
             --with-file-aio \
+            --with-stream \
+            --with-stream_ssl_module \
             --without-http_fastcgi_module \
             --without-http_uwsgi_module \
-            --without-http_scgi_module \
-            --with-debug --add-module=../nginx_tcp_proxy_module
+            --without-http_scgi_module
 make -j4 && make install
 echo "creating symlinks..."
-cd /opt/lua/openresty/luajit/bin/
-ln -s luajit-2.1.0-alpha lua
 cd /usr/sbin
 sudo ln -s /opt/lua/openresty/nginx/sbin/nginx
 cd /usr/local/bin

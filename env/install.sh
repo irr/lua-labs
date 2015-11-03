@@ -33,7 +33,6 @@ sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p |grep drizzle
 cd ..
 rm -rf drizzle7-2011.07.21*
-cd /opt/lua
 wget http://openresty.org/download/ngx_openresty-1.9.3.2rc1.tar.gz
 tar xfva ngx_openresty-1.9.3.2rc1.tar.gz
 cd ngx_openresty-1.9.3.2rc1
