@@ -33,7 +33,6 @@ rm -rf drizzle7-2011.07.21*
 wget http://openresty.org/download/ngx_openresty-1.9.3.2rc1.tar.gz
 tar xfva ngx_openresty-1.9.3.2rc1.tar.gz
 cd ngx_openresty-1.9.3.2rc1
-patch -p1 < ../nginx_tcp_proxy_module/tcp-ngx-1.9.3.1.patch
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
@@ -185,7 +184,6 @@ ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/modules/forked/router.lua
 ln -s /opt/lua/modules/forked/luaxml
 ln -s /opt/lua/underscore.lua
-ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
 ln -s /opt/lua/lua-bit-numberlua
 cd

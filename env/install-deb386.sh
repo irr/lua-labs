@@ -185,7 +185,6 @@ ln -s /opt/lua/modules/forked/sockproc
 ln -s /opt/lua/modules/forked/router.lua
 ln -s /opt/lua/modules/forked/luaxml
 ln -s /opt/lua/underscore.lua
-ln -s /opt/lua/nginx_tcp_proxy_module
 ln -s /opt/lua/luajit-examples
 ln -s /opt/lua/lua-bit-numberlua
 cd
