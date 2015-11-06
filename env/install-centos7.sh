@@ -18,9 +18,6 @@ sudo yum install -y perl-CPAN perl-Text-Diff perl-Test-LongString \
                  perl-Protocol-WebSocket
 echo "installing openresty..."
 cd /opt/lua
-wget wget http://dl.fedoraproject.org/pub/epel/6/i386/luarocks-2.1.2-1.el6.noarch.rpm
-sudo yum install luarocks-2.1.2-1.el6.noarch.rpm
-rm -rf luarocks-2.1.2-1.el6.noarch.rpm
 wget http://agentzh.org/misc/nginx/drizzle7-2011.07.21.tar.gz
 tar xfva drizzle7-2011.07.21.tar.gz
 cd drizzle7-2011.07.21/
@@ -70,8 +67,6 @@ echo "updating libraries..."
 sudo cp /media/sf_irocha/lua/configs/luajit.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p | grep luaj
 cd /opt/lua
-mkdir -p ~/.luarocks
-if [ ! -d "luarocks" ]; then ln -s ~/.luarocks luarocks; fi
 git clone https://github.com/openresty/test-nginx.git
 cd test-nginx
 perl Makefile.PL
@@ -98,32 +93,6 @@ sudo chown root: /usr/local/bin/sockproc
 make clean
 cd ..
 rm -rf sockproc
-echo "installing squish..."
-tar xfva /media/sf_irocha/lua/squish/package/squish-0.2.0.tar.gz
-cd squish-0.2.0
-make
-sudo make install
-cd ..
-rm -rf squish-0.2.0
-luarocks --local install lpeg
-luarocks --local install luabitop
-luarocks --local install lua-apr
-luarocks --local install lua-cjson
-luarocks --local install lua-iconv
-luarocks --local install lua-llthreads2
-luarocks --local install luacrypto
-luarocks --local install lualogging
-luarocks --local install luaposix
-luarocks --local install luasec OPENSSL_LIBDIR=/usr/lib64/
-luarocks --local install luasql-mysql \
-                         MYSQL_INCDIR=/usr/include/mysql \
-                         MYSQL_LIBDIR=/usr/lib64/mysql
-luarocks --local install luasql-sqlite3
-luarocks --local install lzmq
-luarocks --local install redis-lua
-luarocks --local install stdlib
-luarocks --local install underscore.lua \
-                         --from=http://marcusirven.s3.amazonaws.com/rocks/
 echo "setup ok."
 cd
 
