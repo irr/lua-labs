@@ -30,9 +30,9 @@ sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p |grep drizzle
 cd ..
 rm -rf drizzle7-2011.07.21*
-wget http://openresty.org/download/ngx_openresty-1.9.3.2rc1.tar.gz
-tar xfva ngx_openresty-1.9.3.2rc1.tar.gz
-cd ngx_openresty-1.9.3.2rc1
+wget http://openresty.org/download/ngx_openresty-1.9.3.2rc2.tar.gz
+tar xfva ngx_openresty-1.9.3.2rc2.tar.gz
+cd ngx_openresty-1.9.3.2rc2
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
@@ -51,7 +51,8 @@ cd ngx_openresty-1.9.3.2rc1
             --with-stream_ssl_module \
             --without-http_fastcgi_module \
             --without-http_uwsgi_module \
-            --without-http_scgi_module
+            --without-http_scgi_module \
+            --with-debug
 make -j4 && make install
 echo "creating symlinks..."
 cd /usr/sbin
