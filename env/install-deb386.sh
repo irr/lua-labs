@@ -24,7 +24,7 @@ wget http://agentzh.org/misc/nginx/drizzle7-2011.07.21.tar.gz
 tar xfva drizzle7-2011.07.21.tar.gz
 cd drizzle7-2011.07.21/
 ./configure --without-server
-make libdrizzle-1.0
+make -j4 libdrizzle-1.0
 sudo make install-libdrizzle-1.0
 sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p |grep drizzle
