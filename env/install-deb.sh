@@ -9,7 +9,7 @@ sudo mkdir -p /opt/lua
 sudo chown irocha: /opt/lua
 echo "installing dependencies..."
 sudo apt-get install lua5.1 lua5.1-doc luarocks pandoc libreadline6-dev libpcre3-dev libssl-dev \
-                     libsqlite3-dev libmysqlclient-dev libzmq3-dev \
+                     libsqlite3-dev libmysqlclient-dev libzmq3-dev libboost-all-dev \
                      geoip-bin geoip-database libgeoip-dev \
                      libapr1 libaprutil1 libaprutil1-dev libaprutil1-dbd-sqlite3 \
                      libapreq2-3 libapr1-dev libapreq2-dev
@@ -24,7 +24,7 @@ wget http://agentzh.org/misc/nginx/drizzle7-2011.07.21.tar.gz
 tar xfva drizzle7-2011.07.21.tar.gz
 cd drizzle7-2011.07.21/
 ./configure --without-server
-make libdrizzle-1.0
+make -j4 libdrizzle-1.0
 sudo make install-libdrizzle-1.0
 sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p |grep drizzle

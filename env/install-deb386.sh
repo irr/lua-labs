@@ -9,7 +9,7 @@ sudo mkdir -p /opt/lua
 sudo chown irocha: /opt/lua
 echo "installing dependencies..."
 sudo apt-get install lua5.1 lua5.1-doc luarocks pandoc libreadline6-dev libpcre3-dev libssl-dev \
-                     libsqlite3-dev libmysqlclient-dev \
+                     libsqlite3-dev libmysqlclient-dev libboost-all-dev \
                      libzmq3-dev geoip-bin geoip-database libgeoip-dev \
                      libapr1 libaprutil1 libaprutil1-dev libaprutil1-dbd-sqlite3 \
                      libapreq2-3 libapr1-dev libapreq2-dev
