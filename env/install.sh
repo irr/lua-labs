@@ -7,11 +7,6 @@ sudo ldconfig
 sudo rm -rf /opt/lua
 sudo mkdir -p /opt/lua
 sudo chown irocha: /opt/lua
-cd ~/git
-rm -rf headers-more-nginx-module set-misc-nginx-module iconv-nginx-module lua-nginx-module lua-resty* openresty* nginx-tutorials test-nginx
-cd ~/gitf
-rm -rf lua-resty-shell lua-pycrypto-aes sockproc underscore.lua luajit-examples docker-openresty openresty-docker
-cd
 echo "installing dependencies..."
 sudo yum install -y luarocks lua-devel pandoc readline-devel pcre-devel openssl-devel \
                  sqlite-devel mysql-devel \
@@ -249,9 +244,7 @@ luarocks --local install lzmq
 luarocks --local install redis-lua
 luarocks --local install stdlib
 luarocks --local install underscore.lua \
-                         --from=http://marcusirven.s3.amazonaws.com/rocks/
-#luarocks --local install underscore.lua \
-#                         --from=http://github.com/irr/underscore.lua/raw/master/rocks
+                         --from=http://github.com/irr/underscore.lua/raw/master/rocks
 echo "setup ok."
 cd
 
