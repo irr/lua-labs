@@ -30,9 +30,9 @@ sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p |grep drizzle
 cd ..
 rm -rf drizzle7-2011.07.21*
-wget http://openresty.org/download/ngx_openresty-1.9.3.2rc2.tar.gz
-tar xfva ngx_openresty-1.9.3.2rc2.tar.gz
-cd ngx_openresty-1.9.3.2rc2
+wget http://openresty.org/download/ngx_openresty-1.9.3.2rc3.tar.gz
+tar xfva ngx_openresty-1.9.3.2rc3.tar.gz
+cd ngx_openresty-1.9.3.2rc3
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
@@ -87,6 +87,7 @@ git clone https://github.com/calio/iconv-nginx-module.git
 git clone https://github.com/openresty/lua-nginx-module.git
 git clone https://github.com/openresty/lua-resty-dns.git
 git clone https://github.com/pintsized/lua-resty-http.git
+git clone https://github.com/openresty/lua-resty-lock.git
 git clone https://github.com/openresty/lua-resty-memcached.git
 git clone https://github.com/openresty/lua-resty-mysql.git
 git clone https://github.com/openresty/lua-resty-redis.git
@@ -165,6 +166,7 @@ ln -s /opt/lua/modules/nginx/iconv-nginx-module
 ln -s /opt/lua/modules/nginx/lua-nginx-module
 ln -s /opt/lua/modules/nginx/lua-resty-dns
 ln -s /opt/lua/modules/nginx/lua-resty-http
+ln -s /opt/lua/modules/nginx/lua-resty-lock
 ln -s /opt/lua/modules/nginx/lua-resty-memcached
 ln -s /opt/lua/modules/nginx/lua-resty-mysql
 ln -s /opt/lua/modules/nginx/lua-resty-redis
@@ -207,9 +209,7 @@ luarocks --local install lzmq
 luarocks --local install redis-lua
 luarocks --local install stdlib
 luarocks --local install underscore.lua \
-                         --from=http://marcusirven.s3.amazonaws.com/rocks/
-#luarocks --local install underscore.lua \
-#                         --from=http://github.com/irr/underscore.lua/raw/master/rocks
+                         --from=http://github.com/irr/underscore.lua/raw/master/rocks
 echo "installing squish..."
 cd /opt/lua
 tar xfva ~/lua/squish/package/squish-0.2.0.tar.gz
