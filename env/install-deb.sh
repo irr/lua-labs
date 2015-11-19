@@ -218,6 +218,7 @@ cd
 echo "generating documentation..."
 sh lua/env/makedocs.sh
 echo "installing rocks..."
+. ~/.bashrc
 luarocks --local install lpeg
 luarocks --local install luabitop
 luarocks --local install lua-apr
