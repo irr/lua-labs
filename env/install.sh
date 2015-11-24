@@ -28,9 +28,9 @@ sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p |grep drizzle
 cd ..
 rm -rf drizzle7-2011.07.21*
-wget http://openresty.org/download/ngx_openresty-1.9.3.2rc3.tar.gz
-tar xfva ngx_openresty-1.9.3.2rc3.tar.gz
-cd ngx_openresty-1.9.3.2rc3
+wget http://openresty.org/download/ngx_openresty-1.9.3.2.tar.gz
+tar xfva ngx_openresty-1.9.3.2.tar.gz
+cd ngx_openresty-1.9.3.2
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
