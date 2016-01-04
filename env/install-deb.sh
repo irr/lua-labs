@@ -42,7 +42,6 @@ cd ngx_openresty-1.9.7.1
             --with-http_stub_status_module \
             --with-http_ssl_module \
             --with-http_realip_module \
-            --with-http_spdy_module \
             --with-http_drizzle_module \
             --with-md5-asm \
             --with-sha1-asm \
