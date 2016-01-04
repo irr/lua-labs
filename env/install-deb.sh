@@ -30,9 +30,9 @@ sudo cp ~/lua/configs/drizzle7.conf /etc/ld.so.conf.d/
 sudo ldconfig && ldconfig -p |grep drizzle
 cd ..
 rm -rf drizzle7-2011.07.21*
-wget http://openresty.org/download/ngx_openresty-1.9.3.2.tar.gz
-tar xfva ngx_openresty-1.9.3.2.tar.gz
-cd ngx_openresty-1.9.3.2
+wget http://openresty.org/download/ngx_openresty-1.9.7.1.tar.gz
+tar xfva ngx_openresty-1.9.7.1.tar.gz
+cd ngx_openresty-1.9.7.1
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
@@ -53,7 +53,7 @@ cd ngx_openresty-1.9.3.2
             --without-http_uwsgi_module \
             --without-http_scgi_module \
             --with-debug
-make -j4 
+make -j4
 make install
 echo "creating symlinks..."
 cd /usr/sbin
@@ -132,7 +132,7 @@ git clone git@github.com:irr/wrk.git
 cd wrk
 git remote add upstream https://github.com/wg/wrk.git
 git fetch upstream && git merge upstream/master && git push
-make 
+make
 sudo mv wrk /usr/local/bin
 make clean
 cd ..
