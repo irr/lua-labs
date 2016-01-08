@@ -117,6 +117,11 @@ cd lua-resty-shell
 git remote add upstream https://github.com/juce/lua-resty-shell.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
+git clone git@github.com:irr/lua-lru.git
+cd lua-lru
+git remote add upstream https://github.com/starius/lua-lru.git
+git fetch upstream && git merge upstream/master && git push
+cd ..
 git clone git@github.com:irr/lua-pycrypto-aes.git
 cd lua-pycrypto-aes
 git remote add upstream https://github.com/siddontang/lua-pycrypto-aes.git
@@ -173,10 +178,6 @@ cd luajit-examples
 git remote add upstream https://github.com/hnakamur/luajit-examples.git
 git fetch upstream && git merge upstream/master && git push
 cd ..
-git clone git@github.com:irr/lua-lru.git
-cd lua-lru
-git remote add upstream https://github.com/starius/lua-lru.git
-git fetch upstream && git merge upstream/master && git push
 cd ~/git
 ln -s /opt/lua/modules/nginx/headers-more-nginx-module
 ln -s /opt/lua/modules/nginx/set-misc-nginx-module
