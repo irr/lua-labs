@@ -2,7 +2,7 @@
 echo "uninstalling all lua environment..."
 cd
 rm -rf ~/.luarocks ~/.cache/luarocks
-sudo rm -rf /usr/sbin/nginx /usr/local/openresty* /usr/local/bin/lua* /usr/local/bin/resty /usr/local/bin/squish /usr/local/bin/sockproc /etc/ld.so.conf.d/drizzle7.conf /etc/ld.so.conf.d/luajit.conf /usr/local/lib/libdrizzle.*
+sudo rm -rf /usr/sbin/nginx /usr/local/openresty* /usr/local/bin/lua* /usr/local/bin/resty /usr/local/bin/squish /usr/local/bin/sockproc /etc/ld.so.conf.d/drizzle7.conf /etc/ld.so.conf.d/luajit.conf
 sudo ldconfig
 sudo rm -rf /opt/lua
 sudo mkdir -p /opt/lua
@@ -20,9 +20,9 @@ sudo apt-get install cpanminus libtext-diff-perl \
                      liblwp-useragent-determined-perl
 echo "installing openresty..."
 cd /opt/lua
-wget http://openresty.org/download/ngx_openresty-1.9.7.2.tar.gz
-tar xfva ngx_openresty-1.9.7.2.tar.gz
-cd ngx_openresty-1.9.7.2
+wget http://openresty.org/download/openresty-1.9.7.3.tar.gz
+tar xfva openresty-1.9.7.3.tar.gz
+cd openresty-1.9.7.3
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
@@ -32,6 +32,7 @@ cd ngx_openresty-1.9.7.2
             --with-http_stub_status_module \
             --with-http_ssl_module \
             --with-http_realip_module \
+            --with-http_v2_module \
             --with-md5-asm \
             --with-sha1-asm \
             --with-file-aio \
