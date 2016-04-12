@@ -8,7 +8,7 @@ sudo rm -rf /opt/lua
 sudo mkdir -p /opt/lua
 sudo chown irocha: /opt/lua
 echo "installing dependencies..."
-sudo apt-get install lua5.1 lua5.1-doc luarocks pandoc libreadline6-dev libpcre3-dev libssl-dev \
+sudo apt-get install lua5.1 lua5.1-doc luarocks pandoc rlwrap libreadline6-dev libpcre3-dev libssl-dev \
                      libsqlite3-dev libmysqlclient-dev libzmq3-dev libboost-all-dev \
                      geoip-bin geoip-database libgeoip-dev \
                      libapr1 libaprutil1 libaprutil1-dev libaprutil1-dbd-sqlite3 \
@@ -20,9 +20,9 @@ sudo apt-get install cpanminus libtext-diff-perl \
                      liblwp-useragent-determined-perl
 echo "installing openresty..."
 cd /opt/lua
-wget http://openresty.org/download/openresty-1.9.7.3.tar.gz
-tar xfva openresty-1.9.7.3.tar.gz
-cd openresty-1.9.7.3
+wget http://openresty.org/download/openresty-1.9.7.4.tar.gz
+tar xfva openresty-1.9.7.4.tar.gz
+cd openresty-1.9.7.4
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
