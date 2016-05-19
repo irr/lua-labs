@@ -20,9 +20,9 @@ sudo apt-get install cpanminus libtext-diff-perl \
                      liblwp-useragent-determined-perl
 echo "installing openresty..."
 cd /opt/lua
-wget http://openresty.org/download/openresty-1.9.7.4.tar.gz
-tar xfva openresty-1.9.7.4.tar.gz
-cd openresty-1.9.7.4
+wget http://openresty.org/download/openresty-1.9.15.1rc1.tar.gz
+tar xfva openresty-1.9.15.1rc1.tar.gz
+cd openresty-1.9.15.1rc1
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
