@@ -60,7 +60,6 @@ sudo ldconfig && ldconfig -p | grep luaj
 cd /opt/lua
 mkdir -p ~/.luarocks
 if [ ! -d "luarocks" ]; then ln -s ~/.luarocks luarocks; fi
-git clone https://github.com/openresty/openresty.org.git
 git clone https://github.com/openresty/test-nginx.git
 cd test-nginx
 perl Makefile.PL
@@ -183,7 +182,6 @@ ln -s /opt/lua/modules/nginx/lua-resty-websocket
 ln -s /opt/lua/modules/nginx/lua-resty-lrucache
 ln -s /opt/lua/modules/nginx/lua-resty-limit-traffic
 ln -s /opt/lua/modules/nginx/lua-resty-cassandra
-ln -s /opt/lua/openresty.org
 ln -s /opt/lua/nginx-tutorials
 ln -s /opt/lua/test-nginx
 cd ~/gitf
