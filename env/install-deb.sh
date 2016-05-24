@@ -13,7 +13,7 @@ sudo apt-get install lua5.1 lua5.1-doc luarocks pandoc rlwrap libreadline6-dev l
                      geoip-bin geoip-database libgeoip-dev \
                      libapr1 libaprutil1 libaprutil1-dev libaprutil1-dbd-sqlite3 \
                      libapreq2-3 libapr1-dev libapreq2-dev
-sudo apt-get install cpanminus libtext-diff-perl \
+sudo apt-get install c-cpp-reference scons-doc cpanminus libtext-diff-perl \
                      libtest-longstring-perl \
                      liblist-moreutils-perl \
                      libtest-base-perl \
