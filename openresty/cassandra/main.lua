@@ -7,11 +7,7 @@ local cassandra = require "cassandra"
 local session = cassandra.new()
 session:set_timeout(1000) -- 1000ms timeout
 
--- local connected, err = session:connect("127.0.0.1", 9042)
-
--- ScyllaDB
--- ./cqlsh 172.17.0.5 --cqlversion=3.2.0 
-local connected, err = session:connect("172.17.0.5", 9042)
+local connected, err = session:connect("127.0.0.1", 9042)
 
 -- test keyspace
 local table_created, err = session:execute [[
@@ -35,7 +31,7 @@ local table_created, err = session:execute [[
 local lim = 99
 
 for i = 1, lim do
-    local now = (apr.time_now() * 1000) 
+    local now = (apr.time_now() * 1000)
     local res, err = session:execute([[
         INSERT INTO rt_series (id, ts, val) VALUES (?, now(), ?) USING TTL 10;
     ]], {"rt_id", i * 50})
