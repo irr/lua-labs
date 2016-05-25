@@ -47,7 +47,7 @@ end
 
 -- select statement
 local series, err = session:execute(
-    string.format("SELECT id, unixTimestampOf(ts) as ts, val FROM rt_series LIMIT %d", lim))
+    string.format("SELECT id, toUnixTimestamp(ts) as ts, val FROM rt_series LIMIT %d", lim))
 
 if not err then
     print(string.format("retrieving last %d results...", lim))
