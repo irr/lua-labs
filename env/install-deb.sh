@@ -20,9 +20,9 @@ sudo apt-get install c-cpp-reference scons-doc cpanminus libtext-diff-perl \
                      liblwp-useragent-determined-perl
 echo "installing openresty..."
 cd /opt/lua
-wget http://openresty.org/download/openresty-1.9.7.5.tar.gz
-tar xfva openresty-1.9.7.5.tar.gz
-cd openresty-1.9.7.5
+wget http://openresty.org/download/openresty-1.9.15.1rc1.tar.gz
+tar xfva openresty-1.9.15.1rc1.tar.gz
+cd openresty-1.9.15.1rc1
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
@@ -48,7 +48,7 @@ echo "creating symlinks..."
 cd /usr/sbin
 sudo ln -s /opt/lua/openresty/nginx/sbin/nginx
 cd /usr/local/bin
-sudo ln -s /opt/lua/openresty/luajit/bin/luajit-2.1.0-beta1 luajit
+sudo ln -s /opt/lua/openresty/luajit/bin/luajit-2.1.0-beta2 luajit
 sudo ln -s /opt/lua/openresty/bin/resty
 cd /usr/local
 sudo ln -s /opt/lua/openresty openresty
