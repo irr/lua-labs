@@ -4,6 +4,7 @@ curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/
 curl -v -X POST --header 'Content-Type: application/json' http://localhost:8000/ -d "{\"method\":\"insert\", \"name\":\"irr\"}"
 curl -v -X DELETE http://localhost:8000/?id=2
 curl -v http://localhost:8000/?id=1
+curl -v --compressed http://localhost:8000/?id=1
 --]]
 
 --package.cpath = package.cpath .. ";/home/irocha/lua/openresty/web/lib/?.so;;"
@@ -14,8 +15,8 @@ curl -v http://localhost:8000/?id=1
 
 local _ = require "underscore"
 
-local crypt = require "crypto" 
-local json = require "cjson" 
+local crypt = require "crypto"
+local json = require "cjson"
 local mysql = require "resty.mysql"
 local redis = require "resty.redis"
 
@@ -82,11 +83,11 @@ end
 
 function exit(db, rd, status, msg)
     if db then
-        db:set_keepalive(tonumber(ngx.var.db_max_idle_timeout), 
+        db:set_keepalive(tonumber(ngx.var.db_max_idle_timeout),
                          tonumber(ngx.var.db_pool_size))
     end
     if rd then
-        rd:set_keepalive(tonumber(ngx.var.rd_max_idle_timeout), 
+        rd:set_keepalive(tonumber(ngx.var.rd_max_idle_timeout),
                          tonumber(ngx.var.rd_pool_size))
     end
     if status then
@@ -106,7 +107,7 @@ function cache_get(rd, n)
         local cache, err = rd:get(k)
         if cache == ngx.null then
             return k, nil, err
-        end    
+        end
         return k, cache, err
     end
     return nil, nil, nil
@@ -114,36 +115,36 @@ end
 
 function cache_set(rd, n, cache)
     k = "ID:" .. tostring(n)
-    local ok, err = rd:set(k, cache)        
+    local ok, err = rd:set(k, cache)
     if err then
         ngx.log(ngx.ERR, "cache set error: " .. tostring(err))
-    end  
-    return ok, err         
+    end
+    return ok, err
 end
 
 function results(db, rd, n, sql, del)
     local k, cache, err = cache_get(rd, n)
     if del and k then
         local _, err = rd:del(k)
-        if err then       
+        if err then
             ngx.log(ngx.ERR, "cache del error: " .. tostring(err))
-        end 
+        end
     end
     local bytes, err = db:send_query(sql)
     if err then
-        exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
-                        string.format("results error: %s", 
+        exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR,
+                        string.format("results error: %s",
                             tostring(err)))
     end
     local body, res, err, errno, sqlstate = {}
     repeat
-        res, err, errno, sqlstate = db:read_result()                
+        res, err, errno, sqlstate = db:read_result()
         if errno then
             if errno == 1048 then
                 exit(db, rd, ngx.HTTP_NOT_FOUND)
             end
-                exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
-                        string.format("results error: %s: %s %s", 
+                exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR,
+                        string.format("results error: %s: %s %s",
                             tostring(err), tostring(errno), tostring(sqlstate)))
         end
         if type(res) == "table" and type(res[1]) == "table" then
@@ -161,21 +162,21 @@ function check(db, rd, id)
     if cache then
         return cache
     end
-   
-    local res, err, errno, sqlstate = db:query(string.format(SELECT, ngx.quote_sql_str(id)))    
+
+    local res, err, errno, sqlstate = db:query(string.format(SELECT, ngx.quote_sql_str(id)))
 
     if errno then
-        exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
-                string.format("check error: %s: %s %s", 
+        exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR,
+                string.format("check error: %s: %s %s",
                     tostring(err), tostring(errno), tostring(sqlstate)))
     end
 
     if not res or #res == 0 then
         exit(db, rd, ngx.HTTP_NOT_FOUND)
     end
-    
+
     cache_set(rd, res[1]["id"], json.encode({["redis"] =  res[1]}) )
-    return json.encode({["mysql"] =  res[1]}) 
+    return json.encode({["mysql"] =  res[1]})
 end
 
 -------------
@@ -186,17 +187,17 @@ ngx.header.content_type = 'application/json';
 
 local rd = redis:new()
 if not rd then
-    exit(nil, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
+    exit(nil, rd, ngx.HTTP_INTERNAL_SERVER_ERROR,
          "failed to instantiate redis")
 end
 
 local db, err = mysql:new()
 if not db then
-    exit(nil, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
+    exit(nil, rd, ngx.HTTP_INTERNAL_SERVER_ERROR,
          "failed to instantiate mysql: " .. tostring(err))
 end
 
-db:set_timeout(ngx.var.db_timeout) 
+db:set_timeout(ngx.var.db_timeout)
 
 local ok, err, errno, sqlstate = db:connect{
     host = ngx.var.db_host,
@@ -207,15 +208,15 @@ local ok, err, errno, sqlstate = db:connect{
     max_packet_size = tonumber(ngx.var.db_max_packet_size) }
 
 if not ok then
-    exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
-         string.format("failed to connect: %s: %s %s", 
+    exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR,
+         string.format("failed to connect: %s: %s %s",
                        tostring(err), tostring(errno), tostring(sqlstate)))
 end
 
 local ok, err = rd:connect(ngx.var.rd_host, ngx.var.rd_port)
 if not ok then
-    exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR, 
-         string.format("failed to connect to redis: %s", 
+    exit(db, rd, ngx.HTTP_INTERNAL_SERVER_ERROR,
+         string.format("failed to connect to redis: %s",
                        tostring(err)))
 end
 
@@ -233,7 +234,7 @@ if ngx.req.get_method() == "POST" then
         exit(db, rd, ngx.HTTP_BAD_REQUEST)
     end
 
-    local fn = (data["encrypt"] and {"encrypt", ngx.unescape_uri(data["encrypt"])}) or 
+    local fn = (data["encrypt"] and {"encrypt", ngx.unescape_uri(data["encrypt"])}) or
                (data["decrypt"] and {"decrypt", ngx.unescape_uri(data["decrypt"])})
 
     if fn then
@@ -242,7 +243,7 @@ if ngx.req.get_method() == "POST" then
             ngx.say("\""..cr.."\"")
             exit(db, rd)
         else
-            exit(db, rd, ngx.HTTP_BAD_REQUEST)   
+            exit(db, rd, ngx.HTTP_BAD_REQUEST)
         end
     end
 
@@ -252,7 +253,7 @@ if ngx.req.get_method() == "POST" then
 
         local n = ngx.quote_sql_str(data["name"])
         ngx.say(results(db, rd, n, string.format(INSERT, n)))
-        
+
         exit(db, rd)
     end
 
@@ -276,7 +277,7 @@ elseif ngx.req.get_method() == "DELETE" then
     exit(db, rd)
 
 elseif ngx.req.get_method() == "GET" then
-    
+
     local id = ngx.var['arg_id']
 
     if not id then
