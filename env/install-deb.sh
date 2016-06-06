@@ -211,6 +211,7 @@ echo "installing rocks..."
 . ~/.bashrc
 luarocks --local install lpeg
 luarocks --local install luabitop
+luarocks --local install luacheck
 luarocks --local install lua-apr
 luarocks --local install lua-cjson
 luarocks --local install lua-iconv
