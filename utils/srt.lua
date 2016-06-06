@@ -10,7 +10,7 @@ if #arg == 0 then
     os.exit(1)
 end
 
-function os.capture(cmd, raw)
+local function capture(cmd, raw)
     local f = assert(io.popen(cmd, 'r'))
     local s = assert(f:read('*a'))
     f:close()
@@ -21,19 +21,19 @@ function os.capture(cmd, raw)
     return s
 end
 
-function split(str, sep)
+local function split(str, sep)
     local s = str..sep
     return s:match((s:gsub('[^'..sep..']*'..sep, '([^'..sep..']*)'..sep)))
 end
 
-function trim(s)
+local function trim(s)
     return s:match '^%s*(.-)%s*$'
 end
 
 local source = tostring(arg[1])
 local silent = arg[2]
 
-local _, charset = split(os.capture('file -bi "' .. source ..'"', true), "=")
+local _, charset = split(capture('file -bi "' .. source ..'"', true), "=")
 
 local file = io.open(source, 'rb')
 local content = file:read('*all')
@@ -67,7 +67,7 @@ print("Charset: " .. trim(charset))
 print("Size   : " .. tostring(#content))
 
 if not silent then
-    os.execute("zenity --info --text='" .. 
+    os.execute("zenity --info --text='" ..
         string.format("Filename: %s [%s]\nSize: %d'", source, trim(charset), #content))
 end
 
