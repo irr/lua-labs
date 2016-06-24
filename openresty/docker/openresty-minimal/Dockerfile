@@ -4,9 +4,11 @@ FROM ubuntu:xenial
 # docker build -t openresty-minimal .
 # docker run --name=openresty-minimal -v /home/irocha:/mnt/irocha -it -p 8080:8080 openresty-minimal /bin/bash
 # docker run --name=openresty-minimal -v /home/irocha:/mnt/irocha -it -p 8080:8080 openresty-minimal nginx -c /mnt/irocha/git/lua-labs/openresty/docker/openresty-minimal/test/nginx.conf
+# docker exec -it openresty-minimal /bin/bash
 # docker logs -f openresty-minimal
 # docker stop openresty-minimal
 # docker ps -a --no-trunc| grep '\''Exit'\'' | awk '\''{print $1}'\'' | xargs -L 1 -r docker rm'
+# docker inspect openresty-minimal|grep -i logpath | awk -F\" '{print $4}'|xargs sudo tail -f
 # curl -v http://localhost:8080/test?b=irr%202014
 
 MAINTAINER Ivan Ribeiro Rocha <ivan.ribeiro@gmail.com>
