@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:xenial
 
 # MINIMAL VERSION
 # docker build -t openresty-minimal .
@@ -6,7 +6,7 @@ FROM ubuntu:trusty
 
 MAINTAINER Ivan Ribeiro Rocha <ivan.ribeiro@gmail.com>
 
-ENV OPENRESTY_VERSION 1.7.10.1
+ENV OPENRESTY_VERSION 1.9.15.1
 
 RUN mkdir -p /opt/lua
 
@@ -15,7 +15,7 @@ ADD packages/test-nginx.tar.gz /opt/lua
 
 COPY bin /usr/local/bin
 COPY root /root/
- 
+
 RUN cat /root/bash.bashrc >> /etc/bash.bashrc && rm -rf /root/bash.bashrc \
     && sed -i.bak -e 's/archive.ubuntu.com/br.archive.ubuntu.com/g' /etc/apt/sources.list \
     && rm -rf /etc/apt/sources.list.bak; apt-get update -y \
@@ -26,11 +26,11 @@ RUN cat /root/bash.bashrc >> /etc/bash.bashrc && rm -rf /root/bash.bashrc \
                        liblwp-useragent-determined-perl \
                        geoip-bin geoip-database \
     && cd /opt/lua/test-nginx && perl Makefile.PL && make && make install && cd .. && rm -rf test-nginx \
-    && ln -sf /opt/lua/openresty/nginx/sbin/nginx /usr/local/bin/nginx \   
+    && ln -sf /opt/lua/openresty/nginx/sbin/nginx /usr/local/bin/nginx \
     && ln -sf /usr/local/bin/nginx /usr/local/bin/openresty \
     && ln -sf /opt/lua/openresty/bin/resty /usr/local/bin/resty \
-    && ln -sf /opt/lua/openresty/luajit/bin/luajit-2.1.0-alpha /opt/lua/openresty/luajit/bin/lua \
-    && ln -sf /opt/lua/openresty/luajit/bin/lua /usr/local/bin/lua \    
+    && ln -sf /opt/lua/openresty/luajit/bin/luajit-2.1.0-beta2 /opt/lua/openresty/luajit/bin/lua \
+    && ln -sf /opt/lua/openresty/luajit/bin/lua /usr/local/bin/lua \
     && ln -sf /opt/lua/openresty /usr/local/openresty \
     && ln -sf /opt/lua/openresty /usr/local/openresty-debug \
-    && echo "/opt/lua/openresty/luajit/lib" > /etc/ld.so.conf.d/luajit.conf 
+    && echo "/opt/lua/openresty/luajit/lib" > /etc/ld.so.conf.d/luajit.conf

@@ -6,13 +6,13 @@ FROM openresty-minimal
 
 MAINTAINER Ivan Ribeiro Rocha <ivan.ribeiro@gmail.com>
 
-ENV OPENRESTY_VERSION 1.7.10.1
+ENV OPENRESTY_VERSION 1.9.15.1
 
 RUN mkdir -p /opt/lua/base
 
 COPY lua /opt/lua/base/
 COPY root /root/
- 
+
 RUN cat /root/bash.bashrc >> /etc/bash.bashrc && rm -rf /root/bash.bashrc \
     && apt-get update -y && apt-get install -y git cron supervisor logrotate httpie glances \
                        scons valgrind build-essential libreadline6-dev libpcre3-dev libssl-dev \
