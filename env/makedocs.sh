@@ -13,7 +13,7 @@ pandoc -S -o /opt/lua/docs/lua-resty-upload.html /opt/lua/modules/nginx/lua-rest
 pandoc -S -o /opt/lua/docs/lua-resty-websocket.html /opt/lua/modules/nginx/lua-resty-websocket/README.markdown
 pandoc -S -o /opt/lua/docs/lua-resty-lrucache.html /opt/lua/modules/nginx/lua-resty-lrucache/README.markdown
 pandoc -S -o /opt/lua/docs/lua-resty-limit-traffic.html /opt/lua/modules/nginx/lua-resty-limit-traffic/README.md
-pandoc -S -o /opt/lua/docs/lua-resty-cassandra.html /opt/lua/modules/nginx/lua-resty-cassandra/README.md
+pandoc -S -o /opt/lua/docs/lua-cassandra.html /opt/lua/modules/nginx/lua-cassandra/README.md
 pandoc -S -o /opt/lua/docs/lua-pycrypto-aes.html /opt/lua/modules/forked/lua-pycrypto-aes/readme.md
 pandoc -S -o /opt/lua/docs/lua-resty-template.html /opt/lua/modules/nginx/lua-resty-template/README.md
 pandoc -S -o /opt/lua/docs/lua-resty-shell.html /opt/lua/modules/forked/lua-resty-shell/README.md
