@@ -86,7 +86,7 @@ git clone https://github.com/openresty/lua-resty-websocket.git
 git clone https://github.com/openresty/lua-resty-lrucache.git
 git clone https://github.com/bungle/lua-resty-template.git
 git clone https://github.com/openresty/lua-resty-limit-traffic.git
-git clone https://github.com/jbochi/lua-resty-cassandra.git
+git clone https://github.com/thibaultCha/lua-cassandra.git
 mkdir -p /opt/lua/modules/forked
 cd /opt/lua/modules/forked/
 git clone git@github.com:irr/awesome-lua.git
@@ -181,7 +181,7 @@ ln -s /opt/lua/modules/nginx/lua-resty-upload
 ln -s /opt/lua/modules/nginx/lua-resty-websocket
 ln -s /opt/lua/modules/nginx/lua-resty-lrucache
 ln -s /opt/lua/modules/nginx/lua-resty-limit-traffic
-ln -s /opt/lua/modules/nginx/lua-resty-cassandra
+ln -s /opt/lua/modules/nginx/lua-cassandra
 ln -s /opt/lua/nginx-tutorials
 ln -s /opt/lua/test-nginx
 cd ~/gitf
