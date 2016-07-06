@@ -43,7 +43,7 @@ else
         if res.status == 502 and cache then
             ngx.shared.routes:set(key, cache, ngx.var.throttle)
             ngx.var.target = cache
-            ngx.log(ngx.ERR, "target (shared.routes stale value): ", ngx.var.target)
+            ngx.log(ngx.ERR, "shared.routes (using stale value): ", ngx.var.target)
             return
         end
         ngx.log(ngx.ERR, "redis server returned bad status: ", res.status)
