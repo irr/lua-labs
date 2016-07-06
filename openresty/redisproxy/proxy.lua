@@ -40,9 +40,9 @@ else
     if res.status ~= 200 then
         if res.status == 502 then
             if cache then
-                ngx.log(ngx.ERR, "recovering using shared.routes stale value: ", cache)
                 ngx.shared.routes:set(key, cache, ngx.var.throttle)
                 ngx.var.target = cache
+                ngx.log(ngx.ERR, "target (shared.routes stale value): ", ngx.var.target)
                 return
             end
         end
@@ -66,4 +66,4 @@ else
     end
 end
 
-ngx.log(ngx.ERR, "target=" .. ngx.var.target)
+ngx.log(ngx.NOTICE, "target=" .. ngx.var.target)
