@@ -2,11 +2,29 @@
 redis-server
 redis-cli set uol uol.com.br && echo -e "upstream uol.com.br {\n\tserver uol.com.br;\n}" > upstreams/uol.conf && nginx -s reload
 redis-cli set irr irrlab.com && echo -e "upstream irrlab.com {\n\tserver irrlab.com;\n}" > upstreams/irr.conf && nginx -s reload
-http http://localhost:8080?id=uol
-http http://localhost:8080?id=irr
+curl -v http://localhost:8080?id=uol
+curl -v http://localhost:8080?id=irr
+curl -s -H "Content-Type: application/json" -X POST -d '{"id":"uol"}' http://localhost:8080|head -10
 --]]
 
-local keys = ngx.req.get_uri_args()
+local keys = nil
+
+if ngx.req.get_method() == "GET" or ngx.req.get_method() == "HEAD" then
+    keys = ngx.req.get_uri_args()
+elseif ngx.req.get_method() == "POST" then
+    ngx.req.read_body()
+    local json = require "cjson"
+    local ok, data = pcall(json.decode, ngx.req.get_body_data())
+    if ok then
+        keys = data
+    end
+end
+
+if not keys then
+    ngx.log(ngx.ERR, "id could not be extracted")
+    ngx.exit(400)
+end
+
 local key = keys["id"]
 
 local route, err = ngx.shared.routes:get(key)

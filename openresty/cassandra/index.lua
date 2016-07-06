@@ -38,8 +38,9 @@ local lim = 99
 for i = 1, lim do
     local now = (apr.time_now() * 1000)
     local res, err = session:execute([[
-        INSERT INTO rt_series (id, ts, val) VALUES (?, now(), ?) USING TTL 10;
+        INSERT INTO rt_series (id, ts, val) VALUES (?, now(), ?) USING TTL 1000000;
     ]], {"rt_id", i * 50})
+    ngx.sleep(1)
     print(string.format("inserting data (%02d) at %s [res=%s][err=%s]",
         i, tostring(now - now % 1), tostring(res), tostring(err)))
 end
