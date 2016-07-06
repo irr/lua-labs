@@ -1,26 +1,24 @@
 package.path = package.path .. ";/home/irocha/.luarocks/share/lua/5.1/?.lua;"
 package.cpath = package.cpath .. ";/home/irocha/.luarocks/lib/lua/5.1/?.so;"
 
-local apr = require "apr"
-local cassandra = require "cassandra"
+--[[
+CREATE KEYSPACE IF NOT EXISTS irr
+        WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'datacenter1' : 1 };
+--]]
 
-local session, err = cassandra.spawn_session {
-    shm = "cassandra", -- defined by "lua_shared_dict"
-    contact_points = {"127.0.0.1"}
+local apr = require "apr"
+local cluster = require 'resty.cassandra.cluster'
+
+local session, err = cluster.new {
+    shm = 'cassandra', -- defined by the lua_shared_dict directive
+    contact_points = {'127.0.0.1'},
+    keyspace = 'irr'
 }
 
-if err then
-  ngx.log(ngx.ERR, "could not spawn session: ", err)
+if not session then
+  ngx.log(ngx.ERR, "could not create cluster: ", err)
   return ngx.exit(500)
 end
-
--- test keyspace
-local table_created, err = session:execute [[
-    CREATE KEYSPACE IF NOT EXISTS irr
-        WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'datacenter1' : 1 };
-]]
-
-session:set_keyspace("irr")
 
 -- simple query
 local table_created, err = session:execute [[
@@ -38,9 +36,8 @@ local lim = 99
 for i = 1, lim do
     local now = (apr.time_now() * 1000)
     local res, err = session:execute([[
-        INSERT INTO rt_series (id, ts, val) VALUES (?, now(), ?) USING TTL 1000000;
+        INSERT INTO rt_series (id, ts, val) VALUES (?, now(), ?) USING TTL 10;
     ]], {"rt_id", i * 50})
-    ngx.sleep(1)
     print(string.format("inserting data (%02d) at %s [res=%s][err=%s]",
         i, tostring(now - now % 1), tostring(res), tostring(err)))
 end
@@ -65,5 +62,3 @@ if not err then
         end
     end
 end
-
-session:set_keep_alive()
