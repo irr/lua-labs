@@ -27,6 +27,7 @@ end
 
 local key = keys["id"]
 
+local cache, err = ngx.shared.routes:get_stale(key)
 local route, err = ngx.shared.routes:get(key)
 
 if route then
@@ -37,6 +38,14 @@ else
     )
 
     if res.status ~= 200 then
+        if res.status == 502 then
+            if cache then
+                ngx.log(ngx.ERR, "recovering using shared.routes stale value: ", cache)
+                ngx.shared.routes:set(key, cache, ngx.var.throttle)
+                ngx.var.target = cache
+                return
+            end
+        end
         ngx.log(ngx.ERR, "redis server returned bad status: ", res.status)
         ngx.exit(res.status)
     end
