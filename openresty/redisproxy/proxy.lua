@@ -1,5 +1,7 @@
 --[[
 redis-server
+redis-server --port 6380 --slaveof 127.0.0.1 6379
+redis-server --port 6381 --slaveof 127.0.0.1 6379
 redis-cli set uol uol.com.br && echo -e "upstream uol.com.br {\n\tserver uol.com.br;\n}" > upstreams/uol.conf && nginx -s reload
 redis-cli set irr irrlab.com && echo -e "upstream irrlab.com {\n\tserver irrlab.com;\n}" > upstreams/irr.conf && nginx -s reload
 curl -v http://localhost:8080?id=uol
