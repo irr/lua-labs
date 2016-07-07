@@ -19,7 +19,7 @@ elseif ngx.req.get_method() == "POST" then
     local json = require "cjson"
     local ok, keys = pcall(json.decode, ngx.req.get_body_data())
     if not ok then
-        ngx.log(ngx.ERR, "id could not be extracted")
+        ngx.log(ngx.ERR, "bad request: id could not be extracted")
         ngx.exit(400)
     end
 end
@@ -32,10 +32,10 @@ else
     local res = ngx.location.capture("/redis", { args = { key = key } })
     if res.status ~= 200 then
         ngx.log(ngx.ERR, "redis bad status: ", res.status)
-        ngx.exit(res.status)
+        ngx.exit(503)
     elseif not res.body then
         ngx.log(ngx.ERR, "redis error: empty body")
-        ngx.exit(500)
+        ngx.exit(503)
     else
         local parser = require "redis.parser"
         local server, typ = parser.parse_reply(res.body)
@@ -44,7 +44,7 @@ else
             ngx.shared.routes:set(key, ngx.var.target, ngx.var.throttle)
         elseif typ ~= parser.BULK_REPLY or not server then
             ngx.log(ngx.ERR, "redis bad response: ", res.body)
-            ngx.exit(501)
+            ngx.exit(503)
         else
             ngx.shared.routes:set(key, server, ngx.var.throttle)
             ngx.var.target = server
