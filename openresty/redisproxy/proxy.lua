@@ -52,5 +52,5 @@ else
     end
 end
 
---ngx.log(ngx.NOTICE, "target=" .. ngx.var.target)
+-- ngx.log(ngx.NOTICE, "target=" .. ngx.var.target)
 ngx.header["X-Redis-Proxy"] = ngx.var.target;
