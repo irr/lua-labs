@@ -61,7 +61,6 @@ else
     if typ == parser.BULK_REPLY and not server then
         ngx.log(ngx.ERR, "redis not found: using default=" .. ngx.var.target)
         ngx.shared.routes:set(key, ngx.var.target, ngx.var.throttle)
-        return
     elseif typ ~= parser.BULK_REPLY or not server then
         ngx.log(ngx.ERR, "redis bad response: ", res.body)
         ngx.exit(501)
@@ -71,4 +70,5 @@ else
     end
 end
 
+ngx.header["X-Redis-Proxy"] = ngx.var.target;
 ngx.log(ngx.NOTICE, "target=" .. ngx.var.target)
