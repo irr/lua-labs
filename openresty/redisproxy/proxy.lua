@@ -4,6 +4,7 @@ redis-server --port 6380 --slaveof 127.0.0.1 6379
 redis-server --port 6381 --slaveof 127.0.0.1 6379
 redis-cli set uol uol.com.br && echo -e "upstream uol.com.br {\n\tserver uol.com.br;\n}" > upstreams/uol.conf && nginx -s reload
 redis-cli set irr irrlab.com && echo -e "upstream irrlab.com {\n\tserver irrlab.com;\n}" > upstreams/irr.conf && nginx -s reload
+echo -e "upstream www.google.com {\n\tserver www.google.com;\n}" > upstreams/google.conf && nginx -s reload
 curl -v http://localhost:8080?id=uol
 curl -v http://localhost:8080?id=irr
 curl -s -H "Content-Type: application/json" -X POST -d '{"id":"uol"}' http://localhost:8080|head -10
@@ -43,22 +44,26 @@ else
         if res.status == 502 and cache then
             ngx.shared.routes:set(key, cache, ngx.var.throttle)
             ngx.var.target = cache
-            ngx.log(ngx.ERR, "shared.routes (using stale value): ", ngx.var.target)
+            ngx.log(ngx.ERR, "redis unavailable: using shared.routes/stale value=", ngx.var.target)
             return
         end
-        ngx.log(ngx.ERR, "redis server returned bad status: ", res.status)
+        ngx.log(ngx.ERR, "redis bad status: ", res.status)
         ngx.exit(res.status)
     end
 
     if not res.body then
-        ngx.log(ngx.ERR, "redis returned empty body")
+        ngx.log(ngx.ERR, "redis error: empty body")
         ngx.exit(500)
     end
 
     local parser = require "redis.parser"
     local server, typ = parser.parse_reply(res.body)
-    if typ ~= parser.BULK_REPLY or not server then
-        ngx.log(ngx.ERR, "bad redis response: ", res.body)
+    if typ == parser.BULK_REPLY and not server then
+        ngx.log(ngx.ERR, "redis not found: using default=" .. ngx.var.target)
+        ngx.shared.routes:set(key, ngx.var.target, ngx.var.throttle)
+        return
+    elseif typ ~= parser.BULK_REPLY or not server then
+        ngx.log(ngx.ERR, "redis bad response: ", res.body)
         ngx.exit(501)
     else
         ngx.shared.routes:set(key, server, ngx.var.throttle)
