@@ -5,8 +5,8 @@ redis-server --port 6381 --slaveof 127.0.0.1 6379
 redis-cli set uol uol.com.br && echo -e "upstream uol.com.br {\n\tserver uol.com.br;\n}" > upstreams/uol.conf && nginx -s reload
 redis-cli set irr irrlab.com && echo -e "upstream irrlab.com {\n\tserver irrlab.com;\n}" > upstreams/irr.conf && nginx -s reload
 echo -e "upstream www.google.com {\n\tserver www.google.com;\n}" > upstreams/google.conf && nginx -s reload
-curl -v http://localhost:8080?id=uol
-curl -v http://localhost:8080?id=irr
+curl -I http://localhost:8080?id=uol
+curl -I http://localhost:8080?id=irr
 curl -s -H "Content-Type: application/json" -X POST -d '{"id":"uol"}' http://localhost:8080|head -10
 --]]
 
@@ -17,7 +17,7 @@ if ngx.req.get_method() == "GET" or ngx.req.get_method() == "HEAD" then
 elseif ngx.req.get_method() == "POST" then
     ngx.req.read_body()
     local json = require "cjson"
-    local ok, keys = pcall(json.decode, ngx.req.get_body_data())
+    ok, keys = pcall(json.decode, ngx.req.get_body_data())
     if not ok then
         ngx.log(ngx.ERR, "bad request: id could not be extracted")
         ngx.exit(400)
@@ -52,5 +52,5 @@ else
     end
 end
 
-ngx.header["X-Redis-Proxy"] = ngx.var.target;
 --ngx.log(ngx.NOTICE, "target=" .. ngx.var.target)
+ngx.header["X-Redis-Proxy"] = ngx.var.target;
