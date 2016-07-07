@@ -30,7 +30,6 @@ end
 
 local key = keys["id"]
 
-local cache, err = ngx.shared.routes:get_stale(key)
 local route, err = ngx.shared.routes:get(key)
 
 if route then
@@ -41,32 +40,24 @@ else
     )
 
     if res.status ~= 200 then
-        if res.status == 502 and cache then
-            ngx.shared.routes:set(key, cache, ngx.var.throttle)
-            ngx.var.target = cache
-            ngx.log(ngx.ERR, "redis unavailable: using shared.routes/stale value=", ngx.var.target)
-            return
-        end
         ngx.log(ngx.ERR, "redis bad status: ", res.status)
         ngx.exit(res.status)
-    end
-
-    if not res.body then
+    elseif not res.body then
         ngx.log(ngx.ERR, "redis error: empty body")
         ngx.exit(500)
-    end
-
-    local parser = require "redis.parser"
-    local server, typ = parser.parse_reply(res.body)
-    if typ == parser.BULK_REPLY and not server then
-        ngx.log(ngx.ERR, "redis not found: using default=" .. ngx.var.target)
-        ngx.shared.routes:set(key, ngx.var.target, ngx.var.throttle)
-    elseif typ ~= parser.BULK_REPLY or not server then
-        ngx.log(ngx.ERR, "redis bad response: ", res.body)
-        ngx.exit(501)
     else
-        ngx.shared.routes:set(key, server, ngx.var.throttle)
-        ngx.var.target = server
+        local parser = require "redis.parser"
+        local server, typ = parser.parse_reply(res.body)
+        if typ == parser.BULK_REPLY and not server then
+            ngx.log(ngx.ERR, "redis not found: default=" .. ngx.var.target)
+            ngx.shared.routes:set(key, ngx.var.target, ngx.var.throttle)
+        elseif typ ~= parser.BULK_REPLY or not server then
+            ngx.log(ngx.ERR, "redis bad response: ", res.body)
+            ngx.exit(501)
+        else
+            ngx.shared.routes:set(key, server, ngx.var.throttle)
+            ngx.var.target = server
+        end
     end
 end
 
