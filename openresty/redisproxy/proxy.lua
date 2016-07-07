@@ -17,7 +17,7 @@ if ngx.req.get_method() == "GET" or ngx.req.get_method() == "HEAD" then
 elseif ngx.req.get_method() == "POST" then
     ngx.req.read_body()
     local json = require "cjson"
-    ok, keys = pcall(json.decode, ngx.req.get_body_data())
+    local ok, keys = pcall(json.decode, ngx.req.get_body_data())
     if not ok then
         ngx.log(ngx.ERR, "id could not be extracted")
         ngx.exit(400)
@@ -40,7 +40,7 @@ else
         local parser = require "redis.parser"
         local server, typ = parser.parse_reply(res.body)
         if typ == parser.BULK_REPLY and not server then
-            ngx.log(ngx.ERR, "redis not found: default=" .. ngx.var.target)
+            -- ngx.log(ngx.ERR, "redis not found: default=" .. ngx.var.target)
             ngx.shared.routes:set(key, ngx.var.target, ngx.var.throttle)
         elseif typ ~= parser.BULK_REPLY or not server then
             ngx.log(ngx.ERR, "redis bad response: ", res.body)
@@ -53,3 +53,4 @@ else
 end
 
 ngx.header["X-Redis-Proxy"] = ngx.var.target;
+--ngx.log(ngx.NOTICE, "target=" .. ngx.var.target)
