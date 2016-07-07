@@ -1,6 +1,7 @@
 local zmq = require "lzmq"
 local zloop = require "lzmq.loop"
 local zassert = zmq.assert
+
 require "utils"
 
 print_version(zmq)
@@ -15,6 +16,7 @@ local ECHO_TIME = 1000
 
 main_loop:add_new_bind(zmq.REP, ECHO_ADDR, function(skt)
   local msg = zassert(print_msg("SRV RECV: ",skt:recv_all()))
+  msg[2] = os.time()
   zassert(skt:send_all(msg))
 end)
 
@@ -26,7 +28,7 @@ local cli = main_loop:add_new_connect(zmq.REQ, ECHO_ADDR, function(skt,events,lo
 end)
 
 main_loop:add_once(2000, function(ev, loop)
-  zassert(cli:send_all{'hello', 'world'})
+  zassert(cli:send_all{'hello', os.time()})
 end)
 
 main_loop:start()
