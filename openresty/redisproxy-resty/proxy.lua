@@ -13,6 +13,9 @@ redis-cli set uol 127.0.0.1:8001
 # server-02
 redis-cli set irr 127.0.0.1:8002
 
+export REDIS_SERVICE_HOST=127.0.0.1
+export REDIS_SERVICE_PORT=6379
+
 curl -v http://localhost:8080?id=uol
 curl -v http://localhost:8080?id=irr
 
