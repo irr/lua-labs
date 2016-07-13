@@ -23,7 +23,7 @@ curl -s -H "Content-Type: application/json" -X POST -d '{"id":"uol"}' http://loc
 function get_target(key)
     local redis = require "resty.redis"
     local red = redis:new()
-    local ok, err = red:connect("127.0.0.1", 6379)
+    local ok, err = red:connect(os.getenv("REDIS_SERVICE_HOST"), os.getenv("REDIS_SERVICE_PORT"))
     if not ok then
         ngx.log(ngx.ERR, "redis (connection error): ", err)
         ok, err = nil, 503
