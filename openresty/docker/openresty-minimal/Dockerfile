@@ -27,7 +27,7 @@ RUN cat /root/bash.bashrc >> /etc/bash.bashrc && rm -rf /root/bash.bashrc \
     && sed -i.bak -e 's/archive.ubuntu.com/br.archive.ubuntu.com/g' /etc/apt/sources.list \
     && rm -rf /etc/apt/sources.list.bak; apt-get update -y \
     && apt-get install -y vim wget unzip telnet curl bash-completion sipcalc nmap netcat-openbsd \
-                       tcpstat sysstat dstat htop strace ltrace lsof make \
+                       tcpstat sysstat dstat htop strace ltrace lsof make net-tools iputils-ping \
                        cpanminus libtext-diff-perl libtest-longstring-perl \
                        liblist-moreutils-perl libtest-base-perl \
                        liblwp-useragent-determined-perl \

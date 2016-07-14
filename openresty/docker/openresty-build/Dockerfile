@@ -18,7 +18,7 @@ RUN cat /root/bash.bashrc >> /etc/bash.bashrc && rm -rf /root/bash.bashrc \
     && rm -rf /etc/apt/sources.list.bak; apt-get update -y \
     && apt-get install -y vim wget unzip telnet curl cron supervisor logrotate httpie glances \
                        bash-completion iputils-arping git sipcalc nmap netcat-openbsd \
-                       tcpstat sysstat dstat htop strace ltrace lsof scons valgrind \
+                       tcpstat sysstat dstat htop strace ltrace lsof scons valgrind net-tools iputils-ping \
                        make build-essential libreadline6-dev libpcre3-dev libssl-dev \
                        libsqlite3-dev libmysqlclient-dev libexpat1-dev \
                        cpanminus libtext-diff-perl libtest-longstring-perl \
