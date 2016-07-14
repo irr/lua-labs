@@ -1,8 +1,8 @@
 --[[
 
-redis-server
-redis-server --port 6380 --slaveof 127.0.0.1 6379
-redis-server --port 6381 --slaveof 127.0.0.1 6379
+redis-server --protected-mode no
+redis-server --protected-mode no --port 6380 --slaveof 127.0.0.1 6379
+redis-server --protected-mode no --port 6381 --slaveof 127.0.0.1 6379
 
 # default
 redis-cli set default 127.0.0.1:8000
