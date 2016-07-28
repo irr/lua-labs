@@ -1,12 +1,10 @@
-package.path = package.path .. ";/home/irocha/.luarocks/share/lua/5.1/?.lua;"
-package.cpath = package.cpath .. ";/home/irocha/.luarocks/lib/lua/5.1/?.so;"
-
 --[[
 CREATE KEYSPACE IF NOT EXISTS irr
         WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'datacenter1' : 1 };
+
+select id, ts, toUnixTimestamp(ts), val from rt_series;
 --]]
 
-local apr = require "apr"
 local cluster = require 'resty.cassandra.cluster'
 
 local session, err = cluster.new {
@@ -34,7 +32,7 @@ local table_created, err = session:execute [[
 local lim = 99
 
 for i = 1, lim do
-    local now = (apr.time_now() * 1000)
+    local now = (os.time() * 1000)
     local res, err = session:execute([[
         INSERT INTO rt_series (id, ts, val) VALUES (?, now(), ?) USING TTL 100;
     ]], {"rt_id", i * 50})
@@ -43,9 +41,7 @@ for i = 1, lim do
 end
 
 function gmtime(t)
-	-- return os.date("!%c UTC", math.floor(t/1000))
-    -- return apr.time_explode(t/1000)
-    return apr.time_format('rfc822', t/1000)
+    return os.date("!%c UTC", math.floor(t/1000))
 end
 
 -- select statement
