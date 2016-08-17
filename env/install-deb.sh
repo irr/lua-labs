@@ -49,7 +49,9 @@ cd /usr/sbin
 sudo ln -s /opt/lua/openresty/nginx/sbin/nginx
 cd /usr/local/bin
 sudo ln -s /opt/lua/openresty/luajit/bin/luajit-2.1.0-beta2 luajit
+sudo ln -s /opt/lua/openresty/bin/openresty
 sudo ln -s /opt/lua/openresty/bin/resty
+sudo ln -s /opt/lua/openresty/bin/restydoc
 cd /usr/local
 sudo ln -s /opt/lua/openresty openresty
 sudo ln -s /opt/lua/openresty openresty-debug
