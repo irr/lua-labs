@@ -1,18 +1,12 @@
-package.path = package.path .. ";/home/irocha/.luarocks/share/lua/5.1/?.lua;"
-package.cpath = package.cpath .. ";/home/irocha/.luarocks/lib/lua/5.1/?.so;"
-
-ok, __ = pcall(require, "underscore")
-
-if not ok then
-    __ = nil
-end
+package.path = package.path .. ";/home/irocha/.luarocks/share/lua/5.1/?.lua;/opt/lua/openresty/lualib/?.lua;"
+package.cpath = package.cpath .. ";/home/irocha/.luarocks/lib/lua/5.1/?.so;/opt/lua/openresty/lualib/?.so;"
 
 function d(o)
     if type(o) == "table" then
         for k, v in pairs(o) do
             print(k,v)
         end
-    else 
+    else
         print(o)
     end
 end
