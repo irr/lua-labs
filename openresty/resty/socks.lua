@@ -6,7 +6,7 @@ function error(err)
     end
     if err then
         print(">> "..err)
-        ngx.exit(1) 
+        ngx.exit(1)
     end
 end
 
@@ -14,7 +14,7 @@ local sock = ngx.socket.tcp()
 local ok, err = sock:connect("www.uol.com.br", 80)
 error(err)
 
-sock:settimeout(1000) 
+sock:settimeout(1000)
 
 local packet = {
     "GET / HTTP/1.0\n",
@@ -24,15 +24,15 @@ local packet = {
 local bytes, err = sock:send(packet)
 error(err)
 
-local dump = true
-
 repeat
     local line, err, partial = sock:receive()
-    if line and dump then
+    if line then
         print(tostring(line))
         if line == "" then
-            dump = false
+            break
         end
+    else
+        break
     end
 until err
 
