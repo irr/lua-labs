@@ -20,9 +20,9 @@ sudo apt-get install c-cpp-reference scons-doc cpanminus libtext-diff-perl \
                      liblwp-useragent-determined-perl
 echo "installing openresty..."
 cd /opt/lua
-wget http://openresty.org/download/openresty-1.9.15.1.tar.gz
-tar xfva openresty-1.9.15.1.tar.gz
-cd openresty-1.9.15.1
+wget http://openresty.org/download/openresty-1.11.2.1.tar.gz
+tar xfva openresty-1.11.2.1.tar.gz
+cd openresty-1.11.2.1
 ./configure --prefix=/opt/lua/openresty \
             --with-http_gunzip_module \
             --with-luajit \
