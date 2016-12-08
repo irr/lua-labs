@@ -34,7 +34,7 @@ assert(ctx.nbuffers ~= 0, "buffer must not be empty")
 
 -- Modify body content!
 local data = json.decode(table.concat(ngx.ctx.buffers))
-data["modified"] = "OK"
+data["modified"] = tostring(os.time())
 
 -- And send a new body
 ngx.arg[1] = json.encode(data)
