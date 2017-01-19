@@ -76,3 +76,10 @@ function encode (t)
     end
     return table.concat(b, "&")
 end
+
+function read_file(file)
+    local f = io.open(file, "rb")
+    local content = f:read("*all")
+    f:close()
+    return content
+end
