@@ -1,0 +1,36 @@
+function ng {
+    $(nginx_cmd) -c "$(echo `pwd`)/$1"
+}
+
+function ngr {
+    ngs; sleep 1; ng "$1" && ngt
+}
+
+function ngs {
+    $(nginx_cmd) -s stop
+}
+
+function ngc {
+    sudo rm -rf $(nginx_logs)/access*.log
+    sudo rm -rf $(nginx_logs)/error*.log
+}
+
+function ngt {
+    sudo tail -f $(nginx_logs)/*.log
+}
+
+function nginx {
+    $(nginx_cmd) "$@"
+}
+
+function nginx_cmd {
+    echo "sudo /usr/bin/openresty";
+}
+
+function nginx_logs {
+    echo "/usr/local/openresty/nginx/logs";
+}
+
+alias luaj='rlwrap -H /dev/null /usr/local/openresty/luajit/bin/luajit'
+
+export LUA_INIT=@$HOME/lua/configs/init.lua
