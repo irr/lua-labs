@@ -1,0 +1,35 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+
+	# Add index.php to the list if you are using PHP
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name _myproxy;
+	resolver 8.8.8.8;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ =404;
+	}
+
+	location = / {
+    		if ($args ~ "^url=(.+)") { #gets the "url" get parameter
+        		set $key1 $1;
+        		proxy_pass $key1; #use the parameter as proxy address
+    		}
+	}
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/_myproxy/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/_myproxy/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+
+    if ($scheme != "https") {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+}
