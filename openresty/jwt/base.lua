@@ -1,4 +1,4 @@
--- mkdir -p /tmp/logs; openresty -c /home/irocha/git/lua-labs/jwt/nginx.conf -p /tmp
+-- mkdir -p /tmp/logs; openresty -c /home/irocha/git/lua-labs/openresty/jwt/nginx.conf -p /tmp
 -- sudo /usr/local/openresty/bin/opm get SkyLothar/lua-resty-jwt
 -- http://jwtbuilder.jamiekurtz.com/
 -- http -v localhost:8888/ X-AUTH-TOKEN:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NDE0NjcyNTAsImV4cCI6MTU3MzAwMzI1MCwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsImRhdGEiOiJteSBmaXJzdCB0ZXN0In0.u9ObjpX4OsxQoRqTvfonJxlk56oRBx_sKTr_0A_JSPk
