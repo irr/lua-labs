@@ -1,4 +1,5 @@
 -- sudo yum install libuuid-devel
+-- 4f4d9aec-b761-42e4-9cf7-428444da0c13
 
 module("uuid", package.seeall)
 
