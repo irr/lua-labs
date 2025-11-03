@@ -9,7 +9,7 @@
             "type": "lua-local",
             "request": "launch",
             "program": {
-                "lua": "lua",
+                "lua": "luajit",
                 "file": "${file}"
             }
         },
